@@ -20,6 +20,7 @@ $chmod g+w,o+w ~/arq1.txt
 
 
 #umask (a ser definido essa semana)
+teste
 
 
 #chown (a ser definido essa semana)
