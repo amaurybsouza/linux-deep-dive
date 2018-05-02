@@ -1,0 +1,32 @@
+Terms and Utilities:
+
+#chmod (modifica permissões de arquivos e diretórios)
+
+Opções:
+-R : modo recursivo.
+-v : modo verbose.
+
+Exemplos:
+
+- $chmod –v u=rwx,g+w,o=r ~arq1.txt
+
+- Retirando a permissão de execução de todos os níveis no arquivo do
+exemplo acima:
+$chmod –x ~/arq1.txt
+
+- Adicionando permissão de gravação para grupo e outros no mesmo
+arquivo:
+$chmod g+w,o+w ~/arq1.txt
+
+
+#umask (a ser definido essa semana)
+
+
+#chown (a ser definido essa semana)
+
+
+
+#chgrp (a ser definido essa semana)
+
+
+
