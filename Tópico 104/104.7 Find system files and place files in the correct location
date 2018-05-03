@@ -22,8 +22,6 @@ Terms and Utilities:
 /usr                  instalação de programas do linux, normalmente não criticos              /usr/bin, /usr/lib, /usr/sbin
 /opt                  instalação de aplicações em geral
 
-
-
 #DIRETÓRIO /USR
 
 #diretório           finalidade                                         exemplos
@@ -38,6 +36,7 @@ Terms and Utilities:
 
 $find /home -name aula3    $find /home -name aula*    $find /home -user lpi2 
 
+$find /home -size +50M     $find /home -size 10M -user lpi1
 
 #locate (Procura por arquivos e diretórios em todo o sistema mediante atualização em sua própria base de dados pelo comando ‘updatedb’.)
 
@@ -49,20 +48,41 @@ $locate <arquivo/diretório>
 
 $locate estudogrep
 
+$locate rpm (procira pela string rpm dentro da base de dados dele) (mais rápido que find)
+
 #updatedb (O banco de dados é criado por um outro utilitário chamado updatedb. Ao ser invocado, este utilitário varre todo o sistema gerando uma listagem completa que por sua vez é copiada para o banco de dados. )
 - Como o banco de dados é uma imagem da situação do sistema em um determinado momento, pode ocorrer que este banco de dados esteja desatualizado quando consultado. Por esta razão, a frequencia de atualização irá depender das necessidades de uso do utilitário. Dependendo do tamanho de seu sistema, você pode agendar, via cron, a execução do updatedb a cada hora, a cada dez minutos, enfim, com a frequencia que for mais conveniente.
 
+#whereis (usado para localizar arquivos executaveis, bibliotecas, mais especifico que o locate, manuais e fontes)
+$whereis Aula3 (não vai achar nada porque ele não olha no /home)
+- só procura a referência no começo do arquivo, exemplo: 
+$whereis rmp
+rpm: /usr/bin/rpm /usr/lib/rpm /etc/rpm /usr/share/man/man8/rpm.8.gz
 
-#whereis
+- usamos o comando whereis também para saber onde está cada comando, vejamos um exemplos com ls:
 
+$whereis ls
+ls: /usr/bin/ls /usr/share/man/man1p/ls.1p.gz /usr/share/man/man1/ls.1.gz
 
-#which
+$whereis fsck
+fsck: /usr/sbin/fsck /usr/sbin/fsck.btrfs /usr/sbin/fsck.fat /usr/sbin/fsck.cramfs /usr/sbin/fsck.minix /usr/sbin/fsck.hfsplus /usr/sbin/fsck.hfs /usr/sbin/fsck.ext2 /usr/sbin/fsck.ext3 /usr/sbin/fsck.msdos /usr/sbin/fsck.ntfs /usr/sbin/fsck.ext4 /usr/sbin/fsck.xfs /usr/sbin/fsck.vfat /usr/share/man/man8/fsck.8.gz
 
+#which (procura por arquivo executável de um comando do sistema que esteja no PATH do usuáriol)
+- ainda mais restrito que o whereis, mas é util para script, retornando o primeiro arquivo que ele encontrou.
 
-#type
+$which rmp
+/usr/bin/rmp
 
+#type (mostra o tipo do comando, se é um comando, um executavel interno, se é um alias)
 
+$type ls
+ls está apelidada para `ls --color=auto'
 
+$type cd
+cd é um comando interno do shell
+
+$type tar
+tar é /usr/bin/tar
 
 #/etc/updatedb.conf (O modo como o comando updatedb atualiza o banco de dados é regulado pelo arquivo de configuração /etc/updatedb.conf)
 
