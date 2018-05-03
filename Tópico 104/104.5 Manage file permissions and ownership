@@ -86,8 +86,9 @@ $chgrp -v suporte relatorio.txt (alterando o grupo do arquivo)
 
 #PERMISSÕES ESPECIAIS (SUID, SGID e STICKY BIT)
 
--> SUID (dono do arquivo)
-É representado pela letra s no dono do arquivo.
+-> SUID (permissão usada no dono)
+Permite que qualquer usuário tenha a mesma permissão de execução
+que o dono sobre o arquivo. Em modo literal, é representada no campo de dono por s
 
 $ls -l /usr/bin/passwd
 -rwsr-xr-x 1 root root 59640 jan 25 13:09 /usr/bin/passwd
@@ -101,4 +102,24 @@ suid               s
 sgid               s  
 sticky bit         t
 
+Modo octal : SUID (4) SGID (2) STICKY BIT (1)
 
+-> SGID (permissão usada no grupo)
+Faz com que cada arquivo ou subdiretório criado em um diretório seja do
+grupo do “diretório pai” (herança de grupo). Em modo literal, é representada no campo de grupo por s.
+
+Ativando o sgid no modo simbólico e octal:
+
+$chmod g+s dir_do_grupo          $chmod 2755 dir_do_grupo
+
+#OBS: se a permissão de execução existir, aparecerá a letra s minuscula, se não tiver a permissão de execução, aparecerá a letra S maiuscula ou T para sticky bit (serve para todas as permissões especiais).
+
+- STICKY BIT (permissão usada para outros)
+Proíbe que qualquer usuário que não seja o dono do objeto ou o próprio root exclua o mesmo, mesmo que tenha permissão para isso.
+Em modo literal, é representada no campo de outros por t. 
+
+Ativando o sticky bit no modo simbólico e octal:
+
+$chmod -v 1666 teste.txt    $chmod -v o+t teste.txt
+
+OBS: o modo de permissão sticky bit impedem que usuários apaguem arquivos que não tenham sido criado por eles.
