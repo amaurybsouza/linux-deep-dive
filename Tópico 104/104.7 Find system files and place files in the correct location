@@ -1,6 +1,42 @@
 Terms and Utilities:
 
-#find
+#DIRETÓRIOS OBRIGATORIAMENTE EM /
+
+#diretório            finalidade                                     exemplos
+/bin                  programas criticos/todos os usuários           cp, ls, kill, rm
+/sbin                 programas criticos/ sysadmin                   fdisk, fsck, mkfs, quotaon
+/etc/                 arquivos de configuração do sistema            passwd, inittab, profile
+/lib                  bibliotecas e módulos do kernel
+/mnt e /media         pontos de montagem de midias                   /mnt/dvd, /media/cdrom
+/proc e /sys          informações de hardware e processos            interrupts, cpu
+/dev                  dispositivos e arquivos especiais              sda, sr0, tty
+
+#DIRETÓRIOS QUE PODEM SER MONTADOS EM PARTIÇÕES DIFERENTES
+
+#diretório            finalidade                                                              exemplos
+/root                 diretório padrão do usuário root                                        
+/boot                 arquivos de configuração do bootloader, imagens de kernel e initd
+/tmp                  arquivos temporários
+/home                 diretórios e arquivos dos usuários
+/var                  arquivos dinamicos, como logs, filas                                    /var/log, /var/mail
+/usr                  instalação de programas do linux, normalmente não criticos              /usr/bin, /usr/lib, /usr/sbin
+/opt                  instalação de aplicações em geral
+
+
+
+#DIRETÓRIO /USR
+
+#diretório           finalidade                                         exemplos
+/usr/local           arquivos que o sysadmin instala localmente         
+/usr/x11r6           arquivos referentes a interface gráfica
+/usr/bin             comandos não essenciais, todos os usuários         head, du, dpkg, nice
+/usr/sbin            comandos não essenciais, sysadmin                  edquota, xfs_info, useradd
+/usr/lib             bibliotecas de programas
+/usr/share/man       fontes do man
+
+#find (comando mais completo para fazer busca por arquivos e diretórios no sistema)
+
+$find /home -name aula3    $find /home -name aula*    $find /home -user lpi2 
 
 
 #locate
