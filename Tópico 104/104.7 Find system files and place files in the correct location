@@ -39,11 +39,18 @@ Terms and Utilities:
 $find /home -name aula3    $find /home -name aula*    $find /home -user lpi2 
 
 
-#locate
+#locate (Procura por arquivos e diretórios em todo o sistema mediante atualização em sua própria base de dados pelo comando ‘updatedb’.)
 
+Sintaxe:
 
-#updatedb
+$updatedb
 
+$locate <arquivo/diretório>
+
+$locate estudogrep
+
+#updatedb (O banco de dados é criado por um outro utilitário chamado updatedb. Ao ser invocado, este utilitário varre todo o sistema gerando uma listagem completa que por sua vez é copiada para o banco de dados. )
+- Como o banco de dados é uma imagem da situação do sistema em um determinado momento, pode ocorrer que este banco de dados esteja desatualizado quando consultado. Por esta razão, a frequencia de atualização irá depender das necessidades de uso do utilitário. Dependendo do tamanho de seu sistema, você pode agendar, via cron, a execução do updatedb a cada hora, a cada dez minutos, enfim, com a frequencia que for mais conveniente.
 
 
 #whereis
@@ -57,4 +64,8 @@ $find /home -name aula3    $find /home -name aula*    $find /home -user lpi2
 
 
 
-#/etc/updatedb.conf
+#/etc/updatedb.conf (O modo como o comando updatedb atualiza o banco de dados é regulado pelo arquivo de configuração /etc/updatedb.conf)
+
+- A variável PRUNEPATHS define os diretórios que serão ignorados na indexação. Já a variável PRUNEFS identifica os tipos de partições que serão ignorados. No meu sistema atual, LinuxMint, eu acrescentei apenas o diretório /backup para ser ignorado, pois na maior parte dos casos o conteúdo deste diretório não me interessa.
+
+
