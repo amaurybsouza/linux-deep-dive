@@ -88,4 +88,4 @@ tar é /usr/bin/tar
 
 - A variável PRUNEPATHS define os diretórios que serão ignorados na indexação. Já a variável PRUNEFS identifica os tipos de partições que serão ignorados. No meu sistema atual, LinuxMint, eu acrescentei apenas o diretório /backup para ser ignorado, pois na maior parte dos casos o conteúdo deste diretório não me interessa.
 
-
+verificar depois alguns testes
