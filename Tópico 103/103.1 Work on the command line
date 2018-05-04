@@ -133,12 +133,23 @@ xlsclients (1)       - list client applications running on a display
 
 #uname (mostra informações do sistema)
 
+$uname --help (informações do comando uname)
+-a, --all                emite todas as informações, na ordem a seguir,
+                             exceto que omite -p e -i se desconhecidos:
+  -s, --kernel-name        emite o nome do Kernel
+  -n, --nodename           emite o nome do nó da máquina na rede
+  -r, --kernel-release     emite a versão de lançamento do Kernel
+  -v, --kernel-version     emite a data em que o Kernel foi criado
+  -m, --machine            emite o nome do hardware da máquina (arquitetura)
+  -p, --processor          emite o tipo do processador (não portável)
+  -i, --hardware-platform  emite a plataforma de hardware (não portável)
+  -o, --operating-system   emite o sistema operacional
+      --help     mostra esta ajuda e sai
+      --version  informa a versão e sai
 
+#alias (cria um atalho, apelido para algum comando)
 
-
-
-
-
+$alias lt='ls /tmp' (ação temporária, quando fechar a sessão desconfigura).
 
 #history (mostra todos os comandos que foram execuatados no shell)
 
