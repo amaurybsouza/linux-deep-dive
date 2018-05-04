@@ -1,14 +1,48 @@
 Terms and Utilities:
 
-#bash
+#caminho relativo: é o caminho que é referente ao diretório atual, conforme relatado pelo comando pwd
 
-#echo
+#caminho absoluto: é todo caminho que começa com /
+
+#bash (interpretador de comandos do Linux, que fornece diversas funcionalidades e facilidades)
+
+-> Bourne Again Shell: é o shell desenvolvido para o projeto GNU usado pelo GNU/Linux,
+é muito usado pois o sistema que o porta evolui e é adotado rapidamente. Possui uma
+boa portabilidade, pois possui características do Korn Shell e C Shell. É representado por
+"bash". O nosso estudo estará focado neste.
+
+$echo Linux  
+Linux
+
+$echo $SHELL (ver o shell que eu estou utilizando)
+/bin/bash
+
+#echo (comando para imprimir informações na tela, tanto em stdin como stder usando os redireionadores)
+
+$echo “Este é o curso de lpi-1” >> /home/lpi1/Documents/teste.txt
+
+Produzindo como saída o valor da variável SHELL:
+$echo $SHELL
+
+Exibir o texto de seguinte forma:
+Linux
+System
+Administrator
+$echo -e “Linux \\nSystem \\nAdministrator”
+
 
 #env
 
 #export
 
-#pwd
+#pwd (mostra o diretório atual que o usuário se encontra)
+
+$pwd
+/home/lpi
+
+
+
+
 
 #set
 
