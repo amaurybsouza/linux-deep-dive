@@ -99,9 +99,46 @@ $set | less (página a saida do comando set)
 
 $unset TESTE (removi a variavel TESTE)
 
-#man ()
+#man (manual de referência de um comando, mostra as opções do comando e as funcionalidades)
 
-#uname
+-> quando um comando é interno ele não tem o man
+
+-> tem que consultar o manual do bash ($man bash)
+
+-> comando info funciona para obter informações mas é mais limitado que o man.
+
+$man ls (man page do comando ls)
+
+#whatis (mostra o que um comando faz ) == "$man -f" 
+$ whatis mkfs
+mkfs (8)             - build a Linux filesystem
+
+$ whatis fsck
+fsck (8)             - check and repair a Linux filesystem
+
+#apropos (esse comando consulta um banco de dados consistindo da descrição do comando == "man -k")
+#é util em situações em que se deseja executar determinada tarefa e não se conhece o  nome do comando
+$apropos compiler
+B (3pm)              - The Perl Compiler Backend
+B::Deparse (3pm)     - Perl compiler backend to produce perl code
+checkmodule (8)      - SELinux policy module compiler
+checkpolicy (8)      - SELinux policy compiler
+
+$apropos running
+run-parts (4)        - configuration and scripts for running periodical jobs
+sched_getcpu (3)     - determine CPU on which the calling thread is running
+setenforce (8)       - modify the mode SELinux is running in
+uptime (1)           - Tell how long the system has been running.
+xlsclients (1)       - list client applications running on a display
+
+#uname (mostra informações do sistema)
+
+
+
+
+
+
+
 
 #history (mostra todos os comandos que foram execuatados no shell)
 
