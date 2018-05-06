@@ -1,6 +1,13 @@
 Terms and Utilities:
 
-#cat
+#cat (le um arquivo de texto, joga na saida padrão)
+$cat -n (mostra as linhas numeradas)
+
+$cat -b (mostra as linhas vazias sem numeração)
+
+$cat -s (elimina linhas repetidas que estão em branco)
+
+$cat -a (mostra os caracteres especiais do arquivo)
 
 #cut
 
@@ -8,13 +15,29 @@ Terms and Utilities:
 
 #fmt
 
-#head
+#head (mostra as 10 primeiras linhas de um arquivo)
+
+$head arquivolongo.txt (mostra 10 primeiras linhas do arquivo)
+
+$head -n 2 arquivo.txt (mostra as duas primeiras linhas do arquivo)
+
+$head -2 arquivo.txt (mostra as 2 primieras linhas, pode usar sem a opção -n)
+
+$head -c 50 arquivo.txt (mostra 50 primeiros bytes)
 
 #join
 
-#less
+#less (mostra o arquivo de forma paginada, com algumas opções a mais que o comando more)
 
-#nl
+$less arquivo_grande.txt
+
+$cat arquivo_grande | less (conecta a saida do primeiro comando com a entrada do segundo comando)
+
+#nl (comando semelhante ao "cat -b" ele numera as linhas do arquivo desconsiderando as linhas em branco)
+
+$nl arquivo_grande.txt
+
+
 
 #od
 
@@ -24,11 +47,38 @@ Terms and Utilities:
 
 #sed
 
-#sort
+#sort (esse comando faz a ordenação de um arquivo)
+
+$sort alunos.txt (ordena o arquivo em ordem alfabética)
+
+$sort -k 2 alunos.txt (ordena a segunda coluna do arquivo por ordem alfabética)
+
+$sort -n -t , -k 2 vendas.csv (ordena de forma numérica a 2 coluna do arquivo)
+
+Opções:
+-d : ordem alfanumérica.
+-n : ordem numérica.
+-t : usa um delimitador.
+-k : usa um campo como referência.
+-r : ordem reversa.
+-R : ordem randômica (aleatória).
 
 #split
 
-#tail
+#tail (mostra as ultimas 10 linhas de um arquivo)
+
+$tail -n arquivo.txt(mostra as ultimas 10 linhas do arquivo)
+
+$tail -5 arquivo.txt (mostra as ultimas 5 linhas do arquivo)
+
+$tail -f arquivo.txt (mostra as linhas do arquivo e fica esperando o que pode ser escrito no arquivo em tempo real)
+
+$tail -n 5 -f arquivo.txt
+
+- ideal para visualização de logs
+
+
+
 
 #tr
 
@@ -36,4 +86,16 @@ Terms and Utilities:
 
 #uniq
 
-#wc
+#wc (mostra o número de linhas, palavras e caracteres de um arquivo)
+
+$wc alunos.txt (mostra a quantidade de linhas, palavras e caracteres)
+
+$wc -l (mostra a quantidade de linhas)
+
+$wc -c (mostra a quantidade de caracteres)
+
+$wc -w (quantas palavras)
+
+$wc * (executa para todos os arquivos do diretório)
+
+$cat alunos.txt | wc -l (14 linhas desse arquivo)
