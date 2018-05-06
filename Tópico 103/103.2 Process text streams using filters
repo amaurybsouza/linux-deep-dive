@@ -11,7 +11,10 @@ $cat -a (mostra os caracteres especiais do arquivo)
 
 #cut
 
-#expand
+#expand (esse comando converte tabs em espaço)
+
+- Convertendo linhas que tenham 2 tabulações para espaço simples do arquivo /etc/syslog.conf:
+$expand -t 2 /etc/syslog.conf
 
 #fmt
 
@@ -82,9 +85,25 @@ $tail -n 5 -f arquivo.txt
 
 #tr
 
-#unexpand
+#unexpand (converte de espaços para tabs)
 
-#uniq
+
+
+#uniq (exibe as linhas unicas de um arquivo)
+
+$cut -d , -f 1 vendas.csv | sort | uniq
+alberto
+alice
+fernanda
+gabriela
+joão
+jorge
+josé
+lenadro
+
+$uniq -d (mostra as linhas que estavam duplicadas no arquivo)
+
+$uniq -c (conta o número de vezes que repetiu cada ocorrência)
 
 #wc (mostra o número de linhas, palavras e caracteres de um arquivo)
 
