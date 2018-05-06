@@ -1,17 +1,150 @@
 Terms and Utilities:
 
-#cp
-#find
-#mkdir
-#mv
-#ls
-#rm
-#rmdir
-#touch
+#cp (copia um arquivo)
+sintaxe: cp -opções <origem><destino>
+Opções:
+-R : modo recursivo. Copia diretório e seu conteúdo.
+-v : modo verbose.
+-i : modo interativo. Pergunta antes de sobrescrever destino.
+-u : modo “update”. Apenas copia para o destino arquivos que o mesmo não tem ou
+pesar de ter o mesmo nome, são diferentes em seus conteúdos.
+-f : modo forçado de cópia.
+-p : preserva os atributos originais do arquivo.
+-d : preserva ligação simbólica.
+
+$cp alunos.txt /tmp
+$cp -vi alunos* /tmp
+$cp -r /etc/* /tmp
+$cp -pv aula8 /tmp (preserva as propriedades do arquivo, caracteristicas)
+$cp aula1 curso 1 (copia o conteudo para outro arquivo chamado curso1, alterando o nome do arquivo para curso1)
+
+#cd (Troca de diretórios)
+Sintaxes:
+$cd <diretório_destino>
+$cd .. - retorna um nível na hierarquia.
+$cd ../.. - retorna 2 níveis na hierarquia.
+$cd ~ - muda para o diretório pessoal do usuário em seção. É o mesmo que cd sem
+argumentos.
+$cd ~user1 – muda para o diretório pessoal do usuário user1.
+$cd ../<dir1> – muda para o diretório 'dir1', que está um nível hierárquico acima.
+
+#find (procura por arquivos e diretórios no sistema)
+
+Opções:
+-type : procura por tipo de objeto.
+-name : procura por nome.
+-iname: procura por nome em modo insensitivo (ignora diferenças entre maiúsculas minúsculas).
+-fstype : procura por sistema de arquivos do um tipo específico.
+-maxdepth : máximo de profundidade da busca em diretórios (máximo de subdiretórios
+buscados).
+-mindepth : mínimo de profundidade da busca em diretórios.
+-executable : procura por objeto executável.
+-perm : especifica qual a permissão exata do objeto que vai ser buscado.
+-size : busca por tamanho.
+-amin : procura por objetos acessados a minutos atrás.
+-atime : procura por objetos que tenham sido acessados dias atrás.
+-mmin : procura por objetos que tenham sido modificados a minutos atrás.
+-mtime : procura por arquivos que tenham sido modificados a dias atrás.
+
+
+
+#mkdir (cria diretórios)
+Opções:
+-v : “verbose”. Exibe detalhes do que foi feito.
+-m <perm>: cria o diretório já com as permissões determinadas.
+-p : cria subdiretórios e diretórios de uma vez só. Não há a necessidade de existir o
+diretório pai para que seja criado o subdiretório.
+
+- Criando os diretótios linux/debian/ubuntu de uma só vez e exibindo a saída do comando:
+$mkdir -pv linux/debian/ubuntu
+
+- Criando o diretório suse com permissão 733 (permissões de arquivos e diretórios serão
+detalhadas mais à frente).
+$mkdir -mv 733 suse
+
+- Criando diretórios dir1, dir2, dir3 e dir4 em um só comando, exibindo também a saída do
+comando:
+$mkdir -v dir{1,2,3,4}
+
+- Criando diretórios dir10, dir11, dir12, dir13, dir14, dir15 em um só comando, em modo
+“verbose”:
+$mkdir -v dir{10..15}
+
+#mv (move e renomeia um arquivo e diretório)
+Opções:
+-i : modo interativo. Pergunta antes de sobrescrever um arquivo existente com o mesmo nome.
+-v : modo verbose.
+-n : não sobrescreve um arquivo de destino com o mesmo nome.
+-f : modo forçado.
+
+$mv aula7 /tmp (move para o diretório /tmp)
+$mv -v aula1 curso2 (renomeia um arquivo)
+
+#ls (lista os arquivos e diretórios)
+Opções:
+-l : modo longo. Lista detalhes sobre os objetos, como o dono, o grupo, as
+permissões,
+data de última alteração e tamanho (a unidade padrão é o byte).
+-a ou --all : lista todos os objetos contidos no diretório, inclusive os ocultos.
+-i ou –inode : lista o número inode de todos os objetos (índice que o sistema de arquivos usa
+para identificar o arquivo ou diretório).
+-c : lista em odem alfabética.
+-h ou --human-readable: lista o conteúdo no modo “mais humano”. A unidade de tamanho
+de
+cada objeto é a mais compreensível possível.
+-C : lista o conteúdo em colunas.
+-t : classifica o conteúdo pela data de última modificação (ctime).
+-S : classifica os arquivos pelo tamanho.
+-R: lista o conteúdo recursivamente, subdiretórios e arquivos.
+-r: classifica o conteúdo em ordem alfabética reversa.
+
+$ls -a (arquivos ocultos)
+$ls -ld (lista detalhadamente o diretório sem mostrar o conteudo)
+$ls -l (lista de forma de lista os arquivos e diretórios)
+$ls -h (lista de forma mais ligível mostrando o formato do arquivo ou diretório) 
+$ls -lR (lista de forma recursiva cada diretório e todo o conteudo)
+$ls -l aula1* (mostra tudo depois de asterisco)
+$ls -l aula? ()
+$ls -l aula[123] (lista aula1, aula2, aula3)
+$ls -l aula[!123] (negação da lista, mostra tudo menos aula1, aula2, aula3)
+$ls -l aula[1-5] (lista de uma a cinco)
+
+$ls -l arquivo_grande 
+-rw-r--r-- 1 root root 17758 mai  5 21:21 arquivo_grande
+
+#rm (exclui arquivos e diretórios)
+Sintaxe:
+$rm <opções> <arquivo/diretório>
+Opções:
+-v : verbose.
+-i : modo interativo. Espera confirmação do usuário para excluir.
+-r : modo recursivo. Exclui diretório e seu conteúdo.
+$rm aula10 (remove o aula10)
+$rm -vi aula* (remove tudo que comela com aula e perguntando se eu quero remover)
+$rm -r exercicios/ (remove esse diretório e tudo que está dentro dele)
+
+#rmdir (remove diretórios vazios)
+$rmdir estudos/
+
+#touch (cria um arquivo em branco ou altera a data de modificação de um arquivo)
+Opções:
+-d : especifica data.
+-m : troca data de última modificação.
+-r : utiliza data de última modificação de um outro arquivo como referência.
+
+Exemplos:
+$touch -m -d 20160512 arq1 (troca a data de última modificação para 12/05/2016)
+$touch arq2  (cria um arquivo vazio chamado 'arq2')
+
+
 #tar
 #cpio
 #dd
-#file
+#file (identifica o tipo do arquivo)
+$file arquivo_grande 
+arquivo_grande: UTF-8 Unicode text
+
+
 #gzip
 #gunzip
 #bzip2
