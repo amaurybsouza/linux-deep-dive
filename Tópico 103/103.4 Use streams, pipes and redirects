@@ -1,8 +1,35 @@
 Terms and Utilities:
 
-#tee
+- Antes de redirecionar saídas ou entradas de comandos, vamos entender quais tipos de
+entrada/saída podem existir:
 
+"STDOUT" - saída padrão. Quando o comando é executado com sucesso, ele produz esta saída,
+exceto para comandos que não possuem “verbose” em suas saídas.
+"STDERR" - Saída de erros. Quando o resultado da execução é um erro, esta saída é mostrada,
+exceto em comandos que não produzem “verbose”.
+"STDIN" - Entrada padrão. Entrada de dados em um comando.
 
+Tipos de redirecionamento :
+
+> - redireciona saída padrão de um comando para um arquivo novo.
+>> - redireciona saída padrão de um comando para a última linha de um arquivo (append), mas
+se este não existir ele o cria.
+<- redireciona entrada padrão para um comando.
+<< - append de entrada padrão.
+2> - redireciona apenas saída de erros para um arquivo novo.
+2>> - append de saída de erros.
+&> - envia saída padrão e de erros para um arquivo novo.
+
+#tee (envia a saída padrão para um arquivo e exibe na saída do terminal, usado com o pipe |)
+
+- Enviar últimas 15 linhas do log /var/log/auth.log para o arquivo log_auth.txt exibindo a saída dele
+no display :
+$tail -n 15 /var/log/auth.log | tee log_auth.txt
+
+- Enviar linhas numeradas do arquivo /etc/passwd para o mesmo arquivo sem sobrescrevê-lo :
+$nl /etc/passwd | tee -a log_auth.txt
+
+$ls -l | tee listagem.txt
 
 
 #xargs
