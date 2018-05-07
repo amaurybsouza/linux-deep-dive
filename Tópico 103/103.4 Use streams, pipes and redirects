@@ -11,7 +11,7 @@ exceto em comandos que não produzem “verbose”.
 
 Tipos de redirecionamento :
 
-> - redireciona saída padrão de um comando para um arquivo novo.
+> - redireciona saída padrão de um comando para um arquivo novo. (sobrescreve se o arquivo existir)
 >> - redireciona saída padrão de um comando para a última linha de um arquivo (append), mas
 se este não existir ele o cria.
 <- redireciona entrada padrão para um comando.
@@ -22,6 +22,8 @@ se este não existir ele o cria.
 
 #tee (envia a saída padrão para um arquivo e exibe na saída do terminal, usado com o pipe |)
 
+$sort alunos2.txt | uniq | tee resultado.out (escreve na tela e salva no arquivo resultado.out)
+
 - Enviar últimas 15 linhas do log /var/log/auth.log para o arquivo log_auth.txt exibindo a saída dele
 no display :
 $tail -n 15 /var/log/auth.log | tee log_auth.txt
@@ -29,7 +31,52 @@ $tail -n 15 /var/log/auth.log | tee log_auth.txt
 - Enviar linhas numeradas do arquivo /etc/passwd para o mesmo arquivo sem sobrescrevê-lo :
 $nl /etc/passwd | tee -a log_auth.txt
 
+-> OUTROS EXEMPLOS DE DIRECIONAMENTO:
+
+$tail -f /var/log/syslog 1> log-data.txt 
+
+$tail -f /var/log/syslog > log-data.txt 
+
 $ls -l | tee listagem.txt
 
+$ls -l {Aula, AULA}3 > saida-ls.out 2> saida-ls-erro.out (joga a saida  do comando para saida-ls e a saida de erro para saida-ls-erro)
 
-#xargs
+$ls -l {Aula, AULA}3 > saida-ls.out 2>&1 (joga a saida e saida de erro para o mesmo arquivo)
+
+tr 'a-z' 'A-Z' < alunos.txt (recirecionamento de entrada)
+
+mail -s "Assunto" lpi1 < alunos.txt (redirecionamento de entrada, o arquivo alunos vai ser uma entrada para o comando mail)
+
+Pipe | (pega a saida do primeiro comando e envia como entrada para o segundo comando)
+
+$sort alunps.txt | uniq -d
+
+$cat alunos.txt | uniq | wc -l
+
+#xargs (pega a saida de um outro comando e usa o xargs para envia para outro comando)
+
+$find /home -name "Aula3*" 
+/home/lpi1/Exemplos/Aula30
+/home/lpi1/Exemplos/Aula3
+
+$find /home -name "Aula3*" | xargs ls- l (pegando a saida do comando find e jogando como entrada para ls -l)
+
+$find ./ -name "teste*" | xargs ls -l
+-rw-r--r--. 1 root root 0 mai  7 13:43 ./teste2
+-rw-r--r--. 1 root root 0 mai  7 13:43 ./teste3
+-rw-r--r--. 1 root root 0 mai  7 13:43 ./teste4
+-rw-r--r--. 1 root root 0 mai  7 13:43 ./teste5
+
+$find /home -name "Aula1*" | xargs rm -v
+removed '/home/lpi/Exemplos/Aula13'
+removed '/home/lpi/Exemplos/Aula12'
+removed '/home/lpi/Exemplos/Aula14'
+removed '/home/lpi/Exemplos/Aula10'
+removed '/home/lpi/Exemplos/Aula15'
+removed '/home/lpi/Exemplos/Aula11'
+
+$echo "A versão do kernel é:" `uname -r`
+A versão do kernel é: 4.16.5-200.fc27.x86_64
+
+$echo "A versão do kernel é:" $(uname -r)
+A versão do kernel é: 4.16.5-200.fc27.x86_64
