@@ -78,7 +78,7 @@ $ps aux | grep init (mostra o processo init)
 
 $ps u -C VboxClient (processos do usuário do processo vboxclient)
 
-#top
+#top já vou estudar esse comando
 
 #free
 
