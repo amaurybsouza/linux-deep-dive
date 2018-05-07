@@ -46,7 +46,13 @@ buscados).
 -mmin : procura por objetos que tenham sido modificados a minutos atrás.
 -mtime : procura por arquivos que tenham sido modificados a dias atrás.
 
+$find /home -name Aula10 (procura no /home o arquivo de nome aula10)
+$find /home -name Aula2*
+$find /home -user lpi2 -name Aula10
+$find ./ ctime -1 (todos os arquivos executados até um dia antes)
 
+- Busca apenas por arquivos regulares com permissão 644 em /var/log:
+$find /var/log –perm 644 –type f
 
 #mkdir (cria diretórios)
 Opções:
@@ -136,17 +142,126 @@ Exemplos:
 $touch -m -d 20160512 arq1 (troca a data de última modificação para 12/05/2016)
 $touch arq2  (cria um arquivo vazio chamado 'arq2')
 
+#tar (arquiva dados de diretórios em um arquivo apenas)
+Sintaxe:
+$tar <opções> <arquivo de backup> <origens dos dados>
 
-#tar
-#cpio
-#dd
+Opções:
+-c : cria uma arquivo da backup.
+-t : consulta o conteúdo de arquivos tar.
+-v : verbose.
+-x : extrai conteúdo de arquivo tar.
+-u : modo “update”. Apenas atualiza o conteúdo de um arquivo tar.
+Guia de Estudo para LPIC1 - Bruno Odon - howtoonline.com.br
+73-M : habilita backup em múltiplos volumes.
+-C : muda o destino da extração de conteúdo de arquivo tar.
+-z : utiliza o agente de compactação gzip.
+-j : utiliza o agente de compactação bzip2.
+-a : adiciona conteúdo a um arquivo tar.
+-f : toda a saída deve ser redirecionada para um arquivo tar.
+-J : utiliza o agente de compactação xz. 
+$tar cpvf backup.tar novo* (cria um arquivo de backup, preservando as propriedades)
+
+- Criando um arquivo de backup do diretório /etc inteiro em /backups/bkp.tar
+$tar –cvf /backups/bkp.tar /etc
+
+- Adicionando ao arquivo de backup anterior os diretórios /var/mail, /var/mysql e /home:
+$tar –uvf /backups/bkp.tar –a /var/mail /var/mysql /home
+
+- Conferindo conteúdo do arquivo da backup:
+$tar –tf /backups/bkp.tar
+
+- Atualizando o conteúdo do backup com o que foi modificado nesses diretórios:
+$tar –uvf /backups/bkp.tar /etc /var/mysql /var/mail /home
+
+- Criando arquivo de backup /backups/homedir.tar.gz (arquivo também compactado com gzip) do
+diretório /home/user1:
+$tar –czvf /backups/homedir.tar.gz /home/user1
+
+- Criando arquivo de backup /backups/mails.tar.bz2 (arquivo também compactado com o bzip2)
+do diretório /var/mail:
+$tar –cjvf /backups/mails.tar.bz2 /var/mail
+
+- Conferindo o backup /backups/homedir.tar.gz:
+$tar –tzf /backups/homedir.tar.gz
+
+- Extraindo todo o conteúdo do arquivo /backups/homedir.tar.gz para /mnt:
+$tar –xzf /backups/homedir.tar.gz –C /mnt
+
+#cpio (agente de backup muito utilizado, pode ser combinado com outros comandos, como por exemplo o comando find)
+"As opções mais usadas do cpio são:"
+-o : cria um arquivo de backup.
+-t : verifica um arquivo de backup.
+-i : extrai o conteúdo de um arquivo de backup.
+-F : aponta para um arquivo de backup, eliminando a necessidade de se utilizar
+redirecionamentos (< ou >).
+
+- Criando um arquivo de backup de uma lista de diretórios pronta chamada lista.txt:
+$cpio –o < lista.txt > /backups/backup_lista.bin
+
+- Verificando o conteúdo deste backup:
+$cpio –t < lista.txt
+
+- Combinando o comando find com cpio para obter o backup de todos os arquivos com permissão
+de execução contidos em /etc:
+$find /etc –type f –executable | cpio –o > backup_etc.bin
+
+- Restaurando este backup:
+$cpio –i –F backup_etc.bin
+
+$find ./ -name "novo*" | cpio -o > backup.cpio
+
+$find ./ -name "novo*" | cpio -o | gzip > backup.cpio.gz
+
+$ cpio -i < backup.cpio (descompactando o arquivo)
+
+#dd (usado para copiar uma partição inteira, copiar um arquivo de imagem)
+- Cria imagens “bit a bit” de sistemas de arquivos.
+
+Sintaxe:
+$dd if=<origem> of=<destino> <opções>
+
+Exemplos:
+- Criando um clone da partição /dev/sda1 em /dev/sdb1:
+$dd if=/dev/sda1 of=/dev/sdb1
+
+- Criando um arquivo de imagem /root/part2 da partição /dev/sda2:
+$dd if=/dev/sda1 of=/root/part2
+
+$dd if=/dev/sr0 of=imagem.img
+
 #file (identifica o tipo do arquivo)
 $file arquivo_grande 
 arquivo_grande: UTF-8 Unicode text
 
+#gzip (agente de compactação do linux, um dos mais importantes)
+- Gera arquivos de extensão .gz e tem taxa de compactação média quando o arquivo a ser
+compactado é grande.
 
-#gzip
-#gunzip
-#bzip2
-#xz
+- Compactando o arquivo arq1.txt em modo forçado:
+$gzip –f arq1.txt
+
+- Listando o conteúdo deste arquivo:
+$gzip –l arq1.txt.gz
+
+- Descompactando este arquivo:
+$gzip –d arq1.txt.gz
+
+$gzip -k backup.tar (mantem os dois arquivos)
+backup.tar
+backup.tar.gz
+
+#gunzip (agente de descompactação)
+$gunzip backup.tar.gz
+
+#bzip2 (agente de compactação)
+$bzip2 -k backup.tar (faz a compactação do arquivo)
+
+$bunzip backup.tar.bz2 (descompacta o arquivo)
+
+#xz (faz a compactação do arquivo)
+$xz -k backup.tar
+
+$unxz  ou $xz -d (modelos de descompactação)
+
 #file globbing
