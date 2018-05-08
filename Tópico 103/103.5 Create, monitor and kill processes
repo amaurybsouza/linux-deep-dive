@@ -143,7 +143,7 @@ $top -b d3 -n3 (a cada 3 segundos ele joga na tela 3 vezes as informações)
 $top -b -d3 -n3 > processos.txt
 
 #free (mostra a quantidade de memoria e de swap utilizada pelo sistema)
-teste
+
 $free -m (mostra em mega)
 
 $free -g (mostra em giga)
@@ -181,4 +181,16 @@ $killall5
 
 $killall firefox (mata todos os processos que estejam relacionados com firefox)
 
-#screen
+#screen (ferramenta para gerenciar janelas dentro de uma sessão do linux, emula varias abas de outras sessões)
+
+- Ctrla + c (cria uma nova aba do screen)
+
+- Ctrla + n (alterna entre as abas)
+
+- Ctrla + d (sai de uma aba do screen)
+
+$screen -r (retorna a aba anterior do screen)
+
+
+
+

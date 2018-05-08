@@ -20,6 +20,10 @@ se este não existir ele o cria.
 2>> - append de saída de erros.
 &> - envia saída padrão e de erros para um arquivo novo.
 
+$2> &1
+
+$1> &2  Caracteres utilizados para redirecionar a saída-padrão "stdout" para o erro-padrão "stderr" de um comando para um arquivo.
+
 #tee (envia a saída padrão para um arquivo e exibe na saída do terminal, usado com o pipe |)
 
 $sort alunos2.txt | uniq | tee resultado.out (escreve na tela e salva no arquivo resultado.out)
