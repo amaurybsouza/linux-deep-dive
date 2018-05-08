@@ -45,7 +45,63 @@ sinal 18. É o mesmo que a combinação de teclas CTRL + Z.
 
 #jobs
 
-#kill
+#kill (envia sinais para um processo)
+
+- Outro detalhe importante é que o sinal padrão do comando kill é 15, pois é o sinal mais aconselhável para terminar uma tarefa, ou seja: terminar um processo com o comando kill sem especificar qualquer argumento leva-o a terminar o processo com o sinal 15.
+
+$kill -l (mostra todos os tipos de sinais que podem ser enviados para o comando kill)
+
+#PRINCIPAIS SINAIS DO LINUX:
+
+SIGHUP (1)
+- Termina ou reinicia um processo. Utilizado também para
+que arquivos de configuração de um programa sejam
+relidos. 
+
+SIGINT (2)
+- Interrompe a execução de um processo. Relacionado ao
+Ctrl+C 
+
+SIGQUIT (3)
+- Termina um processo e normalmente gera um arquivo de dump
+
+SIGKILL (9)
+- Finaliza um processo de maneira imediata e incondicional.
+
+SIGTERM (15)
+- O sinal solicita que o processo se finalize. Sinal padrão do comando kill.
+
+SIGSTP (20)
+- Interrompe um processo permitindo que ele possa ser retomado. Relacionado ao Ctrl+Z.
+
+SIGCONT (18)
+- Continua a execução de um processo pausado (pelo sinal 20 por exemplo).
+
+$ps aux | grep firefox (ver o PID do Firefox)
+
+$pgrep firefox (mostra o PID do Firefox)
+4441
+
+$kill 4441 (mata o processo de forma "suave")
+
+$kill -s SIGKILL 4500 (envia um sinal para forçar o término do processo)
+
+$kill -s 9 4557 (mata o processo)
+
+$kill -9 4557 (mata o processo)
+
+$kill -SIGKILL 4557 (mata o processo)
+
+- Terminando o processo de PID 913 com o sinal 15(TERM):
+$kill -15 913
+
+ou
+
+$kill –TERM 913
+
+ou
+
+$kill 913
 
 #nohup
 
@@ -78,11 +134,26 @@ $ps aux | grep init (mostra o processo init)
 
 $ps u -C VboxClient (processos do usuário do processo vboxclient)
 
-#top já vou estudar esse comando
+#top (monitora como estão os processos no sistema, cpu, memória)
 
-#free
+$top -b (joga a informação na tela)
 
-#uptime
+$top -b d3 -n3 (a cada 3 segundos ele joga na tela 3 vezes as informações)
+
+$top -b -d3 -n3 > processos.txt
+
+#free (mostra a quantidade de memoria e de swap utilizada pelo sistema)
+
+$free -m (mostra em mega)
+
+$free -g (mostra em giga)
+
+#uptime (mostra a quanto tempo o sistema está ativo)
+
+- mostra a temperatura em 1, 5 e 15 minutos.
+
+$uptime
+21:41:27 up  4:54,  1 user,  load average: 1,80, 1,42, 1,20
 
 #pgrep (mostra os IDs dos processos)
 
@@ -96,8 +167,18 @@ amaury    2638  0.0  0.0  29976  4980 pts/2    Ss+  16:59   0:00 bash
 
 $pgrep bash -u root (mostra os processos bash do usuário root)
 
-#pkill
+#pkill (encontra o processo e vai matar o processo)
 
-#killall
+$pkill -1 firefox -u lpi1 (manda o sinal 1 (SIGHUP) para o usuário lpi1)
+
+#killall (mata os processos baseados no nome)
+
+- Encerrando abruptamente o processo executado pelo servidor X com o sinal 9:
+$killall -9 Xorg    ou    $killall –KILL Xorg
+
+$killall5
+- Termina todos os processos em execução.
+
+$killall firefox (mata todos os processos que estejam relacionados com firefox)
 
 #screen
