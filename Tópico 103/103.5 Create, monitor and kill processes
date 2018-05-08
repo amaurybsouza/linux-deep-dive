@@ -143,7 +143,7 @@ $top -b d3 -n3 (a cada 3 segundos ele joga na tela 3 vezes as informações)
 $top -b -d3 -n3 > processos.txt
 
 #free (mostra a quantidade de memoria e de swap utilizada pelo sistema)
-
+teste
 $free -m (mostra em mega)
 
 $free -g (mostra em giga)
