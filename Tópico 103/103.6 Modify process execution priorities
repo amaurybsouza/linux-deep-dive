@@ -18,9 +18,9 @@ $nice --adjustment=10 (outra forma de definir processo como comando nice)
 # DICA:
 - valores podem ser definidos entre -20 (valores negativos mais prioridade) a +19 (valores positivos menos prioridade) 
 
-- A prioridade padrão do comando nice é 10
+- todo processo começa com prioridade 0.
 
-- Pode usar a opção -15 é o mesmo que -n 15
+- A prioridade padrão do comando nice é 10 quando nada é setado
 
 - somente o root pode dar prioridades negativas entre -19 e -1 a processos.
 
@@ -35,9 +35,23 @@ Fazendo backup compactado do diretório /home com prioridade 2:
 
 $nice -2 tar cjvf /root/backup_users.tar.bz2 /home
 
-#ps
+#ps (a ser descrito posteriormente)
 
-#renice
+#renice (altera a prioridade de um processo que está em execução)
+
+$ps -la | grep calcu
+0 S     0 16007  8037  0  95  15 - 200066 SyS_po pts/1   00:00:00 gnome-calculato
+
+$renice -n 8 16007
+16007 (process ID) com prioridade antiga 15, prioridade nova 8
+
+ou $renice 8 16007 (alterando prioridade positiva para o processo)
+
+$renice -n -8 16007 ou $renice -8 16007 (alterando a prioridade negativa para o processo)
+
+$renice -u lpi1 -n 5 (altera a prioridade de todos os processos do usuário lpi1 para o valor 5)
+
+$renice -g lpi1 -n 5 (alterando o grupo do processo)
 
 - Mudando a prioridade do processo de PID 1811 para -16:
 $renice -16 1811
