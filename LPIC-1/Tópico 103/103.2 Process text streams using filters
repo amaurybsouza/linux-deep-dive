@@ -1,0 +1,222 @@
+Terms and Utilities:
+
+#cat (le um arquivo de texto, joga na saida padrão)
+$cat -n (mostra as linhas numeradas)
+
+$cat -b (mostra as linhas vazias sem numeração)
+
+$cat -s (elimina linhas repetidas que estão em branco)
+
+$cat -a (mostra os caracteres especiais do arquivo)
+
+#cut (exibe apenas os campos desejados de um arquivo)
+
+Opções:
+-c : exibe as colunas desejadas.
+-d : usa um delimitador.
+-f : “fields”. Campos do arquivo, levando em conta o delimitador.
+
+$cut -d , -f 1,3 vendas.csv (mostra a primeira e terceita coluna do arquivo, usando o delimitador ,)
+alberto,televisão
+alice,microondas
+alice,geladeira
+fernanda,dvd
+gabriela,celular
+joão,batedeira
+joão,aspirador
+
+#expand (esse comando converte tabs em espaço)
+
+- Convertendo linhas que tenham 2 tabulações para espaço simples do arquivo /etc/syslog.conf:
+$expand -t 2 /etc/syslog.conf
+
+#fmt (formata um arquivo de texto)
+
+Opções:
+-w : limita a largura de cada linha.
+-u : uniformiza os espaços dentro do arquivo.
+- usado quando vc tem linhas muito longas e quer que ela caiba na tela.
+
+$fmt -w 100 arquivo_longo.txt (ele faz cada linha com 100 caracteres no maximo)
+
+#head (mostra as 10 primeiras linhas de um arquivo)
+
+$head arquivolongo.txt (mostra 10 primeiras linhas do arquivo)
+
+$head -n 2 arquivo.txt (mostra as duas primeiras linhas do arquivo)
+
+$head -2 arquivo.txt (mostra as 2 primieras linhas, pode usar sem a opção -n)
+
+$head -c 50 arquivo.txt (mostra 50 primeiros bytes)
+
+#join (combina dois arquivos através de um indice)
+
+$join codigo-aluno.txt notas-aluno.txt
+1 Ana 10
+2 Jorge 8
+3 Estela 7
+4 João 8
+
+#less (mostra o arquivo de forma paginada, com algumas opções a mais que o comando more)
+
+$less arquivo_grande.txt
+
+$cat arquivo_grande | less (conecta a saida do primeiro comando com a entrada do segundo comando)
+
+#nl (comando semelhante ao "cat -b" ele numera as linhas do arquivo desconsiderando as linhas em branco)
+
+$nl arquivo_grande.txt
+
+#od (exibe o conteudo de um texto em formato octal)
+
+Opções:
+-o : modelo octal
+-u : decimal
+-x : hexadecimal
+
+#paste (junta dois arquivos sem considerar indices)
+
+$paste codigo-aluno.txt notas-aluno.txt
+1 Ana 1 10
+2 João 2 8
+3 André 3 9
+4 Maria 4 2
+
+#pr (prepara um arquivo para impressão, pagina para ser impresso)
+
+$pr arquivo_grande.txt (pagina o arquivo como se fosse para impressão, pagina 1, pagina 2, como se fosse um livro)
+
+$pr -l 50 arquivo_grande.txt (a cada 50 linhas ele cria uma pagina)
+
+$pr -l 50 -h "curso LPI-1" arquivo_grande.txt (a cada 50 linhas ele cria uma pagina com o cabeçalho "curso LPI-1")
+
+#sed (usado com expressões regulares, ele é usado para substituir e deletar partes do texto, funciona como um filtro)
+
+Opções do comando sed:
+s: substitui
+d: apaga a linha
+i: altera o arquivo que está sendo usado
+e: imprime o resultado na tela sem alterar o arquivo
+g: substitui todas as ocorrências encontradas
+
+$sed 's/Silva/Souza/' alunos.txt (substitui Silva por Souza no arquivo)
+
+$sed 's/Ana/Maria/g' alunos.txt (substitui Ana por Maria, em todas as ocorrências do arquivo e da linha)
+
+$sed '3,5 d' alunos.txt (apaga da linha 3 até a linha 5 do arquivo)
+
+$sed '/Claudia/d' alunos.txt (apaga a palavra Claudia  toda vez que encontrar essa palavra)
+
+
+#sort (esse comando faz a ordenação de um arquivo)
+
+$sort alunos.txt (ordena o arquivo em ordem alfabética)
+
+$sort -k 2 alunos.txt (ordena a segunda coluna do arquivo por ordem alfabética)
+
+$sort -n -t , -k 2 vendas.csv (ordena de forma numérica a 2 coluna do arquivo)
+
+Opções:
+-d : ordem alfanumérica.
+-n : ordem numérica.
+-t : usa um delimitador.
+-k : usa um campo como referência.
+-r : ordem reversa.
+-R : ordem randômica (aleatória).
+
+#split (divide um arquivo em vários outros)
+
+Opções:
+-b : quebra por quantidade de bytes.
+-l : quebra por quantidade de linhas.
+
+$split -l 8 vendas.csv (divide o arquivo em outros considerando 8 linhas para cada arquivo criado)
+cat xaa 
+alberto,500,televisão
+alice,300,microondas
+alice,900,geladeira
+fernanda,200,dvd
+gabriela,300,celular
+joão,80,batedeira
+joão,90,aspirador
+jorge,60,ventilador
+
+cat xab 
+josé,280,monitor
+lenadro,1200,notebook
+maria,650,computador
+marta,50,liquidificador
+marta,70,café
+pedro,200,telefone
+tales,300,fogão
+zuleica,100,ferro
+
+#tail (mostra as ultimas 10 linhas de um arquivo)
+
+$tail -n arquivo.txt(mostra as ultimas 10 linhas do arquivo)
+
+$tail -5 arquivo.txt (mostra as ultimas 5 linhas do arquivo)
+
+$tail -f arquivo.txt (mostra as linhas do arquivo e fica esperando o que pode ser escrito no arquivo em tempo real)
+
+$tail -n 5 -f arquivo.txt
+
+- ideal para visualização de logs
+
+#tr (esse comando substituiu ou delata algum caracter do arquivo)
+
+- esse comando deve ser usado junto com o pipe |
+
+$cat vendas.csv | tr a-z A-Z
+ALBERTO,500,TELEVISãO
+ALICE,300,MICROONDAS
+ALICE,900,GELADEIRA
+FERNANDA,200,DVD
+GABRIELA,300,CELULAR
+JOãO,80,BATEDEIRA
+JOãO,90,ASPIRADOR
+JORGE,60,VENTILADOR
+
+$cat vendas.csv | tr A E (substitui todas as letras A maiuscula por E do arquivo)
+
+$cat vendas.csv | tr ei EI (substitui todas as letras ei por EI do arquivo)
+
+$cat vendas.csv | tr [:upper:] [:lower:] (transforma tudo que estava em maiusculo em minusculo)
+
+$cat vendas.csv | tr -d A (deleta toda letra A maiuscula do arquivo)
+
+$cat vendas.csv | tr -d [:upper:] (deleta tudo que esteja em maiusculo do arquivo)
+
+$cat vendas.csv | tr -d [:blank:] (deleta tudo que esteja com espaço em branco do arquivo)
+
+#unexpand (converte de espaços para tabs)
+
+#uniq (exibe as linhas unicas de um arquivo)
+
+$cut -d , -f 1 vendas.csv | sort | uniq
+alberto
+alice
+fernanda
+gabriela
+joão
+jorge
+josé
+lenadro
+
+$uniq -d (mostra as linhas que estavam duplicadas no arquivo)
+
+$uniq -c (conta o número de vezes que repetiu cada ocorrência)
+
+#wc (mostra o número de linhas, palavras e caracteres de um arquivo)
+
+$wc alunos.txt (mostra a quantidade de linhas, palavras e caracteres)
+
+$wc -l (mostra a quantidade de linhas)
+
+$wc -c (mostra a quantidade de caracteres)
+
+$wc -w (quantas palavras)
+
+$wc * (executa para todos os arquivos do diretório)
+
+$cat alunos.txt | wc -l (14 linhas desse arquivo)

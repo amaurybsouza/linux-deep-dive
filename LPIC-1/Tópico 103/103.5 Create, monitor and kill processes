@@ -1,0 +1,227 @@
+Terms and Utilities:
+
+PID: Process ID 
+
+PPID: parent process ID
+
+"primeiro processo do sistema: init" ID == 1
+
+Processo: todo programa, aplicativo que vc inicia, todos os scripts que são executados é um processo dentro do Linux.
+
+"PID"
+- É o “Process ID”, o número de identificação que cada processo recebe. O único PID fixo
+existente é o PID do processo INIT, que é o de no 1.
+
+"NICE NUMBERS"
+- É o número de prioridade de execução de um processo. Se um processo é executado com maior
+prioridade, ele usa os melhores recursos de processamento para sua execução, enquanto se for
+prioridade baixa, ele depende que outros processo não estejam utilizando estes recursos para que ele
+também possa fazer uso. OS NICE NUMBERS vão de -20 até 19, sendo a maior a prioridade negativa.
+
+"SINAIS DE PROCESSOS"
+- Para saber o que se pode fazer com cada processo que está em execução é preciso entender os
+sinais de processos.
+- "Os mais importantes são:"
+1 - HUP ou SIGHUP : instrui o serviço a reler o seu arquivo de configuração (operação de
+“reload”).
+2 – INT ou SIGINT : interrompe um processo em primeiro plano (é o mesmo que CTRL+C).
+9 – KILL ou SIGKILL : Interrompe bruscamente um processo. Este sinal deve ser utilizado em
+último caso, pois ele pode causar danos aos arquivos envolvidos no processo.
+12 – USR2 ou SIGUSR2 : interrompe processo do usuário fazendo logoff no mesmo.
+15 – TERM ou SIGTERM : é enviado para todos os processos do sistema assim que ele entra
+em desligamento. Este sinal fecha todos os arquivos abertos do processo antes de terminá-lo, não
+causando nenhum tipo de dano a eles. Este é o sinal padrão da maioria dos comandos e programas que
+terminam processos justamente pela sua “elegância”.
+18 – CONT ou SIGCONT : continua processos que foram parados pelo sinal 20, enviando-os
+para background.
+20 – TSTP ou SIGTSTP : pára processos de forma que eles possam ser reiniciados depois pelo
+sinal 18. É o mesmo que a combinação de teclas CTRL + Z.
+
+#& (coloca o processo em background, passando primeiro o comando e depois o &)
+
+- colocando o processo com & no final ele já inicia em background.
+
+$gnome-calculator &
+[2] 2594
+
+$jobs -l
+[2]+ 2494 Running       gnome-calculator &
+
+$gnome-calculator (executando a calculadora pelo terminal em foreground)
+
+- ctrl+z (para o processo e coloca em background)
+
+$jobs -l
+[3]+  9064 Stopped                 gnome-calculator
+
+$bg (coloca o processo em background)
+[3]+ gnome-calculator &
+
+$fg (coloca o ultimo processo em foreground)
+
+#bg (envia um processo parado com sinal 20 (ctrl+z) para background)
+
+$firefox & (executando em background)
+[1] 2477
+
+$bg 2 (especifica qual processo você que em background)
+ 
+#fg (coloca o processo rodando em foregrond, fica preso ao terminal, primeiro plano)
+
+#jobs (mostra os processos que estão rodando em background)
+
+$jobs -l (mostra o PID dos processos, status e o nome dele)
+
+#kill (envia sinais para um processo)
+
+- Outro detalhe importante é que o sinal padrão do comando kill é 15, pois é o sinal mais aconselhável para terminar uma tarefa, ou seja: terminar um processo com o comando kill sem especificar qualquer argumento leva-o a terminar o processo com o sinal 15.
+
+$kill -l (mostra todos os tipos de sinais que podem ser enviados para o comando kill)
+
+#PRINCIPAIS SINAIS DO LINUX:
+
+SIGHUP (1)
+- Termina ou reinicia um processo. Utilizado também para
+que arquivos de configuração de um programa sejam
+relidos. 
+
+SIGINT (2)
+- Interrompe a execução de um processo. Relacionado ao
+Ctrl+C 
+
+SIGQUIT (3)
+- Termina um processo e normalmente gera um arquivo de dump
+
+SIGKILL (9)
+- Finaliza um processo de maneira imediata e incondicional.
+
+SIGTERM (15)
+- O sinal solicita que o processo se finalize. Sinal padrão do comando kill.
+
+SIGSTP (20)
+- Interrompe um processo permitindo que ele possa ser retomado. Relacionado ao Ctrl+Z.
+
+SIGCONT (18)
+- Continua a execução de um processo pausado (pelo sinal 20 por exemplo).
+
+$ps aux | grep firefox (ver o PID do Firefox)
+
+$pgrep firefox (mostra o PID do Firefox)
+4441
+
+$kill 4441 (mata o processo de forma "suave")
+
+$kill -s SIGKILL 4500 (envia um sinal para forçar o término do processo)
+
+$kill -s 9 4557 (mata o processo)
+
+$kill -9 4557 (mata o processo)
+
+$kill -SIGKILL 4557 (mata o processo)
+
+- Terminando o processo de PID 913 com o sinal 15(TERM):
+$kill -15 913
+
+ou
+
+$kill –TERM 913
+
+ou
+
+$kill 913
+
+#nohup (não vai aceitar o sinal HUP, evita que eu programa morra quando a sessão é fechada, conexão remota e evita que ele jogue saidas na tela enquanto vc faz outras operações)
+
+$nohup firefox & (coloca em background)
+
+- joga as saida para um arquivo chamado nohup.out
+
+#ps (comando para ver o status dos processos no sistema)
+- mostra todos os processo que estão em execução do Linux.
+
+"Opções:"
+-a : mostra processos de todos os terminais.
+-x : mostra processos que não precisam de terminal de controle.
+-u : exibe o nome do usuário responsável pelo processo ao lado do mesmo.
+-U : exibe apenas processos de um usuário específico.
+-f : modo “floresta”. Exibe “processos pai” e “processos filho”.
+-w : exibe na linha de baixo o conteúdo que não coube na linha de cima.
+
+$ps (mostra os processos que estão em execução no terminal atual)
+
+$ps -u (mostra mais opções, por usuário, nome do usuário, PID)
+
+$ps ux (ele mostra mais informações, mostra processos de outros terminais, programas do sistema)
+
+$ps -aux (mostra processos de todos os usuários, do root, do usuario lpi)
+
+$ps aux | head (não faz diferença)
+
+$ps -aux | head (não faz diferença)
+
+$ps aux | grep photo (mostra todos os processo com a palavra photo)
+
+$ps aux | grep init (mostra o processo init)
+
+$ps u -C VboxClient (processos do usuário do processo vboxclient)
+
+#top (monitora como estão os processos no sistema, cpu, memória)
+
+$top -b (joga a informação na tela)
+
+$top -b d3 -n3 (a cada 3 segundos ele joga na tela 3 vezes as informações)
+
+$top -b -d3 -n3 > processos.txt
+
+#free (mostra a quantidade de memoria e de swap utilizada pelo sistema)
+
+$free -m (mostra em mega)
+
+$free -g (mostra em giga)
+
+#uptime (mostra a quanto tempo o sistema está ativo)
+
+- mostra a temperatura em 1, 5 e 15 minutos.
+
+$uptime
+21:41:27 up  4:54,  1 user,  load average: 1,80, 1,42, 1,20
+
+#pgrep (mostra os IDs dos processos)
+
+$pgrep bash (mostra o processo do bash)
+3267
+
+$ps aux | grep 3267
+amaury    2611  0.0  0.0  29976  4892 pts/0    Ss   16:59   0:00 bash
+amaury    2630  0.0  0.0  29976  4932 pts/1    Ss   16:59   0:00 bash
+amaury    2638  0.0  0.0  29976  4980 pts/2    Ss+  16:59   0:00 bash
+
+$pgrep bash -u root (mostra os processos bash do usuário root)
+
+#pkill (encontra o processo e vai matar o processo)
+
+$pkill -1 firefox -u lpi1 (manda o sinal 1 (SIGHUP) para o usuário lpi1)
+
+#killall (mata os processos baseados no nome)
+
+- Encerrando abruptamente o processo executado pelo servidor X com o sinal 9:
+$killall -9 Xorg    ou    $killall –KILL Xorg
+
+$killall5
+- Termina todos os processos em execução.
+
+$killall firefox (mata todos os processos que estejam relacionados com firefox)
+
+#screen (ferramenta para gerenciar janelas dentro de uma sessão do linux, emula varias abas de outras sessões)
+
+- Ctrla + c (cria uma nova aba do screen)
+
+- Ctrla + n (alterna entre as abas)
+
+- Ctrla + d (sai de uma aba do screen)
+
+$screen -r (retorna a aba anterior do screen)
+
+
+
+

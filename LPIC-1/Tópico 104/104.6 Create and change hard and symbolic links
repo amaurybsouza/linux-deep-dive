@@ -1,0 +1,44 @@
+Terms and Utilities:
+
+#Hardlink (link físico)
+Um hardlink é a ligação entre arquivos onde o arquivo original é
+praticamente o mesmo que o link, tanto que os dois possuem o mesmo número
+inode e, por isso, não podem estar em sistemas de arquivos diferentes.
+Em uma ligação física entre arquivos, se o arquivo original for
+renomeado, movido ou até removido, o link continua existindo com os mesmos
+dados e o mesmo tamanho do arquivo original. Ele é ideal para se fazer cópias
+de segurança de arquivos em tempo real.
+- cria um outro nome que aponta para o mesmo inode.
+- mesmo apagando o arquivo original, não some com o link hard, continua acessando através do inode.
+- só pode ser criado para a mesma pertição.
+- não pode criar link hard para diretórios.
+
+#Softlink (link simbólico)
+Um softlink assume o papel de “simples atalho”, como o usuário costuma
+chamar. Ele assume um número inode diferente do arquivo original, podendo
+assim, ser implementado entre sistemas de arquivos diferentes.
+Em uma ligação simbólica entre arquivos, se o arquivo original for
+movido, excluído ou renomeado, a ligação fica quebrada (não existe mais).
+- é um arquivo que vai apontar para outro arquivo.
+- a flag l no começo do arquivo indica que ele é um link simbolico.
+- é um atalho. 
+- pode apontar para outra partição.
+- pode criar um link para diretórios.
+- link simbolico também vai ter sempre a permissão 777 (lrwxrwxrwx)
+
+#ln (comando para se criar links, com a opção -s cria um link simbolico)
+
+$ln script.sh link-hard 
+
+$ls -l script.sh link-hard (arquivos apontam para o mesmo inode, mesma permissão, mesmo tamanho) 
+-rw-r--r-- 2 root root 0 mai  2 22:13 link-hard
+-rw-r--r-- 2 root root 0 mai  2 22:13 script.sh
+
+$ln -s scriptexemplo link-simbolico (arquivos diferentes)
+lrwxrwxrwx 1 root root 13 mai  2 22:31 link-simbolico -> scriptexemplo
+-rw-r--r-- 1 root root  0 mai  2 22:36 scriptexemplo
+
+Cria ligação simbólica entre /etc/shadow e /mnt/senhas:
+#ln –s /etc/shadow /mnt/senhas
+
+#ls 
