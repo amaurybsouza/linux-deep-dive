@@ -1,6 +1,6 @@
 Terms and Utilities:
 
-PID: Process ID teste
+PID: Process ID 
 
 PPID: parent process ID
 
@@ -37,13 +37,40 @@ para background.
 20 – TSTP ou SIGTSTP : pára processos de forma que eles possam ser reiniciados depois pelo
 sinal 18. É o mesmo que a combinação de teclas CTRL + Z.
 
-#&
+#& (coloca o processo em background, passando primeiro o comando e depois o &)
 
-#bg
+- colocando o processo com & no final ele já inicia em background.
 
-#fg
+$gnome-calculator &
+[2] 2594
 
-#jobs
+$jobs -l
+[2]+ 2494 Running       gnome-calculator &
+
+$gnome-calculator (executando a calculadora pelo terminal em foreground)
+
+- ctrl+z (para o processo e coloca em background)
+
+$jobs -l
+[3]+  9064 Stopped                 gnome-calculator
+
+$bg (coloca o processo em background)
+[3]+ gnome-calculator &
+
+$fg (coloca o ultimo processo em foreground)
+
+#bg (envia um processo parado com sinal 20 (ctrl+z) para background)
+
+$firefox & (executando em background)
+[1] 2477
+
+$bg 2 (especifica qual processo você que em background)
+ 
+#fg (coloca o processo rodando em foregrond, fica preso ao terminal, primeiro plano)
+
+#jobs (mostra os processos que estão rodando em background)
+
+$jobs -l (mostra o PID dos processos, status e o nome dele)
 
 #kill (envia sinais para um processo)
 
@@ -103,7 +130,11 @@ ou
 
 $kill 913
 
-#nohup
+#nohup (não vai aceitar o sinal HUP, evita que eu programa morra quando a sessão é fechada, conexão remota e evita que ele jogue saidas na tela enquanto vc faz outras operações)
+
+$nohup firefox & (coloca em background)
+
+- joga as saida para um arquivo chamado nohup.out
 
 #ps (comando para ver o status dos processos no sistema)
 - mostra todos os processo que estão em execução do Linux.
