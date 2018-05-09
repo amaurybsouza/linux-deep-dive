@@ -63,3 +63,30 @@ $fgrep
 #sed
 
 #regex(7)
+
+- utilizar a expressão regular entre "aspas"
+
+$egrep "b[aei]g" texto.txt (mostra todas as linhas que tenham a expressão iniciada por "b seguida de aei e com final g")
+bag
+beg
+beginner
+bigger
+bege
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
