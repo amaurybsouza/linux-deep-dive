@@ -1,5 +1,7 @@
 Terms and Utilities:
 
+Material utilizado: https://www.vivaolinux.com.br/artigo/Usando-grep-e-egrep
+
 - Um exemplo claro de uso de expressão regular (ou REGEX, como queira) é quando se quer
 visualizar apenas os subdiretórios de um diretório através do comando ls :
 
@@ -10,7 +12,7 @@ O comando ls não tem opção nenhuma que diferencie o tipo do arquivo, portanto
 utilizar o grep para buscar dentro da saída dele linhas que, no modo longo do ls, comecem com ‘ d ‘,
 papel do metacaractere ^.
 
-#Expressão regular - descrição e exemplo (abaixo)
+|Expressão regular | descrição | exemplo abaixo
 
 ^ : Indica o começo da linha. O caractere deve estar do lado esquerdo da expressão. 
 
@@ -48,6 +50,9 @@ $grep -c Linux * (procura por todas os arquivos dentro desse diretórioe mostra 
 -r: modo recursivo, procura dentro dos diretórios/subdiretórios.
 -E: expande o conjunto de expressões regulares/mesmo que egrep.
 -v: mostra os resultados invertidos, exclui a expressão regular do comando, mostra o inverso. 
+-o: lista as ocorrências que foram encontradas.
+--color: destaca com vermelho onde a ER casou.
+-n: exibe o número de linhas que contem o padrão.
 
 #egrep (é o grep com expressões regulares mais avançadas, mais abrangentes, mesmo que grep -E)
 
