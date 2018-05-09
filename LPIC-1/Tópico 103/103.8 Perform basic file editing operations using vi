@@ -1,13 +1,53 @@
 Terms and Utilities:
 
 #vi
+- modos de operação: existem 3 modos de operação no vim
+  - navegação (modo navegação, não edita nada)
+  - inserção (modo inserção, apertar i, escreve, edita conteudo)
+  - comando (modo de comandos, sair, salvar, x,w,i)
 
 #/, ?
 
+/ (procura por uma palavra no texto, de cima para baixo)
+n (próxima ocorrência encontrada)
+N (procura do fim para o começo)
+? (procura do ponto para cima, para o começo do arquivo)
+
 #h,j,k,l
+
+h (move o caracter para trás, esquerda)
+j (desce para a proxima linha)
+k (sobe uma linha, para cima)
+l (proximo caracter seguinte, avança)
 
 #i, o, a
 
+i (insere conteudo no local da barra, habilita  o modo de inserção)
+o (insere na linha abaixo do cursor)
+O (insere na linha de cima do cursor)
+a (modo de inserção, após o cursor)
+A (modo de inserçao, insere no final da linha)
+
 #c, d, p, y, dd, yy
 
+cc (recorta e entra em modo de edição)
+p (cola o conteudo, cola a linha)
+dd (recorta mas não entra em modo de edição)
+p (cola na linha)
+d3d (recorta 3 linhas seguidas)
+yy (copia a linha inteira)
+y3y (copia 3 linhas)
+
 #ZZ, :w!, :q!, :e!
+
+:w (salva o arquivo)
+:q (sai do arquivo sem salvar)
+:q! (força a saida sem salvar)
+:wq (salva e sai do arquivo)
+:x (sai e salva)
+:wq! (força a saida salvando, ! serve para forçar)
+ZZ (sai e salva o arquivo)
+
+:!ls /tmp (executa o comando sem sair do vim)
+
+
