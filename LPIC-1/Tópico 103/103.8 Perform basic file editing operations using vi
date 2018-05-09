@@ -4,7 +4,7 @@ Terms and Utilities:
 - modos de operação: existem 3 modos de operação no vim
   - navegação (modo navegação, não edita nada)
   - inserção (modo inserção, apertar i, escreve, edita conteudo)
-  - comando (modo de comandos, sair, salvar, x,w,i)
+  - comando (modo de comandos, sair, salvar, x,w,ZZ,w,q,q!)
 
 #/, ?
 
@@ -48,6 +48,6 @@ y3y (copia 3 linhas)
 :wq! (força a saida salvando, ! serve para forçar)
 ZZ (sai e salva o arquivo)
 
-:!ls /tmp (executa o comando sem sair do vim)
+	:!ls /tmp (executa o comando sem sair do vim)
 
 
