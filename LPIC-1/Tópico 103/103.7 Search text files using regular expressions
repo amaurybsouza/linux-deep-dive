@@ -60,18 +60,73 @@ $grep -c Linux * (procura por todas os arquivos dentro desse diretórioe mostra 
 
 $fgrep 
 
-#sed
+#sed (substitui um valor por outro ou deletar uma linha que segue um padrão)
+
+$sed '/Linux/d' texto.txt (deleta toda vez que aparecer a palavra Linux)
+
+$sed '/^#/d' texto.txt (apaga todos os comentaŕios do texto)
+
+$sed '/[Ll]inux/d' texto.txt (apaga toda vez que encontrar Linux ou linux)
+
+$sed 's/[Ll]inux/Windows/' texto.txt (troca linux Linux pela palavra Windows no texto)
 
 #regex(7)
 
 - utilizar a expressão regular entre "aspas"
 
+- vamos utilizar a opção egrep que mostra mais opções de expressões regulares.
+
 $egrep "b[aei]g" texto.txt (mostra todas as linhas que tenham a expressão iniciada por "b seguida de aei e com final g")
-bag
-beg
-beginner
-bigger
-bege
+
+$egrep "b[a-u]g" texto.txt (pode se usar dessa forma, o egrep mostra as expressões que casem com a letra a até a letra u)
+
+$egrep "^linux" texto.txt  (mostra a palavra Linux no começo da linha)
+
+$egrep "Linux$" texto.txt (mostra a palavra Linux no final da linha)
+
+$egrep "^#" texto.txt (mostra apenas as linhas que estão comentadas)
+
+$egrep -v "^#"  texto.txt (mostra tudo menos o comentário, usar a opção -v que faz o inverso)
+
+#EXEMPLOS DE METACARACTERES:
+
+* (exige que o ultimo caracter (letra g do exemplo abaixo) ocorra nenhuma ou várias vezes)
+
+- o asterico impacta no caracter anterior.
+
+$egrep "b[a-i]g*" texto.txt
+
+$egrep "b[a-i]g*e" texto.txt (o g pode ou não aparecer e depois tem que etr a letra e)
+
++ (exige que o caracter anterior apareça pelo menos uma vez)
+
+$egrep "b[a-i]g+" texto.txt
+
+? (exige que o caracter anterior apareça nenhuma ou apenas uma vez)
+
+$egrep "b[a-i]g?" texto.txt (a letra g aparece nenhuma ou apenas uma vez)
+
+. (casa com um unico caracter, com qualquer caracter)
+
+- posso adicionar vários pontos, que equivalem a vários caracteres.
+
+$egrep "b[a-i]g." texto.txt
+
+$egrep "O.Linux" texto.txt (mostra todas qualquer caracetr entre a letra O e Linux)
+
+- posso adicionar vários pontos, que equivalem a vários caracteres.
+
+.* (exige que o caracter antes do ponto exista e que tenha qualquer coisa depois)
+
+$egrep "O.*Linux" texto.txt
+
+#ESCAPANDO O CARACTER .
+
+$egrep -i "linux\." texto.txt (escapa o . para que ele se torna um texto e não parte de uma expressão regular)
+
+
+
+
 
 
 
