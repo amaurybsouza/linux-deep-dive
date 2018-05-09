@@ -1,11 +1,59 @@
 Terms and Utilities:
 
-#grep
+- Um exemplo claro de uso de expressão regular (ou REGEX, como queira) é quando se quer
+visualizar apenas os subdiretórios de um diretório através do comando ls :
 
-teste
-#egrep
+$ls -l /etc | grep ^d
 
-#fgrep
+- Explicação:
+O comando ls não tem opção nenhuma que diferencie o tipo do arquivo, portanto, foi preciso
+utilizar o grep para buscar dentro da saída dele linhas que, no modo longo do ls, comecem com ‘ d ‘,
+papel do metacaractere ^.
+
+#Expressão regular - descrição e exemplo (abaixo)
+
+^ : Indica o começo da linha. O caractere deve estar do lado esquerdo da expressão. 
+
+^Linux 
+-------------------------------------
+$ : Indica o final da linha. O caractere deve estar do lado direito da expressão.
+
+Linux$ 
+-------------------------------------
+[abc] : Conjuntos de caractere-único. Determina qualquer caractere debtre os pertencentes na lista.
+
+[Ll]inux= Linux, linux 
+-------------------------------------
+[a-z] [0-9] : Range de caractere-único. Determina qualquer caractere dentre os pertencentes ao range.
+
+Versao[5-7]=Versao5,Versao6, Versao7 
+
+#grep (recebe uma exmpressão regular seguida de um arquivo)
+
+$grep Linux texto.txt (mostra as linhas que tem a palavra Linux dentro do texto)
+
+O Sistema Operacional "Linux"
+"Linux"
+"Linux"Ubuntu
+"Linux" Ubuntu
+O "Linux"
+Origem "Linux"
+O"Linux"
+
+$grep -c Linux * (procura por todas os arquivos dentro desse diretórioe mostra as ocorrências de Linux nos arquivos).
+
+#Opções do comando grep
+-c: número de ocorrências da palavra/ expressão dentro do texto.
+-i: ignora o case-sensitive/maiusculas e minusculas. (essa opção deixe o comando mais pesado)
+-r: modo recursivo, procura dentro dos diretórios/subdiretórios.
+-E: expande o conjunto de expressões regulares/mesmo que egrep.
+-v: mostra os resultados invertidos, exclui a expressão regular do comando, mostra o inverso. 
+
+#egrep (é o grep com expressões regulares mais avançadas, mais abrangentes, mesmo que grep -E)
+
+#fgrep (não aplica expressões regulares, considera tudo como um texto)
+
+$fgrep 
 
 #sed
 
