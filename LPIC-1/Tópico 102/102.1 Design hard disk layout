@@ -1,7 +1,31 @@
 Terms and Utilities:
 
-teste
+#MBR (Master Boot Record)
+- Padrão mas é limitada a 2TB por partição (mais utilizada no mercado)
 
+- Tipos de partição:
+ -> primária
+ -> extendida (contém as partições lógicas)
+ -> lógica
+
+- Limitada a 4 partições primárias ou 3 primárias + 1 extendida
+
+- Primárias numeradas de 1 a 4. Ex: sda1, sda3, sda4
+
+- Lógicas numeradas a partir de 5. Ex: sda5, sda6, sda7
+
+
+
+
+
+
+
+
+
+
+#GPT (GUID Partition Table)
+- utilizado quando são necessárias partições maiores de 2TB
+- maioria dos sistemas co  EFI utilizam GPT
 
 #/ (root) filesystem
 
@@ -15,6 +39,23 @@ teste
 
 #swap space
 
-#mount points
+#mount points (pegar um diretório e associar esse diretório a uma partição, por exemplo /home é associado a partição sdb2)
 
-#partitions
+
+- particionamento: dividir em partes, 
+sda1  sda2   sda3   sda4 
+
+#partitions ()
+- vantagens do particionamento: espaço em disco (tenho que ter duas partições, uma para o  / e outra para o swap)
+
+#Principais vantagens que podem cair na prova:
+- controle de espaço por partição
+- diferentes tipos de filesystem para cada partição (ext3, ext4, )
+- backup facilitado
+- diferentes níveis de segurança
+- proteção contra erros de disco
+
+
+desvantagem em ter só uma partição / (caso o usuário crie um arquivo muito grande, isso afeta todo o sistema, não tem espaço para gravar logs, aplicações)
+
+
