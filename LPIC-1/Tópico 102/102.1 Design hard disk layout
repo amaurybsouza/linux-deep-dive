@@ -41,6 +41,18 @@ Terms and Utilities:
 - utilizado quando são necessárias partições maiores de 2TB
 - maioria dos sistemas co  EFI utilizam GPT
 
+
+#LVM (forma de gerenciar o espaço no disco de maneira mais lógica)
+
+- método para alocar espaço dos discos em volumes lógicos
+- facilita o redimensionamento
+- elementos:
+  - VG: volume group
+  - PV: phisical volume
+  - LV: logical volume
+  - PE: phisical extent
+  - LE: logical extent
+
 #/ (root) filesystem
 
 #/var filesystem
