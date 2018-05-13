@@ -14,14 +14,28 @@ Terms and Utilities:
 
 - Lógicas numeradas a partir de 5. Ex: sda5, sda6, sda7
 
+- A partição / é a primeira partição montada pelo kernel
 
+- Ao menos 2 partições devem ser criadas: / e swap
 
+- Código dos tipos de partição:
+  - 83 = Linux Filesystem
+  - 82 = Linux swap
 
+- partições comuns:
+  /home  (arquivos dos usuário, isolar numa partição)
+  /var   (arquivos temporários, filas de impressão, de e-mail)
+  /tmp   (arquivos temporários)
+  /boot  (bootloader, kernel, initrd, carregados pelo grub)
+  /usr   (aplicação, arquivos de aplicação, programas)
 
-
-
-
-
+- diretórios que não podem estar montados fora do /
+  /etc   ()
+  /bin
+  /sbin
+  /dev
+  /proc
+  /sys
 
 #GPT (GUID Partition Table)
 - utilizado quando são necessárias partições maiores de 2TB
@@ -29,9 +43,7 @@ Terms and Utilities:
 
 #/ (root) filesystem
 
-
 #/var filesystem
-
 
 #/home filesystem
 
