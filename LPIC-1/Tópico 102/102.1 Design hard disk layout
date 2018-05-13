@@ -21,6 +21,9 @@ Terms and Utilities:
 - Código dos tipos de partição:
   - 83 = Linux Filesystem
   - 82 = Linux swap
+  - 8e = linux LVM
+  - 85 = Linux extendido
+  - 07 = NTFS, exFAT
 
 - partições comuns:
   /home  (arquivos dos usuário, isolar numa partição)
@@ -30,7 +33,7 @@ Terms and Utilities:
   /usr   (aplicação, arquivos de aplicação, programas)
 
 - diretórios que não podem estar montados fora do /
-  /etc   ()
+  /etc
   /bin
   /sbin
   /dev
@@ -40,7 +43,6 @@ Terms and Utilities:
 #GPT (GUID Partition Table)
 - utilizado quando são necessárias partições maiores de 2TB
 - maioria dos sistemas co  EFI utilizam GPT
-
 
 #LVM (forma de gerenciar o espaço no disco de maneira mais lógica)
 
@@ -55,21 +57,24 @@ Terms and Utilities:
 
 #/ (root) filesystem
 
-#/var filesystem
+#/var filesystem (sempre separado numa partição especifica, fila de impressão, de e-mail, logs pode ocupar muito espaço e é bom separar esse diretório)
 
-#/home filesystem
+#/home filesystem (diretório que ficam os arquivos dos usuários, tem que isolar essa partição, para que ele fique separado, não impactando outras partições e aplicações)
 
-#/boot filesystem
+#/boot filesystem (diretório que tem o kernel, initrd, carregados pelo GRUB, )
 
-#swap space
+#swap space (é usado no windows, linux, espaço no hd que serve para uma ram temporária caso a ram principal fique completamente cheia)
+
+- código da partição 82 = linux swap
+- tamanho da swap tem que ser duas vezes mais que a memória ram
+- se tiver 2GB a swap tem que ter 4GB
 
 #mount points (pegar um diretório e associar esse diretório a uma partição, por exemplo /home é associado a partição sdb2)
 
-
-- particionamento: dividir em partes, 
+- particionamento: dividir em partes 
 sda1  sda2   sda3   sda4 
 
-#partitions ()
+#partitions (/home /var /tmp /boot /usr)
 - vantagens do particionamento: espaço em disco (tenho que ter duas partições, uma para o  / e outra para o swap)
 
 #Principais vantagens que podem cair na prova:
@@ -78,7 +83,6 @@ sda1  sda2   sda3   sda4
 - backup facilitado
 - diferentes níveis de segurança
 - proteção contra erros de disco
-
 
 desvantagem em ter só uma partição / (caso o usuário crie um arquivo muito grande, isso afeta todo o sistema, não tem espaço para gravar logs, aplicações)
 
