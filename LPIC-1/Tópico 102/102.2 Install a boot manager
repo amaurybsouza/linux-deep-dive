@@ -1,0 +1,32 @@
+The following is a partial list of the used files, terms and utilities:
+
+------ GRUB LEGACY --------
+
+Arquivos de configuração: 
+  - /boot/grub/menu.lst
+  - /boot/grub/grub.conf/cfg
+
+Referência ao disco:
+  - hda1 = hd0,0
+  - hda5 = hd0,4
+  - hdb3 = hd1,2
+
+Comandos:
+  - $grub-install /dev/sda
+  - $grub-install '(hd0)'
+
+Principais parâmetros:
+  - 
+
+
+
+
+
+
+#menu.lst, grub.cfg and grub.conf
+
+#grub-install
+
+#grub-mkconfig
+
+#MBR
