@@ -47,6 +47,7 @@ hda5 = hd0,5
 hdb3 = hd1,3
 
 #Comandos:
+
 $grub-install <device>
 $update-grub
 $grub-mkconfig -o /boot/grub/grub.cfg (gera o arquivo grub.cfg)
@@ -78,9 +79,27 @@ $grep timeout grub.cfg
 
 #menu.lst, grub.cfg and grub.conf
 
+Para GRUB2:
+- Todas as alterações mais importantes são feitas no arquivo /etc/default/grub 
+É a partir desse arquivo que será gerado o arquivo /boot/grub/grub.cfg
+
+Para GRUB-LEGACY:
+- Todas as alterações importantes são feitas no arquivo /boot/grub/menu.lst
+
+
 #grub-install (instala o GRUB em um dispositivo)
 
+- O grub também pode ser instalado no MBR ou na partição pelo comando grub-install.
+
+Exemplo:
+Instalando o GRUB no disco /dev/sdc:
+$grub-install /dev/sdc
+
 #grub-mkconfig (gera um arquivo de configuração do GRUB)
+
+$grub-mkconfig -o /boot/grub/grub.cfg ou $grub2-mkconfig -o /boot/grub2/grub.cfg
+
+Outro comando que é similar é: $update-grub ou $update-grub2
 
 #MBR
 - O gerenciador de inicialização - ou simplesmente bootloader - é o componente res­
