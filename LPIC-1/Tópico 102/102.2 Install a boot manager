@@ -1,10 +1,58 @@
 The following is a partial list of the used files, terms and utilities:
 
------- GRUB LEGACY --------
+-> Diferença entre os dois tipos de GRUBS: (Legacy e GRUB 2)
+
+1) GRUB LEGACY
+- O GRUB é o boot loader usado pela maioria das distribuições para desktops e servers justamente pelo fato de ele ser um gerenciador dinâmico (não precisa ser reinstalado após cada mudança em seu arquivo de configuração) e cheio de recursos, como boot por diversos sistemas operacionais e filesystems diferentes, por discos de qualquer tipo (inclusive ISCSI), por múltiplas imagens, por ter um menu que disponibiliza o modo de comando (para emergências) e a possibilidade de criptografação de senha se boot.
+
+#Arquivos de configuração: 
+
+$/boot/grub/menu.lst (principal arquivo de configuração)
+$/boot/grub/grub.conf/cfg (outro arquivo para edição)
+
+#Referência ao disco:
+
+hda1 = hd0,0
+hda5 = hd0,4
+hdb = hd1,2
+
+#Comandos:
+
+$grub-install /dev/sda
+$grub-install '(hd0)'
+
+#Principais parâmetros:
+
+title "Ubuntu"
+    root (hd0,0)
+    kernel /boot/vmlinuz-4.15.0-20-generic root=UUID=f44e8cc3-eaae-4dd2-823d-8d8004ef93c8 ro  quiet splash $vt_handoff
+        initrd  /boot/initrd.img-4.15.0-20-generic
+
+default=0
+Timeout=15
+
+2) GRUB 2 (mais utilizado no mercado, esse é o mais atual)
+- Afim de adequar o boot manager aos novos padrões de hardware e fimware do mercado, o GRUB2 surgiu modificando praticamente todos os padrões de configuração. O arquivo /boot/grub/menu.lst já não existe mais nesta versão do boot manager. O recomendado é sempre fazer as alterações dentro do arquivo /etc/default/grub e logo depois atualizar o grub. Toda e qualquer alteração na configuração também pode ser feita diretamente em /boot/grub/grub.cfg.
 
 Arquivos de configuração: 
-  - /boot/grub/menu.lst
-  - /boot/grub/grub.conf/cfg
+
+$/boot/grub/grub.cfg (principal arquivo de configuração)
+$/etc/default/grub (timeout, cmdline, grub-default)
+$/etc/grub.d (defini as opções de boot, onde o administrador trabalha, a configuração é feita nesses dois arquivos, para depois gerar o grub.cfg)
+
+
+
+
+
+
+
+
+
+Referência ao disco:
+  - hda1 = hd0,0
+  - hda5 = hd0,4
+  - hdb3 = hd1,2
+
 
 Referência ao disco:
   - hda1 = hd0,0
