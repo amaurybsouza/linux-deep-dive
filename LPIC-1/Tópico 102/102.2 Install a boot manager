@@ -110,10 +110,10 @@ maticamente e não deve ser editado diretamente;
 eliminado;
 
 • No GRUB2, o principal arquivo de configuração para modificar do menu de
-boot é o / e t c / d efa u l t / g r u b ;
+boot é o /etc/default/grub;
 
 • Configurações avançadas são definidas e m arquivos separados localizados no
-diretório / e tc / g r u b . d / .
+diretório/etc/grub.d
 
 • A numeração das partições inicia a partir do 1 e não mais de O;
 
@@ -131,6 +131,7 @@ Boa prática é fazer uma cópia da MBR, para restaurá-la no caso de ser sobres
 
 • Esse becape pode ser guardado e depois restaurado para a MBR:
 dd i f=mbr. b a c k u p of=/ d e v / hd a
+
 
 
 
