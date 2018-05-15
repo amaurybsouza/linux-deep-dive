@@ -6,9 +6,11 @@ Terms and Utilities:
 
 -> na estática eu vou referenciar a biblioteca externa e essa será incorporada na minha aplicação, o código vai ser incorporado na aplicação.
 
-->
+-> vinculo dinâmico é só um mapeamento externo das bibliotecas com a aplicação.
 
-#ldd (mostra as bibliotecas que são utilizadas pela aplicação)
+#ldd (mostra as bibliotecas que são utilizadas pela aplicação, aplicação)
+
+$ldd <programa>
 
 $ldd /usr/bin/vi (mostra todas as bibliotecas compartilhadas que o vi está utilizando)
 
@@ -42,7 +44,14 @@ drwxr-xr-x. 2 root root   4096 mai  7 06:46 ld.so.conf.d
 
 - um dos principais é o ld.so.cache (é aqui que estão mapeados todas as bibliotecas conhecidas pelo Linux que podem ser utilizadas pelas aplicações)
 
-#ldconfig ()
+#ldconfig (é usado para recompilar o ld.so.cache)
+
+- Este comando aplica as modificações feitas em todos os arquivos de configuração de paths. Ele 
+grava estas mudanças em /etc/ld.so.cache, que é o aquivo que armazena estas informações de busca.
+
+- quando é executado esse comando ele vai reler as configurações que estão em ld.so.conf e no ld.so.conf.d e vai gerar um novo arquivo ld.so.cache
+
+- a opção -p vai listar as bibliotecas ativas no momento.
 
 #/etc/ld.so.conf (é o principal arquivo de configuração, é nesse arquivo que eu vou indicar quais os caminhos, novos caminhos onde o Linux vai encontrar as bibliotecas)
 
@@ -51,4 +60,12 @@ include ld.so.conf.d/*.conf
 
 $ld.so.conf.d (o que tiver aqui dentro desse diretório será incluido dentro na lib, onde vão estar as bibliotecas)
 
-#LD_LIBRARY_PATH
+#LD_LIBRARY_PATH  (usuário pode definir essa váriavel, significa quais diretórios que ele quer considerar como fonte de biblioteca, isso é temporário)
+
+- é usado quando o usuário não tem permissão para alterar o ld.so.conf (mas é uma forma que funciona, setar uma variavel de ambiente)
+
+$export LD_LIBRARY_PATH=/tmp/lib/
+
+$env | grep LIBRARY
+
+
