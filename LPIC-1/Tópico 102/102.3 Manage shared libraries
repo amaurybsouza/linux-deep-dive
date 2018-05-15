@@ -40,27 +40,15 @@ $ls -ld ld.so* (diretório /etc onde ficam todos os arquivos e diretórios usado
 -rw-r--r--. 1 root root     28 mar  2 09:01 ld.so.conf
 drwxr-xr-x. 2 root root   4096 mai  7 06:46 ld.so.conf.d
 
+- um dos principais é o ld.so.cache (é aqui que estão mapeados todas as bibliotecas conhecidas pelo Linux que podem ser utilizadas pelas aplicações)
 
+#ldconfig ()
 
+#/etc/ld.so.conf (é o principal arquivo de configuração, é nesse arquivo que eu vou indicar quais os caminhos, novos caminhos onde o Linux vai encontrar as bibliotecas)
 
+$cat ld.so.conf (mostra o diretório secundário)
+include ld.so.conf.d/*.conf
 
-
-
-
-
-
-
-
-
-
-
-
-Terms and Utilities:
-
-#ldd
-
-#ldconfig
-
-#/etc/ld.so.conf
+$ld.so.conf.d (o que tiver aqui dentro desse diretório será incluido dentro na lib, onde vão estar as bibliotecas)
 
 #LD_LIBRARY_PATH
