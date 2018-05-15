@@ -2,9 +2,14 @@ Terms and Utilities:
 
 Adiconar usrquota e grpquota no arquivo /etc/fstab
 
-limite soft: consegue escrever dentro do periodo de grace time, por tolerancia
+limite soft: consegue escrever dentro do periodo de grace time, por tolerancia.
 
-limite hard: não consegue escrever pois já está em cima do limite.
+É o primeiro limite a ser estabelecido para cota de usuários ou grupos. Quando o usuário chega
+a este limite, ele passa a ficar em grace time, que é o período de tolerância dado ao usuário ou grupo
+para que eles possam remover o conteúdo excedente e continuem tendo permissão de escrita no
+volume. Caso eles não o façam durante este período, terão a permissão de escrita negada no volume.
+
+limite hard: não consegue escrever pois já está em cima do limite, atingindo esse nível o usuário vai ter a permissão de escrita no volume negada aumaticamente.
 
 Grace period: limite grace, tempo de tolerância até atingir ao limte. (altera com edquota)
 
