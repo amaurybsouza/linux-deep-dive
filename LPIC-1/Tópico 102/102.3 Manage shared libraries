@@ -1,5 +1,62 @@
 Terms and Utilities:
 
+#Biblioteca compartilhada (é quando vc desenvolve uma aplicação e dentro dessa aplicação vc faz referência a um pedaço de código que está fora dessa aplicação, que está desenvolvida através de uma biblioteca)
+
+- O Linux usa dois conceitos de bibliotecas, tem a estática e a dinâmica:
+
+-> na estática eu vou referenciar a biblioteca externa e essa será incorporada na minha aplicação, o código vai ser incorporado na aplicação.
+
+->
+
+#ldd (mostra as bibliotecas que são utilizadas pela aplicação)
+
+$ldd /usr/bin/vi (mostra todas as bibliotecas compartilhadas que o vi está utilizando)
+
+inux-vdso.so.1 (0x00007ffe5839b000)
+libselinux.so.1 => /lib64/libselinux.so.1 (0x00007f250c8da000)
+libtinfo.so.6 => /lib64/libtinfo.so.6 (0x00007f250c6ae000)
+libacl.so.1 => /lib64/libacl.so.1 (0x00007f250c4a5000)
+libc.so.6 => /lib64/libc.so.6 (0x00007f250c0ef000)
+libpcre2-8.so.0 => /lib64/libpcre2-8.so.0 (0x00007f250be6d000)
+libdl.so.2 => /lib64/libdl.so.2 (0x00007f250bc69000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f250ce20000)
+libattr.so.1 => /lib64/libattr.so.1 (0x00007f250ba64000)
+libpthread.so.0 => /lib64/libpthread.so.0 (0x00007f250b846000)
+
+- tudo que for so. é uma biblioteca
+
+- pode se usar a opção -v no comando ldd, para mostrar mais detalhes, outras versões.
+
+- diretórios onde se encontram as bibliotecas, são dois diretórios:
+
+/lib (tem vários diretórios e dentro tem várias bibliotecas)
+
+/usr/lib (contem por padrão as bibliotecas utilizadas pelas aplicações)
+
+- pode ter bibliotecas em outros diretórios
+
+$ls -ld ld.so* (diretório /etc onde ficam todos os arquivos e diretórios usados pelo ld.so)
+-rw-r--r--. 1 root root 130214 mai  7 06:46 ld.so.cache
+-rw-r--r--. 1 root root     28 mar  2 09:01 ld.so.conf
+drwxr-xr-x. 2 root root   4096 mai  7 06:46 ld.so.conf.d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Terms and Utilities:
+
 #ldd
 
 #ldconfig
