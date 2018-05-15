@@ -17,7 +17,7 @@ m: manual de ajuda dos comandos do fdisk
 Exemplos: # fdisk -l /dev/sda   # fdisk /dev/sdb2
 
 #gdisk (comando parecido com o fdisk, na qual trabalha com a manipulação da tabela de partição)
-- Usa o modelo GPT (sem limitações como a MB)
+- Usa o modelo GPT (sem limitações como a MBR)
 - As mesmas opções do fdisk servem no comando gdisk.
 - Opções do comando gdisk: 
 p: exibe a tabela de partição do volume
