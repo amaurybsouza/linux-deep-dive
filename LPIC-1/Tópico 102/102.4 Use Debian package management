@@ -81,7 +81,7 @@ este gerenciador consulta os dados de /etc/apt/sources.list.
 
 - Toda vez que eu executo o comando apt ele vai consultar a base de dados, no source list, aonde que está aquele pacote, qual a ultima versão e vai fazer o update, download e instalação do pacote.
 
-- ele toma conta de tudo, das dependencias do pacote, faz o download de tudo e a instalação de tudo
+- ele toma conta de tudo, das dependencias do pacote, faz o download de tudo e a instalação de tudo, tendo como principal beneficio a resolução e instalação de dependências.
 
 $apt-get update (esse comando verifica no arquivo source.list e atualiza o mesmo, se foi adicionado um novo pacote em sources.list, o update então atualiza esse arquivo) Ele não faz download de nada, ele só se atualiza sobre as informações da fonte.
 
