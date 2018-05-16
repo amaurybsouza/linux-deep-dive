@@ -22,7 +22,10 @@ Outros comandos: $yumdowloader $rmp2cpio
 
 #/etc/apt/sources.list (é nesse arquivo que contem todas as fontes, é daqui que o apt-get faz o download da versão correta dos programas)
 
-- 
+- O arquivo de configuração de repositórios para pacotes .deb é /etc/apt/sources.list,
+contém a lista de servidores ou mídias onde podem ser encontrados os pacotes para a
+distribuição. Geralmente, opta-se por trabalhar com repositórios em rede (LAN ou WAN)
+pois a dinâmica de atualização dos pacotes funciona muito mais.
 
 #dpkg (instala e manipula arquivos .deb. Ele também faz operações de consultas em pacotes já instalados)
 
@@ -57,7 +60,19 @@ $dpkg -c ldap-utils_2.4.21-0ubuntu5.2_i386.deb
 Mostra detalhes sobre o pacote samba, que já está instalado:
 $dpkg -p samba
 
-#dpkg-reconfigure
+#dpkg-reconfigure (é usado para imprimir pacotes que exigem uma interação de configuração com o usuário)
+
+- esse comando é usado para ajudar o usuário na instalação e configuração de algum pacote.
+
+Exemplo:
+
+$dpkg-reconfigure tzdata (mostra a tela de configuração do timezone)
+
+$dpkg-reconfigure keyboard-configuration (configuração do teclado)
+
+- não tem muitas opções, absta saber só o básico.
+
+$dselect (é uma interface gráfica do apt, em modo texto, seleciona os pacotes para remover, instalar)
 
 #apt-get (os comandos do apt tem um repositório, um conjunto de URL, onde ele consulta os pacotes e softwares que se pretende instalar ou remover)
 
@@ -72,7 +87,7 @@ $apt-get update (esse comando verifica no arquivo source.list e atualiza o mesmo
 
 $apt-get upgrade (pega todos os softwares que tem instalado no sistema, aplicações, vai consultar as fontes e ver se tem versões mais atualizadas e faz o download e instalação).
 
-$apt-get dist-upgrade (mais inteligente que o comando upgrade, ele verifica se tem algum tipo de conslito)
+$apt-get dist-upgrade (mais inteligente que o comando upgrade, ele verifica se tem algum tipo de conflito)
 
 $apt-get install (Instala um pacote e suas dependências a partir de repositórios que estão listados
 dentro de /etc/apt/sources.list)
@@ -92,7 +107,7 @@ $apt-get remove (remove o pacote mas mantem alguns arquivos de configuração)
 
 $apt-get purge (remove o pacote e os arquivos de configuração)
 
-$apt-get check (verifica as consistencias checar a base de dados do gerenciador de pacotes)
+$apt-get check (verifica as consistencias checa a base de dados do gerenciador de pacotes)
 
 $apt-get clean (remove algum arquivo temporário e faz uma limpeza na base de dados)
 
@@ -114,4 +129,30 @@ vim
   Depends: libc6
   Depends: libgpm2
 
-#aptitude
+#aptitude (ele tbm tem uma interface gráfica através de menus, mais complexa que o dselect)
+
+- É uma interface mais amigável para o apt. É possível visualizar a lista de pacotes
+disponíveis para instalação de uma forma muito organizada.
+
+- As opções do aptitude são as mesmas do apt-get.
+
+Exemplos:
+Instala o pacote samba através de um repositório:
+$aptitude install samba
+
+Atualiza a base da dados do apt:
+$aptitude update
+
+Remove o pacote samba:
+$aptitude remove samba
+
+$aptitude safe-upgrade (faz a mesma coisa que o apt-get dist-upgrade)
+
+$aptitude search csh (pesquisa todos os pacotes que tem csh no nome dos pacotes, é bom que vc verifica qual o pacote ideal para se instalar)
+
+$aptitude purge csh (remove o pacote csh e todos os arquivos de configuração)
+
+$alien (ele converte e instala pacotes binários alien)
+
+- converte arquivos rpm em .deb e ao inverso.
+- instala tbm no sistema debian pacote que é rpm.
