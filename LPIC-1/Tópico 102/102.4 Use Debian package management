@@ -20,7 +20,9 @@ Outros comandos: $yumdowloader $rmp2cpio
 -> um pacote é um conjunto de arquivos relacionados a uma aplicação: executáveis, cfgs, bibliotecas, manuais, etc. além de informações sobre dependências.
 -> os gerenciadores de pacotes mantem uma base de dados relacionando todos os pacotes, seus arquivos e dependências.
 
-#/etc/apt/sources.list
+#/etc/apt/sources.list (é nesse arquivo que contem todas as fontes, é daqui que o apt-get faz o download da versão correta dos programas)
+
+- 
 
 #dpkg (instala e manipula arquivos .deb. Ele também faz operações de consultas em pacotes já instalados)
 
@@ -29,7 +31,7 @@ Outros comandos: $yumdowloader $rmp2cpio
 - Opções:
 -i : instala um pacote.
 -x : extrai conteúdo de um pacote.
--r : remove um pacote.
+-r : remove um pacote, mas mantem os arquivos de configuração do pacote.
 -P : “purge” - remove completamente o pacote e arquivos de configuração.
 -l : lista pacotes instalados.
 -c : exibe o conteúdo de um arquivo de pacote .deb.
@@ -57,8 +59,59 @@ $dpkg -p samba
 
 #dpkg-reconfigure
 
-#apt-get
+#apt-get (os comandos do apt tem um repositório, um conjunto de URL, onde ele consulta os pacotes e softwares que se pretende instalar ou remover)
 
-#apt-cache
+- Gerenciador de arquivos e dependências de pacotes através de repositórios do Debian,
+este gerenciador consulta os dados de /etc/apt/sources.list.
+
+- Toda vez que eu executo o comando apt ele vai consultar a base de dados, no source list, aonde que está aquele pacote, qual a ultima versão e vai fazer o update, download e instalação do pacote.
+
+- ele toma conta de tudo, das dependencias do pacote, faz o download de tudo e a instalação de tudo
+
+$apt-get update (esse comando verifica no arquivo source.list e atualiza o mesmo, se foi adicionado um novo pacote em sources.list, o update então atualiza esse arquivo) Ele não faz download de nada, ele só se atualiza sobre as informações da fonte.
+
+$apt-get upgrade (pega todos os softwares que tem instalado no sistema, aplicações, vai consultar as fontes e ver se tem versões mais atualizadas e faz o download e instalação).
+
+$apt-get dist-upgrade (mais inteligente que o comando upgrade, ele verifica se tem algum tipo de conslito)
+
+$apt-get install (Instala um pacote e suas dependências a partir de repositórios que estão listados
+dentro de /etc/apt/sources.list)
+
+Exemplos:
+$apt-get install <opções> <pacote(s)>
+
+$apt-get install zsh (instala esse pacote, verifica a versão mais atual, a origem, de onde ele vai fazer download e quais os pacotes dependentes).
+
+Opções:
+-s : simula a instalação do pacote.
+-d: apenas faz o download dos pacotes para o diretório /var/cache/apt/archives/.
+-y : assume como “Yes” todas as respostas de instalação.
+--reinstall : reinstala um pacote.
+
+$apt-get remove (remove o pacote mas mantem alguns arquivos de configuração) 
+
+$apt-get purge (remove o pacote e os arquivos de configuração)
+
+$apt-get check (verifica as consistencias checar a base de dados do gerenciador de pacotes)
+
+$apt-get clean (remove algum arquivo temporário e faz uma limpeza na base de dados)
+
+$apt-get --download-only install zsh (faz o download do pacote, não instala)
+
+- o download fica no caminho: /var/cache/apt/archives
+
+#apt-cache (comando utilizado para mostrar as informações que ele tem na base de dados dele, na base de pacotes debian dele)
+
+$apt-cache pkgnames (lista de pacotes instalados no sistema)
+
+$apt-cache show vim (mostra as informações do vim, dependencias, descriçao dele, e outras informações)
+
+$apt-cache depends vim (mostra os pacotes que o vim depende, pacotes que ele precisa para o vim funcionar)
+vim
+  Depends: vim-common
+  Depends: vim-runtime
+  Depends: libacl1
+  Depends: libc6
+  Depends: libgpm2
 
 #aptitude
