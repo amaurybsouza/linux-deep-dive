@@ -1,0 +1,56 @@
+Terms and Utilities:
+
+- Distribuições baseadas em Red Hat e o próprio Red Hat aceitam a instalação de
+pacotes .rpm e .tar.gz.
+A questão das dependências é a mesma: um pacote sozinho pode não ter todas as
+dependências necessárias para a sua instalação e, para resolvê-las, é muito importante
+instalar os pacotes por repositórios.
+
+
+
+#rpm
+
+$rpm <opções> <pacote>
+- Opções do modo de instalação:
+-i : instala um pacote através de arquivo de pacote.
+-U : faz upgrade em um programa já instalado através de um arquivo.
+-v : modo verbose de instalação.
+-vv: modo verbose com mais detalhes.
+-h : modo hash. Exibe barra de rolagem ao instalar.
+-e : remove um programa instalado.
+--nodeps : ignora dependências não satisfeitas do pacote na instalação. Esta opção não é recomendável, pois há grandes chances de o programa não funcionar.
+
+- Opções do modo de consulta:
+- Para o modo de consulta, a opção q deve estar sempre presente antes de qualquer
+
+-qa: consulta todos os programas instalados.
+-ql: consulta por arquivos pertencentes a programas instalados.
+-qf : descobre a qual pacote pertence um determinado arquivo.
+-qi : exibe informações detalhadas sobre um programa instalado.
+-qd ou –-configfiles : mostra todos os arquivos de configuração do programa
+instalado.
+-qd ou –-docfiles : mostra todos os arquivos de documentação do programa
+instalado.
+-qpl : exibe os arquivos e diretórios contidos em um arquivo de pacote.
+-qpd: exibe os arquivos de documentação contidos dentro de um arquivo de
+pacote.
+-qpc: exibe os arquivos de configuração de um arquivo de pacote.
+
+
+
+
+
+
+
+
+
+
+#rpm2cpio
+
+#/etc/yum.conf
+
+#/etc/yum.repos.d/
+
+#yum
+
+#yumdownloader
