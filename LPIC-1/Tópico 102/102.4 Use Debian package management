@@ -83,11 +83,11 @@ este gerenciador consulta os dados de /etc/apt/sources.list.
 
 - ele toma conta de tudo, das dependencias do pacote, faz o download de tudo e a instalação de tudo, tendo como principal beneficio a resolução e instalação de dependências.
 
-$apt-get update (esse comando verifica no arquivo source.list e atualiza o mesmo, se foi adicionado um novo pacote em sources.list, o update então atualiza esse arquivo) Ele não faz download de nada, ele só se atualiza sobre as informações da fonte.
+$apt-get update (obtém informações atualizadas das fontes).
 
-$apt-get upgrade (pega todos os softwares que tem instalado no sistema, aplicações, vai consultar as fontes e ver se tem versões mais atualizadas e faz o download e instalação).
+$apt-get upgrade (realiza a atualização de todos os pacotes).
 
-$apt-get dist-upgrade (mais inteligente que o comando upgrade, ele verifica se tem algum tipo de conflito)
+$apt-get dist-upgrade (realiza a atualização de todos os pacotes, desde que não haja quebra de dependências)
 
 $apt-get install (Instala um pacote e suas dependências a partir de repositórios que estão listados
 dentro de /etc/apt/sources.list)
@@ -164,11 +164,3 @@ $alien -r zsh_5.1.1-3_amd64.deb  (transforma esse pacote .deb em um pacote rpm p
 zsh-5.1.1-4.x86_64.rpm generated
 
 $alien -i zsh-5.1.1-4.x86_64.rpm (instala o pacote, o sistema debian instala o pacote rpm, executa o dpkg)
-
-
-
-
-
-
-
-
