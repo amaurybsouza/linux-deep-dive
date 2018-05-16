@@ -1,8 +1,59 @@
 Terms and Utilities:
 
+- Padrão Debian
+
+Arquivo: .deb
+Gerenciador de pacotes: $dpkg
+Gerenciador + repositório: $apt-get
+Outros comandos: $dpkg-reconfigure $apt-cache $dselect $aptitude $alien
+
+- Padrão RPM/RedHat
+
+Arquivo: .rpm
+Gerenciador de pacotes: $rpm
+Gerenciador + repositório: $yum
+Outros comandos: $yumdowloader $rmp2cpio
+
+- Considerações importantes:
+
+-> cada sistema deve usar um sistema de gerenciamento unico.
+-> um pacote é um conjunto de arquivos relacionados a uma aplicação: executáveis, cfgs, bibliotecas, manuais, etc. além de informações sobre dependências.
+-> os gerenciadores de pacotes mantem uma base de dados relacionando todos os pacotes, seus arquivos e dependências.
+
 #/etc/apt/sources.list
 
-#dpkg
+#dpkg (instala e manipula arquivos .deb. Ele também faz operações de consultas em pacotes já instalados)
+
+- o dpkg não faz controle de dependências de pacotes, ele não faz download automático, nada disso, é preciso ter o pacote já baixado.
+
+- Opções:
+-i : instala um pacote.
+-x : extrai conteúdo de um pacote.
+-r : remove um pacote.
+-P : “purge” - remove completamente o pacote e arquivos de configuração.
+-l : lista pacotes instalados.
+-c : exibe o conteúdo de um arquivo de pacote .deb.
+-L : pesquisa arquivos que pertencem a um pacote já instalado.
+-S : exibe quais arquivos foram copiados para o sistema após a instalação do pacote.
+-s : exibe o status do pacote.
+-p : exibe informações detalhadas sobre pacote já instalado.
+--get-selections : lista todos os pacotes instalados.
+
+- Exemplos:
+Instala o pacote 'ldap-utils' através de um arquivo de pacote .deb.
+$dpkg -i ldap-utils_2.4.21-0ubuntu5.2_i386.deb
+
+Expurga o pacote slapd:
+$dpkg -P slapd
+
+Remove o pacote samba sem remover seus arquivos:
+$dpkg -r samba
+
+Mostra o conteúdo do arquivo de pacote ldap-utils_2.4.21-0ubuntu5.2_i386.deb:
+$dpkg -c ldap-utils_2.4.21-0ubuntu5.2_i386.deb
+
+Mostra detalhes sobre o pacote samba, que já está instalado:
+$dpkg -p samba
 
 #dpkg-reconfigure
 
