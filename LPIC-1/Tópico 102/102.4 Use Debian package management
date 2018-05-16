@@ -152,7 +152,23 @@ $aptitude search csh (pesquisa todos os pacotes que tem csh no nome dos pacotes,
 
 $aptitude purge csh (remove o pacote csh e todos os arquivos de configuração)
 
-$alien (ele converte e instala pacotes binários alien)
+#alien (ele converte e instala pacotes binários alien)
 
 - converte arquivos rpm em .deb e ao inverso.
 - instala tbm no sistema debian pacote que é rpm.
+
+$ls *deb
+zsh_5.1.1-3_amd64.deb
+
+$alien -r zsh_5.1.1-3_amd64.deb  (transforma esse pacote .deb em um pacote rpm para Red Hat)
+zsh-5.1.1-4.x86_64.rpm generated
+
+$alien -i zsh-5.1.1-4.x86_64.rpm (instala o pacote, o sistema debian instala o pacote rpm, executa o dpkg)
+
+
+
+
+
+
+
+
