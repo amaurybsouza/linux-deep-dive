@@ -6,7 +6,77 @@ A questão das dependências é a mesma: um pacote sozinho pode não ter todas a
 dependências necessárias para a sua instalação e, para resolvê-las, é muito importante
 instalar os pacotes por repositórios.
 
-#rpm
+#rpm (é o equivalente ao dpkg do Debian, ele que faz a base de instalação e remoção dos pacotes)
+
+- o rpm trabalha em modos, COM 3 MODOS PRINCIPAIS:
+
+1) MODO DE CONSULTA: 
+
+- para consultas temos que usar a opção -q que terá que vir com outras subopções.
+
+$rpm -qa (mostra todos os pacotes instalados no sistema)
+
+$rpm -qa bash (mostra informações do que tiver o nome "bash")
+
+ou  $ rpm -qa | grep bash
+
+$rpm -qi bash (a opção i mostra informações, detalhes  do aplicativo mencionado, no caso o "bash")
+
+$rpm -ql bash (lista os arquivos que pertecem a essa instalação)
+
+$rpm -qc bash (mostra apenas os arquivos de configuração do pacote)
+
+$rpm -qc bash
+/etc/skel/.bash_logout
+/etc/skel/.bash_profile
+/etc/skel/.bashrc
+
+$rpm -qd (mostra arquivos de documentação do pacote)
+
+$rpm -qd bash
+/usr/share/doc/bash/FAQ
+/usr/share/doc/bash/INTRO
+/usr/share/doc/bash/RBASH
+/usr/share/doc/bash/README
+/usr/share/doc/bash/bash.html
+
+$rpm -qf /etc/skel/.bashrc (mostra qual aplicação instalou esse pacote, esse arquivo)
+
+$rpm -qf /etc/skel/.bashrc 
+bash-4.4.19-1.fc27.x86_64
+
+$rpm -qlp adobe-release-x86_64-1.0-1.noarch.rpm (lista os arquivos que estão dentro do pacote adobe)
+
+$rpm -qlp adobe-release-x86_64-1.0-1.noarch.rpm 
+/etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+/etc/yum.repos.d/adobe-linux-x86_64.repo
+
+2) Modo de instalação:
+
+
+
+
+
+
+
+
+
+
+3) Modo de remoção
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $rpm <opções> <pacote>
 - Opções do modo de instalação:
@@ -33,6 +103,13 @@ instalado.
 -qpd: exibe os arquivos de documentação contidos dentro de um arquivo de
 pacote.
 -qpc: exibe os arquivos de configuração de um arquivo de pacote.
+
+
+
+
+
+
+
 
 #rpm2cpio
 
