@@ -6,8 +6,6 @@ A questão das dependências é a mesma: um pacote sozinho pode não ter todas a
 dependências necessárias para a sua instalação e, para resolvê-las, é muito importante
 instalar os pacotes por repositórios.
 
-
-
 #rpm
 
 $rpm <opções> <pacote>
@@ -35,15 +33,6 @@ instalado.
 -qpd: exibe os arquivos de documentação contidos dentro de um arquivo de
 pacote.
 -qpc: exibe os arquivos de configuração de um arquivo de pacote.
-
-
-
-
-
-
-
-
-
 
 #rpm2cpio
 
