@@ -8,11 +8,11 @@ instalar os pacotes por repositórios.
 
 #rpm (é o equivalente ao dpkg do Debian, ele que faz a base de instalação e remoção dos pacotes)
 
-- o rpm trabalha em modos, COM 3 MODOS PRINCIPAIS:
+## O rpm trabalha em modos, COM 3 MODOS PRINCIPAIS:
 
 1) MODO DE CONSULTA: 
 
-- para consultas temos que usar a opção -q que terá que vir com outras subopções.
+- Para consultas temos que usar a opção -q que terá que vir com outras subopções, como -qa, -ql, -qc
 
 $rpm -qa (mostra todos os pacotes instalados no sistema)
 
@@ -51,27 +51,80 @@ $rpm -qlp adobe-release-x86_64-1.0-1.noarch.rpm
 /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
 /etc/yum.repos.d/adobe-linux-x86_64.repo
 
-2) Modo de instalação:
+2) MODO DE INSTALAÇÃO:
 
+- modo de instalação possui menos opções e é represenatado pela opção -i
 
+$rpm -i adobe-release-x86_64-1.0-1.noarch.rpm (instala essa aplicação, esse pacote)
 
+$rpm -U adobe-release-x86_64-1.0-1.noarch.rpm (faz o update, atualiza a versão do pacote)
 
+- o rpm não resolve dependências de pacotes.
+- principais opções usadas com o -i (v e h) (verbose e hash - cerquilhas)
 
+$rpm -ivh skypeforlinux-64.rpm (instala o pacote, mostra os detalhes da instalação e mostra os hash (cerquilhas durante a instalação))
 
+$rpm -ivh skypeforlinux-64.rpm 
+aviso: skypeforlinux-64.rpm: Cabeçalho V4 RSA/SHA1 Signature, ID da chave df7587c3: NOKEY
+Preparando...                         ################################# [100%]
+Updating / installing...
+   1:skypeforlinux-8.20.0.9-1         ################################# [100%]
+Redirecting to /bin/systemctl start atd.service
 
+$rpm -qa skypeforlinux (lista o pacote)
 
+$rpm -qa skypeforlinux
+skypeforlinux-8.20.0.9-1.x86_64
 
+$rpm -ivh gcc-8.1.1-1.fc29.aarch64.rpm (esse pacote precisa de dependência para ser instalado)
 
-3) Modo de remoção
+$rpm -ivh gcc-8.1.1-1.fc29.aarch64.rpm 
+aviso: gcc-8.1.1-1.fc29.aarch64.rpm: Cabeçalho V3 RSA/SHA256 Signature, ID da chave 429476b4: NOKEY
+erro: Dependências não satisfeitas:
+	binutils >= 2.30 é requerido por gcc-8.1.1-1.fc29.aarch64
+	cpp = 8.1.1-1.fc29 é requerido por gcc-8.1.1-1.fc29.aarch64
+	ld-linux-aarch64.so.1()(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	ld-linux-aarch64.so.1(GLIBC_2.17)(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libasan.so.5()(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libdl.so.2(GLIBC_2.17)(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libgcc >= 8.1.1-1.fc29 é requerido por gcc-8.1.1-1.fc29.aarch64
+	libgomp = 8.1.1-1.fc29 é requerido por gcc-8.1.1-1.fc29.aarch64
+	libm.so.6(GLIBC_2.17)(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libubsan.so.1()(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
 
+- existe uma forma de forçar a instalação fazendo com o o rpm não verifique as dependências:
 
+$rpm -ivh --nodeps gcc-8.1.1-1.fc29.aarch64.rpm (força a instalação do pacote sem verificar as dependências)
 
+$rpm -ivh --nodeps gcc-8.1.1-1.fc29.aarch64.rpm
+aviso: gcc-8.1.1-1.fc29.aarch64.rpm: Cabeçalho V3 RSA/SHA256 Signature, ID da chave 429476b4: NOKEY
+Preparando...                         ################################# [100%]
+	o pacote gcc-8.1.1-1.fc29.aarch64 é destinado para a arquitetura different
 
+$rpm -ivh --force gcc-8.1.1-1.fc29.aarch64.rpm (a opção --force ignora e força a instalação de um pacote que já esteja com determinados arquivos no sistema)
 
+$rpm -ivh --test skypeforlinux-64.rpm (essa opção testa e não faz a instalação de fato)
 
+- todas essas opções que foram feitas usando o -i também funciona com a opção -U (pode usar os dois)
 
+3) MODO DE REMOÇÃO:
 
+- modo mais simples de uso do rpm
 
+- para esse modo usamos a opção de menos -e (erase)
+
+$rpm -e ksh (remove o pacote ksh)
+
+$rpm -evh ksh (remove o pacote ksh, usando o verbose e o hash, mostrando melhor o resultado da remoção)
+
+$rpm -evh --teste gcc (simula a remoção do pacote gcc, mas não remove de fato)
+
+$rpm -evh --test skypeforlinux
+Preparando...                         ################################# [100%]
+
+- pode ser que ocorra de outro pacote utilizar alguma dependência de outro pacote, e na hora de remover, ele não deixa, dá erro, usando a opção --nodeps, ele ignora isso e força.
+
+$rpm -evh --nodeps skypeforlinux
 
 
 
