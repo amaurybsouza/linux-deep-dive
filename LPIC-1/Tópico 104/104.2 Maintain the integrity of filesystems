@@ -1,9 +1,10 @@
 Terms and Utilities:
 
-#du (qual o espaço está sendo usado em cada diretórios, em arquivos)
+#du (qual o espaço está sendo usado em cada diretório, em arquivos)
 - Opções do comando du:
 -h: mostra de forma melhor, em GB, MB, KB
 -s: mostra o estado geral de cada arquivo e diretório
+-c: mostra uma soma do total de espaço ocupado
 
 Exemplos: 
 $du -sh /home  
@@ -34,6 +35,7 @@ $df -h /home (informações do /home)
 
 #fsck (analisa uma partição e faz correções, blocos corrompidos, queda de energia, quando isso acontece a gente usa o fsck)
 - esse comando deve ser usado quando a partição estiver desmontada ou em modo leitura.
+
 - Opções do comando fsck:
 -t : especifica o tipo do sistema de arquivos que vai ser verificado.
 -f : força o a checagem mesmo em sistemas de arquivos aparentemente “limpos”.
@@ -55,6 +57,8 @@ $fsck –N /dev/sdb6
 
 #e2fsck (faz o fsck para sistemas de arquivos ext2, ext3, ext4)
 
+$e2fsck.ext3 /dev/sdb1
+
 #mke2fs (cria sistemas de arquivos do tipo ext2, ext3 e ext4)
 
 $mke2fs /dev/sdb1
@@ -64,7 +68,6 @@ $mke2fs /dev/sdb1
 - recuperar um arquivo apagado. 
 
 Exemplos:
-
 $debugfs /dev/sdb1
 
 #dumpe2fs (mostra informações sobre determinada partição, cada partição  tem parametros setados, flags que a gente pode ver com o dumpe2fs)
@@ -73,6 +76,16 @@ $debugfs /dev/sdb1
 Exemplos:
 $dumpe2fs /dev/sda1 -h (mostra informações da partição)
 
+dumpe2fs 1.44.1 (24-Mar-2018)
+Filesystem volume name:   <none>
+Last mounted on:          /
+Filesystem UUID:          f44e8cc3-eaae-4dd2-823d-8d8004ef93c8
+Filesystem magic number:  0xEF53
+Filesystem revision #:    1 (dynamic)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum
+Filesystem flags:         signed_directory_hash 
+Default mount options:    user_xattr acl
+Filesystem state:         clean
 
 #tune2fs (ajustes e configurações nos sistemas ext2, ext3 e ext4).
 
@@ -86,7 +99,6 @@ Opções:
 fsck.
 
 Exemplos:
-
 Modificando o percentual de blocos reservados para inodes de /dev/sda7 para
 15%:
 $tune2fs –m 15 /dev/sda7
