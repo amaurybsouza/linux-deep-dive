@@ -39,6 +39,9 @@ mkpartfs: comando interno do parted usado para criar o sistema de arquivos.
 resizepart: comando interno do parted para redimensionar partição
 resize2fs: comando usado para redimensionar o sistema de arquivos com extensão ext3 e ext4.
 
+Exemplo:
+resizepart 2 4000MB (número da partição:2 e o final da partição: 4000)
+
 OBS: esse comando altera e modo real (ao vivo) as alterações, não fica em cache como o fdisk.
 
 #mkfs (cria sistemas de arquivos em volumes, formata o sistema de arquivos)
@@ -46,6 +49,12 @@ OBS: esse comando altera e modo real (ao vivo) as alterações, não fica em cac
 -t: especifica o tipo de sistema de arquivos.
 -L: aplica o rotulo em volumes ext2 e ext4.
 -c: faz a verificação antes de formatar o volume.
+
+-journalling: é uma habilidade que o filesystem tem de gravar um log das operações que estão sendo feitas no disco, da criação do bloco dentro do disco, log de registro do sistema, queda de energia, travamento, ele consegue recuperar isso de forma melhor.
+
+- uma forma de ver qual filesystem está setado na partição é usar o seguinte comando:
+$file -s /dev/sdb1
+/dev/sda1: Linux rev 1.0 ext4 filesystem data, UUID=f44e8cc3-eaae-4dd2-823d-8d8004ef93c8 (needs journal recovery) (extents) (64bit) (large files) (huge files)
 
 OBS: Comando equivalentes:
 mkfs -t ext3 /dev/sdb2
