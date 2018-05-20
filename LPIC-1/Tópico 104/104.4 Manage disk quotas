@@ -2,6 +2,8 @@ Terms and Utilities:
 
 Adiconar usrquota e grpquota no arquivo /etc/fstab
 
+- assim que criar adicionar as opções de quota em /etc/fstab, deve aparecer no /home do usuário os arquivos aquota.user e aquota.group, com o comando quotacheck ele força para que crie esses arquivos.
+
 limite soft: consegue escrever dentro do periodo de grace time, por tolerancia.
 
 É o primeiro limite a ser estabelecido para cota de usuários ou grupos. Quando o usuário chega
