@@ -10,39 +10,39 @@ Terms and Utilities:
 
 - Limitada a 4 partições primárias ou 3 primárias + 1 extendida
 
-- Primárias numeradas de 1 a 4. Ex: sda1, sda3, sda4
+- Primárias numeradas de 1 a 4. Ex: sda1, sda3, sda4 (não tem necessidade de ter duas partições extendidas)
 
-- Lógicas numeradas a partir de 5. Ex: sda5, sda6, sda7
+- Lógicas numeradas a partir de 5. Ex: sda5, sda6, sda7 (não pode haver intervalo entre partições lógicas, tem que estar na sequência)
 
 - A partição / é a primeira partição montada pelo kernel
 
 - Ao menos 2 partições devem ser criadas: / e swap
 
 - Código dos tipos de partição:
-  - 83 = Linux Filesystem
+  - 83 = Linux Filesystem (sistema Linux)
   - 82 = Linux swap
   - 8e = linux LVM
   - 85 = Linux extendido
   - 07 = NTFS, exFAT
 
 - partições comuns:
-  /home  (arquivos dos usuário, isolar numa partição)
+  /home  (arquivos dos usuários, isolar numa partição, para que os dados dos usuários não cause impactos na aplicação)
   /var   (arquivos temporários, filas de impressão, de e-mail)
   /tmp   (arquivos temporários)
   /boot  (bootloader, kernel, initrd, carregados pelo grub)
   /usr   (aplicação, arquivos de aplicação, programas)
 
 - diretórios que não podem estar montados fora do /
-  /etc
-  /bin
-  /sbin
+  /etc   (arquivos de configuração do sistema, fstab)
+  /bin   (ficam os comandos, scripts, para ver as partições, ver os diretórios, processos do sistema)
+  /sbin  (ficam os comandos, scripts, para ver as partições, ver os diretórios, processos do sistema)
   /dev
   /proc
   /sys
 
 #GPT (GUID Partition Table)
 - utilizado quando são necessárias partições maiores de 2TB
-- maioria dos sistemas co  EFI utilizam GPT
+- maioria dos sistemas com  EFI utilizam GPT
 
 #LVM (forma de gerenciar o espaço no disco de maneira mais lógica)
 
@@ -84,6 +84,7 @@ sda1  sda2   sda3   sda4
 - diferentes níveis de segurança
 - proteção contra erros de disco
 
-desvantagem em ter só uma partição / (caso o usuário crie um arquivo muito grande no /home, isso afeta todo o sistema, não tem espaço para gravar logs, aplicações)
+#desvantagem do particionamento:
+- em ter só uma partição / (caso o usuário crie um arquivo muito grande no /home, isso afeta todo o sistema, não tem espaço para gravar logs, aplicações)
 
 
