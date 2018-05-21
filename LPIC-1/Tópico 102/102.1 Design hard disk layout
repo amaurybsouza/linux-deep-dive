@@ -84,6 +84,6 @@ sda1  sda2   sda3   sda4
 - diferentes níveis de segurança
 - proteção contra erros de disco
 
-desvantagem em ter só uma partição / (caso o usuário crie um arquivo muito grande, isso afeta todo o sistema, não tem espaço para gravar logs, aplicações)
+desvantagem em ter só uma partição / (caso o usuário crie um arquivo muito grande no /home, isso afeta todo o sistema, não tem espaço para gravar logs, aplicações)
 
 
