@@ -18,7 +18,7 @@ hdb = hd1,2
 
 #Comandos:
 
-$grub-install /dev/sda (instala o bootloader na MBR do disco)
+$grub-install /dev/sda (instala o GRUB na MBR do disco)
 $grub-install '(hd0)'
 
 #Principais parâmetros:
@@ -49,7 +49,7 @@ hdb3 = hd1,3
 #Comandos:
 
 $grub-install <device>
-$update-grub
+$update-grub (gera o grub.cfg)
 $grub-mkconfig -o /boot/grub/grub.cfg (gera o arquivo grub.cfg)
 
 #Principais parâmetros:
