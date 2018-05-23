@@ -132,13 +132,13 @@ $rpm2cpio gcc-8.1.1-1.fc29.aarch64.rpm > gcc.cpio (é uma forma de extrair o que
 
 #/etc/yum.conf (principal arquivo de configuração do yum)
 
-#/etc/yum.repos.d/ (diretório que contém as fontes de pacotes que o yum vai consultar)
+#/etc/yum.repos.d/ (diretório que contém as fontes de pacotes, repositório, que o yum vai consultar)
 
 - dentro do /etc/yum.repos.d/ ficam os arquivos de repositórios.
 
 #yum (comando equivalente ao apt-get do Debian, ele faz download, instalação, verificação de dependências dos pacotes)
 
-- principais opções do yum:
+- PRINCIPAIS OPÇÕES DO YUM:
 
 $yum install gcc (instala o pacote gcc e suas dependências).
 
