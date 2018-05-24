@@ -9,13 +9,12 @@
 
 #TÓPICO 103
 
-- estudar mais o tópico 104.7
-- estudar mais o tópico 103.2
+- estudar mais redirecionamentos, | tee
+- estudar mais grep, egrep, expressões regulares
+- estudar mais filtros, cut, cat, split, sort
 - estudar mais o comando xargs
-- estudar expressões regulares
 - estudar mais os comandos cat e tac e as opções
-- estudar mais redirecionamentos
-- estudar mais os comando cut, sort, find
+- estudar mais variaveis de ambiente
 
 #TÓPICO 104
 
