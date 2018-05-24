@@ -1,0 +1,22 @@
+#TÓPICO 102
+
+- estudar mais as opções do aptitude
+- estudar a opção apt-get autoremove, autoclean, clean
+- estudar o comando apt-cache (show, stats, depends, pkgnames)
+- estudar as opções do comando yum (list, install, info, search)
+- estudar as opções para simulação de instalação de pacotes tanto em rpm como dpkg
+- estudar dpkg-reconfigure
+
+#TÓPICO 103
+
+- estudar mais o tópico 104.7
+- estudar mais o tópico 103.2
+- estudar mais o comando xargs
+- estudar expressões regulares
+- estudar mais os comandos cat e tac e as opções
+- estudar mais redirecionamentos
+- estudar mais os comando cut, sort, find
+
+#TÓPICO 104
+
+
