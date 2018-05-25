@@ -1,0 +1,15 @@
+The following is a partial list of the used files, terms and utilities:
+
+#/sys/
+
+#/proc/
+
+#/dev/
+
+#modprobe
+
+#lsmod
+
+#lspci
+
+#lsusb
