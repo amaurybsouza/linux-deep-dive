@@ -22,6 +22,7 @@ também possa fazer uso. OS NICE NUMBERS vão de -20 até 19, sendo a maior a pr
 - Para saber o que se pode fazer com cada processo que está em execução é preciso entender os
 sinais de processos.
 - "Os mais importantes são:"
+
 1 - HUP ou SIGHUP : instrui o serviço a reler o seu arquivo de configuração (operação de
 “reload”).
 2 – INT ou SIGINT : interrompe um processo em primeiro plano (é o mesmo que CTRL+C).
