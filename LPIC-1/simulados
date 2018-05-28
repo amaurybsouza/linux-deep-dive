@@ -6,23 +6,18 @@
 
 #TÓPICO 102
 
-- estudar mais as opções do aptitude
-- estudar a opção apt-get autoremove, autoclean, clean
-- estudar o comando apt-cache (show, stats, depends, pkgnames)
-- estudar as opções do comando yum (list, install, info, search)
-- estudar as opções para simulação de instalação de pacotes tanto em rpm como dpkg
-- estudar dpkg-reconfigure
+- estudar mais os comandos grub, grub install
+- estudar mais as opções do comando dpkg e do comando rpm.
+- estudar mais as opções do comando rpm.
+
 
 #TÓPICO 103
 
-- estudar mais redirecionamentos, | tee
-- estudar mais grep, egrep, expressões regulares
-- estudar mais filtros, cut, cat, split, sort
+- estudar mais os comandos de filtros (cut, tail, wc)
 - estudar mais o comando xargs
-- estudar mais os comandos cat e tac e as opções
-- estudar mais variaveis de ambiente
+- estudar permissões (SUID, SGID, STICKY)
 
 #TÓPICO 104
 
 - tópico estudado, praticando simulados no momento. 
-
+- estudar opções do comando fsck.
