@@ -1,5 +1,42 @@
 The following is a partial list of the used files, terms and utilities:
 
+BIOS: Basic Input Output System
+
+- configura a ordem de boot
+- configurações de energia, data e hora do sistema.
+- a BIOS é o firmware da placa mãe (gerenciamento de dispositivos que estão conectados na placa mãe)
+- é na BIOS que se identifica aonde que está o gerenciador de boot que deve ser iniciado.
+
+IRQ ()
+1- sinal enviado a CPU
+2- não deve haver conflitos
+3- /proc/interrupts
+
+
+
+
+
+
+
+
+
+
+
+
+POST: Power-On Self-Test
+
+Gerencia Dispostivos; IRQ, I/O, DMA, etc
+
+Inicia o processo de boot
+
+EFI (Extensible Firmware Interface) (Novas BIOS, mais modernos)
+
+UEFI (Unfied EFI) (Novas BIOS, mais modernos)
+
+
+
+
+
 #/sys/
 
 #/proc/
