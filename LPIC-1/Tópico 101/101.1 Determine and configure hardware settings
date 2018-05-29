@@ -55,9 +55,15 @@ UEFI (Unfied EFI) (Novas BIOS, mais modernos)
 
 - sysfs (filesystem do /sys)
 
+- /bus (diretórios de hardware do sistema, pci, usb)
+
 #/proc/ (informações dos processos ativos e recursos de hardware)
 
 - IRQ, DMA, memória, endereço de entrada e saída (I/O)
+
+- /proc/cpuinfo (mostra informações dos CPUS da máquina)
+
+- /proc/meminfo (informação de memória, ativa, inativa, disponível)
 
 #/dev/ (referências aos dispositivos do sistema, inclusive de armazenamento (udev))
 
@@ -66,6 +72,8 @@ UEFI (Unfied EFI) (Novas BIOS, mais modernos)
 - dbus (comunicação entre processos, informa os processos a situação dos dispositivos de hardware).
 
 - coldpulg x hotplug (hotplug pode inserir dispositivos com o sistema ligado que ele já reconhece e coldplug tem que inserir com o sistema desligado para que o dispositivo seja reconhecido durante o boot).
+
+- referência a hd externo, a CDROM, dispositivo de hardware (não são arquivos que vc pode ler, são tipos diferentes)
 
 #modprobe
 
