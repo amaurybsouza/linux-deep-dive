@@ -28,13 +28,6 @@ IRQ 15 - IDE Secundáriia
 3- não é utilizado por todos os dispositivos
 4- /proc/dma (é um jeito de o dispositivo de hardware falar diretamente com a memória, sem usar CPU).
 
-
-
-
-
-
-
-
 POST: Power-On Self-Test
 
 Gerencia Dispostivos; IRQ, I/O, DMA, etc
@@ -44,10 +37,6 @@ Inicia o processo de boot
 EFI (Extensible Firmware Interface) (Novas BIOS, mais modernos)
 
 UEFI (Unfied EFI) (Novas BIOS, mais modernos)
-
-
-
-
 
 #PARTIÇÕES VIRTUAIS DO SISTEMA:
 
@@ -108,4 +97,53 @@ Bus 001 Device 002: ID 0c45:6712 Microdia
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 $lspci -s 001:001 -v (mostra detalhes do dispositivo conectado na unidade USB) (001:001 é bus:device)
+
+#DISPOSITIVOS DE ARMAZENAMENTO
+
+1 - PATA (IDE)
+
+- também chamado de IDE  que é a referência a interface de conexão
+- sistemas master/slave, 2 discos por cabo.
+
+- mapeados no Linux como:
+/dev/dha ou sda - master
+/dev/hdb ou sdb - slave
+/dev/hdc ou sdc - master
+/dev/hdd ou sdd - slave
+
+- um drive de CD/DVD conectado a um IDE também será referenciado como hdx.
+
+2 - SATA (Serial Advanced  Technology Attachment)
+
+- 1 disco por cabo
+- mais rápido que o PATA
+
+- maepados no Linux como:
+/dev/sda - primeiro disco
+/dev/sdb - segundo disco
+/dev/sdc - terceiro disco
+
+3 - SCSI (Small Computer  System Interface)
+
+Tipos: 
+     - 8 bits (permite 7 dispositivos + 1 controlador)
+     - 16 bits (permite 15 dispositivos + 1 controlador)
+
+SCSI: 
+     - canal: identificador de cada adaptador
+     - ID: identificador de cada dispostivo
+     - LUN: número lógico de unidade
+
+- mapeados no Linux como:
+/dev/sda - primeiro disco
+/dev/sdb - segundo disco
+/dev/sdc - terceiro disco
+
+- /proc/scsi/scsi
+
+
+
+
+
+
 
