@@ -141,7 +141,16 @@ SCSI:
 
 - /proc/scsi/scsi
 
+OUTROS DISPOSITIVOS MAPEADOS NO LINUX:
 
+- /dev/fd0 - Disquete / Floppy Disk
+
+- /dev/scd0 - SCSI CD-ROM
+
+- /dev/sr0 - SCSI DVD
+
+- /dev/cdrom - normalmente criado como link para o device do cdrom
+- /dev/dvd - normalmente criado como link para o device do dvd.
 
 
 
