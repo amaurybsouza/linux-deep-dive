@@ -28,16 +28,6 @@ IRQ 15 - IDE Secundáriia
 3- não é utilizado por todos os dispositivos
 4- /proc/dma (é um jeito de o dispositivo de hardware falar diretamente com a memória, sem usar CPU).
 
-POST: Power-On Self-Test
-
-Gerencia Dispostivos; IRQ, I/O, DMA, etc
-
-Inicia o processo de boot
-
-EFI (Extensible Firmware Interface) (Novas BIOS, mais modernos)
-
-UEFI (Unfied EFI) (Novas BIOS, mais modernos)
-
 #PARTIÇÕES VIRTUAIS DO SISTEMA:
 
 #/sys/ (informações sobre dispositivos de hardware (sysfs))
@@ -64,9 +54,61 @@ UEFI (Unfied EFI) (Novas BIOS, mais modernos)
 
 - referência a hd externo, a CDROM, dispositivo de hardware (não são arquivos que vc pode ler, são tipos diferentes)
 
-#modprobe
+#modinfo (mostra detalhes de um módulo, mostra nome, filename, versão)
 
-#lsmod
+$modinfo hid
+filename:       /lib/modules/4.15.0-22-generic/kernel/drivers/hid/hid.ko
+license:        GPL
+author:         Jiri Kosina
+author:         Vojtech Pavlik
+author:         Andreas Gal
+srcversion:     DD14BD575604E28B50092C9
+depends:        
+retpoline:      Y
+intree:         Y
+name:           hid
+vermagic:       4.15.0-22-generic SMP mod_unload 
+signat:         PKCS#7
+
+#rmmod (remover um módulo que está carregado no sistema)
+
+$lsmod| grep mouse (procura via grep o módulo mouse)
+psmouse               147456  0
+
+$modinfo psmouse (verifica informações do módulo psmouse)
+filename:       /lib/modules/4.15.0-22-generic/kernel/drivers/input/mouse/psmouse.ko
+license:        GPL
+description:    PS/2 mouse driver
+author:         Vojtech Pavlik <vojtech@suse.cz>
+srcversion:     D67F55DDAB721180E7F8B94
+alias:          serio:ty05pr*id*ex*
+alias:          serio:ty01pr*id*ex*
+
+$rmmod psmouse (remove o módulo do sistema)
+
+#insmod (insere um módulo mas sem a depedência do módulo)
+
+- precisa indicar o caminho do arquivo e o insmod não carrega as dependências do módulo.
+
+$insmod /lib/modules/4.8.0-4-generic/kernel/drivers/input/psmouse.ko
+
+#modprobe (insere e carrega módulo, ele carrega os módulos e dependências, não precisa indicar o arquivo do módulo)
+
+- pode ser utilizado para remover um módulo também.
+
+$modprobe bluecard_cs
+bluecard-cs     16384   0
+bluetooth      557056   1  bluecard_cs 
+pcmcia          69632   1  bluecard_cs
+
+$modprobe -r bluecard_cs (remove esse módulo e as dependencias desse módulo)
+
+#lsmod (lista os módulos carregador pelo Linux, carregador no momento)
+
+- arquivo similar ao /proc/modules (contem os módulos carregados)
+- os módulos do linux ficam sempre em /lib/modules/kernel
+- alguns arquivos tem a extensão .ko (que são módulos para algum dispositivo do sistema)
+- /etc/modules (posso definir quais módulos eu quero carregar nesse arquivo)
 
 #lspci (PCI)
 
