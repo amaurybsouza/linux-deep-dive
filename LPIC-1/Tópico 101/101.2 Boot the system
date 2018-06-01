@@ -1,5 +1,20 @@
 Terms and Utilities:
 
+PROCESSO DE BOOT DO SISTEMA LINUX:
+
+#BIOS (localiza e executa a MBR) -> MBR (executa o bootloader) -> Bootloader GRUB (seleciona e executa o kernel e o initrd) ->
+
+#KERNEL (executa o /sbin/init) -> INIT (inicia os programas do runlevel/target definido)
+
+#MBR: (master boot record)
+
+- possui 512 bytes
+- localizada no primeiro setor do disco bootavel (/dev/hda ou /dev/sda)
+- contém informações sobre o GRUB
+- MBR carrega e executa do GRUB
+
+
+
 #dmesg
 
 #BIOS
