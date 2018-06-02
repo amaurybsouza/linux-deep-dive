@@ -1,6 +1,12 @@
 Terms and Utilities:
 
+Principais gerenciadores (INIT's) de inicialização do Linux:
 
+- SystemV (SysV) - init original
+
+- systemd (gerenciador de sistemas e serviços compatível com o SysV)
+
+- Upstart (gerenciador de serviços substituto ao init, mas com opções de compatibilidade)
 
 
 
