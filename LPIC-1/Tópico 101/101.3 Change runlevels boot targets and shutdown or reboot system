@@ -2,11 +2,38 @@ Terms and Utilities:
 
 Principais gerenciadores (INIT's) de inicialização do Linux:
 
-- SystemV (SysV) - init original
+1) SystemV (SysV) - init original
 
-- systemd (gerenciador de sistemas e serviços compatível com o SysV)
+- trabalha com runlevel (níveis de execução)
+- cada runlevel carrega um conjunto de programas, scripts, serviços
+- principal arquivo de configuração: /etc/initab
+*para ver o initdefault é preciso ver dentro do /etc/initab a linha initdefault e ver o número que está ajustado.
+- diretórios de scripts:
+  /etc/init.d (escripts de inicialização de cada serviços: Ex.: ./cron status)
+  /etc/rc.d (arquivos ondem ficam os runlevels, rc5.d/ (serviços que ele deve iniciar ou  parar))
 
-- Upstart (gerenciador de serviços substituto ao init, mas com opções de compatibilidade)
+- principais comandos que podem ser usados para o systemV:
+  
+$runlevel (mostra o runlevel que está sendo usado no momento)
+N 5
+
+$init ou telinit (muda de um runlevel para outro, pode usar esses dois comandos, são similares.)
+
+$init 1 (entra no runlevel de single mode (1,s,S)) ou $telinit 2 (entra no runlevel 2 (multiusuario))
+
+*se eu mudar para o runlevel 6 que é $init 6 ele vai reiniciar o sistema.
+
+1.1) Runlevels (systemV - SysV)
+
+0     -> desligamento
+1,s,S -> single user / usuário unico (modo de recuperação, sem rede,recuperação de disco...)
+2     -> multiusuário (sem rede)
+3     -> multiusuario (con rede)
+4     -> multiusuario (definido pelo usuário)
+5     -> multiusuario (com rede e gráfico)
+6     -> reinicialização
+
+2) systemd (gerenciador de sistemas e serviços compatível com o SysV) *um dos mais usados nos sistemas Linux
 
 
 
@@ -14,16 +41,17 @@ Principais gerenciadores (INIT's) de inicialização do Linux:
 
 
 
+3) Upstart (gerenciador de serviços substituto ao init, mas com opções de compatibilidade) *será o padrão no futuro
 
-#/etc/inittab
+#/etc/inittab (principal arquivo de configuração do systemV - SysV)
 
 #shutdown
 
-#init
+#init (ou telinit muda de um runlevel para outro, pode usar esses dois comandos, são similares.)
 
 #/etc/init.d/
 
-#telinit
+#telinit (muda de um runlevel para outro, pode usar esses dois comandos, são similares.)
 
 #systemd
 
