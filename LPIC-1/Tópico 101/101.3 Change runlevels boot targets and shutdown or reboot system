@@ -22,7 +22,7 @@ $init ou telinit (muda de um runlevel para outro, pode usar esses dois comandos,
 $init 1 (entra no runlevel de single mode (1,s,S)) ou $telinit 2 (entra no runlevel 2 (multiusuario))
 
 *se eu mudar para o runlevel 6 que é $init 6 ele vai reiniciar o sistema.
-
+*os comando init e telinit funcionam no systemd devido aos links internos e ao modo de compatibilidade
 1.1) Runlevels (systemV - SysV)
 
 0     -> desligamento
@@ -84,14 +84,47 @@ $systemctl start crom.service (inicia o serviço da cron)
 *no systemd tem o target default, assim como no systemV.
 - snapchat
 
-
-
-
-
-
-
-
 3) Upstart (gerenciador de serviços substituto ao init, mas com opções de compatibilidade) *será o padrão no futuro
+
+- mantem compatibilidade
+- arquivo de configuração é /etc/init
+- principais comandos:
+
+$initctl list (systemctl == systemd e initctl == upstart)
+
+$start serviço ou $start cron (diferente do systemd, que usa o systemctl start cron.service)
+
+$stop serviço
+
+$status serviço
+
+
+#shutdown (esse comando desliga o sistema e reinicia)
+
+- quando é executado esse comando, o sistema recebe dois sinais, primeiro o SIGTERM e depois o sinal SIGKILL.
+- permite que a gente programa quando o sistema será desligado.
+- progranar para daqui a 10 minutos, ou 18:00hs.
+
+$shutdown (sem parametro desliga o sistema em 1 minuto)
+Shutdown scheduled for Sat 2018-06-02 22:30:00 -03, use 'shutdown -c' to cancel.
+
+$shutdwon -r (o sistema será reiniciado)
+
+$shutdwon -h (dá o comando halt, que é desliga o linux mas não desliga a máquina)
+
+$shutdown -r +10 (agenda o restart para daqui a 10 minutos)
+
+$shutdown 18:00 (programa o desligamento para as 18:00)
+
+$halt (desliga o linux sem desligar a máquina)
+
+$poweroff (desliga o linux e a máquina)
+
+$wall (comando usado para mandar mensagem para todos os usuários do sistema)
+
+$wall "vamos tomar café?"
+
+
 
 #/etc/inittab (principal arquivo de configuração do systemV - SysV)
 
