@@ -2,6 +2,8 @@ Terms and Utilities:
 
 Principais gerenciadores (INIT's) de inicialização do Linux:
 
+
+
 1) SystemV (SysV) - init original
 
 - trabalha com runlevel (níveis de execução)
@@ -9,7 +11,7 @@ Principais gerenciadores (INIT's) de inicialização do Linux:
 - principal arquivo de configuração: /etc/initab
 *para ver o initdefault é preciso ver dentro do /etc/initab a linha initdefault e ver o número que está ajustado.
 - diretórios de scripts:
-  /etc/init.d (escripts de inicialização de cada serviços: Ex.: ./cron status)
+  /etc/init.d (scripts de inicialização de cada serviços: Ex.: ./cron status)
   /etc/rc.d (arquivos ondem ficam os runlevels, rc5.d/ (serviços que ele deve iniciar ou  parar))
 
 - principais comandos que podem ser usados para o systemV:
@@ -32,6 +34,8 @@ $init 1 (entra no runlevel de single mode (1,s,S)) ou $telinit 2 (entra no runle
 4     -> multiusuario (definido pelo usuário)
 5     -> multiusuario (com rede e gráfico)
 6     -> reinicialização
+
+
 
 2) Systemd (gerenciador de sistemas e serviços compatível com o SysV) *um dos mais usados nos sistemas Linux
 
@@ -84,6 +88,8 @@ $systemctl start crom.service (inicia o serviço da cron)
 *no systemd tem o target default, assim como no systemV.
 - snapchat
 
+
+
 3) Upstart (gerenciador de serviços substituto ao init, mas com opções de compatibilidade) *será o padrão no futuro
 
 - mantem compatibilidade
@@ -103,7 +109,7 @@ $status serviço
 
 - quando é executado esse comando, o sistema recebe dois sinais, primeiro o SIGTERM e depois o sinal SIGKILL.
 - permite que a gente programa quando o sistema será desligado.
-- progranar para daqui a 10 minutos, ou 18:00hs.
+- programar para daqui a 10 minutos, ou 18:00hs.
 
 $shutdown (sem parametro desliga o sistema em 1 minuto)
 Shutdown scheduled for Sat 2018-06-02 22:30:00 -03, use 'shutdown -c' to cancel.
@@ -128,11 +134,11 @@ $wall "vamos tomar café?"
 
 #/etc/inittab (principal arquivo de configuração do systemV - SysV)
 
-#shutdown
+#shutdown (sem parametro desliga o sistema em 1 minuto)
 
 #init (ou telinit muda de um runlevel para outro, pode usar esses dois comandos, são similares.)
 
-#/etc/init.d/
+#/etc/init.d/ (scripts de inicialização de cada serviços: Ex.: ./cron status)
 
 #telinit (muda de um runlevel para outro, pode usar esses dois comandos, são similares.)
 
