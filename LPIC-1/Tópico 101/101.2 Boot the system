@@ -13,9 +13,7 @@ PROCESSO DE BOOT DO SISTEMA LINUX:
 - contém informações sobre o GRUB
 - MBR carrega e executa do GRUB
 
-#dmesg
-
-- esse comando lê o que foi registrado durante o boot para depois poder ser consultado.
+#dmesg (esse comando lê o que foi registrado durante o boot para que seja possível consultar os logs do sistema na inicialização)
 
 $dmesg | less (mostra as informações de log do sistema na hora do boot, dispositivos, hd, dma, problema de hardrware, de rede)
 
@@ -23,7 +21,7 @@ $dmesg | less (mostra as informações de log do sistema na hora do boot, dispos
 
 **as distribuições usam um kernel para implementar as caracteristicas e funcionalidades**
 
-/var/log/massages (mostra informações de log)
+/var/log/messages (mostra informações de log)
 
 /var/log/dmesg (informações de log de boot do sistema)
 
