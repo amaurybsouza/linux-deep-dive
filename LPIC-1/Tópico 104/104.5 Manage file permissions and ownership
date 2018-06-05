@@ -1,5 +1,19 @@
 Terms and Utilities:
 
+
+PERMISSÃO PARA ARQUIVOS:
+
+r -> consegue ler o arquivo
+w -> consegue escrever e modificar o arquivo, e apagar ainda
+x -> consegue executar o script, a aplicação.
+
+PERMISSÃO PARA DIRETÓRIOS:
+
+r -> lista o conteudo do diretórios Ex: ls diretorio1
+w -> criar e remover arquivos dentro desse diretório
+x -> consegue acessar esse diretório, consegue dar um cd nesse diretório 
+
+
 #chmod (modifica permissões de arquivos e diretórios)
 
 Opções:
