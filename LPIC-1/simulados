@@ -58,14 +58,45 @@ E. SysV init
 9) Qual arquivo no /proc lista os parâmetros passados do bootloader para o kernel?
 (Especifique o nome do arquivo apenas sem nenhum caminho.)
 
-10) Qual dos seguintes comandos reinicia o sistema ao usar o SysV init? (Escolha duis respostas corretas.)
+10) Qual dos seguintes comandos reinicia o sistema ao usar o SysV init? (Escolha duas respostas corretas.)
 A. shutdown -r now
 B. shutdown -r "rebooting"
 C. telinit 6
 D. telinit 0
 E. shutdown -k now "rebooting"
 
+11) Qual é o primeiro programa que geralmente é iniciado, no momento da inicialização, pelo kernel do Linux quando
+usando o SysV init?
+A. /lib/init.so
+B. /sbin/init
+C. /etc/rc.d/rcinit
+D. /proc/sys/kernel/init
+E. /boot/init
 
+12) Qual comando irá exibir mensagens do kernel que foram geradas durante a sequencia de inicialização?
+  
+13) Qual dos seguintes comandos irá escrever uma mensagem para os terminais de todos os usuários logados?
+A. bcast
+B. mesg
+C. print
+D. wall
+E. yell
+
+14) Qual dos seguintes comandos traz um sistema executando o SysV init para um estado no qual
+é seguro realizar tarefas de manutenção? (Escolha duas respostas corretas.)
+A. desligamento -R 1 agora
+B. desligamento - agora
+C. init 1
+D. telinit 1
+E. nível de execução 1
+
+15) Quais níveis de execução nunca devem ser declarados como o nível de execução padrão ao usar o init do SysV?
+(Escolha duas respostas corretas.)
+A. 0
+B. 1
+C. 3
+D. 5
+E. 6
 
 
 
