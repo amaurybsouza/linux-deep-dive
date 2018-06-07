@@ -84,19 +84,81 @@ E. yell
 
 14) Qual dos seguintes comandos traz um sistema executando o SysV init para um estado no qual
 é seguro realizar tarefas de manutenção? (Escolha duas respostas corretas.)
-A. desligamento -R 1 agora
-B. desligamento - agora
+A. shutdown -R 1 now
+B. shutdown -single now
 C. init 1
 D. telinit 1
-E. nível de execução 1
+E. runlevel 1
 
-15) Quais níveis de execução nunca devem ser declarados como o nível de execução padrão ao usar o init do SysV?
+15) Quais níveis de execução nunca devem ser declarados como o nível de execução padrão ao usar o SysV init?
 (Escolha duas respostas corretas.)
 A. 0
 B. 1
 C. 3
 D. 5
 E. 6
+
+16) Qual arquivo de configuração do SysV init deve ser modificado para desabilitar a tecla ctrl-alt-delete combinação?
+A. /etc/keys
+B. /proc/keys
+C. /etc/inittab
+D. /proc/inittab
+E. /etc/reboot
+
+17) Qual ferramenta de gerenciamento de pacotes Debian faz as perguntas de configuração para um pacote já instalado como se 
+o pacote estivesse sendo instalado pela primeira vez?
+(Especifique SOMENTE o comando sem nenhum caminho ou parâmetros.)
+
+18) Após modificar o arquivo de configuração do GNU GRUB, qual comando deve ser executado para as mudanças entrar em vigor?
+A. kill -HUP $ (pidof grub)
+B. grub-install
+C. grub
+D. Nenhuma ação é necessária
+
+19) Qual opção para o comando yum atualizará todo o sistema? (Especifique SOMENTE a opção nome sem parâmetros adicionais.)
+
+20) Qual das seguintes variáveis de ambiente substitui ou estende a lista de diretórios
+segurando bibliotecas compartilhadas?
+A. LD_LOAD_PATH
+B. LD_LIB_PATH
+C. LD_LIBRARY_PATH
+D. LD_SHARE_PATH
+E. LD_RUN_PATH
+
+21) Qual dos seguintes comandos lista todos os pacotes atualmente instalados ao usar o RPM gerenciamento de pacotes?
+A. yum --query --all
+B. yum --list --instalado
+C. rpm --query --all
+D. rpm --list – installed
+
+22) Ao usar rpm --verify para verificar arquivos criados durante a instalação de pacotes RPM, qual das seguintes informações
+é levada em consideração? (Escolha TRÊS respostas corretas.)
+A. Timestamps
+B. MD5 checksums
+C. Inodes
+D. Tamanhos de arquivo
+E. GnuPG assinaturas
+
+23) Qual tecla de função é usada para iniciar o modo de segurança no Windows NT?
+A. F10
+B. F8
+C. F6
+D. Windows NT não suporta o modo de segurança
+
+24) Qual dos seguintes comandos é usado para atualizar a lista de pacotes disponíveis quando usando o gerenciamento de
+pacotes baseado em dpkg?
+A. apt-get update
+B. apt-get upgrade
+C. apt-cache update
+D. apt-get refresh
+E. apt-cache upgrade
+
+25) Qual é o nome do arquivo de configuração principal do GNU GRUB? (Especifique apenas o nome do arquivo sem nenhum caminho.)
+
+
+
+
+
 
 
 
