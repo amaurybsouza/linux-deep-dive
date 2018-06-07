@@ -7,48 +7,63 @@ C. Todas as alterações nos arquivos em /proc/ são imediatamente reconhecidas 
 D. Todos os arquivos dentro de /proc/ são legíveis apenas pelo usuário root.
 
 2) Quais informações o comando lspci pode exibir sobre o hardware do sistema? (Escolher TRÊS respostas corretas.)
-
 A. Configurações de IRQ do dispositivo
 B. velocidade do barramento PCI
 C. tipo de bateria do sistema
 D. Identificação do fornecedor do dispositivo
 E. endereço MAC Ethernet
 
-3) Quais das seguintes afirmações são verdadeiras em relação ao / dev / ao usar o udev? (Escolha dois
-respostas corretas.)
-A. As entradas para todos os dispositivos possíveis são criadas na inicialização, mesmo que esses dispositivos não estejam conectados.
+3) Quais das seguintes afirmações são verdadeiras em relação ao /dev/ ao usar o udev? (Escolha dois respostas corretas.)
+A. As entradas para todos os dispositivos possíveis são criadas na inicialização, mesmo que esses dispositivos não estejam 
+conectados.
 B. Regras adicionais para o udev podem ser criadas adicionando-as ao /etc/udev/rules.d/.
-C. Ao usar o udev, não é possível criar dispositivos de bloco ou caractere em / dev / usando o mknod.
-D. O diretório / dev / é um sistema de arquivos do tipo tmpfs e é montado pelo udev durante a inicialização do sistema.
-E. O conteúdo de / dev / é armazenado em / etc / udev / dev e é restaurado durante a inicialização do sistema.
+C. Ao usar o udev, não é possível criar dispositivos de bloco ou caractere em /dev/ usando o mknod.
+D. O diretório /dev/ é um sistema de arquivos do tipo tmpfs e é montado pelo udev durante a inicialização do sistema.
+E. O conteúdo de /dev/ é armazenado em /etc/udev/dev e é restaurado durante a inicialização do sistema.
 
-4) Quais das seguintes informações são armazenadas no BIOS? (Escolha DOIS correto
-respostas.)
-A. Ordem do dispositivo de inicialização
+4) Quais das seguintes informações são armazenadas na BIOS? (Escolha DUAS respostas corretas.)
+A. Ordem de inicialização do dispositivo
 B. Versão do kernel do Linux
 C. fuso horário
 D. Configuração de Hardware
-E. O nome do host do sistema
+E. O hostname do sistema
 
-Pergunta No: 5 - Topic 1
-Qual dos seguintes parâmetros do kernel instrui o kernel a suprimir a maioria dos boot
-mensagens?
-A. silencioso
-B. detalhado = 0
+5) Qual dos seguintes parâmetros do kernel instrui o kernel a suprimir a maioria das mensagens de boot?
+A. silent
+B. verbose=0
 C. nomesg
-D. quieto
+D. quiet
 
+6) Qual das seguintes opções para a linha de comando do kernel muda a inicialização do systemd boot target para rescue.target 
+em vez do default target?
+A. systemd.target = rescue.target
+B. systemd.runlevel = rescue.target
+C. systemd.service = rescue.target
+D. systemd.default = rescue.target
+E. systemd.unit = rescue.target
 
+7) Durante um ciclo de inicialização do sistema, qual programa é executado depois que o BIOS conclui suas tarefas?
+A. O bootloader
+B. O programa inetd
+C. O programa init
+D. O kernel
 
+8) Quais dos seguintes são sistemas init usados em sistemas Linux? (Escolha três respostas corretas.)
+A. startd
+B. systemd
+C. Upstart
+D. SysInit
+E. SysV init
 
+9) Qual arquivo no /proc lista os parâmetros passados do bootloader para o kernel?
+(Especifique o nome do arquivo apenas sem nenhum caminho.)
 
-
-
-
-
-
-
-
+10) Qual dos seguintes comandos reinicia o sistema ao usar o SysV init? (Escolha duis respostas corretas.)
+A. shutdown -r now
+B. shutdown -r "rebooting"
+C. telinit 6
+D. telinit 0
+E. shutdown -k now "rebooting"
 
 
 
