@@ -197,7 +197,7 @@ C. Os diretórios precisam ter o sinalizador SetUID configurado para ser usado c
 D. Os arquivos dentro de um diretório são excluídos quando o diretório é usado como um ponto de montagem.
 
 34) Ao remover um pacote, qual das seguintes opções do dpkg removerá completamente arquivos incluindo arquivos de configuração?
-A. -clean
+A. --clean
 B. --delete
 C. --purge
 D. --remove
@@ -238,7 +238,7 @@ D. exec
 E. :&
 
 40) Qual das seguintes afirmações está correta em relação ao comando foo 1> bar?
-A. O stdout do comando foo é anexado à barra de arquivos.
+A. A saída padrão do comando foo é anexada ao arquivo bar.
 B. O stdout do comando foo sobrescreve a barra de arquivos.
 C. O comando foo recebe seu stdin da barra de arquivos.
 D. O comando foo recebe seu stdin da stdout da barra de comandos.
