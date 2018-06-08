@@ -302,6 +302,44 @@ C. p (lowercase)
 D. U (uppercase)
 E. u (lowercase)
 
+51) Qual dos seguintes comandos define a variável Bash chamada TEST com o conteúdo FOO/
+A. set TEST="FOO"
+B. TEST = "FOO"
+C. var TEST="FOO"
+D. TEST="FOO"
+
+52) Qual dos seguintes comandos pode ser usado para determinar quanto tempo o sistema está rodando? (Escolha duas respostas corretas.)
+A. uptime
+B. up
+C. top
+D. uname -u
+E. time–up
+
+53) Qual dos seguintes comandos pode ser usado para criar uma mídia de armazenamento USB a partir de um disco imagem?
+A. gdisk
+B. dd
+C. cc
+D. fdisk
+E. mount
+
+54) O que acontece depois de emitir o comando vi sem parâmetros adicionais?
+A. vi inicia e carrega o último arquivo usado e move o cursor para a posição em que o vi estava quando ele saiu pela última vez.
+B. vi inicia e requer que o usuário crie explicitamente um novo ou carregue um arquivo existente.
+C. vi sai com uma mensagem de erro, pois não pode ser chamado sem um nome de arquivo para operar.
+D. vi inicia no modo de comando e abre um novo arquivo vazio.
+O E. vi inicia e abre um novo arquivo que é preenchido com o conteúdo do buffer vi se o buffer contiver texto.
+
+55) Um usuário acidentalmente criou o subdiretório \dir em seu diretório inicial. Qual dos os seguintes comandos removerão esse diretório?
+A. rmdir '~/\dir'
+B. rmdir "~/\dir"
+C. rmdir ~/'dir'
+D. rmdir ~/\dir
+E. rmdir ~/\\dir
+
+56)
+
+
+
 
 
 
