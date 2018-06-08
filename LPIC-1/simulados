@@ -22,11 +22,11 @@ D. O diretório /dev/ é um sistema de arquivos do tipo tmpfs e é montado pelo 
 E. O conteúdo de /dev/ é armazenado em /etc/udev/dev e é restaurado durante a inicialização do sistema.
 
 4) Quais das seguintes informações são armazenadas na BIOS? (Escolha DUAS respostas corretas.)
-A. Ordem de inicialização do dispositivo
-B. Versão do kernel do Linux
-C. fuso horário
-D. Configuração de Hardware
-E. O hostname do sistema
+A. Boot device order
+B. Linux kernel version
+C. Timezone
+D. Hardware configuration
+E. The system's hostname
 
 5) Qual dos seguintes parâmetros do kernel instrui o kernel a suprimir a maioria das mensagens de boot?
 A. silent
