@@ -155,7 +155,31 @@ E. apt-cache upgrade
 
 25) Qual é o nome do arquivo de configuração principal do GNU GRUB? (Especifique apenas o nome do arquivo sem nenhum caminho.)
 
+26) Qual dos seguintes comandos lista as dependências de um determinado pacote dpkg?
+A. apt-cache depends-on package
+B. apt-cache dependencies package
+C. apt-cache depends package
+D. apt-cache requires package
 
+27) Qual arquivo deve ser editado para selecionar os locais de rede a partir dos quais a instalação da Debian arquivos de
+ pacote são carregados?
+A. /etc/dpkg/dpkg.cfg
+B. /etc/apt/apt.conf
+C. /etc/apt/apt.conf.d
+D. /etc/apt/sources.list
+E. /etc/dpkg/dselect.cfg
+
+28) O que pode ser usado pelo Logical Volume Manager (LVM)? (Escolha TRÊS respostas corretas.)
+A. para criar matrizes RAID 9.
+B. Alterar dinamicamente o tamanho dos volumes lógicos.
+C. Para criptografar volumes lógicos.
+D. Para criar instantâneos.
+E. Para criar ou excluir dinamicamente volumes lógicos.
+
+29) Em qual diretório os arquivos de definição devem ser colocados para adicionar repositórios adicionais ao yum?
+
+30) Qual comando desativará a troca de swapping em um dispositivo? (Especifique SOMENTE o comando sem qualquer caminho
+ ou parâmetros.)
 
 
 
