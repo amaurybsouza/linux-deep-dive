@@ -244,6 +244,64 @@ C. O comando foo recebe seu stdin da barra de arquivos.
 D. O comando foo recebe seu stdin da stdout da barra de comandos.
 E. O stderr do comando foo é salvo na barra de arquivos.
 
+41) Qual variável define os diretórios nos quais um shell Bash procura por executável comandos?
+A. BASHEXEC
+B. BASHRC
+C. PATH
+D. EXECPATH
+E. PATHRC
+
+42) Qual dos seguintes sinais é enviado para um processo quando a combinação de teclas CTRL + C é pressionado no teclado?
+A. SIGTERM
+B. SIGINT
+C. SIGSTOP
+D. SIGKILL
+
+43) Ao iniciar um programa com o comando nice sem nenhum parâmetro adicional, qual o nível de nice está definido para o processo resultante?
+A. -10
+B. 0
+C. 10
+D. 20
+
+44) Qual comando é usado em um ambiente Linux para criar um novo diretório? 
+(Especifique SOMENTE o comando sem nenhum caminho ou parâmetros.)
+
+45) Qual comando grep irá imprimir apenas as linhas que não terminam com / no arquivo foo?
+A. grep '/$' foo
+B. grep '/#' foo
+C. grep -v '/$' foo
+D. grep -v '/#' foo
+
+46) Qual é o efeito do comando egrep quando a opção -v é usada? 
+A. Permite que as cores realcem os matches correspondentes.
+B. Só produz linhas não correspondentes.
+C. Mostra a informação da versão do comando.
+D. Altera a ordem de saída mostrando a última linha correspondente primeiro.
+
+47) Qual dos seguintes comandos irá enviar saída do programa myapp para ambas saída padrão (stdout) e o arquivo file1.log?
+A. cat &lt; myapp | cat > file1.log
+B. myapp 0>&1 | cat > file1.log
+C. myapp | cat > file1.log
+D. myapp | tee file1.log
+E. tee myapp file1.log
+
+48) Qual dos seguintes comandos move e recomeça em segundo plano o último trabalho parado no shell?
+A. run
+B. bg
+C. fg
+D. back
+
+49) Qual sinal está faltando no seguinte comando que é comumente usado para instruir um daemon para reinicializar-se, 
+incluindo a leitura de arquivos de configuração? killall -s _______ daemon
+
+50) Imediatamente após excluir 3 linhas de texto no vi e mover o cursor para uma linha diferente, qual comando de 
+caractere único irá inserir o conteúdo excluído abaixo da linha atual?
+A. i (lowercase)
+B. P (uppercase)
+C. p (lowercase)
+D. U (uppercase)
+E. u (lowercase)
+
 
 
 
