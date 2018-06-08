@@ -181,7 +181,34 @@ E. Para criar ou excluir dinamicamente volumes lógicos.
 30) Qual comando desativará a troca de swapping em um dispositivo? (Especifique SOMENTE o comando sem qualquer caminho
  ou parâmetros.)
 
+31) Qual dos seguintes comandos pode ser usado para baixar o kernel do pacote RPM sem instalá-lo?
+A. download do yum --no-install kernel
+B. kernel yumdownloader
+C. rpm --download - kernel do pacote
+D. rpmdownload kernel
 
+32) Qual diretório gravável do mundo deve ser colocado em uma partição separada para evitar
+usuários de ser capaz de preencher o / filesystem? (Especifique o caminho completo para o diretório.)
+
+33) Qual das alternativas a seguir está correta ao falar sobre pontos de montagem?
+A. Todo diretório existente pode ser usado como um ponto de montagem.
+B. Apenas diretórios vazios podem ser usados ​​como um ponto de montagem.
+C. Os diretórios precisam ter o sinalizador SetUID configurado para ser usado como um ponto de montagem.
+D. Os arquivos dentro de um diretório são excluídos quando o diretório é usado como um ponto de montagem.
+
+34) Ao remover um pacote, qual das seguintes opções do dpkg removerá completamente
+arquivos incluindo arquivos de configuração?
+A. - limpo
+B. --delete
+C. - purge
+D. - remover
+
+35) Qual das seguintes opções é usada em um arquivo de configuração do GRUB Legacy para definir o
+quantidade de tempo que o menu GRUB será mostrado para o usuário?
+A. hidemenu
+B. respingo
+C. timeout
+D. showmenu
 
 
 
