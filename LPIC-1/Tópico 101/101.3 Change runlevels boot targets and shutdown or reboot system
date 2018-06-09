@@ -25,6 +25,7 @@ $init 1 (entra no runlevel de single mode (1,s,S)) ou $telinit 2 (entra no runle
 
 *se eu mudar para o runlevel 6 que é $init 6 ele vai reiniciar o sistema.
 *os comando init e telinit funcionam no systemd devido aos links internos e ao modo de compatibilidade
+
 1.1) Runlevels (systemV - SysV)
 
 0     -> desligamento
