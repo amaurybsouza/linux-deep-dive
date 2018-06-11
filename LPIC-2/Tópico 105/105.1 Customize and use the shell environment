@@ -1,0 +1,17 @@
+The following is a partial list of the used files, terms and utilities:
+
+source
+/etc/bash.bashrc
+/etc/profile
+env
+export
+set
+unset
+~/.bash_profile
+~/.bash_login
+~/.profile
+~/.bashrc
+~/.bash_logout
+function
+alias
+lists
