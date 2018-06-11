@@ -1,6 +1,15 @@
 The following is a partial list of the used files, terms and utilities:
 
-source
+source (executa o script no shell local, não abre um novo shell)
+
+$source script_variavel.sh
+
+
+
+
+
+
+
 /etc/bash.bashrc
 /etc/profile
 env
