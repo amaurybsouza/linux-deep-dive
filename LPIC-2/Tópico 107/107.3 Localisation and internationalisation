@@ -1,0 +1,18 @@
+Terms and Utilities:
+
+/etc/timezone
+/etc/localtime
+/usr/share/zoneinfo/
+LC_*
+LC_ALL
+LANG
+TZ
+/usr/bin/locale
+tzselect
+timedatectl
+date
+iconv
+UTF-8
+ISO-8859
+ASCII
+Unicode

@@ -1,0 +1,15 @@
+Terms and Utilities:
+
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/skel/
+chage
+getent
+groupadd
+groupdel
+groupmod
+passwd
+useradd
+userdel
+usermod
