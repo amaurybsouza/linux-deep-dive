@@ -1,14 +1,39 @@
 The following is a partial list of the used files, terms and utilities:
 
+#source (faz com que o comando seguinte seguinte, script,seja executado no bash local, e que não abra um novo bash)
+
+- outra forma seria usar o . ("ponto e espaço")
+
+$ . script_variavel.sh 
+o script lê e imprime o valor da variavel TESTE
+ 
+O valor da variavel TESTE é: valor1
+
+$ ./script_variavel.sh 
+o script lê e imprime o valor da variavel TESTE
+ 
+O valor da variavel TESTE é:
+
+$ source script_variavel.sh 
+o script lê e imprime o valor da variavel TESTE
+ 
+O valor da variavel TESTE é: valor1
+
+
+
+
+
+
+
+
+
+
+
+
+
 source (executa o script no shell local, não abre um novo shell)
 
 $source script_variavel.sh
-
-
-
-
-
-
 
 /etc/bash.bashrc
 /etc/profile
