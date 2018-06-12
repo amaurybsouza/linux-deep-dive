@@ -29,6 +29,19 @@ $dt
 11:52 
 
 $alias (sem argumento mostra todos os alias definidos no bash atual)
+alias dt='date +%H:%M'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+root@wk2001876:/home/absouza/estudo-LPI# 
+
+function (usado para criar uma sequencia rotinas, de comandos, loops, if, while)
+
+$function
 
 
 
@@ -39,9 +52,11 @@ $alias (sem argumento mostra todos os alias definidos no bash atual)
 
 
 
-source (executa o script no shell local, não abre um novo shell)
 
-$source script_variavel.sh
+
+
+
+
 
 /etc/bash.bashrc
 /etc/profile
