@@ -4,23 +4,31 @@ The following is a partial list of the used files, terms and utilities:
 
 - outra forma seria usar o . ("ponto e espaço")
 
-$ . script_variavel.sh 
+$. script_variavel.sh 
 o script lê e imprime o valor da variavel TESTE
  
 O valor da variavel TESTE é: valor1
 
-$ ./script_variavel.sh 
+- usando o comando $source para executar o script:
+
+$./script_variavel.sh 
 o script lê e imprime o valor da variavel TESTE
  
 O valor da variavel TESTE é:
 
-$ source script_variavel.sh 
+$source script_variavel.sh 
 o script lê e imprime o valor da variavel TESTE
  
 O valor da variavel TESTE é: valor1
 
+#alias (comando que permite criar atalhos, sinonimos de comando)
 
+$alias dt="date + %H:%M" (criando um alias para o comando date chamado dt)
 
+$dt
+11:52 
+
+$alias (sem argumento mostra todos os alias definidos no bash atual)
 
 
 
