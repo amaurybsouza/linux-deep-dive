@@ -99,6 +99,20 @@ OBS: essas listas mostram apenas com o comando set, não está exportado.
 
 $unset array (para apagar essa lista usamos o comando unset)
 
+-- Customização do ambiente shell:
+
+- declarar uma variavel sempre que eu fizer login no sistema
+- uma função ficar sempre disponível para um usuário ou para todos os usuários
+- pode fazer essas configurações globalmente (aplicadas para todos os usuários, todo o ambiente) ou para cada usuário.
+- isso é feito através de arquivos, onde pode se criar 
+
+
+
+
+
+
+
+
 
 
 --Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
@@ -106,6 +120,7 @@ $unset array (para apagar essa lista usamos o comando unset)
 #/etc/bash.bashrc (Arquivo executado para toda nova sessão de shell bash, aplicado a todos os usuários.)
 
 #/etc/profile (Arquivo de inicialização executado durante o processo de login de todos os usuários do sistema. Em caso de processo de login, será sempre o primeiro arquivo executado.)
+
 
 env
 
