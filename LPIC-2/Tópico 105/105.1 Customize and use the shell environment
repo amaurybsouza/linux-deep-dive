@@ -41,6 +41,8 @@ root@wk2001876:/home/absouza/estudo-LPI#
 
 function (usado para criar uma sequencia rotinas, de comandos, loops, if, while)
 
+1º) Primeira forma de declarar uma função:
+
 $function funcao1 { (exemplo de declaração de função)
 > date;
 > uptime;  
@@ -57,11 +59,15 @@ funcao1 ()
     echo "fim da função"
 }
 
+2º) Segunda forma de declarar uma função:
+
 $function funcao2 { date; uptime; } (outra forma de definir uma função)
 
 $funcao2 
 qua jun 13 07:35:18 -03 2018
  07:35:18 up 49 min,  1 user,  load average: 0,69, 0,55, 0,48
+
+3º) Terceira forma de se declarar uma função:
 
 $funcao3 () { uptime; uname -v; hostname; } (outra forma de se definir função, sem usar o comando function)
 
@@ -93,7 +99,9 @@ OBS: essas listas mostram apenas com o comando set, não está exportado.
 
 $unset array (para apagar essa lista usamos o comando unset)
 
-#Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
+
+
+--Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
 
 #/etc/bash.bashrc (Arquivo executado para toda nova sessão de shell bash, aplicado a todos os usuários.)
 
@@ -107,7 +115,8 @@ set
 
 unset
 
-#Arquivos de configuração LOCAIS, de cada usuário:
+
+--Arquivos de configuração LOCAIS, de cada usuário:
 
 #~/.bash_profile (Se existir, o arquivo é executado após o /etc/profile, durante o processo de login do usuário.)
 
@@ -118,6 +127,7 @@ unset
 #~/.bashrc (Executado automaticamente em toda nova sessão de shell bash, logo após o /etc/bash.bashrc.)
 
 #~/.bash_logout (Arquivo executado durante o processo de logout do usuário)
+
 
 --Principais Variáveis de Ambiente
 
@@ -145,9 +155,6 @@ OLDPWD: Diretório anterior
 
 
 
-function
-
-alias
 
 
-lists
+
