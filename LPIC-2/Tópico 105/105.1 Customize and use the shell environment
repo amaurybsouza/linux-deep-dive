@@ -104,16 +104,26 @@ $unset array (para apagar essa lista usamos o comando unset)
 - declarar uma variavel sempre que eu fizer login no sistema
 - uma função ficar sempre disponível para um usuário ou para todos os usuários
 - pode fazer essas configurações globalmente (aplicadas para todos os usuários, todo o ambiente) ou para cada usuário.
-- isso é feito através de arquivos, onde pode se criar 
+- isso é feito através de arquivos, onde se pode incluir as configurações para que seja carregado toda vez que faça login.
 
+- arquivos que aplicam configurações para todos usuários:
 
+#/etc/profile (utilizado quando se faz o procedimento de login, quando ele loga na interface gráfica)
 
+- é aqui que se inclui um alias para todos usuários, uma função que seja carregada no momento do login. 
+- foi definida uma variavel chamada ETCPROFILE=valor2 no /etc/profile
 
+$echo $ETCPROFILE
 
+- se eu abrir um novo terminal essa variavel não estara acessível porque eu não fiz procedimento de login, para testar,
+eu realizo o procedimento de login com (ctrl-alt+F2) e digito $echo $ETCPROFILE e a variavel é mostrada.
 
+#/etc/bash.bash.rc (aplicado quando se abre um novo terminal, uma sessão do shell) bashrc (novo bash, novo shell)
 
-
-
+- existem várias definições nesse arquivo.
+- declarando a variavel BASHRCTESTE=valor2
+- digitando dentro do terminal, $bash ele abre outro shell, digitando $echo  $BASHRCTESTE, ele mostra o valor, porque
+ele abriu outro shell, nova aba tbm serve.
 
 --Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
 
