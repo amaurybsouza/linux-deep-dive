@@ -41,7 +41,13 @@ root@wk2001876:/home/absouza/estudo-LPI#
 
 function (usado para criar uma sequencia rotinas, de comandos, loops, if, while)
 
-$function
+$function funcao1 { (exemplo de declaração de função)
+> date;
+> uptime;  
+> uname -a;
+> echo "fim da função"; 
+> }
+
 
 
 
