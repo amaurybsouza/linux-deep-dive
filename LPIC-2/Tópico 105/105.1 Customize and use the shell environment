@@ -48,6 +48,54 @@ $function funcao1 { (exemplo de declaração de função)
 > echo "fim da função"; 
 > }
 
+#set (para ver a definição da função que foi declarada)
+funcao1 () 
+{ 
+    date;
+    uptime;
+    uname -a;
+    echo "fim da função"
+}
+
+$function funcao2 { date; uptime; } (outra forma de definir uma função)
+
+$funcao2 
+qua jun 13 07:35:18 -03 2018
+ 07:35:18 up 49 min,  1 user,  load average: 0,69, 0,55, 0,48
+
+$funcao3 () { uptime; uname -v; hostname; } (outra forma de se definir função, sem usar o comando function)
+
+$funcao3
+07:37:52 up 52 min,  1 user,  load average: 0,48, 0,55, 0,49
+25-Ubuntu SMP Wed May 23 18:02:16 UTC 2018
+wk2001876
+
+#listas (arrays em shell) 
+
+$lista=(valor1 valor2 valor3 valor 4) (criando um lista em shell)
+
+$set | grep lista (usando o comando set para mostrar essa lista)
+lista=([0]="valor1" [1]="valor2" [2]="valor3" [3]="valor" [4]="4")
+
+$echo ${lista[2]} (usando o comando echo para mostrar os valores dessa lista, sempre começa de 0, então ele mostrou o valor 3)
+valor3
+
+$array=(A B C D) (criando uma lista)
+
+$echo ${array[3]} (mostrando o valor dessa lista)
+D
+
+$set | grep array
+BASH_REMATCH=([0]="\${array[3" [1]="\${" [2]="array" [3]="3")
+array=([0]="A" [1]="B" [2]="C" [3]="D")
+
+OBS: essas listas mostram apenas com o comando set, não está exportado.
+
+$unset array (para apagar essa lista usamos o comando unset)
+
+
+
+
 
 
 
