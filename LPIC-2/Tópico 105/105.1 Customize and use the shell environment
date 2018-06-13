@@ -72,7 +72,7 @@ wk2001876
 
 #listas (arrays em shell) 
 
-$lista=(valor1 valor2 valor3 valor 4) (criando um lista em shell)
+$lista=(valor1 valor2 valor3 valor 4) (criando uma lista em shell)
 
 $set | grep lista (usando o comando set para mostrar essa lista)
 lista=([0]="valor1" [1]="valor2" [2]="valor3" [3]="valor" [4]="4")
@@ -93,36 +93,31 @@ OBS: essas listas mostram apenas com o comando set, não está exportado.
 
 $unset array (para apagar essa lista usamos o comando unset)
 
+#/etc/bash.bashrc ()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/etc/bash.bashrc
 /etc/profile
+
 env
+
 export
+
 set
+
 unset
+
 ~/.bash_profile
+
 ~/.bash_login
+
 ~/.profile
+
 ~/.bashrc
+
 ~/.bash_logout
+
 function
+
 alias
+
+
 lists
