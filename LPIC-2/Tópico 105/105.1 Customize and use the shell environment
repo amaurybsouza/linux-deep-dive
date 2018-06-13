@@ -93,9 +93,11 @@ OBS: essas listas mostram apenas com o comando set, não está exportado.
 
 $unset array (para apagar essa lista usamos o comando unset)
 
-#/etc/bash.bashrc ()
+#Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
 
-/etc/profile
+#/etc/bash.bashrc (Arquivo executado para toda nova sessão de shell bash, aplicado a todos os usuários.)
+
+#/etc/profile (Arquivo de inicialização executado durante o processo de login de todos os usuários do sistema. Em caso de processo de login, será sempre o primeiro arquivo executado.)
 
 env
 
@@ -105,15 +107,43 @@ set
 
 unset
 
-~/.bash_profile
+#Arquivos de configuração LOCAIS, de cada usuário:
 
-~/.bash_login
+#~/.bash_profile (Se existir, o arquivo é executado após o /etc/profile, durante o processo de login do usuário.)
 
-~/.profile
+#~/.bash_login (Se .bash_profile não existir, o arquivo é executado automaticamente durante o processo de login, após a execução do /etc/profile.)
 
-~/.bashrc
+#~/.profile (Não existindo .bash_profile e .bash_login, o arquivo é executado durante o login após a execução do /etc/profile.)
 
-~/.bash_logout
+#~/.bashrc (Executado automaticamente em toda nova sessão de shell bash, logo após o /etc/bash.bashrc.)
+
+#~/.bash_logout (Arquivo executado durante o processo de logout do usuário)
+
+--Principais Variáveis de Ambiente
+
+É importante conhecer a função de algumas variáveis de ambiente existentes no sistema, as principais são:
+
+DISPLAY: Indica às aplicações gráficas onde as janelas deverão ser exibidas. Será estudado no Tópico 106
+
+HISTFILE: Arquivo do histórico de comandos
+
+HISTFILESIZE: Quantidade de linhas/comandos armazenados no arquivo de histórico
+
+HOME: Indica o diretório do usuário atual
+
+LANG: Definição do idioma
+
+LOGNAME e USER: Nome do usuário atual
+
+PATH: Diretórios em que o Linux irá procurar por arquivos executáveis
+
+PS1: Aparência do prompt do shell.
+
+PWD: Diretório atual
+
+OLDPWD: Diretório anterior
+
+
 
 function
 
