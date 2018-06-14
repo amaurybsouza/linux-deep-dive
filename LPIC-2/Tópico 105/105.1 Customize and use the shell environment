@@ -106,7 +106,7 @@ $unset array (para apagar essa lista usamos o comando unset)
 - pode fazer essas configurações globalmente (aplicadas para todos os usuários, todo o ambiente) ou para cada usuário.
 - isso é feito através de arquivos, onde se pode incluir as configurações para que seja carregado toda vez que faça login.
 
-- arquivos que aplicam configurações para todos usuários:
+-- "arquivos que aplicam configurações para todos usuários:"
 
 #/etc/profile (utilizado quando se faz o procedimento de login, quando ele loga na interface gráfica)
 
@@ -124,6 +124,31 @@ eu realizo o procedimento de login com (ctrl-alt+F2) e digito $echo $ETCPROFILE 
 - declarando a variavel BASHRCTESTE=valor2
 - digitando dentro do terminal, $bash ele abre outro shell, digitando $echo  $BASHRCTESTE, ele mostra o valor, porque
 ele abriu outro shell, nova aba tbm serve.
+
+-- "arquivos que aplicam configurações para um usuário especifíco:"
+
+- existem alguns arquivos no /home de cada usuário para que ele mesmo faça as alterações.
+- "semelhante ao /etc/profile (novo login):"
+
+/.bash_profile
+/.bash_login
+/.profile (definições pessoais que serão aplicadas em todo novo login) - posso adicionar um alias, uma função, uma variavel.
+
+- sempre será nessa ordem, caso não tenha o 1º arquivo, ele segue para o 2º, caso não tenha ele vai para o último (/.profile)
+
+- existem alguns arquivos no /home de cada usuário para que ele mesmo faça as alterações.
+- "semelhante ao /etc/bash.bash.rc (novo shell, nossa sessão):"
+
+.bashrc (correspondente a uma nova sessão, novo shell e não login)
+
+- o /home do usuário tbm tem outro arquivo importante, que é:
+
+.bash_logout (o que tem nesse arquivo será executado toda vez que o usuário fizer logout)
+
+/etc/inputrc (definir comandos no terminal)
+
+/etc/skel (diretório no /etc todos os arquivos e diretórios que estão dentro do /etc/skel, vão ser fazer parte da base de novos usuários que serão criados no sistema, os arquivos vão ser colocados no /home do usuário que eu criar)
+
 
 --Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
 
