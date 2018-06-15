@@ -4,7 +4,57 @@ Terms and Utilities:
 
 - É um arquivo texto que vai conter uma sequência de comandos, de operações, loops que vc executar a ação que o administrador deseja.
 
- 
+- criando um script chamado "primeiro-script.sh"
+
+clear
+echo "=========================== meu primeiro script =========================="
+echo ""
+uptime
+free -m
+echo ""
+echo "fim do script"
+
+- para executar esse script, podemos usar o comando source (esse comando faz com o programa, script, seja executado no shell atual)
+
+$source vim primeiro-script.sh
+
+- pode se usar o (ponto e espaço)
+
+$. vim primeiro-script.sh
+
+- podemos usar também a forma tradicional, que é ./vim primeiro-script.sh, mas essa forma não funciona, porque está sem permissão o arquivo, não tem permissão de execução.
+
+$chmod +x  primeiro-script.sh
+
+$./vim primeiro-script.sh (dessa forma ele vai abrir um novo bash, executar e retornar o valor)
+
+- existe um outra opção, que é o comando exec:
+
+$exec ./primeiro-script (esse comando executa o script, e ele vai fechar a minha sessão atual)
+
+- se eu quiser colocar o script dentro da váriavel PATH:
+
+$vim ~/.profile (é lido toda vez que eu faço um login)
+PATH="$HOME/estudolpi:$HOME/.local/bin:$PATH" (adicionar o $HOME/estudolpi no arquivo)
+
+- depois dessa alteração, é necessário fazer login e assim, é possível executar o script em outro diretório do sistema, porque ele foi definido na váriavel PATH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
