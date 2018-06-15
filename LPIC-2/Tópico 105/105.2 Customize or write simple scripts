@@ -69,4 +69,4 @@ test
 if
 read
 seq
-exec
+exec ok
