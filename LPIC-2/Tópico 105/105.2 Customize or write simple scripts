@@ -39,6 +39,7 @@ PATH="$HOME/estudolpi:$HOME/.local/bin:$PATH" (adicionar o $HOME/estudolpi no ar
 
 - depois dessa alteração, é necessário fazer login e assim, é possível executar o script em outro diretório do sistema, porque ele foi definido na váriavel PATH.
 
+-- lembrando que para o script entender qual o she-bang que eu estou utilizando, é necessário no inicio do script, adicionar se é um bin/bash ou ksh ou csh...
 
 
 
