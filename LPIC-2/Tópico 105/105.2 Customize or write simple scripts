@@ -99,6 +99,97 @@ echo "o valor digitado foi $VAR1"    (esse valor ficara armazenado nessa váriav
 echo ""
 echo "fim do script"
 
+-- outro exemplo usando o script mas agora usando váriaveis e passando valores nesses váriaveis:
+
+1) Não é necessário declarar o tipo de váriavel, isso não tem  no shell.
+
+2) Passando comandos dentro da váriavel, feito isso no script (VAR4=`cat /etc/passwd | wc -l`)
+
+#!/bin/bash
+clear
+VAR2="Curso LPI1"
+VAR3=99
+VAR4=`cat /etc/passwd | wc -l`
+VAR5=$(date +%H)
+echo "=========================== meu primeiro script =========================="
+echo ""
+echo "o meu script se chama $0"
+echo "esse script recebeu $# parametros que são, $1 $2"
+echo ""
+echo "por favor digite um número de 0 a 10:"
+read VAR1
+echo "o valor digitado foi $VAR1"
+echo ""
+echo "o arquivo /etc/passwd possui $VAR4 linhas. A hora atual é $VAR5"
+echo ""
+echo "fim do script"
+
+
+
+-- Customização de shell script com if - Case - teste
+
+- Vamos olhar o script feito pelo sistema, que é o arquivo /etc/profile:
+  - blocos de if no /etc/profile
+
+- Vamos ver a instrução test (que é um comando que existe no Linux)
+
+- Exemplo de uma instrução do arquivo /etc/profile:
+  - tem um if, e finaliza a instrução com o fi.
+  - na primeira linha tem um teste, que vai retornar verdadeiro ou falso.
+  - a opção -f significa se existe ou não o arquivo /etc/bash.bashrc.
+  - esse teste pode ser feito usando colchetes [] ou usando o comando teste, veja -> if test -f /etc/bash.bashrc ]; then
+  - testa se o arquivo existe, se for verdade, ele executa a linha abaixo -> . /etc/bash.bashrc
+
+if [ -f /etc/bash.bashrc ]; then
+      . /etc/bash.bashrc
+    fi
+
+- Vamos agora usar o comando test no bash, para exemplificar:
+
+$test LPI1 = LPI1
+$echo $? (mostra o sinal de saída do comando anterior $? se é 0 ou 1 0 para sucesso e 1 para erro)
+0
+
+$test LPI1 = LPI2
+echo $?
+1
+
+$test -f /etc/profile (usando a opção -f para saber se o arquivo /etc/profile existe ou não)
+$echo $?
+0
+
+$test -f /etc/profile2
+$echo $?
+1
+
+$test 10 -gt 20 (quero saber se 10 é maior que 20) == gt 
+echo $?
+1
+
+$test 10 -lt 20 (quero saber se 10 é menor que 20) == lt
+echo $?
+0
+
+- Usando o primeiro-script para implementar instruções de comando if e else:
+
+# TESTE DO IF
+if test $VAR4 -gt $VAR3 ; then
+        echo "O sistema tem mais de $VAR3 usuários"
+else
+        echo "O sistema tem menos de $VAR3 usuários"
+fi
+
+- Usando o primeiro-script para implementar instruções de comando case:
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -121,7 +212,7 @@ for
 
 while
 
-test
+test aprendido
 
 if
 
