@@ -34,16 +34,70 @@ $exec ./primeiro-script (esse comando executa o script, e ele vai fechar a minha
 
 - se eu quiser colocar o script dentro da váriavel PATH:
 
-$vim ~/.profile (é lido toda vez que eu faço um login)
+$vim .profile (é lido toda vez que eu faço um login)
 PATH="$HOME/estudolpi:$HOME/.local/bin:$PATH" (adicionar o $HOME/estudolpi no arquivo)
 
 - depois dessa alteração, é necessário fazer login e assim, é possível executar o script em outro diretório do sistema, porque ele foi definido na váriavel PATH.
 
+$cd /etc
+
+etc$ primeiro-script.sh (o script é executado porque eu defini na váriave PATH o caminho do meu script)
+
+
+
 -- lembrando que para o script entender qual o she-bang que eu estou utilizando, é necessário no inicio do script, adicionar se é um bin/bash ou ksh ou csh...
 
+- exemplo: poderia usar no começo do script, #!/bin/csh, #!/bin/perl 
 
+#parâmetros no shell ()
 
+- posso usar no meu script um parametro, veja abaixo:
 
+$ ./primeiro-script.sh 10 20 (10 e 20 seriam os parametros)
+
+#!/bin/bash
+clear
+echo "=========================== meu primeiro script =========================="
+echo ""
+echo "o meu script se chama $0"
+echo "esse script recebeu $# parametros que são, $1 $2"
+echo ""
+uptime
+free -m
+echo ""
+echo "fim do script"
+
+- entendendo algumas opções: $0 (retorna o nome do script), $# (retorna quantos parametros foram inseridos no script), 
+$1 e $2 (primeiro parametro será mapeado no $1 e o segundo no $2)
+
+$./primeiro-script.sh (excutando o script para mostrar esses valores)
+
+=========================== meu primeiro script ==========================
+
+o meu script se chama ./primeiro-script
+esse script recebeu 2 parametros que são, 10 ricardo
+
+ 21:36:35 up  4:33,  1 user,  load average: 1,27, 1,38, 1,42
+              total        used        free      shared  buff/cache   available
+Mem:           7786        1886        3810         365        2089        5259
+Swap:          2047           0        2047
+
+fim do script
+
+-- outro exemplo usando do script mas agora usando o comando read:
+
+#!/bin/bash
+clear
+echo "=========================== meu primeiro script =========================="
+echo ""
+echo "o meu script se chama $0"
+echo "esse script recebeu $# parametros que são, $1 $2"
+echo ""
+echo "por favor digite um número de 0 a 10:"
+read VAR1  (o comando read espera por uma entrada do usuário que executou o programa, e VAR1 é a variavel que vai receber esse valor, exemplo 5)
+echo "o valor digitado foi $VAR1"    (esse valor ficara armazenado nessa váriavel, VAR1)
+echo ""
+echo "fim do script"
 
 
 
@@ -64,9 +118,15 @@ PATH="$HOME/estudolpi:$HOME/.local/bin:$PATH" (adicionar o $HOME/estudolpi no ar
 
 
 for
+
 while
+
 test
+
 if
-read
+
+read aprendido
+
 seq
-exec ok
+
+exec aprendido
