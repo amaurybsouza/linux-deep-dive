@@ -255,6 +255,19 @@ do
         sleep 1
 done
 
+- nesse exemplo acima, while [ $VAR1 -le  $1 ] quer dizer: o valor do var1 for menos ou igual do que o valor informado no parametro.
+
+-- usando o comando until: (semelhante ao comando while), até que essa informação seja verdadeiro faça a sequencia.
+
+# TESTE DO UNTIL
+echo ""
+echo "=================== LOOP DO UNTIL =================="
+until [ $VAR1 = 0 ]
+do
+        echo "O valor atual do \$VAR1 é: $VAR1"
+        VAR1=`expr $VAR1 - 1`
+        sleep 1
+done
 
 
 
@@ -282,9 +295,10 @@ done
 
 
 
-for
 
-while
+for aprendido
+
+while aprendido
 
 test aprendido
 
