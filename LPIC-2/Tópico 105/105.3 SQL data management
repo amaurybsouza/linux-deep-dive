@@ -1,5 +1,128 @@
 Terms and Utilities:
 
+-- Começando o conteudo vendo os bancos de dados que existem na nossa aplicação:
+
+$mysqlshow (mostra os bancos de dados existentes)
++--------------------+
+|     Databases      |
++--------------------+
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+
+- o banco de dados que está rodado é o MariaDB.
+- nesse banco temos 4 banco de dados, o que vamos trabalhar é o "employees."
+- para conectar o banco, usamos a sintaxe abaixo:
+
+$mysql employees -u root (conecta no banco e cai na interface do MariaDB)
+
+MariaDB [employees]> show tables; (mostra as tabelas existentes)
++----------------------+
+| Tables_in_employees  |
++----------------------+
+| current_dept_emp     |
+| departments          |
+| dept_emp             |
+| dept_emp_latest_date |
+| dept_manager         |
+| employees            |
+| salaries             |
+| titles               |
++----------------------+
+
+-- vamos começar usando o comando SELECT, usando a tabela departments:
+- antes de começar vamos descrever a estrutura da tabela departments, usando a sintaxe:
+
+MariaDB [employees]> describe departments;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | char(4)     | NO   | PRI | NULL    |       |
+| dept_name | varchar(40) | NO   | UNI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+- sempre usar ; no fim do comando.
+- abaixo está sendo mostrado o nome de dois departamentos da tabela departments.
+- podemos usar o * para mostrar todos os campos da tabela departments.
+
+MariaDB [employees]> select dept_no , dept_name from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d005    | Development        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d005    | Development        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
+
+- se eu quiser delimitar os campos, eu posso usar o "limit" e passar o número, por exemplo 5, veja abaixo.
+
+MariaDB [employees]> select * from departments limit 5;
++---------+------------------+
+| dept_no | dept_name        |
++---------+------------------+
+| d009    | Customer Service |
+| d005    | Development      |
+| d002    | Finance          |
+| d003    | Human Resources  |
+| d001    | Marketing        |
++---------+------------------+
+
+- consultando a tabela employees, com limit 10 setado:
+
+MariaDB [employees]> select * from employees limit 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+|  10001 | 1953-09-02 | Georgi     | Facello   | M      | 1986-06-26 |
+|  10002 | 1964-06-02 | Bezalel    | Simmel    | F      | 1985-11-21 |
+|  10003 | 1959-12-03 | Parto      | Bamford   | M      | 1986-08-28 |
+|  10004 | 1954-05-01 | Chirstian  | Koblick   | M      | 1986-12-01 |
+|  10005 | 1955-01-21 | Kyoichi    | Maliniak  | M      | 1989-09-12 |
+|  10006 | 1953-04-20 | Anneke     | Preusig   | F      | 1989-06-02 |
+|  10007 | 1957-05-23 | Tzvetan    | Zielinski | F      | 1989-02-10 |
+|  10008 | 1958-02-19 | Saniya     | Kalloufi  | M      | 1994-09-15 |
+|  10009 | 1952-04-19 | Sumant     | Peac      | F      | 1985-02-18 |
+|  10010 | 1963-06-01 | Duangkaew  | Piveteau  | F      | 1989-08-24 |
++--------+------------+------------+-----------+--------+------------+
+
+- mostrando a estrutura da tabela employees:
+
+MariaDB [employees]> describe employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_no     | int(11)       | NO   | PRI | NULL    |       |
+| birth_date | date          | NO   |     | NULL    |       |
+| first_name | varchar(14)   | NO   |     | NULL    |       |
+| last_name  | varchar(16)   | NO   |     | NULL    |       |
+| gender     | enum('M','F') | NO   |     | NULL    |       |
+| hire_date  | date          | NO   |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+
+
 
 
 
