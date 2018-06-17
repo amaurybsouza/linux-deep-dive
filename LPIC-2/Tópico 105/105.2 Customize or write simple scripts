@@ -181,6 +181,80 @@ fi
 
 - Usando o primeiro-script para implementar instruções de comando case:
 
+# TESTE DO CASE
+echo ""
+case $VAR1 in
+        0)
+                echo "o valor digitado foi 0"
+        ;;
+        1|2|3|4|5)
+                echo "o valor digitado foi entre 1 e 5"
+                sleep 3
+        ;;
+        *)
+                echo "o valor digitado foi maior que 5"
+esac
+
+
+-- Vamos agora estudar um pouco do comando seq, abaixo alguns exemplos:
+
+$seq 10 (esse comando vc passa um número para ele, e ele vai te dar uma sequência até esse número)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+- esse comando é utilizado bastante no comando for.
+
+-- Outro comando importante é o expr, que vem de expression, esse comando faz uma conta aritmética, muito usado para fazer calculos no shell.
+
+$expr 1 + 2 (1 + 2  ele retorna 3)
+3
+
+
+-- vamos agora usar o comando for, para aprender a sintaxe:
+
+# TESTE DO FOR
+echo ""
+echo "=================== LOOP DO FOR ===================="
+for i in 1 2 3 4 5
+do
+        j=`expr $i + $VAR1`
+        echo "$i + $VAR1 = $j"
+done
+
+-- outro exemplo do comando for, mas agora usando o seq junto com o for:
+
+# TESTE DO FOR
+echo ""
+echo "=================== LOOP DO FOR ===================="
+for i in `seq $1`
+do
+        j=`expr $i + $VAR1`
+        echo "$i + $VAR1 = $j"
+        sleep 1
+done
+
+- nesse exemplo acima, o $1 é o primeiro parametro digitado no começo do script.
+
+-- usando o while para melhorar nosso script:
+
+# TESTE DO WHILE
+echo ""
+echo "=================== LOOP DO WHILE =================="
+while [ $VAR1 -le  $1 ]
+do
+        echo "O valor atual do \$VAR1 é: $VAR1"
+        VAR1=`expr $VAR1 + 1`
+        sleep 1
+done
+
 
 
 
@@ -214,10 +288,10 @@ while
 
 test aprendido
 
-if
+if aprendido
 
 read aprendido
 
-seq
+seq aprendido
 
 exec aprendido
