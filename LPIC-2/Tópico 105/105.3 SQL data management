@@ -184,7 +184,9 @@ MariaDB [employees]> select * from employees where hire_date > "2000-01-01" AND 
 
 - mostrando todas as funcionárias que foram contratadas depois de 1999, femininos, onde o primeiro nome começa com S:
 
-MariaDB [employees]> select * from employees where hire_date > "1999-01-01" AND gender = "F" and first_name like "s%";
+obs: o simbolo "%" é igual ao "*" utilizado em expressões regulares.
+
+MariaDB [employees]> select * from employees where hire_date > "1999-01-01" and gender = "F" and first_name like "s%";
 +--------+------------+---------------+---------------+--------+------------+
 | emp_no | birth_date | first_name    | last_name     | gender | hire_date  |
 +--------+------------+---------------+---------------+--------+------------+
@@ -578,7 +580,7 @@ MariaDB [employees]> select * from employees limit 10;
 
 - selecionando o código do funcionário, primeiro nome, ultimo nome e o salario dele, salario maior que 150000, utilizei o join para retirar as informações de duas tabelas:
 
-- revisando: select (campos que eu quero mostrar), de que tabela eu quero mostrar (employees.emp_no, employees.first_name, employees.last_name, salaries.salary), from (pegar da tabela employees join salaries), on (qual é o campo que coincide com as duas tabelas, o join só funciona se tiver um campo que coincide com a outra tabela).
+- revisando: select (campos que eu quero mostrar), de que tabela eu quero mostrar (employees.emp_no, employees.first_name, employees.last_name, salaries.salary), from (pegar da tabela employees join salaries), on (qual é o campo que coincide com as duas tabelas, o join só funciona se tiver um campo que coincide com a outra tabela), que nosso exemplo é o campo "emp_no".
 
 MariaDB [employees]> select employees.emp_no, employees.first_name, employees.last_name, salaries.salary from employees join salaries on employees.emp_no=salaries.emp_no where  salaries.to_date="9999-01-01" and salaries.salary > 150000;
 +--------+------------+-----------+--------+
