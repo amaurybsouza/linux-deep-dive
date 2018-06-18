@@ -13,7 +13,7 @@ $mysqlshow (mostra os bancos de dados existentes)
 +--------------------+
 
 - o banco de dados que está rodado é o MariaDB.
-- nesse banco temos 4 banco de dados, o que vamos trabalhar é o "employees."
+- nessa aplicação temos 4 banco de dados, o que vamos trabalhar é o "employees."
 - para conectar o banco, usamos a sintaxe abaixo:
 
 $mysql employees -u root (conecta no banco e cai na interface do MariaDB)
@@ -397,13 +397,209 @@ MariaDB [employees]> select * from employees where hire_date > "1999-01-01" AND 
 |  60426 | 1955-05-02 | Sven          | Quaggetto     | F      | 1999-02-18 |
 +--------+------------+---------------+---------------+--------+------------+
 
-- parei nos 13 minutos do video.
+- ordenando de acordo com o desejado, mostrando o os campos da tabela como mencionado, codigo, nome e sobrenome ao invés de first-name, last-name:
 
+MariaDB [employees]> select emp_no as Codigo, first_name as Nome, last_name as sobrenome from employees where hire_date > "1999-01-01" AND hire_date < "1999-06-01" AND gender = "F" and first_name like "s%" order by hire_date;
++--------+---------------+---------------+
+| Codigo | Nome          | sobrenome     |
++--------+---------------+---------------+
+|  24530 | Shen          | Bhattacharjee |
+|  11325 | Samphel       | Rossi         |
+| 221197 | Shan          | Demir         |
+| 201805 | Somnath       | Montemayor    |
+| 488287 | Slavian       | Gulla         |
+| 247870 | Suvo          | Axelband      |
+| 261066 | Sugwoo        | Hashii        |
+| 239253 | Shigeaki      | Majewski      |
+| 455384 | Sahrah        | Lieberherr    |
+| 448042 | Shigenori     | Lores         |
+| 489684 | Shichao       | Herath        |
+|  34020 | Susanna       | Encarnacion   |
+| 269134 | Serge         | Barriga       |
+|  60426 | Sven          | Quaggetto     |
+| 217984 | Subhankar     | Cappello      |
+|  43320 | Shan          | Jording       |
+|  69861 | Sangeeta      | Katiyar       |
+|  99909 | Stafford      | Coorg         |
+| 276232 | Samphel       | Wossner       |
+|  65575 | Shahar        | Azumi         |
+| 461376 | Shaowen       | Eppinger      |
+| 276528 | Shushma       | Setia         |
+| 262820 | Satyanarayana | Sooriamurthi  |
+| 458717 | Subir         | Ossenbruggen  |
+|  15368 | Seongbin      | Lortz         |
+|  84186 | Sumant        | Lorho         |
+|  33979 | Saeko         | Worfolk       |
+| 292260 | Somnath       | Huxford       |
+| 445133 | Supot         | Vecchio       |
+| 407616 | Shaowei       | Stanger       |
+|  75267 | Sergi         | Coombs        |
+|  44588 | Serap         | Castellani    |
+| 493745 | Shaibal       | Nations       |
+| 107571 | Shalesh       | Jarecki       |
++--------+---------------+---------------+
 
+- se eu quiser contar quantos funcionários tem na tabela, usamos o comando count(*):
 
+MariaDB [employees]> select count(*) from employees;
++----------+
+| count(*) |
++----------+
+|   300024 |
++----------+
+1 row in set (0.07 sec)
 
+- se eu quiser saber quantos homens e quantas mulheres eu tenho na empresa, usamos o group  by:
 
+MariaDB [employees]> select gender, count(*) from employees group by gender;
++--------+----------+
+| gender | count(*) |
++--------+----------+
+| M      |   179973 |
+| F      |   120051 |
++--------+----------+
 
+MariaDB [employees]> show tables;
++----------------------+
+| Tables_in_employees  |
++----------------------+
+| current_dept_emp     |
+| departments          |
+| dept_emp             |
+| dept_emp_latest_date |
+| dept_manager         |
+| employees            |
+| salaries             |
+| titles               |
++----------------------+
+
+MariaDB [employees]> describe salaries;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| emp_no    | int(11) | NO   | PRI | NULL    |       |
+| salary    | int(11) | NO   |     | NULL    |       |
+| from_date | date    | NO   | PRI | NULL    |       |
+| to_date   | date    | NO   |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+
+MariaDB [employees]> select * from salaries limit 10;
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|  10001 |  60117 | 1986-06-26 | 1987-06-26 |
+|  10001 |  62102 | 1987-06-26 | 1988-06-25 |
+|  10001 |  66074 | 1988-06-25 | 1989-06-25 |
+|  10001 |  66596 | 1989-06-25 | 1990-06-25 |
+|  10001 |  66961 | 1990-06-25 | 1991-06-25 |
+|  10001 |  71046 | 1991-06-25 | 1992-06-24 |
+|  10001 |  74333 | 1992-06-24 | 1993-06-24 |
+|  10001 |  75286 | 1993-06-24 | 1994-06-24 |
+|  10001 |  75994 | 1994-06-24 | 1995-06-24 |
+|  10001 |  76884 | 1995-06-24 | 1996-06-23 |
++--------+--------+------------+------------+
+
+- selecionar os salários que são mais de 100.000:
+
+MariaDB [employees]> select * from salaries where salary > 150000 limit 10;
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|  43624 | 151115 | 1998-03-23 | 1999-03-23 |
+|  43624 | 153166 | 1999-03-23 | 2000-03-22 |
+|  43624 | 153458 | 2000-03-22 | 2001-03-22 |
+|  43624 | 157821 | 2001-03-22 | 2002-03-22 |
+|  43624 | 158220 | 2002-03-22 | 9999-01-01 |
+|  46439 | 150345 | 2002-05-15 | 9999-01-01 |
+|  47978 | 151929 | 2001-07-14 | 2002-07-14 |
+|  47978 | 155709 | 2002-07-14 | 9999-01-01 |
+|  66793 | 150052 | 2002-06-16 | 9999-01-01 |
+|  80823 | 151768 | 2001-02-22 | 2002-02-22 |
++--------+--------+------------+------------+
+
+- selecionando da tabela salários, onde o salário é maior que 150000:
+
+MariaDB [employees]> select * from salaries where salary > 150000 and to_date="9999-01-01";
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|  43624 | 158220 | 2002-03-22 | 9999-01-01 |
+|  46439 | 150345 | 2002-05-15 | 9999-01-01 |
+|  47978 | 155709 | 2002-07-14 | 9999-01-01 |
+|  66793 | 150052 | 2002-06-16 | 9999-01-01 |
+|  80823 | 154459 | 2002-02-22 | 9999-01-01 |
+| 109334 | 155190 | 2002-02-11 | 9999-01-01 |
+| 205000 | 153715 | 2001-10-09 | 9999-01-01 |
+| 237542 | 152687 | 2002-04-08 | 9999-01-01 |
+| 238117 | 152220 | 2001-12-30 | 9999-01-01 |
+| 253939 | 155513 | 2002-04-11 | 9999-01-01 |
+| 254466 | 156286 | 2001-08-04 | 9999-01-01 |
+| 266526 | 152710 | 2001-10-04 | 9999-01-01 |
+| 276633 | 152412 | 2001-10-04 | 9999-01-01 |
+| 279776 | 150740 | 2002-06-06 | 9999-01-01 |
+| 493158 | 154376 | 2002-05-05 | 9999-01-01 |
++--------+--------+------------+------------+
+
+- vamos usar agora um comando importante que é o join:
+- vamos relacionar entre duas tabelas, o salário dos funcionários pelo nome, usando o joim.
+- como não mostra o nome do funcionário e o salário na mesma tabela, uso o join para mostrar isso:
+
+MariaDB [employees]> select * from salaries limit 10;
++--------+--------+------------+------------+
+| emp_no | salary | from_date  | to_date    |
++--------+--------+------------+------------+
+|  10001 |  60117 | 1986-06-26 | 1987-06-26 |
+|  10001 |  62102 | 1987-06-26 | 1988-06-25 |
+|  10001 |  66074 | 1988-06-25 | 1989-06-25 |
+|  10001 |  66596 | 1989-06-25 | 1990-06-25 |
+|  10001 |  66961 | 1990-06-25 | 1991-06-25 |
+|  10001 |  71046 | 1991-06-25 | 1992-06-24 |
+|  10001 |  74333 | 1992-06-24 | 1993-06-24 |
+|  10001 |  75286 | 1993-06-24 | 1994-06-24 |
+|  10001 |  75994 | 1994-06-24 | 1995-06-24 |
+|  10001 |  76884 | 1995-06-24 | 1996-06-23 |
++--------+--------+------------+------------+
+
+MariaDB [employees]> select * from employees limit 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+|  10001 | 1953-09-02 | Georgi     | Facello   | M      | 1986-06-26 |
+|  10002 | 1964-06-02 | Bezalel    | Simmel    | F      | 1985-11-21 |
+|  10003 | 1959-12-03 | Parto      | Bamford   | M      | 1986-08-28 |
+|  10004 | 1954-05-01 | Chirstian  | Koblick   | M      | 1986-12-01 |
+|  10005 | 1955-01-21 | Kyoichi    | Maliniak  | M      | 1989-09-12 |
+|  10006 | 1953-04-20 | Anneke     | Preusig   | F      | 1989-06-02 |
+|  10007 | 1957-05-23 | Tzvetan    | Zielinski | F      | 1989-02-10 |
+|  10008 | 1958-02-19 | Saniya     | Kalloufi  | M      | 1994-09-15 |
+|  10009 | 1952-04-19 | Sumant     | Peac      | F      | 1985-02-18 |
+|  10010 | 1963-06-01 | Duangkaew  | Piveteau  | F      | 1989-08-24 |
++--------+------------+------------+-----------+--------+------------+
+
+- selecionando o código do funcionário, primeiro nome, ultimo nome e o salario dele, salario maior que 150000, utilizei o join para retirar as informações de duas tabelas:
+
+- revisando: select (campos que eu quero mostrar), de que tabela eu quero mostrar (employees.emp_no, employees.first_name, employees.last_name, salaries.salary), from (pegar da tabela employees join salaries), on (qual é o campo que coincide com as duas tabelas, o join só funciona se tiver um campo que coincide com a outra tabela).
+
+MariaDB [employees]> select employees.emp_no, employees.first_name, employees.last_name, salaries.salary from employees join salaries on employees.emp_no=salaries.emp_no where  salaries.to_date="9999-01-01" and salaries.salary > 150000;
++--------+------------+-----------+--------+
+| emp_no | first_name | last_name | salary |
++--------+------------+-----------+--------+
+|  43624 | Tokuyasu   | Pesch     | 158220 |
+|  46439 | Ibibia     | Junet     | 150345 |
+|  47978 | Xiahua     | Whitcomb  | 155709 |
+|  66793 | Lansing    | Kambil    | 150052 |
+|  80823 | Willard    | Baca      | 154459 |
+| 109334 | Tsutomu    | Alameldin | 155190 |
+| 205000 | Charmane   | Griswold  | 153715 |
+| 237542 | Weicheng   | Hatcliff  | 152687 |
+| 238117 | Mitsuyuki  | Stanfel   | 152220 |
+| 253939 | Sanjai     | Luders    | 155513 |
+| 254466 | Honesty    | Mukaidono | 156286 |
+| 266526 | Weijing    | Chenoweth | 152710 |
+| 276633 | Shin       | Birdsall  | 152412 |
+| 279776 | Mohammed   | Moehrke   | 150740 |
+| 493158 | Lidong     | Meriste   | 154376 |
++--------+------------+-----------+--------+
 
 
 
@@ -460,10 +656,10 @@ MariaDB [employees]> select * from employees where hire_date > "1999-01-01" AND 
 
 insert
 update
-select
+select aprendido
 delete
-from
-where
+from aprendido
+where aprendido
 group by
-order by
+order by aprendido
 join
