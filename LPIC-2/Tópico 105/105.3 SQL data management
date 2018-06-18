@@ -397,6 +397,7 @@ MariaDB [employees]> select * from employees where hire_date > "1999-01-01" AND 
 |  60426 | 1955-05-02 | Sven          | Quaggetto     | F      | 1999-02-18 |
 +--------+------------+---------------+---------------+--------+------------+
 
+- parei nos 13 minutos do video.
 
 
 
