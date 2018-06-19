@@ -39,7 +39,7 @@ alias ll='ls -alF'
 alias ls='ls --color=auto'
 root@wk2001876:/home/absouza/estudo-LPI# 
 
--- no bash temos a function, para rotinas de comandos no Linux
+-- no bash temos o comando function, para rotinas de comandos no Linux:
 
 function (usado para criar uma sequencia rotinas, de comandos, loops, if, while)
 
