@@ -603,15 +603,189 @@ MariaDB [employees]> select employees.emp_no, employees.first_name, employees.la
 | 493158 | Lidong     | Meriste   | 154376 |
 +--------+------------+-----------+--------+
 
+- iniciando os estudos para inserção, remoção e update de tabelas:
+- essa tabela departments possui apenas dois campos.
+- para inserir dados é utilizado o comando insert.
 
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d005    | Development        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
 
+- realizando o comando insert para inserir dados na tabela, usando os valores d100 e devops:
 
+MariaDB [employees]> insert into departments (dept_no, dept_name) values ("d100", "DevOps");
+Query OK, 1 row affected (0.01 sec)
 
+- veja como ficou após a inserção dos dados, apareceu mais um registro na tabela:
 
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d005    | Development        |
+| d100    | DevOps             |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
 
+- criando mais um registro na tabela:
 
+MariaDB [employees]> insert into departments (dept_no, dept_name) values ("d101", "Suporte Técnico");
+Query OK, 1 row affected (0.00 sec)
 
+- MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d005    | Development        |
+| d100    | DevOps             |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
+| d101    | Suporte Técnico    |
++---------+--------------------+
 
+- usando outra forma de inserir os dados na tabela usando o comando insert:
+
+MariaDB [employees]> insert into departments set dept_no="d103", dept_name="Desenvolvimento";
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d103    | Desenvolvimento    |
+| d005    | Development        |
+| d100    | DevOps             |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
+| d101    | Suporte Técnico    |
++---------+--------------------+
+
+- usando o comando update (sempre usar o where nessa sintaxe):
+
+MariaDB [employees]> update departments set dept_name="DevOps Novo" where dept_no="d100";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d103    | Desenvolvimento    |
+| d005    | Development        |
+| d100    | DevOps Novo        |
+
+MariaDB [employees]> update departments set dept_no="d200" where dept_name like "%Suporte%";
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d103    | Desenvolvimento    |
+| d005    | Development        |
+| d100    | DevOps Novo        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
+| d200    | Suporte Técnico    |
++---------+--------------------+
+
+- usando agora o comando delete, para deletar um registro de dentro da tabela:
+- observe que agora não tem mais a linha d200:
+
+MariaDB [employees]> delete from departments where dept_no="d200";
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d103    | Desenvolvimento    |
+| d005    | Development        |
+| d100    | DevOps Novo        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
+
+MariaDB [employees]> delete from departments where dept_name like "%Novo%";
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d103    | Desenvolvimento    |
+| d005    | Development        |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
+
+- apagando tudo que começa com a letra D:
+
+MariaDB [employees]> delete from departments where dept_name like "D%";
+Query OK, 2 rows affected (0.79 sec)
+
+MariaDB [employees]> select * from departments;
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+| d009    | Customer Service   |
+| d002    | Finance            |
+| d003    | Human Resources    |
+| d001    | Marketing          |
+| d004    | Production         |
+| d006    | Quality Management |
+| d008    | Research           |
+| d007    | Sales              |
++---------+--------------------+
 
 
 
@@ -664,4 +838,4 @@ from aprendido
 where aprendido
 group by
 order by aprendido
-join
+join aprendido
