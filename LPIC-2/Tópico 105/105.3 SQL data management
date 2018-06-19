@@ -787,55 +787,12 @@ MariaDB [employees]> select * from departments;
 | d007    | Sales              |
 +---------+--------------------+
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-insert
-update
+insert aprendido
+update aprendido
 select aprendido
-delete
+delete aprendido
 from aprendido
 where aprendido
-group by
+group by aprendido
 order by aprendido
 join aprendido
