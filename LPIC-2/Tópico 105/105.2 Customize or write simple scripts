@@ -84,7 +84,7 @@ Swap:          2047           0        2047
 
 fim do script
 
--- outro exemplo usando do script mas agora usando o comando read:
+-- outro exemplo usando o script mas agora usando o comando read:
 
 #!/bin/bash
 clear
@@ -229,7 +229,7 @@ do
         echo "$i + $VAR1 = $j"
 done
 
--- outro exemplo do comando for, mas agora usando o seq junto com o for:
+-- outro exemplo do comando for, mas agora usando o comando seq junto com o for:
 
 # TESTE DO FOR
 echo ""
@@ -270,6 +270,67 @@ do
 done
 
 
+-----------------------------------------------------------------------------------------------
+
+# Váriaveis especiais do Linux:
+
+Os argumentos passados para um script e outras informações úteis são retornados pela variável especial $x, em que x determina que valor retornar:
+
+$*: Todos os valores passados como argumentos;
+
+$#: O número de argumentos;
+
+$0 : O nome do arquivo de script;
+
+Sn : O valor do argumento na posição n;
+
+$! : PID do último programa executado;
+
+$$ : PID do shell atual;
+
+$? : Código de saída do último comando.
 
 
+#As principais opções utilizadas são:
 
+Análises de Arquivos e Diretórios
+
+-f Arquivo : Verifica se o arquivo indicado existe e é um arquivo regular
+
+-d Arquivo : Verifica se o caminho indicado é um diretório existente
+
+-r Arquivo : Verificar se há permissão de leitura
+
+-w Arquivo : Verificar se há permissão de escrita
+
+-x Arquivo : Verificar se há permissão de execução
+
+-s Arquivo : Verifica se o tamanho do arquivo é maior que 0
+
+
+#Comparação de Strings
+
+-n $VAR1 : Usado com variáveis, verifica se o tamanho do conteúdo da variável é diferente de zero (nonzero)
+
+-z $VAR1 : Usado com variáveis, verifica se o tamanho do conteúdo da variável é zero
+
+$VAR1 : Usado com variáveis, indica verdadeiro se $VAR1 não for nulo
+
+String1 = String2 : Compara se as duas strings são iguais
+
+String1 != String2 : Verifica se as duas strings são diferentes
+
+
+#Comparação de Valores Numéricos
+
+Valor1 -eq Valor2 : Verdadeiro se os 2 valores forem iguais (equal)
+
+Valor1 -ne Valor2 : Verdadeiro se os 2 valores forem diferentes (not equal)
+
+Valor1 -gt Valor2 : Verdadeiro se o Valor1 for maior que Valor2 (greater than)
+
+Valor1 -ge Valor2 : Verdadeiro se o Valor1 for maior ou igual que Valor2 (greater or equal)
+
+Valor1 -lt Valor2 : Verdadeiro se o Valor1 for menor que Valor2 (less than)
+
+Valor1 -le Valor2 : Verdadeiro se o Valor1 for menor ou igual que Valor2 (less or equal)
