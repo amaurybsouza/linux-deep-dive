@@ -2,6 +2,7 @@ The following is a partial list of the used files, terms and utilities:
 
 #source (faz com que o comando seguinte seguinte, script,seja executado no bash local, e que não abra um novo bash)
 
+
 - outra forma seria usar o . ("ponto e espaço")
 
 $. script_variavel.sh 
