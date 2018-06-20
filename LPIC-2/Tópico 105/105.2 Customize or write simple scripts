@@ -137,7 +137,7 @@ echo "fim do script"
   - tem um if, e finaliza a instrução com o fi.
   - na primeira linha tem um teste, que vai retornar verdadeiro ou falso.
   - a opção -f significa se existe ou não o arquivo /etc/bash.bashrc.
-  - esse teste pode ser feito usando colchetes [] ou usando o comando teste, veja -> if test -f /etc/bash.bashrc ]; then
+  - esse teste pode ser feito usando colchetes [] ou usando o comando test, veja -> if test -f /etc/bash.bashrc ]; then
   - testa se o arquivo existe, se for verdade, ele executa a linha abaixo -> . /etc/bash.bashrc
 
 if [ -f /etc/bash.bashrc ]; then
