@@ -28,13 +28,13 @@ Terms and Utilities:
 - nas distribuições novas esse arquivo nem existe mais, porque tudo é detectado no momento do boot, 
 tem suporte para monitores, teclados, mouses, tudo é automático.
 
-- para gerar ele, faz assim:
+- para gerar ele, temos que seguir os seguintes passos:
 
 1) tem que matar o processo do Xorg que está rodando no tty7. (interface gráfica.)
 
 2) Entrar em outro terminal sem interface gráfica, tty1.
 
-3) depois mudar para o multi.target (systemctl isolate multi.user.target)
+3) depois mudar para o multi.target (systemctl isolate multi-user.target)
 
 4) Para gerar o arquivo de configuração, deve executar o comando:
 
