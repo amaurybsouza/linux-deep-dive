@@ -1,6 +1,67 @@
 Terms and Utilities:
 
-/etc/X11/xorg.conf
+- A interface X ou o servidor X, sistema X, nada mais que é que uma interface gráfica que o Linux disponibiliza para o usuário.
+
+- O X11 ou Xorg11 é uma implementação dessa interface X.
+
+- Hoje em dia quase todas as distros usam o X11 ou o Xorg.
+
+- É importante entender que o servidor X ou o X11, é a interface gráfica mais básica do Linux, é pelo X controle do botão do mouse, clique do botão direito, botão esquerdo, quantos monitores estão configurados, qual a resolução, tamanho, esse tipo de configuração é tudo feito e controlado pelo servidor X.
+
+- Em cima de servidor X, rodam os gerenciadores de janelas, mais conhecidos como, Gnome, XFCE, kDE.
+
+- Além disso tem o display maneger (tela de login assim que vc liga a máquina, bem vindo, usuário e senha).
+
+- É importante saber que o X funciona num modelo de cliente/servidor.
+
+- Servidor X (X é a interface gráfica) e todos os programas que rodam em cima do servidor X, são clientes do servidor X.
+
+- quando eu abro o Mozilla, ele é um cliente do servidor X.
+
+  - servidor X que prove as funcionalidades gráficas e os clientes X.
+  - se eu abrir o xcalc no terminal, ele é uma aplicação cliente do servidor X.
+
+-- Arquivo de configuração mais importante do X11 (/etc/X11/xorg.conf)
+
+#/etc/X11/xorg.conf ()
+
+- nas distribuições novas esse arquivo nem existe mais, porque tudo é detectado no momento do boot, 
+tem suporte para monitores, teclados, mouses, tudo é automático.
+
+- para gerar ele, faz assim:
+
+1) tem que matar o processo do Xorg que está rodando no tty7. (interface gráfica.)
+
+2) Entrar em outro terminal sem interface gráfica, tty1.
+
+3) depois mudar para o multi.target (systemctl isolate multi.user.target)
+
+4) Para gerar o arquivo de configuração, deve executar o comando:
+
+$Xorg -configure (o arquivo X foi gerado no  /root)
+
+5) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 xhost
 DISPLAY
 xwininfo
