@@ -42,16 +42,95 @@ $Xorg -configure (o arquivo X foi gerado no  /root)
 
 5) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
 
+-- O que aprender com esse arquivo de configuração (/etc/X11/xorg.conf)
+
+- ele terá sessões, veja alguns modelos de sessões: Sessão de layout, monitor, mouse, dispositivos.
+- blocos de configuração.
+- bloco "Files"
+  - bloco utilizado para indicar os módulos utilizados pela interface X11, e aonde estão as fontes utilizadas. 
+(onde o X procura as fontes para o usuário).
+
+Section "Files"
+# These folders do not exist
+    FontPath        "/usr/share/fonts/X11/misc"
+    FontPath        "/usr/share/fonts/X11/100dpi"
+# No files in here    FontPath        "/usr/share/X11/fonts/75dpi"
+# removed this tail   /:unscaled"
+# No files here either    FontPath        "/usr/share/X11/fonts/Type1"
+# path to defoma fonts
+    FontPath        "/var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType"
+    RgbPath         "/usr/X11R6/lib/X11/rgb"
+EndSection
+
+#Section "InputDevice"
+    Identifier     "Ergonomic4000"
+    Driver         "kbd"
+    Option         "CoreKeyboard"
+    Option         "XkbRules" "xorg"
+    Option         "XkbModel" "pc105"
+    Option         "XkbLayout" "us"
+    Option         "XkbOptions" "lv3:ralt_switch"
+      Would be nice if the top ribbon web buttons worked
+      and the Zoom slider in the centre
+      and back/forward buttons
+EndSection
+
+- terá sempre esse identificador, para saber qual tipo de device é, driver, modelo do teclado. Pode incluir opções de configuração nessa sessão.
+
+- Por exemplo, se algo não está funcionando direito com o teclado, pode ser que eu precise incluir alguma opção aqui, ou outro driver, dentro desse bloco.
+
+Section "InputDevice"
+    Identifier     "Razer Copperhead"
+    Driver         "mouse"
+    Option         "CorePointer"
+    Option         "Device" "/dev/input/mice"
+    Option         "Protocol" "ExplorerPS/2"
+    Option         "ZAxisMapping" "4 5"
+          ZAxis mapping is the scrolling. Exclude from list below
+    Option         "Emulate3Buttons" "true"
+    Option         "Buttons" "9"
+    Option         "ButtonMapping" "1 2 3 6 7 8 9"
+          3 is the wheel click
+          6 & 7 and 8 & 9 are on the sides of the mouse - and hard to press
+EndSection
 
 
 
 
 
 
+- sessão do mouse, driver, posso ajustar se está usando os dois botões.
 
 
 
 
+#Section "Monitor"
+    Identifier     "SyncMaster-226BW"
+    VendorName     "Samsung"
+    HorizSync       30.0 - 81.0
+    VertRefresh     56.0 - 75.0
+    Option         "DPMS"
+  More Options...
+EndSection
+
+
+
+#Section "Device"
+    Identifier     "Left nVidia 8600GT"
+    Driver         "nvidia"
+  For use after kernel upgrades kills nVidia proprietory
+  Also turn off RightScreen
+     Driver         "nv"
+    VendorName      "NVIDIA Corporation"
+    BoardName       "GeForce 8600 GT"
+
+    PCI-Express 16x bus
+    BusID          "PCI:7:0:0"
+  Appears as PCI:4 on other machines
+      BusID             "PCI:1:0:0"  this is AGP
+    Screen          0
+          Options...
+EndSection
 
 
 
