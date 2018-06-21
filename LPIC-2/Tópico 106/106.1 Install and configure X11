@@ -46,8 +46,10 @@ $Xorg -configure (o arquivo X foi gerado no  /root)
 
 - ele terá sessões, veja alguns modelos de sessões: Sessão de layout, monitor, mouse, dispositivos.
 - blocos de configuração.
+
+
 - bloco "Files"
-  - bloco utilizado para indicar os módulos utilizados pela interface X11, e aonde estão as fontes utilizadas. 
+- bloco utilizado para indicar os módulos utilizados pela interface X11, e aonde estão as fontes utilizadas. 
 (onde o X procura as fontes para o usuário).
 
 Section "Files"
@@ -94,16 +96,6 @@ Section "InputDevice"
           6 & 7 and 8 & 9 are on the sides of the mouse - and hard to press
 EndSection
 
-
-
-
-
-
-- sessão do mouse, driver, posso ajustar se está usando os dois botões.
-
-
-
-
 #Section "Monitor"
     Identifier     "SyncMaster-226BW"
     VendorName     "Samsung"
@@ -112,8 +104,6 @@ EndSection
     Option         "DPMS"
   More Options...
 EndSection
-
-
 
 #Section "Device"
     Identifier     "Left nVidia 8600GT"
@@ -132,6 +122,53 @@ EndSection
           Options...
 EndSection
 
+Section "Screen"
+        Identifier      "RightScreen"
+        Device          "Right nVidia 8600GT"
+        Monitor         "SyncMaster-226BW"
+        # Compositing manager
+        Option         "RenderAccel" "true"
+        Option         "TripleBuffer" "true"
+        Option         "AllowGLXWithComposite"
+        Option         "DPMS" "true"
+        DefaultDepth    24
+        SubSection "Display"
+                Depth           24
+                Modes           "1680x1050"
+        EndSubSection
+        # Even though the SyncMaster and the Viewsonic are 1050, the Viewsonic is 10mm taller. Syncmaster has a finer dot pitch, but less physical real estate
+EndSection
+
+#xdpyinfo (mostra informações/opções da interface X, consigo ver a versão, o Xorg, e as opções da tela, display).
+
+$xdpyinfo | less
+
+#xwininfo (mostra informações sobre uma janela do sistema, dimensão, ajustes, tamanho, comprimento)
+
+- assim que vc aperta "enter" ele vai pedir para selecionar uma janela.
+
+$xwininfo + enter
+
+xwininfo: Please select the window about which you
+          would like information by clicking the
+          mouse in that window.
+
+xwininfo: Window id: 0x2200015 "Configurações"
+
+  Absolute upper-left X:  474
+  Absolute upper-left Y:  96
+  Relative upper-left X:  474
+  Relative upper-left Y:  96
+  Width: 881
+  Height: 566
+  Depth: 32
+  Visual: 0x16c
+  Visual Class: TrueColor
+
+
+
+
+
 
 
 
@@ -143,6 +180,4 @@ EndSection
 
 xhost
 DISPLAY
-xwininfo
-xdpyinfo
 X
