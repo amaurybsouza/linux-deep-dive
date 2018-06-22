@@ -23,7 +23,7 @@ Terms and Utilities:
 
 -- Arquivo de configuração mais importante do X11 (/etc/X11/xorg.conf)
 
-#/etc/X11/xorg.conf ()
+#####/etc/X11/xorg.conf ()
 
 - nas distribuições novas esse arquivo nem existe mais, porque tudo é detectado no momento do boot, 
 tem suporte para monitores, teclados, mouses, tudo é automático.
@@ -165,6 +165,60 @@ xwininfo: Window id: 0x2200015 "Configurações"
   Visual: 0x16c
   Visual Class: TrueColor
 
+-- Outro comando importante para a prova é o xvinfo.
+
+#xvinfo (exibe as capacidades dos adaptadores de vídeo que estão utilizando o X).
+
+####Fontes no X
+
+- A interface X ela utiliza e disponibiliza um conjunto de fontes.
+- O usuário pode adicionar as fontes para utilizar dentro da interface X.
+- São os dois principais tipos de fontes:
+
+- bitmap fonts (tipo mais simples)
+
+- outline fonts (mais utilizado e possui mais opções gráficas para as fontes).
+
+- as fontes ficam dentro da Section "Files" no arquivo "/usr/share/fonts/X11"
+
+- dentro do diretório Type1 existem alguns modelos de fontes, fontes de todo o sistema.
+
+-- é importante notar que sempre vai ter dois arquivos de fontes, que são:
+
+/usr/share/fonts/X11/Type1$ls f*
+fonts.dir  fonts.scale
+
+-- esses dois arquivos ssão tipo um indice das fontes, o X precisa desses arquivos para referenciar e utilizar essas fontes.
+
+-- para gerar esses dois arquivos utilizamos dois comandos, que são:
+
+$mkfontscale (esse comando gera o arquivo fonts.scale, é importante gerar esse arquivo primeiro).
+
+$mkfontdir (gera o arquivo fonts.dir)
+
+-- como dito na aula anterior, temos a opção de ter o servidor de fontes.
+
+
+
+#### Estudar agora o lado do cliente do servidor. (lembrando que o X é o servidor de interface gráfica e nele rodam os clientes X
+que são aplicações do clientes do servidor X).
+
+- uma observação, esse lado cliente servidor, além de poder ser utilizado localmente, é possível ser usado entre máquinas diferentes,
+eu posso a partir de uma máquina executar um programa só que esse programa ser exibido no servidor X que está em outra máquina.
+
+- nessa aula vamos fazer um teste para ver o programa rodando em uma máquina e o programa ser exibido no servidor X de outra máquina.
+
+- primeiramente vamos configurar a VM para iniciar em modo bridge, assim cada sistema ficará com um IP diferente em questão de redes.
+
+- vamos iniciar a configuração da variavel DISPLAY:
+
+$echo $DISPLAY (essa variavel indica onde as janelas vão ser exibidas, variavel do shell, o shell vai identificar através da variavel DISPLAY quem deve exibir essa informação, o servidor X local ou é o servidor X de outra máquina)
+:0
+
+$echo $DISPLAY 
+:0
+
+#xhost (esse comando libera uma máquina para aceitar a configuração de outra máquina) *existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
 
 
 
