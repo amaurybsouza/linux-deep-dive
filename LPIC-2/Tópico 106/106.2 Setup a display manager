@@ -1,4 +1,29 @@
 Terms and Utilities:
 
-lightdm
-/etc/lightdm/
+- nessa aula vamos estudar um pouco sobre display manager ou gerenciador de login.
+- existem vários tipos de display manager, e o mais simples deles, é o XDM (foi o primeiro).
+- o Gnome utiliza o GDM (display manager do Gnome), o KDE usa o KDM (display manager do KDM).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#lightdm
+
+
+
+
+
+
+
+
+#/etc/lightdm/
