@@ -2,7 +2,14 @@ Terms and Utilities:
 
 - nessa aula vamos estudar um pouco sobre display manager ou gerenciador de login.
 - existem vários tipos de display manager, e o mais simples deles, é o XDM (foi o primeiro).
-- o Gnome utiliza o GDM (display manager do Gnome), o KDE usa o KDM (display manager do KDM).
+- o Gnome utiliza o GDM (display manager do Gnome), o KDE usa o KDM (display manager do KDM)
+- já o Ubuntu e seus derivados usam o LightDM. (display manager mais leve e que se tornou padrão de muitas distros).
+- o mais cobrado pela LPI e pela CompTIA é o LightDM, que será estudado mais a fundo.
+
+- quando se faz login no sistema, aparece a tela (greeter, tela de recepção).
+- toda a tela pode ser configurada, as letras, o layout da tela.
+
+
 
 
 
