@@ -1,14 +1,18 @@
 Terms and Utilities:
 
-- A interface X ou o servidor X, sistema X, nada mais que é que uma interface gráfica que o Linux disponibiliza para o usuário.
+#### CONCEITOS DE SERVIDOR X: (INTERFACE GRÁFICA PARA LINUX)
 
-- O X11 ou Xorg11 é uma implementação dessa interface X.
+1) A plataforma gráfica disponível para distros Linux é o "Servidor X" (ou Xorg), ela suporta as aplicações gráficas 
+disponíveis para Linux, como gerenciadores de desktop, gerenciadores de logins, jogos, aplicações de escritório 
+e editores de imagens.
 
-- Hoje em dia quase todas as distros usam o X11 ou o Xorg.
 
-- É importante entender que o servidor X ou o X11, é a interface gráfica mais básica do Linux, é pelo X controle do botão do mouse, clique do botão direito, botão esquerdo, quantos monitores estão configurados, qual a resolução, tamanho, esse tipo de configuração é tudo feito e controlado pelo servidor X.
+2) Hoje em dia quase todas as distros usam o X11 ou o Xorg.
 
-- Em cima de servidor X, rodam os gerenciadores de janelas, mais conhecidos como, Gnome, XFCE, kDE.
+
+3) É importante entender que o servidor X ou o X11, é a interface gráfica mais básica do Linux, é pelo X  que se pode controlar o botão do mouse, clique do botão direito, botão esquerdo, quantos monitores estão configurados, qual a resolução, tamanho, esse tipo de configuração é tudo feito e controlado pelo servidor X.
+
+- Em cima de servidor X, rodam os gerenciadores de janelas, mais conhecidos como, Gnome, XFCE, KDE.
 
 - Além disso tem o display maneger (tela de login assim que vc liga a máquina, bem vindo, usuário e senha).
 
@@ -18,17 +22,19 @@ Terms and Utilities:
 
 - quando eu abro o Mozilla, ele é um cliente do servidor X.
 
-  - servidor X que prove as funcionalidades gráficas e os clientes X.
+  - servidor X que organiza as funcionalidades gráficas e os clientes X.
   - se eu abrir o xcalc no terminal, ele é uma aplicação cliente do servidor X.
 
--- Arquivo de configuração mais importante do X11 (/etc/X11/xorg.conf)
 
-#####/etc/X11/xorg.conf ()
+#####/etc/X11/xorg.conf (Arquivo de configuração mais importante do X11)
 
-- nas distribuições novas esse arquivo nem existe mais, porque tudo é detectado no momento do boot, 
-tem suporte para monitores, teclados, mouses, tudo é automático.
 
-- para gerar ele, temos que seguir os seguintes passos:
+#### COMO GERAR O ARQUIVO DE CONFIGURAÇÃO /etc/X11/xorg.conf:
+
+OBS: "nas distribuições novas esse arquivo nem existe mais, porque tudo é detectado no momento do boot, 
+tem suporte para monitores, teclados, mouses, tudo é automático".
+
+
 
 1) tem que matar o processo do Xorg que está rodando no tty7. (interface gráfica.)
 
@@ -42,85 +48,28 @@ $Xorg -configure (o arquivo X foi gerado no  /root)
 
 5) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
 
--- O que aprender com esse arquivo de configuração (/etc/X11/xorg.conf)
 
-- ele terá sessões, veja alguns modelos de sessões: Sessão de layout, monitor, mouse, dispositivos.
-- blocos de configuração.
+#### ESSE ARQUIVO É DIVIDIDO EM SESSÕES E SUB-SESSÕES, VEJA ABAIXO:
 
 
-- bloco "Files"
-- bloco utilizado para indicar os módulos utilizados pela interface X11, e aonde estão as fontes utilizadas. 
+“InputDevice”
+Esta seção é responsável pela configuração de opções de teclado, como layout, idioma e driver e também de configuração de mouse.
+
+“Files”
+Configura o local onde estão armazenadas as fontes do servidor X. O local padrão é /usr/share/fonts
 (onde o X procura as fontes para o usuário).
 
-Section "Files"
-# These folders do not exist
-    FontPath        "/usr/share/fonts/X11/misc"
-    FontPath        "/usr/share/fonts/X11/100dpi"
-# No files in here    FontPath        "/usr/share/X11/fonts/75dpi"
-# removed this tail   /:unscaled"
-# No files here either    FontPath        "/usr/share/X11/fonts/Type1"
-# path to defoma fonts
-    FontPath        "/var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType"
-    RgbPath         "/usr/X11R6/lib/X11/rgb"
-EndSection
+“Device”
+Configura opções da placa de vídeo, como driver e o nome do fabricante também.
 
-#Section "InputDevice"
-    Identifier     "Ergonomic4000"
-    Driver         "kbd"
-    Option         "CoreKeyboard"
-    Option         "XkbRules" "xorg"
-    Option         "XkbModel" "pc105"
-    Option         "XkbLayout" "us"
-    Option         "XkbOptions" "lv3:ralt_switch"
-      Would be nice if the top ribbon web buttons worked
-      and the Zoom slider in the centre
-      and back/forward buttons
-EndSection
+“Monitor”
+Opções de monitor, como frequências horizontal e vertical, modelo e fabricante.
 
-- terá sempre esse identificador, para saber qual tipo de device é, driver, modelo do teclado. Pode incluir opções de configuração nessa sessão.
+“Screen”
+Esta seção se refere à configuração da visualização da interface gráfica. É, por exemplo, nesta seção 
+que as resoluções de vídeo podem ser configuradas através da SubSection “Display”
 
-- Por exemplo, se algo não está funcionando direito com o teclado, pode ser que eu precise incluir alguma opção aqui, ou outro driver, dentro desse bloco.
-
-Section "InputDevice"
-    Identifier     "Razer Copperhead"
-    Driver         "mouse"
-    Option         "CorePointer"
-    Option         "Device" "/dev/input/mice"
-    Option         "Protocol" "ExplorerPS/2"
-    Option         "ZAxisMapping" "4 5"
-          ZAxis mapping is the scrolling. Exclude from list below
-    Option         "Emulate3Buttons" "true"
-    Option         "Buttons" "9"
-    Option         "ButtonMapping" "1 2 3 6 7 8 9"
-          3 is the wheel click
-          6 & 7 and 8 & 9 are on the sides of the mouse - and hard to press
-EndSection
-
-#Section "Monitor"
-    Identifier     "SyncMaster-226BW"
-    VendorName     "Samsung"
-    HorizSync       30.0 - 81.0
-    VertRefresh     56.0 - 75.0
-    Option         "DPMS"
-  More Options...
-EndSection
-
-#Section "Device"
-    Identifier     "Left nVidia 8600GT"
-    Driver         "nvidia"
-  For use after kernel upgrades kills nVidia proprietory
-  Also turn off RightScreen
-     Driver         "nv"
-    VendorName      "NVIDIA Corporation"
-    BoardName       "GeForce 8600 GT"
-
-    PCI-Express 16x bus
-    BusID          "PCI:7:0:0"
-  Appears as PCI:4 on other machines
-      BusID             "PCI:1:0:0"  this is AGP
-    Screen          0
-          Options...
-EndSection
+VEJA ABAIXO O EXEMPLO DA SESSÃO SCREEN:
 
 Section "Screen"
         Identifier      "RightScreen"
@@ -138,6 +87,10 @@ Section "Screen"
         EndSubSection
         # Even though the SyncMaster and the Viewsonic are 1050, the Viewsonic is 10mm taller. Syncmaster has a finer dot pitch, but less physical real estate
 EndSection
+
+
+
+
 
 #xdpyinfo (mostra informações/opções da interface X, consigo ver a versão, o Xorg, e as opções da tela, display).
 
@@ -169,7 +122,7 @@ xwininfo: Window id: 0x2200015 "Configurações"
 
 #xvinfo (exibe as capacidades dos adaptadores de vídeo que estão utilizando o X).
 
-####Fontes no X
+#### Fontes no X
 
 - A interface X ela utiliza e disponibiliza um conjunto de fontes.
 - O usuário pode adicionar as fontes para utilizar dentro da interface X.
@@ -232,6 +185,3 @@ $echo $DISPLAY
 
 
 
-xhost
-DISPLAY
-X
