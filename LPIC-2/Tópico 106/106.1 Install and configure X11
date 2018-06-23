@@ -85,14 +85,14 @@ Section "Screen"
                 Depth           24
                 Modes           "1680x1050"
         EndSubSection
-        # Even though the SyncMaster and the Viewsonic are 1050, the Viewsonic is 10mm taller. Syncmaster has a finer dot pitch, but less physical real estate
+         Even though the SyncMaster and the Viewsonic are 1050, the Viewsonic is 10mm taller. Syncmaster has a finer dot pitch, but less physical real estate
 EndSection
 
 
+#### OUTROS COMANDOS IMPORTANTES DO SERVIDOR X:
 
 
-
-#xdpyinfo (mostra informações/opções da interface X, consigo ver a versão, o Xorg, e as opções da tela, display).
+#xdpyinfo (mostra informações da interface/servidor X).
 
 $xdpyinfo | less
 
@@ -171,7 +171,7 @@ $echo $DISPLAY (essa variavel indica onde as janelas vão ser exibidas, variavel
 $echo $DISPLAY 
 :0
 
-#xhost (esse comando libera uma máquina para aceitar a configuração de outra máquina) *existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
+#xhost (programa de controle de acesso para o servidor X) *existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
 
 
 
