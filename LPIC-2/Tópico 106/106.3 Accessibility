@@ -1,14 +1,55 @@
 Terms and Utilities:
 
-Sticky/Repeat Keys
-Slow/Bounce/Toggle Keys
-Mouse Keys
+- para começarmos vamos abrir o menu do sistema, de acessibilidade.
+
+#### OPÇÕES PARA O TECLADO:
+
+#Sticky Keys (existe para quem não consegue pressionar mais de uma tecla ao mesmo tempo).
+  - Por exemplo: ao pressionar duas teclas como Ctrl+C ou Ctrl+V.
+  - Com essa função ativada basta apertar o Ctrl (uma vez) e depois apertar C (uma vez) que ele copia o conteudo.
+
+
+#Slow Keys (com essa função ativada a tecla vai funcionar apenas se for pressionada por alguns segundos).
+  - Por exemplo: ao pressionar uma tecla, você deve segurar por instantes para que a função seja realizada.
+  - essa função serve para pessoas que tem algum tipo de problema motor, ou que pressiona as teclas muito facilmente.
+
+#Bounce Keys (cria um delay na repetição da mesma tecla, quando vc pressiona a mesma tecla mais de uma vez).
+
+ 
+
+
+
+
+
+
+
+
+#Mouse Keys
+
+
+
 High Contrast/Large Print Desktop Themes
+
+
+
+
+
+
+
 Screen Reader
+
+
+
 Braille Display
+
 Screen Magnifier
+
 On-Screen Keyboard
+
 Gestures (used at login, for example GDM)
+
 Orca
+
 GOK
+
 emacspeak
