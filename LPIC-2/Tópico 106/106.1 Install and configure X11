@@ -69,7 +69,7 @@ Opções de monitor, como frequências horizontal e vertical, modelo e fabricant
 Esta seção se refere à configuração da visualização da interface gráfica. É, por exemplo, nesta seção 
 que as resoluções de vídeo podem ser configuradas através da SubSection “Display”
 
-VEJA ABAIXO O EXEMPLO DA SESSÃO SCREEN:
+#### VEJA ABAIXO O EXEMPLO DA SESSÃO SCREEN:
 
 Section "Screen"
         Identifier      "RightScreen"
