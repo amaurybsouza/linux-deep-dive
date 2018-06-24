@@ -1,6 +1,6 @@
 The following is a partial list of the used files, terms and utilities:
 
-#source (faz com que o comando seguinte seguinte, script,seja executado no bash local, e que não abra um novo bash)
+# COMANDO: source (faz com que o comando seguinte seguinte, script,seja executado no bash local, e que não abra um novo bash)
 
 
 - outra forma seria usar o . ("ponto e espaço")
@@ -22,7 +22,7 @@ o script lê e imprime o valor da variavel TESTE
  
 O valor da variavel TESTE é: valor1
 
-#alias (comando que permite criar atalhos, sinonimos de comando)
+# COMANDO: alias (comando que permite criar atalhos, sinonimos de comando)
 
 $alias dt="date + %H:%M" (criando um alias para o comando date chamado dt)
 
@@ -40,7 +40,7 @@ alias ll='ls -alF'
 alias ls='ls --color=auto'
 root@wk2001876:/home/absouza/estudo-LPI# 
 
--- no bash temos o comando function, para rotinas de comandos no Linux:
+# COMANDO: function
 
 function (usado para criar uma sequencia rotinas, de comandos, loops, if, while)
 
@@ -102,10 +102,10 @@ array=([0]="A" [1]="B" [2]="C" [3]="D")
 OBS: essas listas mostram apenas com o comando set, não está exportado.
 
 $unset array (para apagar essa lista usamos o comando unset)
-----------------------------------------------------------------------------------------------------------
 
 
--- Customização do ambiente shell:
+### Customização do ambiente shell:
+
 
 - declarar uma variavel sempre que eu fizer login no sistema
 - uma função ficar sempre disponível para um usuário ou para todos os usuários
@@ -170,7 +170,7 @@ ele abriu outro shell, nova aba tbm serve.
 --Customização e Uso do Ambiente Shell - Descrição dos Arquivos
 
 
---Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
+# Arquivos de configuração GLOBAIS, aplicados a todos os usuários:
 
 /etc/profile: Arquivo de inicialização executado durante o processo de login de todos os usuários do sistema. Em caso de processo de login, será sempre o primeiro arquivo executado.
 
@@ -183,7 +183,7 @@ ele abriu outro shell, nova aba tbm serve.
 /etc/skel/ : Todos os arquivos e diretórios presentes nesse diretório serão incluídos no diretório home de novos usuários criados no sistema.
 
 
---Arquivos de configuração LOCAIS, de cada usuário:
+# Arquivos de configuração LOCAIS, de cada usuário:
 
 ~/.bash_profile: Se existir, o arquivo é executado após o /etc/profile, durante o processo de login do usuário.
 
@@ -199,8 +199,7 @@ ele abriu outro shell, nova aba tbm serve.
 
 * As configurações globais são sempre executadas primeiro que as configurações locais. O que significa também que as locais podem "sobrescrever" as globais.
 
-
---Principais Variáveis de Ambiente
+# Principais Variáveis de Ambiente
 
 É importante conhecer a função de algumas variáveis de ambiente existentes no sistema, as principais são:
 
@@ -223,4 +222,3 @@ PS1: Aparência do prompt do shell.
 PWD: Diretório atual
 
 OLDPWD: Diretório anterior
-
