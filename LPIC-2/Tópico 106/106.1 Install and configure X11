@@ -168,7 +168,7 @@ $echo $DISPLAY (essa variavel indica onde as janelas vão ser exibidas, variavel
 $echo $DISPLAY 
 :0
 
-#xhost (programa de controle de acesso para o servidor X) *existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
+# xhost (programa de controle de acesso para o servidor X) *existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
 
 
 
