@@ -7,10 +7,7 @@ disponíveis para Linux, como gerenciadores de desktop, gerenciadores de logins,
 e editores de imagens.
 
 
-2) Hoje em dia quase todas as distros usam o X11 ou o Xorg.
-
-
-3) É importante entender que o servidor X ou o X11, é a interface gráfica mais básica do Linux, é pelo X  que se pode controlar o botão do mouse, clique do botão direito, botão esquerdo, quantos monitores estão configurados, qual a resolução, tamanho, esse tipo de configuração é tudo feito e controlado pelo servidor X.
+2) É importante entender que o servidor X ou o X11, é a interface gráfica mais básica do Linux, é pelo X  que se pode controlar o botão do mouse, clique do botão direito, botão esquerdo, quantos monitores estão configurados, qual a resolução, tamanho, esse tipo de configuração é tudo feito e controlado pelo servidor X.
 
 - Em cima de servidor X, rodam os gerenciadores de janelas, mais conhecidos como, Gnome, XFCE, KDE.
 
@@ -35,18 +32,11 @@ OBS: "nas distribuições novas esse arquivo nem existe mais, porque tudo é det
 tem suporte para monitores, teclados, mouses, tudo é automático".
 
 
+1) Para gerar o arquivo de configuração, deve executar o comando: $X -configure ou $Xorg -configure
 
-1) tem que matar o processo do Xorg que está rodando no tty7. (interface gráfica.)
+$Xorg -configure (o arquivo X é gerado no  /root)
 
-2) Entrar em outro terminal sem interface gráfica, tty1.
-
-3) depois mudar para o multi.target (systemctl isolate multi-user.target)
-
-4) Para gerar o arquivo de configuração, deve executar o comando:
-
-$Xorg -configure (o arquivo X foi gerado no  /root)
-
-5) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
+2) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
 
 
 #### ESSE ARQUIVO É DIVIDIDO EM SESSÕES E SUB-SESSÕES, VEJA ABAIXO:
@@ -141,7 +131,7 @@ xwininfo: Window id: 0x2200015 "Configurações"
 /usr/share/fonts/X11/Type1$ls f*
 fonts.dir  fonts.scale
 
--- esses dois arquivos ssão tipo um indice das fontes, o X precisa desses arquivos para referenciar e utilizar essas fontes.
+-- esses dois arquivos são tipo um indice das fontes, o X precisa desses arquivos para referenciar e utilizar essas fontes.
 
 -- para gerar esses dois arquivos utilizamos dois comandos, que são:
 
@@ -154,16 +144,23 @@ $mkfontdir (gera o arquivo fonts.dir)
 
 
 #### Estudar agora o lado do cliente do servidor. (lembrando que o X é o servidor de interface gráfica e nele rodam os clientes X
-que são aplicações do clientes do servidor X).
+#que são aplicações do clientes do servidor X).
 
 - uma observação, esse lado cliente servidor, além de poder ser utilizado localmente, é possível ser usado entre máquinas diferentes,
 eu posso a partir de uma máquina executar um programa só que esse programa ser exibido no servidor X que está em outra máquina.
 
 - nessa aula vamos fazer um teste para ver o programa rodando em uma máquina e o programa ser exibido no servidor X de outra máquina.
 
-- primeiramente vamos configurar a VM para iniciar em modo bridge, assim cada sistema ficará com um IP diferente em questão de redes.
-
 - vamos iniciar a configuração da variavel DISPLAY:
+
+-- A variável DISPLAY é dividida em duas partes. A porção antes do caractere ":" identifica a máquina (nome ou número IP) 
+A porção após o caractere ":" identifica qual o display nessa máquina.
+
+
+# EXEMPLO DE USO DA VÁRIAVEL DISPLAY:
+
+$export DISPLAY=192.168.1.3:0.0
+
 
 $echo $DISPLAY (essa variavel indica onde as janelas vão ser exibidas, variavel do shell, o shell vai identificar através da variavel DISPLAY quem deve exibir essa informação, o servidor X local ou é o servidor X de outra máquina)
 :0
