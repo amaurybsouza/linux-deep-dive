@@ -60,20 +60,3 @@ $vim /etc/X11/default-display-manager (caso eu queria mudar para outro display, 
 ### Outro funcionalidade bacana do display manager é a capacidade de trabalhar em modo cliente/servidor.
 
 - com isso podemos a partir de uma máquina conectar em outra, no display manager de outra máquina  e usar a outra máquina. 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
