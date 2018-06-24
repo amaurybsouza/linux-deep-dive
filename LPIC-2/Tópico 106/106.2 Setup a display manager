@@ -15,7 +15,7 @@ Terms and Utilities:
 - toda a tela pode ser configurada, as letras, o layout da tela.
 
 
-####Vamos olhar as configurações relacionadas ao display manager (LightDM)
+#### Vamos olhar as configurações relacionadas ao display manager (LightDM)
 
 -- a configuração que define o display manager fica em /etc/X11/default-display-manager
 
