@@ -154,7 +154,7 @@ ele abriu outro shell, nova aba tbm serve.
 
 
 
-- o /home do usuário tbm tem outros arquivos importantes, que são:
+# O /home do usuário tbm tem outros arquivos importantes, que são:
 
 .bash_logout (o que tem nesse arquivo será executado toda vez que o usuário fizer logout)
 
