@@ -272,6 +272,7 @@ done
 
 -----------------------------------------------------------------------------------------------
 
+
 # Váriaveis especiais do Linux:
 
 Os argumentos passados para um script e outras informações úteis são retornados pela variável especial $x, em que x determina que valor retornar:
