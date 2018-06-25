@@ -1,6 +1,6 @@
 Terms and Utilities:
 
-#O que é um script?
+# O que é um script?
 
 - É um arquivo texto que vai conter uma sequência de comandos, de operações, loops que vc executar a ação que o administrador deseja.
 
@@ -28,7 +28,7 @@ $chmod +x  primeiro-script.sh
 
 $./vim primeiro-script.sh (dessa forma ele vai abrir um novo bash, executar e retornar o valor)
 
-- existe um outra opção, que é o comando exec:
+# COMANDO EXEC:
 
 $exec ./primeiro-script (esse comando executa o script, e ele vai fechar a minha sessão atual)
 
@@ -41,7 +41,7 @@ PATH="$HOME/estudolpi:$HOME/.local/bin:$PATH" (adicionar o $HOME/estudolpi no ar
 
 $cd /etc
 
-etc$ primeiro-script.sh (o script é executado porque eu defini na váriave PATH o caminho do meu script)
+etc$ primeiro-script.sh (o script é executado porque eu defini na váriavel PATH o caminho do meu script)
 
 
 
@@ -49,11 +49,11 @@ etc$ primeiro-script.sh (o script é executado porque eu defini na váriave PATH
 
 - exemplo: poderia usar no começo do script, #!/bin/csh, #!/bin/perl 
 
-#parâmetros no shell ()
+# Parâmetros no shell ()
 
 - posso usar no meu script um parametro, veja abaixo:
 
-$ ./primeiro-script.sh 10 20 (10 e 20 seriam os parametros)
+$ ./primeiro-script.sh 10 20      (10 e 20 seriam os parametros)
 
 #!/bin/bash
 clear
@@ -84,7 +84,7 @@ Swap:          2047           0        2047
 
 fim do script
 
--- outro exemplo usando o script mas agora usando o comando read:
+# COMANDO READ (solicitar valores do usuário durante a execução do script)
 
 #!/bin/bash
 clear
