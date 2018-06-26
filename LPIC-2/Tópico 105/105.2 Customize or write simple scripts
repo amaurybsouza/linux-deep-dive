@@ -47,7 +47,9 @@ etc$ primeiro-script.sh (o script é executado porque eu defini na váriavel PAT
 
 -- lembrando que para o script entender qual o she-bang que eu estou utilizando, é necessário no inicio do script, adicionar se é um bin/bash ou ksh ou csh...
 
-- exemplo: poderia usar no começo do script, #!/bin/csh, #!/bin/perl 
+- exemplo: poderia usar no começo do script, #!/bin/csh, #!/bin/perl, #!/bin/sed 
+
+
 
 # Parâmetros no shell ()
 
@@ -84,6 +86,8 @@ Swap:          2047           0        2047
 
 fim do script
 
+
+
 # COMANDO READ (solicitar valores do usuário durante a execução do script)
 
 #!/bin/bash
@@ -99,11 +103,11 @@ echo "o valor digitado foi $VAR1"    (esse valor ficara armazenado nessa váriav
 echo ""
 echo "fim do script"
 
--- outro exemplo usando o script mas agora usando váriaveis e passando valores nesses váriaveis:
+# Usando váriaveis e passando valores nessas váriaveis:
 
 1) Não é necessário declarar o tipo de váriavel, isso não tem  no shell.
 
-2) Passando comandos dentro da váriavel, feito isso no script (VAR4=`cat /etc/passwd | wc -l`)
+2) Passando comandos dentro da váriavel, feito isso no script (VAR4=`cat /etc/passwd | wc -l`) ou usar o $(comando1)
 
 #!/bin/bash
 clear
@@ -126,7 +130,7 @@ echo "fim do script"
 
 
 
--- Customização de shell script com if - Case - teste
+#  Customização de shell script com if - Case - teste
 
 - Vamos olhar o script feito pelo sistema, que é o arquivo /etc/profile:
   - blocos de if no /etc/profile
