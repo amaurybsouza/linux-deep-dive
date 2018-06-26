@@ -2,7 +2,11 @@ Terms and Utilities:
 
 -- Começando o conteudo vendo os bancos de dados que existem na nossa aplicação:
 
-$mysqlshow (mostra os bancos de dados existentes)
+
+# COMANDO MYSQLSHOW  (mostra os bancos de dados do sistema)
+
+
+$mysqlshow;
 +--------------------+
 |     Databases      |
 +--------------------+
@@ -18,7 +22,11 @@ $mysqlshow (mostra os bancos de dados existentes)
 
 $mysql employees -u root (conecta no banco e cai na interface do MariaDB)
 
-MariaDB [employees]> show tables; (mostra as tabelas existentes)
+
+# COMANDO SHOW TABLES (mostra as tabelas existentes)
+
+
+$show tables;
 +----------------------+
 | Tables_in_employees  |
 +----------------------+
@@ -32,10 +40,11 @@ MariaDB [employees]> show tables; (mostra as tabelas existentes)
 | titles               |
 +----------------------+
 
--- vamos começar usando o comando SELECT, usando a tabela departments:
-- antes de começar vamos descrever a estrutura da tabela departments, usando a sintaxe:
 
-MariaDB [employees]> describe departments;
+# COMANDO DESCRIBE (descreve a estrutura de uma tabela)
+
+
+$describe departments;
 +-----------+-------------+------+-----+---------+-------+
 | Field     | Type        | Null | Key | Default | Extra |
 +-----------+-------------+------+-----+---------+-------+
@@ -43,11 +52,14 @@ MariaDB [employees]> describe departments;
 | dept_name | varchar(40) | NO   | UNI | NULL    |       |
 +-----------+-------------+------+-----+---------+-------+
 
-- sempre usar ; no fim do comando.
-- abaixo está sendo mostrado o nome de dois departamentos da tabela departments.
-- podemos usar o * para mostrar todos os campos da tabela departments.
 
-MariaDB [employees]> select dept_no , dept_name from departments;
+# COMANDO SELECT (seleciona campos de uma tabela, colunas de todas as linhas de uma tabela)
+
+# Sintaxe: SELECT <CAMPOS> FROM <TABELA> WHERE <CONDIÇÂO>
+
+
+
+$select dept_no , dept_name from departments;
 +---------+--------------------+
 | dept_no | dept_name          |
 +---------+--------------------+
@@ -62,7 +74,9 @@ MariaDB [employees]> select dept_no , dept_name from departments;
 | d007    | Sales              |
 +---------+--------------------+
 
-MariaDB [employees]> select * from departments;
+-- selecionando todos os campos da tabela departments:
+
+$select * from departments;
 +---------+--------------------+
 | dept_no | dept_name          |
 +---------+--------------------+
@@ -77,9 +91,9 @@ MariaDB [employees]> select * from departments;
 | d007    | Sales              |
 +---------+--------------------+
 
-- se eu quiser delimitar os campos, eu posso usar o "limit" e passar o número, por exemplo 5, veja abaixo.
+-- se eu quiser delimitar os campos, eu posso usar o "limit" e passar o número, por exemplo 5, veja abaixo.
 
-MariaDB [employees]> select * from departments limit 5;
+$select * from departments limit 5;
 +---------+------------------+
 | dept_no | dept_name        |
 +---------+------------------+
@@ -90,7 +104,7 @@ MariaDB [employees]> select * from departments limit 5;
 | d001    | Marketing        |
 +---------+------------------+
 
-- consultando a tabela employees, com limit 10 setado:
+-- consultando a tabela employees, com limit 10 setado:
 
 MariaDB [employees]> select * from employees limit 10;
 +--------+------------+------------+-----------+--------+------------+
