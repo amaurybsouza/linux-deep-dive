@@ -804,12 +804,42 @@ MariaDB [employees]> select * from departments;
 | d007    | Sales              |
 +---------+--------------------+
 
-insert aprendido
-update aprendido
-select aprendido
+
+### REVISANDO OS COMANDOS APRENDIDOS NA AULA:
+
+
+# INSERT (insere registros em uma tabela)
+ 
+ - Sintaxe: INSERT INTO <TABELA> (<CAMPO1>, <CAMPO2>) VALUES 
+ 
+ - Exemplo: $insert into LPIC1 (Candidato, Nota) values ('Linux Torvalds', 750);
+
+
+# UPDATE (atualiza os campos de uma tabela)
+ 
+ - Sintaxe: UPDATE <TABELA> SET <RELAÇÂO CAMPO/VALOR> WHERE <CONDIÇÂO>  
+ 
+ - Exemplo 1: $update cliente set  telefone  = '3256-2366' where id = 2; 
+ - Exemplo 2: update client set telefone = '2366-9955', nome = 'Nielson Siqueira' where id = 2; 
+
+
+# SELECT (seleciona dados de uma tabela, podendo ser utilizado com o where)
+
+ - Sintaxe: SELECT <CAMPOS> FROM <TABELA> WHERE <CONDIÇÂO>
+ 
+ - Exemplo 1: $select id, nome from cliente;
+ - Exemplo 2: $select nome from cliente where  id = 2;
+
+
 delete aprendido
+
 from aprendido
+
 where aprendido
+
 group by aprendido
+
 order by aprendido
+
+
 join aprendido
