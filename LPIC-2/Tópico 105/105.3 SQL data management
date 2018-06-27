@@ -53,7 +53,7 @@ $describe departments;
 +-----------+-------------+------+-----+---------+-------+
 
 
-# COMANDO SELECT (seleciona campos de uma tabela, colunas de todas as linhas de uma tabela)
+# COMANDO SELECT (seleciona campos de uma tabela, mostra colunas, linhas de uma tabela)
 
 # Sintaxe: SELECT <CAMPOS> FROM <TABELA> WHERE <CONDIÇÂO>
 
@@ -74,7 +74,7 @@ $select dept_no , dept_name from departments;
 | d007    | Sales              |
 +---------+--------------------+
 
--- selecionando todos os campos da tabela departments:
+1) Selecionando todos os campos da tabela departments:
 
 $select * from departments;
 +---------+--------------------+
@@ -91,7 +91,7 @@ $select * from departments;
 | d007    | Sales              |
 +---------+--------------------+
 
--- se eu quiser delimitar os campos, eu posso usar o "limit" e passar o número, por exemplo 5, veja abaixo.
+2) Se eu quiser delimitar os campos, eu posso usar o "limit" e passar o número, por exemplo 5, veja abaixo.
 
 $select * from departments limit 5;
 +---------+------------------+
@@ -104,9 +104,9 @@ $select * from departments limit 5;
 | d001    | Marketing        |
 +---------+------------------+
 
--- consultando a tabela employees, com limit 10 setado:
+3) Consultando a tabela employees, com limit 10 setado:
 
-MariaDB [employees]> select * from employees limit 10;
+$select * from employees limit 10;
 +--------+------------+------------+-----------+--------+------------+
 | emp_no | birth_date | first_name | last_name | gender | hire_date  |
 +--------+------------+------------+-----------+--------+------------+
@@ -122,9 +122,9 @@ MariaDB [employees]> select * from employees limit 10;
 |  10010 | 1963-06-01 | Duangkaew  | Piveteau  | F      | 1989-08-24 |
 +--------+------------+------------+-----------+--------+------------+
 
-- mostrando a estrutura da tabela employees:
+4) Mostrando a estrutura da tabela employees:
 
-MariaDB [employees]> describe employees;
+$describe employees;
 +------------+---------------+------+-----+---------+-------+
 | Field      | Type          | Null | Key | Default | Extra |
 +------------+---------------+------+-----+---------+-------+
@@ -136,9 +136,13 @@ MariaDB [employees]> describe employees;
 | hire_date  | date          | NO   |     | NULL    |       |
 +------------+---------------+------+-----+---------+-------+
 
-- contando quantos registros/linhas eu tenho na tabela employees:
 
-MariaDB [employees]> select count(*) from employees;
+# COMANDO COUNT: (faz a contagem de determinados dados)
+
+
+1) Contando quantos registros/linhas eu tenho na tabela employees:
+
+$select count(*) from employees;
 +----------+
 | count(*) |
 +----------+
@@ -269,8 +273,7 @@ MariaDB [employees]> select * from employees where hire_date > "1999-01-01" and 
 | 495878 | 1958-10-26 | Saeed         | Kaiserswerth  | F      | 1999-06-26 |
 | 499361 | 1963-01-23 | Sandeepan     | Solares       | F      | 1999-11-30 |
 +--------+------------+---------------+---------------+--------+------------+
-
-- 
+ 
 
 MariaDB [employees]> select * from employees where hire_date > "1999-01-01" AND hire_date < "1999-06-01" AND gender = "F" and first_name like "s%";
 +--------+------------+---------------+---------------+--------+------------+
