@@ -840,4 +840,8 @@ group by aprendido
 order by aprendido
 
 
-join aprendido
+# JOIN (consulta dados em duas ou mais Tabelas no MySQL)
+
+ - Sintaxe: SELECT colunas FROM tabela1 INNER JOIN tabela2 ON tabela1.coluna=tabela2.coluna; 
+ 
+ - Exemplo: select * from tabela_livro inner join  tabela_autores on tabela_livro.ID_Autor = tabela_autores.ID_Autor; 
