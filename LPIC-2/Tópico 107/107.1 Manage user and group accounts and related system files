@@ -1,15 +1,44 @@
 Terms and Utilities:
 
-/etc/passwd
-/etc/shadow
-/etc/group
-/etc/skel/
-chage
-getent
-groupadd
-groupdel
-groupmod
-passwd
-useradd
-userdel
+- cada usuário tem a sua conta, sua informação de login e temos os grupos que nada mais são que os grupos de usuários.
+
+- grupos são entidades que reunem usuários.
+
+- cada usuário tem seu grupo padrão, e cada usuário pode estar em vários grupos secundários.
+
+
+
+
+
+
+
+#/etc/passwd (arquivo que faz os registros de usuários no sistema)
+
+
+
+#/etc/shadow
+
+#/etc/group
+
+#/etc/skel/
+
+#chage
+
+#getent
+
+#groupadd
+
+#groupdel
+
+#groupmod
+
+#passwd
+
+#useradd
+
+#userdel
+
+
+
+
 usermod
