@@ -6,18 +6,21 @@ Terms and Utilities:
 
 - cada usuário tem seu grupo padrão, e cada usuário pode estar em vários grupos secundários.
 
-#/etc/passwd (arquivo que faz os registros de usuários no sistema)
+#/etc/passwd (informações de contas de usuários do sistema)
 
 - principal arquivo que contem os usuários do sistema.
 - cada usuário é representado por uma linha.
 - por campos separados por dois pontos (:)
 - cada usuário tem o seu ID (3º campo)
 - cada usuário tem o GID (4º campo, ID do grupo padrão).
-- o usuário root terá sempre o ID 0.
+- o usuário root terá sempre o ID e o GID 0.
 - nesse arquivo existem diversos usuários do sistema, de aplicações que precisam de usuários para rodar.
-  - um exemplo é o deamon (processo deamon fica sempre em execução provendo algum serviço).
+  - um exemplo é o daemon (processo daemon fica sempre em execução provendo algum serviço).
   - usuário: amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash 
   - os usuários normais estão usando o ID a partir de 1000, sempre que criar um usuário novo ele vai ter ID a partir de 1000.
+  - antes de 1000 são ID's de sistema, 500 sao ID de sistemas e a partir de 1000  são de usuários normais.
+
+-- Estudando cada campo, a linha de um usuário do arquivo /etc/passwd:
 
 
 
