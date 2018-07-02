@@ -8,15 +8,33 @@ Terms and Utilities:
 
 #/etc/passwd (informações de contas de usuários do sistema)
 
-- principal arquivo que contem os usuários do sistema.
-- cada usuário é representado por uma linha.
+      - Formato do arquivo: root:x:0:0:root:/root:/bin/bash
+      - amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
+- Cada usuário é representado por uma linha e em campos separados por (:) respectivamente:
+
+1 . Nome de Login;
+2. Senha ( "x" quando usando o arquivo /etc/shadow) ;
+3. Número de identificação do usuário (UID) ;
+4. Número do grupo principal do usuário (GID) ;
+5. Descrição do usuário (opcional) ;
+6. Diretório pessoal para o usuário;
+7. Shell inicial do usuário (se vazio, o arquivo padrão /bin/sh será usado) .
+
+
+
+
+
+
+
+
+
 - por campos separados por dois pontos (:)
 - cada usuário tem o seu ID (3º campo)
 - cada usuário tem o GID (4º campo, ID do grupo padrão).
 - o usuário root terá sempre o ID e o GID 0.
 - nesse arquivo existem diversos usuários do sistema, de aplicações que precisam de usuários para rodar.
   - um exemplo é o daemon (processo daemon fica sempre em execução provendo algum serviço).
-  - usuário: amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash 
   - os usuários normais estão usando o ID a partir de 1000, sempre que criar um usuário novo ele vai ter ID a partir de 1000.
   - antes de 1000 são ID's de sistema, 500 sao ID de sistemas e a partir de 1000  são de usuários normais.
 
