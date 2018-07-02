@@ -86,12 +86,18 @@ de aplicações que precisam de usuários para rodar.
 
 #groupmod
 
-#passwd
 
 
+
+#passwd (muda a senha do usuário do sistema)
+
+1) Exemplo de uso: $passwd usuario5
+
+2) Só root pode trocar a senha de outro usuário, informando o nome do usuário na frente.
+
+#adduser (esse comando é um script que existe nas distribuições Linux) -- NÃO CAI NA PROVA.
 
 ### COMANDOS PARA GESTÃO DE USUÁRIOS NO SISTEMA:
-
 
 #useradd (adiciona um usuário no sistema)
 
@@ -153,6 +159,7 @@ Opções:
 2) Exemplo de uso: $usermod -c "Amaury B. Souza" usuario5  -- olhando o arquivo /etc/passwd, veremos:
 
 amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
 
 3) Definindo o shell do usuário Amaury para /bin/ksh:
 
