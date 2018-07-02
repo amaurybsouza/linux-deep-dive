@@ -1,7 +1,8 @@
 Terms and Utilities:
 
 
-# CONCEITOS INICIAIS:
+# PRINCIPAIS ARQUIVOS DE GESTÃO DE USUÁRIOS:
+
 
 - cada usuário tem a sua conta, sua informação de login e temos os grupos que nada mais são que os grupos de usuários.
 - grupos são entidades que reunem usuários.
@@ -72,21 +73,50 @@ de aplicações que precisam de usuários para rodar.
 - /etc/gshadow
 - /etc/login.defs
 
-
-
 #/etc/skel/
+
+
+
+### COMANDOS PARA GESTÃO DE GRUPOS DO SISTEMA:
+
 
 #chage
 
 #getent
 
-#groupadd
-
-#groupdel
-
-#groupmod
 
 
+
+#groupadd (cria grupo de usuários no sistema)
+
+1) Criando um grupo chamado suporte: 
+
+$groupadd suporte
+
+2) Criando um grupo chamado dev com GID 2000: 
+
+$groupadd -g 2000 dev 
+
+
+#groupdel (para deletar, excluir um grupo usamos esse comando)
+
+1) Apagando um grupo chamado dev:
+
+$groupdel dev
+
+
+#groupmod (modifica as configurações de um grupo)
+
+1) Alterando o nome de um grupo do sistema para devops:
+
+$groupmod -n devops suporte
+
+2) Alterando o GID do grupo dev para 2001:
+
+$groumod -g 2001 dev
+
+
+### COMANDOS PARA GESTÃO DE USUÁRIOS NO SISTEMA:
 
 
 #passwd (muda a senha do usuário do sistema)
@@ -97,7 +127,6 @@ de aplicações que precisam de usuários para rodar.
 
 #adduser (esse comando é um script que existe nas distribuições Linux) -- NÃO CAI NA PROVA.
 
-### COMANDOS PARA GESTÃO DE USUÁRIOS NO SISTEMA:
 
 #useradd (adiciona um usuário no sistema)
 
@@ -164,3 +193,30 @@ amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
 3) Definindo o shell do usuário Amaury para /bin/ksh:
 
 $usermod -s /bin/ksh amaury
+
+
+4) Adicionando o usuário5 nos grupos adicionais devops e qateam:
+
+$usermod -a -G devops usuario5   (opção -a: adiciona em um grupo a mais, sem remover do grupo anterior)
+
+
+5) Adicionando o usuario1 no grupo adicional devops:
+
+$ usermod -G devops usuario1
+
+- Vendo o arquivo /etc/group: devops:x:3001:usuario5,usuario1
+- enquanto que no arquivo /etc/passwd o grupo padrão dele é o 3002,  usuario1:x:3000:3002:Nome do Usuario:/home/usuario1:/bin/bash
+- Um usuário pode estar em mais de grupo ao mesmo tempo e um grupo pode estar em vários usuários.
+
+
+6) Adicionando um usuário no grupo padrão: 
+
+-g: grupo padrão.
+-G: grupos adicionais.
+
+$usermod -g suporte usuario5
+
+- Usando o  comando ls -l podemos observar:
+
+$ls -l
+-rw-r--r-- 1 usuario5 suporte 0 Mai 12 17:16 teste3
