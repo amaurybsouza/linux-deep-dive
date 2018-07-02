@@ -88,11 +88,55 @@ de aplicações que precisam de usuários para rodar.
 
 #passwd
 
-#useradd
-
-#userdel
 
 
+### COMANDOS PARA GESTÃO DE USUÁRIOS NO SISTEMA:
 
 
-usermod
+#useradd (adiciona um usuário no sistema)
+
+- Esse comando não define a senha do usuário.
+- O shell padrão do useradd é o /bin/sh.
+
+
+1) $useradd usuario1 (cria um usuário no sistema)
+
+2) $useradd -c "Nome do usuário" -s /bin/bash usuario2
+
+3) Opções do useradd:
+
+-d : homedir do usuário.
+-s : shell que o usuário vai usar.
+-c : descrição (comentários).
+-m : cria o diretório /home.
+-u : especifica um UID.
+-g : especifica um grupo primário.
+-G : relaciona o usuário a grupos.
+-k : escolhe um diretório de skel alternativo.
+-e : cria o usuário com data para sua conta expirar.
+
+4) Exemplos do comando useradd:
+
+- Criando um usuário com login user1, homedir /home/user1, shell /bin/bash e nome “Operador 1”:
+  
+  $useradd –m –d /home/user1 –s /bin/bash –c “Operador 1” user1
+
+- Criando usuário webmaster com UID 1400, grupo primário cdrom, grupos relacionados audio e backup, shell /bin/bash e homedir /var/www/webmaster:
+  
+  $useradd –m –d /var/www/webmaster –u 1400 –g cdrom –G audio,backup –s /bin/bash webmaster
+
+- Criando usuário user2 com data de expiração da conta para 10/12/2016, sem uso de shell e com diretório de skel alternativo /dados :
+  
+  $useradd –m –s /bin/false –e 2016-12-10 –k /dados user2
+
+
+#userdel (remove um usuário do sistema)
+
+
+
+
+
+
+
+
+#usermod (alterar as configurações de um usuário do sistema)
