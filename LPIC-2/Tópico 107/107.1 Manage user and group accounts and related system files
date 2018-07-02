@@ -133,10 +133,27 @@ de aplicações que precisam de usuários para rodar.
 #userdel (remove um usuário do sistema)
 
 
+1) $userdel usuario1 (remove esse usuário do sistema).
+   
+   - esse comando não apaga o /home do usuário, ele apaga dos arquivos (passwd, shadow e group)
+   - isso é para evitar que o administrador de sistemas não apague os dados de usuário por erros, o /home sempre prevalece.
 
+2) $userdell -r usuario1 (removendo todos os registros do usuario, inclusive o /home)
 
+Opções:
 
-
+-r: remove o diretório padrão do usuário (/home/).
 
 
 #usermod (alterar as configurações de um usuário do sistema)
+
+
+
+
+
+
+
+
+
+
+
