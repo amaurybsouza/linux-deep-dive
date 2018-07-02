@@ -1,54 +1,78 @@
 Terms and Utilities:
 
+
+# CONCEITOS INICIAIS:
+
 - cada usuário tem a sua conta, sua informação de login e temos os grupos que nada mais são que os grupos de usuários.
-
 - grupos são entidades que reunem usuários.
-
 - cada usuário tem seu grupo padrão, e cada usuário pode estar em vários grupos secundários.
 
-#/etc/passwd (informações de contas de usuários do sistema)
 
-      - Formato do arquivo: root:x:0:0:root:/root:/bin/bash
+#/etc/passwd (informações de contas de usuários do sistema) ***arquivo principal que registra todos os usuários***
+
+1)    - Formato do arquivo: root:x:0:0:root:/root:/bin/bash
       - amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
 
-- Cada usuário é representado por uma linha e em campos separados por (:) respectivamente:
+2) Cada usuário é representado por uma linha e em campos separados por (:) respectivamente:
 
-1 . Nome de Login;
-2. Senha ( "x" quando usando o arquivo /etc/shadow) ;
-3. Número de identificação do usuário (UID) ;
-4. Número do grupo principal do usuário (GID) ;
-5. Descrição do usuário (opcional) ;
-6. Diretório pessoal para o usuário;
-7. Shell inicial do usuário (se vazio, o arquivo padrão /bin/sh será usado) .
+- Nome de Login;
+- Senha ( "x" quando usando o arquivo /etc/shadow);
+- Número de identificação do usuário (UID);
+- Número do grupo principal do usuário (GID);
+- Descrição do usuário (opcional);
+- Diretório pessoal para o usuário; (/home/usuário)
+- Shell inicial do usuário (normalmente é o /bin/bash)
 
-
-
-
+obs: quando tiver /bin/false (ID de sistemas), não consegue logar, porque não existe shell para interagir.
 
 
-
-
-
-- por campos separados por dois pontos (:)
-- cada usuário tem o seu ID (3º campo)
-- cada usuário tem o GID (4º campo, ID do grupo padrão).
-- o usuário root terá sempre o ID e o GID 0.
-- nesse arquivo existem diversos usuários do sistema, de aplicações que precisam de usuários para rodar.
-  - um exemplo é o daemon (processo daemon fica sempre em execução provendo algum serviço).
-  - os usuários normais estão usando o ID a partir de 1000, sempre que criar um usuário novo ele vai ter ID a partir de 1000.
-  - antes de 1000 são ID's de sistema, 500 sao ID de sistemas e a partir de 1000  são de usuários normais.
-
--- Estudando cada campo, a linha de um usuário do arquivo /etc/passwd:
+3) O usuário root terá sempre o UID e o GID 0. Nesse arquivo existem diversos usuários do sistema, 
+de aplicações que precisam de usuários para rodar.
+  a) um exemplo é o daemon (processo daemon fica sempre em execução provendo algum serviço).
+  b) os usuários normais estão usando o ID a partir de 1000, sempre que criar um usuário novo ele vai ter ID a partir de 1000.
+  c) antes de 1000 são ID's de sistema, antes de 500 são UID de sistemas e a partir de 1000  são de usuários normais.
+  d) posso alterar manualmente o arquivo /etc/passwd, mas existem comandos que fazem isso e é a melhor prática.
 
 
 
+#/etc/shadow (arquivo que contem as senhas dos usuários)
+
+1) - cada usuário também possui uma linha, separada por (:)
+   - Formato: amaury:$6$XjkKHhLB$BeLhnGULz/sjkisB3Captti04gbiGR5VyAedRGONxU1AmOxw1nhpLDmUCqrOIyZqDmQeVXYGmmLQ1MKwDz/YM.:17649:0:99999:7:::
+   
+- Nome do usuário;
+- hash com a senha do usuário; (quando é criada a senha o sistema transforma a senha nesse hash)
+- vai ter também algumas configurações como (data de expiração da senha, data de troca da senha)
 
 
 
+#/etc/group (equivalente ao /etc/passwd mas para grupos, tem os grupos, ID's e os usuários que pertencem aos grupos)
 
-#/etc/shadow
+1) - Formato do arquivo: amaury:x:1000:
 
-#/etc/group
+- Nome do grupo;
+- Senha do grupo;
+- ID do grupo
+- e por último os usuários que pertencem a esse grupo (sambashare:x:126:amaury)
+
+2) O arquivo /etc/group também tem o arquivo de senhas dele, que é o arquivo /etc/gshadow
+
+3) Outro arquivo importante é o arquivo: /etc/login.defs
+   
+   a) esse arquivo tem as definições de logins de cada usuário.
+   b) tem a definição dos ID dos usuparios, posso configurar de 1000 para 2000 e o UID máximo. 
+   c) tem um parãmetro chamado CREATE HOME, essa config faz com que seja criado o /home de todos os usuarios do sistema, adicionar o "yes".
+
+
+### REVISANDO OS ARQUIVOS PRINCIPAIS:
+
+- /etc/passwd
+- /etc/shadow
+- /etc/group
+- /etc/gshadow
+- /etc/login.defs
+
+
 
 #/etc/skel/
 
