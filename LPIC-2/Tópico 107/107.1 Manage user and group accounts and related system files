@@ -145,15 +145,15 @@ Opções:
 -r: remove o diretório padrão do usuário (/home/).
 
 
-#usermod (alterar as configurações de um usuário do sistema)
+#usermod (alterar as configurações de uma conta de usuário do sistema)
+
+1) Neste comando eu posso definir um comentário de um usuário do sistema, muda o home, o grupo, o shell e o UID.
 
 
+2) Exemplo de uso: $usermod -c "Amaury B. Souza" usuario5  -- olhando o arquivo /etc/passwd, veremos:
 
+amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
 
+3) Definindo o shell do usuário Amaury para /bin/ksh:
 
-
-
-
-
-
-
+$usermod -s /bin/ksh amaury
