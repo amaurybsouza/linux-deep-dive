@@ -116,6 +116,27 @@ $groupmod -n devops suporte
 $groumod -g 2001 dev
 
 
+#newgrp (faz com que o usuário assuma um novo grupo da qual ele faz parte) *** um usuário pode estar em vários grupos, com esse comando eu posso assumir um novo grupo.
+
+$newgrp devops (o usuario5 faz parte tbm do grupo devops e agora está navegando entre esses grupos).
+
+- quando eu criar um novo arquivo no sistema, ele assume um grupo secundário no qual ele faz parte. 
+
+$touch teste6
+
+$ls -l teste6
+-rw-r--r-- 1 usuario5 devops  0 Mai 12 17:22 teste6
+
+
+#gpasswd (adiciona uma senha para um grupo e o usuário pode acessar esse grupo com a senha)
+
+$gpasswd dev  (criando um senha para  grupo dev)
+
+- olhando o arquivo /etc/gshadow é possível ver que existe uma senha para o grupo dev.
+- se um usuario do sistema quiser entrar e assumir as permissões do grupo dev, ele tem que usar "newgrp dev"  e por a senha.
+
+
+
 ### COMANDOS PARA GESTÃO DE USUÁRIOS NO SISTEMA:
 
 
