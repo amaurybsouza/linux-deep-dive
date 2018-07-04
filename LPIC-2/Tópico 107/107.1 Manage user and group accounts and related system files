@@ -73,7 +73,9 @@ de aplicações que precisam de usuários para rodar.
 - /etc/gshadow
 - /etc/login.defs
 
-#/etc/skel/
+#/etc/skel/ (todos os arquivos e diretórios que estão dentro do /etc/skel, vão ser fazer parte da base de novos usuários que serão criados no sistema, os arquivos vão ser colocados no /home do usuário que eu criar)
+
+- se eu quiser adicionar uma configuração especifíca eu posso por no diretório /etc/skel, que ele vai criar para todos os usuários do sistema.
 
 
 ### COMANDOS PARA VER OS ID's DOS USUÁRIOS E GRUPOS DO SISTEMA:
