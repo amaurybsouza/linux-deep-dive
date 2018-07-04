@@ -76,15 +76,81 @@ de aplicações que precisam de usuários para rodar.
 #/etc/skel/
 
 
+### COMANDOS PARA VER OS ID's DOS USUÁRIOS E GRUPOS DO SISTEMA:
+
+
+#id (mostra o UID do usuário, GID e os grupos do qual faz parte o usuário).
+
+1) Exemplo de uso do comando id:
+
+$id amaury 
+uid=1000(amaury) gid=1000(amaury) grupos=1000(amaury),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)
+
+#groups (mostra os grupos de um usuário do sistema)
+
+1) Exemplo de uso do comando groups:
+
+$groups amaury 
+amaury : amaury adm cdrom sudo dip plugdev lpadmin sambashare
+
+
+#getent (mostra informações de um usuário, grupo)
+
+1) Exemplo de uso do comando getent:
+
+$getent passwd amaury
+amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
+$getent group amaury
+amaury:x:1000:
+
+#chage (mostra  as propriedades do usuário)
+
+- com esse comando posso alterar quando a senha vai expirar.
+- quando a conta fica inativa.
+
+---- Opções do comando chage:
+-l: Lista as definições atuais
+-d DATA: Define forçadamente a data da última mudança de senha. -d0 força a expiração da senha
+-E DATA: Define a data de expiração da conta
+-I dias: Define o número de dias entre a data da expiração da senha e a desativação da conta
+-m dias: Número mínimo de dias entre as trocas de senha
+-M dias: Máximo de dias para a alteração de senha. Ou validade da senha.
+-W dias: Define a partir de quantos dias antes da expiração da senha o usuário receberá avisos
+
+1) Comando padrão é:
+
+$chage -l amaury 
+Última mudança de senha					: abr 28, 2018
+Senha expira					: nunca
+Senha inativa					: nunca
+Conta expira						: nunca
+Número mínimo de dias entre troca de senhas		: 0
+Número máximo de dias entre troca de senhas		: 99999
+Número de dias de avisos antes da expiração da senha	: 7
+
+2) Alterando para que a senha do usuário expire 10 dias após a troca da senha:
+
+$chage -M 10 usuario6
+
+3) Alterando para que o usuário possa trocar a senha apenas uma vez por dia:
+
+$chage -m1 usuario6
+
+4) Alterando para que a conta do usuário expire na data de hoje:
+
+$chage -E "2017-05-12" usuario6
+
+5) Tirando a data de expiração da conta do usuário:
+
+$chage -E -1 usuario6
+
+6) Forçando para que o usuário troque a senha no próximo login:
+
+$chage -d 0 usuario6
+
 
 ### COMANDOS PARA GESTÃO DE GRUPOS DO SISTEMA:
-
-
-#chage
-
-#getent
-
-
 
 
 #groupadd (cria grupo de usuários no sistema)
@@ -149,6 +215,7 @@ $gpasswd dev  (criando um senha para  grupo dev)
 #adduser (esse comando é um script que existe nas distribuições Linux) -- NÃO CAI NA PROVA.
 
 
+
 #useradd (adiciona um usuário no sistema)
 
 - Esse comando não define a senha do usuário.
@@ -157,13 +224,13 @@ $gpasswd dev  (criando um senha para  grupo dev)
 
 1) $useradd usuario1 (cria um usuário no sistema)
 
-2) $useradd -c "Nome do usuário" -s /bin/bash usuario2
+2) $useradd -c "Nome do usuário" -s /bin/bash usuario2 (cria um usuário com descrição e setando o shell como bash)
 
 3) Opções do useradd:
 
 -d : homedir do usuário.
 -s : shell que o usuário vai usar.
--c : descrição (comentários).
+-c : comentários / nome completo do usuário.
 -m : cria o diretório /home.
 -u : especifica um UID.
 -g : especifica um grupo primário.
