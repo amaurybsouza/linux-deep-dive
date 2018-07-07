@@ -1,0 +1,78 @@
+Terms and Utilities:
+
+#/etc/fstab (contem as configurações de montagem de volumes)
+
+Sintaxe: dispositivo, ponto de montagem, tipo, opções, dump e ordem de checagem (6 entradas)
+
+Opções de montagem
+ro : monta o volume com permissão de apenas leitura para todos.
+rw : monta o volume com permissão de leitura e grevação para todos.
+auto : monta automaticamente o volume assim que o arquivo /etc/fstab for relido.
+noauto : neste caso, o volume precisaria ser montado manualmente através do
+comando mount.
+dev : o volume pode abrigar arquivos especiais.
+nodev : o contrário de dev.
+exec : o volume permite que sejam executados programas dentro do volume
+(permissão x em arquivos).
+noexec : o contrário de exec.
+suid : permite que permissões especiais aplicadas a arquivos e diretórios tenham
+efeito.
+nosuid : o contrário de suid.
+user : permite que o usuário comum monte o volume e apenas aquele que montou
+pode desmontar o mesmo.
+users : qualquer usuário monta e desmonta o volume.
+nouser: proíbe que qualquer usuário não-root monte ou desmonte o volume.
+async : entrada e saída assíncrona de gravação e escrita no volume.
+sync : o contrário de async.
+defaults : é o mesmo que as opções rw,auto,suid,nouser,async e exec juntas.
+loop : alvo é um arquivo loop.
+guest : mounta como convidado, em caso de montar volumes CIFS.
+
+#/media/ (diretório onde ficam  montadas todas as midias removiveis como pendrive, DVD, CD)
+
+#mount (monta um sistema de arquivos)
+
+Sintaxe:
+$mount <opções> <volume> <ponto de montagem>
+- são alterações temporárias no sistema, para ser permanente tem que montar com /etc/fstab
+- mount -a: monta tudo que está no arquivo /etc/fstab
+- umount -a: desmonta tudo que está no arquivo /etc/fstab
+- no comando mount pasaar as opções no momento da montagen, usando a opção  -t  para sistemas de arquivos e -o para opção de montagem.
+
+Opções:
+-a : monta todo volume com opção ‘auto’ em /etc/fstab.
+-v : verbose.
+-r : monta como apenas leitura.
+-w : monta como leitura e gravação.
+-o : especifica as opções de montagem.
+
+Exemplos:
+
+$ mkdir /tmp/teste_mount
+$ mount /dev/sdb2 /tmp/teste_mount
+
+Montando o volume /dev/sdb1, formatado como vfat, em /dados, em modo
+verbose:
+$mount –t vfat –v /dev/sdb1 /dados
+
+Montando o volume /dev/sdb2, que é ext3, em /backup como leitura e gravação,
+sem verbose:
+$mount –t ext3 –w /dev/sdb2 /backup
+
+#umount (desmonta um sistema de arquivos)
+
+Exemplos: 
+
+Desmontando o volume /dev/sdb3:
+$umount /dev/sdb3
+
+Desmontando um volume qualquer montado em /media/debian:
+$umount /media/debian
+
+Desmontando todos os volumes montados:
+$umount –a
+
+
+
+
+

@@ -1,0 +1,120 @@
+Terms and Utilities:
+
+#du (qual o espaço está sendo usado em cada diretório, em arquivos)
+- Opções do comando du:
+-h: mostra de forma melhor, em GB, MB, KB
+-s: mostra o estado geral de cada arquivo e diretório
+-c: mostra uma soma do total de espaço ocupado
+
+Exemplos: 
+$du -sh /home  
+
+Exibindo o tamanho ocupado por todos os subdiretórios de /etc/network e por ele
+próprio em modo mais “humano”:
+$du -h /etc/network
+
+Exibindo apenas o tamanho total do diretório /etc em modo mais humano:
+$du -sh /etc
+
+#df (mostra informações de partições, onde estão montadas e tamanhos de cada partição)
+- Opções do comando df:
+-i: mostra o inode de cada diretório
+-h: mostra as informações de forma mais compreensiva, modo humano
+-m: mostra em MB
+-k: mostra em KB
+-T: mostra o tipo do sistema de arquivos, se está ext3, ext4, ext2
+
+Exemplos:
+Exibindo o espaço ocupado pela partição /dev/sda5, que está montada:
+$df -h /dev/sda5
+
+Mostrando informações sobre a reserva de inodes da partição montada /dev/sda5:
+$df –hi /dev/sda5
+
+$df -h /home (informações do /home)
+
+#fsck (analisa uma partição e faz correções, blocos corrompidos, queda de energia, quando isso acontece a gente usa o fsck)
+- esse comando deve ser usado quando a partição estiver desmontada ou em modo leitura.
+
+- Opções do comando fsck:
+-t : especifica o tipo do sistema de arquivos que vai ser verificado.
+-f : força o a checagem mesmo em sistemas de arquivos aparentemente “limpos”.
+-p : repara automaticamente inconsistências no sistema de arquivos.
+-c : verifica badblocks.
+-N : não executa. Apenas simula o que seria feito.
+-M : não verifica sistemas de arquivos montados.
+-C : exibe barra de progresso.
+
+Exemplos:
+$fsck /dev/sdb1    #fsck.ext3 /dev/sda1    #fsck -t ext4 /dev/sda
+
+Verificando integridade do volume ext3 /dev/sdb6 e corrigindo as falhas no
+mesmo, se houverem:
+$fsck –t ext3 –p /dev/sdb6
+
+Simulando verificação em /dev/sdb6:
+$fsck –N /dev/sdb6
+
+#e2fsck (faz o fsck para sistemas de arquivos ext2, ext3, ext4)
+
+$e2fsck.ext3 /dev/sdb1
+
+#mke2fs (cria sistemas de arquivos do tipo ext2, ext3 e ext4)
+
+$mke2fs /dev/sdb1
+
+#debugfs (permite fazer coisas mais avançadas nos sistemas de arquivos)
+- esse comando faz as mesmas coisas que o comando tune2fs mas ele pode ir além, fazendo outras coisas.
+- recuperar um arquivo apagado. 
+
+Exemplos:
+$debugfs /dev/sdb1
+
+#dumpe2fs (mostra informações sobre determinada partição, cada partição  tem parametros setados, flags que a gente pode ver com o dumpe2fs)
+- esse comando só funciona para sistemas de arquivos, ext2, ext3 e ext4. 
+
+Exemplos:
+$dumpe2fs /dev/sda1 -h (mostra informações da partição)
+
+dumpe2fs 1.44.1 (24-Mar-2018)
+Filesystem volume name:   <none>
+Last mounted on:          /
+Filesystem UUID:          f44e8cc3-eaae-4dd2-823d-8d8004ef93c8
+Filesystem magic number:  0xEF53
+Filesystem revision #:    1 (dynamic)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum
+Filesystem flags:         signed_directory_hash 
+Default mount options:    user_xattr acl
+Filesystem state:         clean
+
+#tune2fs (ajustes e configurações nos sistemas ext2, ext3 e ext4).
+
+Opções:
+-l : lista os parâmetros do filesystem.
+-j : aplica recurso de Journaling em sistemas de arquivos ext2 (converte para ext3).
+-L : aplica um rótulo ao volume.
+-m : modifica o percentual de blocos reservados para inodes.
+-r : modifica o número de blocos reservados para inodes.
+-c : configura o número de montagens do volume antes de ele ser verificado por
+fsck.
+
+Exemplos:
+Modificando o percentual de blocos reservados para inodes de /dev/sda7 para
+15%:
+$tune2fs –m 15 /dev/sda7
+
+Convertendo /dev/sda8 para ext3:
+$tune2fs –j /dev/sda8
+
+Listando parâmetros de volume /dev/sda7:
+$tune2fs –l /dev/sda6
+
+#XFS tools (such as xfs_metadump and xfs_info)
+- o comando equivalente ao tune2fs para sistemas de arquivos xfs, é o xfs_admin
+- xfs_info (mostra informações da assim como o dumpe2fs)
+- comando xfs_db é o equivalente ao debugfs
+- o comando xfs_metadump faz um extrato da partição xfs, faz um dump
+
+Exemplos:
+
+$xfs_metadump /dev/sdc2 /tmp/dump_xfs

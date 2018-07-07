@@ -1,0 +1,267 @@
+Terms and Utilities:.
+
+#cp (copia um arquivo)
+sintaxe: cp -opções <origem><destino>
+Opções:
+-R : modo recursivo. Copia diretório e seu conteúdo.
+-v : modo verbose.
+-i : modo interativo. Pergunta antes de sobrescrever destino.
+-u : modo “update”. Apenas copia para o destino arquivos que o mesmo não tem ou
+pesar de ter o mesmo nome, são diferentes em seus conteúdos.
+-f : modo forçado de cópia.
+-p : preserva os atributos originais do arquivo.
+-d : preserva ligação simbólica.
+
+$cp alunos.txt /tmp
+$cp -vi alunos* /tmp
+$cp -r /etc/* /tmp
+$cp -pv aula8 /tmp (preserva as propriedades do arquivo, caracteristicas)
+$cp aula1 curso 1 (copia o conteudo para outro arquivo chamado curso1, alterando o nome do arquivo para curso1)
+
+#cd (Troca de diretórios)
+Sintaxes:
+$cd <diretório_destino>
+$cd .. - retorna um nível na hierarquia.
+$cd ../.. - retorna 2 níveis na hierarquia.
+$cd ~ - muda para o diretório pessoal do usuário em seção. É o mesmo que cd sem
+argumentos.
+$cd ~user1 – muda para o diretório pessoal do usuário user1.
+$cd ../<dir1> – muda para o diretório 'dir1', que está um nível hierárquico acima.
+
+#find (procura por arquivos e diretórios no sistema)
+
+Opções:
+-type : procura por tipo de objeto.
+-name : procura por nome.
+-iname: procura por nome em modo insensitivo (ignora diferenças entre maiúsculas minúsculas).
+-fstype : procura por sistema de arquivos do um tipo específico.
+-maxdepth : máximo de profundidade da busca em diretórios (máximo de subdiretórios
+buscados).
+-mindepth : mínimo de profundidade da busca em diretórios.
+-executable : procura por objeto executável.
+-perm : especifica qual a permissão exata do objeto que vai ser buscado.
+-size : busca por tamanho.
+-amin : procura por objetos acessados a minutos atrás.
+-atime : procura por objetos que tenham sido acessados dias atrás.
+-mmin : procura por objetos que tenham sido modificados a minutos atrás.
+-mtime : procura por arquivos que tenham sido modificados a dias atrás.
+
+$find /home -name Aula10 (procura no /home o arquivo de nome aula10)
+$find /home -name Aula2*
+$find /home -user lpi2 -name Aula10
+$find ./ ctime -1 (todos os arquivos executados até um dia antes)
+
+- Busca apenas por arquivos regulares com permissão 644 em /var/log:
+$find /var/log –perm 644 –type f
+
+#mkdir (cria diretórios)
+Opções:
+-v : “verbose”. Exibe detalhes do que foi feito.
+-m <perm>: cria o diretório já com as permissões determinadas.
+-p : cria subdiretórios e diretórios de uma vez só. Não há a necessidade de existir o
+diretório pai para que seja criado o subdiretório.
+
+- Criando os diretótios linux/debian/ubuntu de uma só vez e exibindo a saída do comando:
+$mkdir -pv linux/debian/ubuntu
+
+- Criando o diretório suse com permissão 733 (permissões de arquivos e diretórios serão
+detalhadas mais à frente).
+$mkdir -mv 733 suse
+
+- Criando diretórios dir1, dir2, dir3 e dir4 em um só comando, exibindo também a saída do
+comando:
+$mkdir -v dir{1,2,3,4}
+
+- Criando diretórios dir10, dir11, dir12, dir13, dir14, dir15 em um só comando, em modo
+“verbose”:
+$mkdir -v dir{10..15}
+
+#mv (move e renomeia um arquivo e diretório)
+Opções:
+-i : modo interativo. Pergunta antes de sobrescrever um arquivo existente com o mesmo nome.
+-v : modo verbose.
+-n : não sobrescreve um arquivo de destino com o mesmo nome.
+-f : modo forçado.
+
+$mv aula7 /tmp (move para o diretório /tmp)
+$mv -v aula1 curso2 (renomeia um arquivo)
+
+#ls (lista os arquivos e diretórios)
+Opções:
+-l : modo longo. Lista detalhes sobre os objetos, como o dono, o grupo, as
+permissões,
+data de última alteração e tamanho (a unidade padrão é o byte).
+-a ou --all : lista todos os objetos contidos no diretório, inclusive os ocultos.
+-i ou –inode : lista o número inode de todos os objetos (índice que o sistema de arquivos usa
+para identificar o arquivo ou diretório).
+-c : lista em odem alfabética.
+-h ou --human-readable: lista o conteúdo no modo “mais humano”. A unidade de tamanho
+de
+cada objeto é a mais compreensível possível.
+-C : lista o conteúdo em colunas.
+-t : classifica o conteúdo pela data de última modificação (ctime).
+-S : classifica os arquivos pelo tamanho.
+-R: lista o conteúdo recursivamente, subdiretórios e arquivos.
+-r: classifica o conteúdo em ordem alfabética reversa.
+
+$ls -a (arquivos ocultos)
+$ls -ld (lista detalhadamente o diretório sem mostrar o conteudo)
+$ls -l (lista de forma de lista os arquivos e diretórios)
+$ls -h (lista de forma mais ligível mostrando o formato do arquivo ou diretório) 
+$ls -lR (lista de forma recursiva cada diretório e todo o conteudo)
+$ls -l aula1* (mostra tudo depois de asterisco)
+$ls -l aula? ()
+$ls -l aula[123] (lista aula1, aula2, aula3)
+$ls -l aula[!123] (negação da lista, mostra tudo menos aula1, aula2, aula3)
+$ls -l aula[1-5] (lista de uma a cinco)
+
+$ls -l arquivo_grande 
+-rw-r--r-- 1 root root 17758 mai  5 21:21 arquivo_grande
+
+#rm (exclui arquivos e diretórios)
+Sintaxe:
+$rm <opções> <arquivo/diretório>
+Opções:
+-v : verbose.
+-i : modo interativo. Espera confirmação do usuário para excluir.
+-r : modo recursivo. Exclui diretório e seu conteúdo.
+$rm aula10 (remove o aula10)
+$rm -vi aula* (remove tudo que comela com aula e perguntando se eu quero remover)
+$rm -r exercicios/ (remove esse diretório e tudo que está dentro dele)
+
+#rmdir (remove diretórios vazios)
+$rmdir estudos/
+
+#touch (cria um arquivo em branco ou altera a data de modificação de um arquivo)
+Opções:
+-d : especifica data.
+-m : troca data de última modificação.
+-r : utiliza data de última modificação de um outro arquivo como referência.
+
+Exemplos:
+$touch -m -d 20160512 arq1 (troca a data de última modificação para 12/05/2016)
+$touch arq2  (cria um arquivo vazio chamado 'arq2')
+
+#tar (arquiva dados de diretórios em um arquivo apenas)
+Sintaxe:
+$tar <opções> <arquivo de backup> <origens dos dados>
+
+Opções:
+-c : cria uma arquivo da backup.
+-t : consulta o conteúdo de arquivos tar.
+-v : verbose.
+-x : extrai conteúdo de arquivo tar.
+-u : modo “update”. Apenas atualiza o conteúdo de um arquivo tar.
+Guia de Estudo para LPIC1 - Bruno Odon - howtoonline.com.br
+73-M : habilita backup em múltiplos volumes.
+-C : muda o destino da extração de conteúdo de arquivo tar.
+-z : utiliza o agente de compactação gzip.
+-j : utiliza o agente de compactação bzip2.
+-a : adiciona conteúdo a um arquivo tar.
+-f : toda a saída deve ser redirecionada para um arquivo tar.
+-J : utiliza o agente de compactação xz. 
+$tar cpvf backup.tar novo* (cria um arquivo de backup, preservando as propriedades)
+
+- Criando um arquivo de backup do diretório /etc inteiro em /backups/bkp.tar
+$tar –cvf /backups/bkp.tar /etc
+
+- Adicionando ao arquivo de backup anterior os diretórios /var/mail, /var/mysql e /home:
+$tar –uvf /backups/bkp.tar –a /var/mail /var/mysql /home
+
+- Conferindo conteúdo do arquivo da backup:
+$tar –tf /backups/bkp.tar
+
+- Atualizando o conteúdo do backup com o que foi modificado nesses diretórios:
+$tar –uvf /backups/bkp.tar /etc /var/mysql /var/mail /home
+
+- Criando arquivo de backup /backups/homedir.tar.gz (arquivo também compactado com gzip) do
+diretório /home/user1:
+$tar –czvf /backups/homedir.tar.gz /home/user1
+
+- Criando arquivo de backup /backups/mails.tar.bz2 (arquivo também compactado com o bzip2)
+do diretório /var/mail:
+$tar –cjvf /backups/mails.tar.bz2 /var/mail
+
+- Conferindo o backup /backups/homedir.tar.gz:
+$tar –tzf /backups/homedir.tar.gz
+
+- Extraindo todo o conteúdo do arquivo /backups/homedir.tar.gz para /mnt:
+$tar –xzf /backups/homedir.tar.gz –C /mnt
+
+#cpio (agente de backup muito utilizado, pode ser combinado com outros comandos, como por exemplo o comando find)
+"As opções mais usadas do cpio são:"
+-o : cria um arquivo de backup.
+-t : verifica um arquivo de backup.
+-i : extrai o conteúdo de um arquivo de backup.
+-F : aponta para um arquivo de backup, eliminando a necessidade de se utilizar
+redirecionamentos (< ou >).
+
+- Criando um arquivo de backup de uma lista de diretórios pronta chamada lista.txt:
+$cpio –o < lista.txt > /backups/backup_lista.bin
+
+- Verificando o conteúdo deste backup:
+$cpio –t < lista.txt
+
+- Combinando o comando find com cpio para obter o backup de todos os arquivos com permissão
+de execução contidos em /etc:
+$find /etc –type f –executable | cpio –o > backup_etc.bin
+
+- Restaurando este backup:
+$cpio –i –F backup_etc.bin
+
+$find ./ -name "novo*" | cpio -o > backup.cpio
+
+$find ./ -name "novo*" | cpio -o | gzip > backup.cpio.gz
+
+$ cpio -i < backup.cpio (descompactando o arquivo)
+
+#dd (usado para copiar uma partição inteira, copiar um arquivo de imagem)
+- Cria imagens “bit a bit” de sistemas de arquivos.
+
+Sintaxe:
+$dd if=<origem> of=<destino> <opções>
+
+Exemplos:
+- Criando um clone da partição /dev/sda1 em /dev/sdb1:
+$dd if=/dev/sda1 of=/dev/sdb1
+
+- Criando um arquivo de imagem /root/part2 da partição /dev/sda2:
+$dd if=/dev/sda1 of=/root/part2
+
+$dd if=/dev/sr0 of=imagem.img
+
+#file (identifica o tipo do arquivo)
+$file arquivo_grande 
+arquivo_grande: UTF-8 Unicode text
+
+#gzip (agente de compactação do linux, um dos mais importantes)
+- Gera arquivos de extensão .gz e tem taxa de compactação média quando o arquivo a ser
+compactado é grande.
+
+- Compactando o arquivo arq1.txt em modo forçado:
+$gzip –f arq1.txt
+
+- Listando o conteúdo deste arquivo:
+$gzip –l arq1.txt.gz
+
+- Descompactando este arquivo:
+$gzip –d arq1.txt.gz
+
+$gzip -k backup.tar (mantem os dois arquivos)
+backup.tar
+backup.tar.gz
+
+#gunzip (agente de descompactação)
+$gunzip backup.tar.gz
+
+#bzip2 (agente de compactação)
+$bzip2 -k backup.tar (faz a compactação do arquivo)
+
+$bunzip backup.tar.bz2 (descompacta o arquivo)
+
+#xz (faz a compactação do arquivo)
+$xz -k backup.tar
+
+$unxz  ou $xz -d (modelos de descompactação)
+
+#file globbing
