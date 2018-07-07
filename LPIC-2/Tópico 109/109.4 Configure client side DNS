@@ -1,8 +1,0 @@
-Terms and Utilities:
-
-/etc/hosts
-/etc/resolv.conf
-/etc/nsswitch.conf
-host
-dig
-getent
