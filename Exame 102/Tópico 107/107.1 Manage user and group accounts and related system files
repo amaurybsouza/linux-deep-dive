@@ -1,0 +1,312 @@
+Terms and Utilities:
+
+
+# PRINCIPAIS ARQUIVOS DE GESTÃO DE USUÁRIOS:
+
+
+- cada usuário tem a sua conta, sua informação de login e temos os grupos que nada mais são que os grupos de usuários.
+- grupos são entidades que reunem usuários.
+- cada usuário tem seu grupo padrão, e cada usuário pode estar em vários grupos secundários.
+
+
+#/etc/passwd (informações de contas de usuários do sistema) ***arquivo principal que registra todos os usuários***
+
+1)    - Formato do arquivo: root:x:0:0:root:/root:/bin/bash
+      - amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
+2) Cada usuário é representado por uma linha e em campos separados por (:) respectivamente:
+
+- Nome de Login;
+- Senha ( "x" quando usando o arquivo /etc/shadow);
+- Número de identificação do usuário (UID);
+- Número do grupo principal do usuário (GID);
+- Descrição do usuário (opcional);
+- Diretório pessoal para o usuário; (/home/usuário)
+- Shell inicial do usuário (normalmente é o /bin/bash)
+
+obs: quando tiver /bin/false (ID de sistemas), não consegue logar, porque não existe shell para interagir.
+
+
+3) O usuário root terá sempre o UID e o GID 0. Nesse arquivo existem diversos usuários do sistema, 
+de aplicações que precisam de usuários para rodar.
+  a) um exemplo é o daemon (processo daemon fica sempre em execução provendo algum serviço).
+  b) os usuários normais estão usando o ID a partir de 1000, sempre que criar um usuário novo ele vai ter ID a partir de 1000.
+  c) antes de 1000 são ID's de sistema, antes de 500 são UID de sistemas e a partir de 1000  são de usuários normais.
+  d) posso alterar manualmente o arquivo /etc/passwd, mas existem comandos que fazem isso e é a melhor prática.
+
+
+
+#/etc/shadow (arquivo que contem as senhas dos usuários)
+
+1) - cada usuário também possui uma linha, separada por (:)
+   - Formato: amaury:$6$XjkKHhLB$BeLhnGULz/sjkisB3Captti04gbiGR5VyAedRGONxU1AmOxw1nhpLDmUCqrOIyZqDmQeVXYGmmLQ1MKwDz/YM.:17649:0:99999:7:::
+   
+- Nome do usuário;
+- hash com a senha do usuário; (quando é criada a senha o sistema transforma a senha nesse hash)
+- vai ter também algumas configurações como (data de expiração da senha, data de troca da senha)
+
+
+
+#/etc/group (equivalente ao /etc/passwd mas para grupos, tem os grupos, ID's e os usuários que pertencem aos grupos)
+
+1) - Formato do arquivo: amaury:x:1000:
+
+- Nome do grupo;
+- Senha do grupo;
+- ID do grupo
+- e por último os usuários que pertencem a esse grupo (sambashare:x:126:amaury)
+
+2) O arquivo /etc/group também tem o arquivo de senhas dele, que é o arquivo /etc/gshadow
+
+3) Outro arquivo importante é o arquivo: /etc/login.defs
+   
+   a) esse arquivo tem as definições de logins de cada usuário.
+   b) tem a definição dos ID dos usuparios, posso configurar de 1000 para 2000 e o UID máximo. 
+   c) tem um parãmetro chamado CREATE HOME, essa config faz com que seja criado o /home de todos os usuarios do sistema, adicionar o "yes".
+
+
+### REVISANDO OS ARQUIVOS PRINCIPAIS:
+
+- /etc/passwd
+- /etc/shadow
+- /etc/group
+- /etc/gshadow
+- /etc/login.defs
+
+#/etc/skel/ (todos os arquivos e diretórios que estão dentro do /etc/skel, vão ser fazer parte da base de novos usuários que serão criados no sistema, os arquivos vão ser colocados no /home do usuário que eu criar)
+
+- se eu quiser adicionar uma configuração especifíca eu posso por no diretório /etc/skel, que ele vai criar para todos os usuários do sistema.
+
+
+### COMANDOS PARA VER OS ID's DOS USUÁRIOS E GRUPOS DO SISTEMA:
+
+
+#id (mostra o UID do usuário, GID e os grupos do qual faz parte o usuário).
+
+1) Exemplo de uso do comando id:
+
+$id amaury 
+uid=1000(amaury) gid=1000(amaury) grupos=1000(amaury),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)
+
+#groups (mostra os grupos de um usuário do sistema)
+
+1) Exemplo de uso do comando groups:
+
+$groups amaury 
+amaury : amaury adm cdrom sudo dip plugdev lpadmin sambashare
+
+
+#getent (mostra informações de um usuário, grupo)
+
+1) Exemplo de uso do comando getent:
+
+$getent passwd amaury
+amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
+$getent group amaury
+amaury:x:1000:
+
+#chage (mostra  as propriedades do usuário)
+
+- com esse comando posso alterar quando a senha vai expirar.
+- quando a conta fica inativa.
+
+---- Opções do comando chage:
+-l: Lista as definições atuais
+-d DATA: Define forçadamente a data da última mudança de senha. -d0 força a expiração da senha
+-E DATA: Define a data de expiração da conta
+-I dias: Define o número de dias entre a data da expiração da senha e a desativação da conta
+-m dias: Número mínimo de dias entre as trocas de senha
+-M dias: Máximo de dias para a alteração de senha. Ou validade da senha.
+-W dias: Define a partir de quantos dias antes da expiração da senha o usuário receberá avisos
+
+1) Comando padrão é:
+
+$chage -l amaury 
+Última mudança de senha					: abr 28, 2018
+Senha expira					: nunca
+Senha inativa					: nunca
+Conta expira						: nunca
+Número mínimo de dias entre troca de senhas		: 0
+Número máximo de dias entre troca de senhas		: 99999
+Número de dias de avisos antes da expiração da senha	: 7
+
+2) Alterando para que a senha do usuário expire 10 dias após a troca da senha:
+
+$chage -M 10 usuario6
+
+3) Alterando para que o usuário possa trocar a senha apenas uma vez por dia:
+
+$chage -m1 usuario6
+
+4) Alterando para que a conta do usuário expire na data de hoje:
+
+$chage -E "2017-05-12" usuario6
+
+5) Tirando a data de expiração da conta do usuário:
+
+$chage -E -1 usuario6
+
+6) Forçando para que o usuário troque a senha no próximo login:
+
+$chage -d 0 usuario6
+
+
+### COMANDOS PARA GESTÃO DE GRUPOS DO SISTEMA:
+
+
+#groupadd (cria grupo de usuários no sistema)
+
+1) Criando um grupo chamado suporte: 
+
+$groupadd suporte
+
+2) Criando um grupo chamado dev com GID 2000: 
+
+$groupadd -g 2000 dev 
+
+
+#groupdel (para deletar, excluir um grupo usamos esse comando)
+
+1) Apagando um grupo chamado dev:
+
+$groupdel dev
+
+
+#groupmod (modifica as configurações de um grupo)
+
+1) Alterando o nome de um grupo do sistema para devops:
+
+$groupmod -n devops suporte
+
+2) Alterando o GID do grupo dev para 2001:
+
+$groumod -g 2001 dev
+
+
+#newgrp (faz com que o usuário assuma um novo grupo da qual ele faz parte) *** um usuário pode estar em vários grupos, com esse comando eu posso assumir um novo grupo.
+
+$newgrp devops (o usuario5 faz parte tbm do grupo devops e agora está navegando entre esses grupos).
+
+- quando eu criar um novo arquivo no sistema, ele assume um grupo secundário no qual ele faz parte. 
+
+$touch teste6
+
+$ls -l teste6
+-rw-r--r-- 1 usuario5 devops  0 Mai 12 17:22 teste6
+
+
+#gpasswd (adiciona uma senha para um grupo e o usuário pode acessar esse grupo com a senha)
+
+$gpasswd dev  (criando um senha para  grupo dev)
+
+- olhando o arquivo /etc/gshadow é possível ver que existe uma senha para o grupo dev.
+- se um usuario do sistema quiser entrar e assumir as permissões do grupo dev, ele tem que usar "newgrp dev"  e por a senha.
+
+
+
+### COMANDOS PARA GESTÃO DE USUÁRIOS NO SISTEMA:
+
+
+#passwd (muda a senha do usuário do sistema)
+
+1) Exemplo de uso: $passwd usuario5
+
+2) Só root pode trocar a senha de outro usuário, informando o nome do usuário na frente.
+
+#adduser (esse comando é um script que existe nas distribuições Linux) -- NÃO CAI NA PROVA.
+
+
+
+#useradd (adiciona um usuário no sistema)
+
+- Esse comando não define a senha do usuário.
+- O shell padrão do useradd é o /bin/sh.
+
+
+1) $useradd usuario1 (cria um usuário no sistema)
+
+2) $useradd -c "Nome do usuário" -s /bin/bash usuario2 (cria um usuário com descrição e setando o shell como bash)
+
+3) Opções do useradd:
+
+-d : homedir do usuário.
+-s : shell que o usuário vai usar.
+-c : comentários / nome completo do usuário.
+-m : cria o diretório /home.
+-u : especifica um UID.
+-g : especifica um grupo primário.
+-G : relaciona o usuário a grupos.
+-k : escolhe um diretório de skel alternativo.
+-e : cria o usuário com data para sua conta expirar.
+
+4) Exemplos do comando useradd:
+
+- Criando um usuário com login user1, homedir /home/user1, shell /bin/bash e nome “Operador 1”:
+  
+  $useradd –m –d /home/user1 –s /bin/bash –c “Operador 1” user1
+
+- Criando usuário webmaster com UID 1400, grupo primário cdrom, grupos relacionados audio e backup, shell /bin/bash e homedir /var/www/webmaster:
+  
+  $useradd –m –d /var/www/webmaster –u 1400 –g cdrom –G audio,backup –s /bin/bash webmaster
+
+- Criando usuário user2 com data de expiração da conta para 10/12/2016, sem uso de shell e com diretório de skel alternativo /dados :
+  
+  $useradd –m –s /bin/false –e 2016-12-10 –k /dados user2
+
+
+#userdel (remove um usuário do sistema)
+
+
+1) $userdel usuario1 (remove esse usuário do sistema).
+   
+   - esse comando não apaga o /home do usuário, ele apaga dos arquivos (passwd, shadow e group)
+   - isso é para evitar que o administrador de sistemas não apague os dados de usuário por erros, o /home sempre prevalece.
+
+2) $userdell -r usuario1 (removendo todos os registros do usuario, inclusive o /home)
+
+Opções:
+
+-r: remove o diretório padrão do usuário (/home/).
+
+
+#usermod (alterar as configurações de uma conta de usuário do sistema)
+
+1) Neste comando eu posso definir um comentário de um usuário do sistema, muda o home, o grupo, o shell e o UID.
+
+
+2) Exemplo de uso: $usermod -c "Amaury B. Souza" usuario5  -- olhando o arquivo /etc/passwd, veremos:
+
+amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
+
+3) Definindo o shell do usuário Amaury para /bin/ksh:
+
+$usermod -s /bin/ksh amaury
+
+
+4) Adicionando o usuário5 nos grupos adicionais devops e qateam:
+
+$usermod -a -G devops usuario5   (opção -a: adiciona em um grupo a mais, sem remover do grupo anterior)
+
+
+5) Adicionando o usuario1 no grupo adicional devops:
+
+$ usermod -G devops usuario1
+
+- Vendo o arquivo /etc/group: devops:x:3001:usuario5,usuario1
+- enquanto que no arquivo /etc/passwd o grupo padrão dele é o 3002,  usuario1:x:3000:3002:Nome do Usuario:/home/usuario1:/bin/bash
+- Um usuário pode estar em mais de grupo ao mesmo tempo e um grupo pode estar em vários usuários.
+
+
+6) Adicionando um usuário no grupo padrão: 
+
+-g: grupo padrão.
+-G: grupos adicionais.
+
+$usermod -g suporte usuario5
+
+- Usando o  comando ls -l podemos observar:
+
+$ls -l
+-rw-r--r-- 1 usuario5 suporte 0 Mai 12 17:16 teste3

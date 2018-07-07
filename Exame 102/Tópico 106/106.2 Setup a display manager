@@ -1,0 +1,62 @@
+Terms and Utilities:
+
+### PRINCIPAIS DISPLAY MANAGER DO LINUX:
+
+- nessa aula vamos estudar um pouco sobre display manager ou gerenciador de login.
+- existem vários tipos de display manager, e o mais simples deles, é o XDM (foi o primeiro).
+
+
+# O Gnome utiliza o GDM (display manager do Gnome)
+# O KDE usa o KDM (display manager do KDM)
+# O Ubuntu e seus derivados usam o LightDM. (display manager mais leve e que se tornou padrão de muitas distros).
+
+
+- quando se faz login no sistema, aparece a tela (greeter, tela de recepção).
+- toda a tela pode ser configurada, as letras, o layout da tela.
+
+
+#### Vamos olhar as configurações relacionadas ao display manager (LightDM)
+
+-- a configuração que define o display manager fica em /etc/X11/default-display-manager
+
+$/etc/X11# cat default-display-manager  (GDM porque estou usando o Ubuntu Gnome)
+/usr/sbin/gdm3
+
+$vim /etc/X11/default-display-manager (caso eu queria mudar para outro display, tem que colocar o caminho do display manager nesse arquivo)
+/usr/sbin/LightDM
+
+
+### DIRETÓRIOS IMPORTANTES DE CONFIGURAÇÃO DO LIGHTDM:
+
+#/etc/lightdm/ (diretório onde fica as configurações básicas do LightDM) USA-SE ESSE DIRETÓRIO.
+
+-> dentro desse diretório vai ter o arquivo lightdm.conf (configurações do LightDM)
+-> dentro desse diretório também vai ter o diretório lightdm.conf.d (pode ter arquivos de configuração)
+
+-> também dentro desse diretório vai ter o arquivo lightdm-gtk-greeter.conf (esse arquivo se refere aquela tela de login do sistema, posso ajustar como aquela tela aparece, tamanho das letras, icones na parte de cima, tela de fundo, toda a aparência do display manager).
+
+
+#/usr/share/lightdm (outro diretório para incluir as configurações do LightDM). USA-SE ESSE DIRETÓRIO.
+
+-> tenho nesse diretório alguns semelhantes ao anterior, que são:  
+   /lightdm-gtk-greeter.conf.d
+   /lightdm.conf.d
+
+
+### Algo interessantes de se notar e aprender: Como que eu defino se o Linux vai bootar com a interface gráfica ou sem a interface?
+
+- posso usar o comando systemctl (SystemD) ou usamos o /etc/iniitab (SysV)
+
+1) $systemctl get-default  (para ver qual o target padrão no meu sistema)
+   graphical.target   (target que inicia a interface do X)
+
+- para que o Linux não inicie a interface gráfica no momento do boot, devemos usar o comando:
+
+- mudando primeiro o target default do sistema com o comando:
+
+2) $systemctl set-default multi-user.target (esse modo inicia todos os serviços do sistema mas sem a parte gráfica, sem a interface X)
+
+
+### Outro funcionalidade bacana do display manager é a capacidade de trabalhar em modo cliente/servidor.
+
+- com isso podemos a partir de uma máquina conectar em outra, no display manager de outra máquina  e usar a outra máquina. 
