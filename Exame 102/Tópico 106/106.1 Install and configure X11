@@ -38,6 +38,8 @@ $Xorg -configure (o arquivo X é gerado no  /root)
 
 2) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
 
+3) O comando startx (inicia a interface X, o servidor X). Ele sobe somente a interface gráfica do X sem a interface de login do sistema.
+
 
 #### ESSE ARQUIVO É DIVIDIDO EM SESSÕES E SUB-SESSÕES, VEJA ABAIXO:
 
