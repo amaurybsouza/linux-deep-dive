@@ -31,6 +31,7 @@ $vim /etc/X11/default-display-manager (caso eu queria mudar para outro display, 
 #/etc/lightdm/ (diretório onde fica as configurações básicas do LightDM) USA-SE ESSE DIRETÓRIO.
 
 -> dentro desse diretório vai ter o arquivo lightdm.conf (configurações do LightDM)
+
 -> dentro desse diretório também vai ter o diretório lightdm.conf.d (pode ter arquivos de configuração)
 
 -> também dentro desse diretório vai ter o arquivo lightdm-gtk-greeter.conf (esse arquivo se refere aquela tela de login do sistema, posso ajustar como aquela tela aparece, tamanho das letras, icones na parte de cima, tela de fundo, toda a aparência do display manager).
