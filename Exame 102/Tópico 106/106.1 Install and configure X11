@@ -174,4 +174,4 @@ $echo $DISPLAY
 
 1) Existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
 
-$xhost +192.168.1.1
+$xhost +192.168.1.1 (Ip adicionado na lista de controle para serem permitidos de abrir).
