@@ -155,8 +155,11 @@ eu posso a partir de uma máquina executar um programa só que esse programa ser
 
 - vamos iniciar a configuração da variavel DISPLAY:
 
--- A variável DISPLAY é dividida em duas partes. A porção antes do caractere ":" identifica a máquina (nome ou número IP) 
-A porção após o caractere ":" identifica qual o display nessa máquina.
+-- A variável DISPLAY é dividida em duas partes. 
+
+1) A porção antes do caractere ":" identifica a máquina (nome ou número IP) 
+
+2) A porção após o caractere ":" identifica qual o display nessa máquina.
 
 
 # EXEMPLO DE USO DA VÁRIAVEL DISPLAY:
