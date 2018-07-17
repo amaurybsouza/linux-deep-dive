@@ -42,8 +42,9 @@ Terms and Utilities:
   - tem um aplicativo que se chama KMAG (modelo de screen magnifier mais usado).
   - esse aplicativo KMAG aumenta partes da tela, ele mostra o zoom no lugar que mover.
 
-#Screen Reader (aplicativos que leem o conteudo de um texto, leitor de texto).
+#Screen Reader (aplicativos que leem o conteudo de um texto, leitor de texto, leitor de tela).
   - ele o que tem na tela do sistema para o usuário.
+
   - os principais são ORCA e emacspeak (leitor de texto).
   - o principal é o ORCA (lê um arquivo de texto na tela para o usuário).
 
