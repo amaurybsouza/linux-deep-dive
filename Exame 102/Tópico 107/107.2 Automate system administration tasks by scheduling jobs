@@ -1,21 +1,28 @@
 Terms and Utilities:
 
 
+#/etc/cron.{d,daily,hourly,monthly,weekly}/ (outros diretórios relevantes, por mês, por dia, por hora, por semana).
+
+/etc/cron.hourly# (nesse diretório tem scripts, tudo será executado).
+
+/etc/cron.weekly# (vai rodar uma vez por semanam tem programas e scripts).
+
+/etc/cron.monthly# (scripts que serão executados uma vez por mês).
+
+/etc/cron.d# (esse diretório é diferente, nele tem os agendamentos, semelhante ao /etc/crontab).
 
 
-	
 
 
 
 
-#/etc/cron.{d,daily,hourly,monthly,weekly}/
+
+
+
 
 #/etc/at.deny
 
 #/etc/at.allow
-
-
-
 
 
 #/etc/crontab (é o agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
@@ -32,9 +39,10 @@ Terms and Utilities:
 
 2) Cada linha é um agendamento, o administrador do sistema pode adicionar outros agendamentos.
 
-- Sintaxe do agendamento:
+- Sintaxe de agendamento: são 5 campos importantes.
 
-17 *    * * *
+m h dom mon dow user  command
+17 *    * * *   root   cd / && run-parts --report /etc/cron.hourly
 
 1º campo (em que minuto o comando será executado).
 2º campo (que hora o comando será executado) * (significa toda hora).
@@ -47,14 +55,6 @@ Terms and Utilities:
 4) Temos também os comandos, scripts, de backup, de envio de e-mail, de limpeza, gerar relatório.
 
 - o comando run-parts executa tudo que está dentro do diretório.
-- 
-
-
-
-
-
-
-
 
 
 #/etc/cron.allow
