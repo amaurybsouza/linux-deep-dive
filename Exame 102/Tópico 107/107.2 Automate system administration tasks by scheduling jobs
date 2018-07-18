@@ -1,7 +1,11 @@
 Terms and Utilities:
 
+### CRON ###
+
 
 #/etc/cron.{d,daily,hourly,monthly,weekly}/ (outros diretórios relevantes, por mês, por dia, por hora, por semana).
+
+Esses diretórios representam, respectivamente, a execução de hora em hora, diária, semanal e mensal.
 
 /etc/cron.hourly# (nesse diretório tem scripts, tudo será executado toda hora).
 
@@ -16,13 +20,8 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 31 14 * * *   root    test -x /etc/cron.daily/popularity-contest && /etc/cron.daily/popularity-contest --crond
 
-#/etc/at.deny
 
-#/etc/at.allow
-
-
-#/etc/crontab (é o agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
-
+#/etc/crontab (arquivo crontab geral do sistema, para agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
 
 1) Nesse arquivo tem algumas váriaveis de ambiente, e agendamentos padrões do sistema, veja abaixo:
 
@@ -35,7 +34,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 2) Cada linha é um agendamento, o administrador do sistema pode adicionar outros agendamentos.
 
-- Sintaxe de agendamento: são 5 campos importantes.
+a) Sintaxe de agendamento: são 5 campos importantes.
 
 m h dom mon dow user  command
 17 *    * * *   root   cd / && run-parts --report /etc/cron.hourly
@@ -46,6 +45,12 @@ m h dom mon dow user  command
 4º campo (mês do ano, de 1 a 12, de janeiro a julho, só em janeiro).
 5º campo (dia da semana, domingo, segunda, de segunda a sexta). 0 e 7 são domingos, temos a sequência, 1 segunda, 2 terça... até 6 que é sabado.
 
+b) Exemplo:
+
+* */4 * 5,6 1-5 /usr/local/bin/script_backup
+
+1º campo (O exemplo acima executa o script_backup a cada quatro horas, de segunda à sexta, nos meses de maio e junho).
+
 3) Temos também a determinação de qual usuário vai executar esse agendamento, comando, script.
 
 4) Temos também os comandos, sequência de comandos, scripts, de backup, de envio de e-mail, de limpeza, gerar relatório.
@@ -55,10 +60,9 @@ m h dom mon dow user  command
 
 #crontab (principal programa utilizado para fazer agendamentos de tarefas no linux).
 
-- pode ser chamado de cron ou crontab, o processo de chama cron, alguns arquivos se chamam crontab.
+- pode ser chamado de cron ou crontab, o processo se chama cron, alguns arquivos se chamam crontab como o /etc/crontab.
 
-1) Com esse comando, é possível agendar um comando, um script, atividade para rodar a cada uma hora, a cada minuto.
-todo dia, toda segunda às 15.
+1) Com esse comando, é possível agendar um comando, um script, atividade para rodar a cada uma hora, a cada minuto, todo dia, toda segunda às 15.
 
 2) É importante entender que a cron é um deamon (processo que precisa estar sempre em execução para que o agendamento funcione).
 
@@ -109,6 +113,7 @@ no crontab for lpi2
 
 #/var/spool/cron/ (local onde ficam as crontabs, agendamentos de cada usuário do sistema).
 
+
 # É POSSÍVEL CONTROLAR O USO DA CRONTAB POR MEIO DOS ARQUIVOS: /etc/cron.allow e /etc/cron.deny
 
 #/etc/cron.allow (permite o uso de quem está listado)
@@ -122,6 +127,11 @@ Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agen
 --> Se nenhum dos arquivos existir, todos os usuários poderão agendar tarefas.
 
 
+
+
+#/etc/at.deny
+
+#/etc/at.allow
 
 #at
 
