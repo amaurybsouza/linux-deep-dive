@@ -14,11 +14,45 @@ Terms and Utilities:
 
 #/etc/at.allow
 
-#/etc/crontab (é o cron do sistema, só usuário root pode editar esse arquivo).
 
-- tem váriaveis de ambiente, e agendamentos do sistema.
 
-- cada linha é um agendamento 
+
+
+#/etc/crontab (é o agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
+
+
+1) Nesse arquivo tem algumas váriaveis de ambiente, e agendamentos padrões do sistema, veja abaixo:
+
+# m h dom mon dow user  command
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+#
+
+2) Cada linha é um agendamento, o administrador do sistema pode adicionar outros agendamentos.
+
+- Sintaxe do agendamento:
+
+17 *    * * *
+
+1º campo (em que minuto o comando será executado).
+2º campo (que hora o comando será executado) * (significa toda hora).
+3º campo (dia do mês que será executado, de 1 a 31 do mês).
+4º campo (mês do ano, de 1 a 12, de janeiro a julho, só em janeiro).
+5º campo (dia da semana, domingo, segunda, de segunda a sexta). 0 e 7 são domingos, temos a sequência, 1 segunda, 2 terça... até 6.
+
+3) Temos também a determinação de qual usuário vai executar esse agendamento, script.
+
+4) Temos também os comandos, scripts, de backup, de envio de e-mail, de limpeza, gerar relatório.
+
+- o comando run-parts executa tudo que está dentro do diretório.
+- 
+
+
+
+
+
 
 
 
