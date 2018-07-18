@@ -3,22 +3,47 @@ Terms and Utilities:
 
 
 
+	
 
 
 
 
-i
-/etc/cron.{d,daily,hourly,monthly,weekly}/
-/etc/at.deny
-/etc/at.allow
-/etc/crontab
-/etc/cron.allow
-/etc/cron.deny
-/var/spool/cron/
-crontab
-at
-atq
-atrm
-anacron
-/etc/anacrontab
-.
+#/etc/cron.{d,daily,hourly,monthly,weekly}/
+
+#/etc/at.deny
+
+#/etc/at.allow
+
+#/etc/crontab (é o cron do sistema, só usuário root pode editar esse arquivo).
+
+- tem váriaveis de ambiente, e agendamentos do sistema.
+
+- cada linha é um agendamento 
+
+
+
+
+#/etc/cron.allow
+
+#/etc/cron.deny
+
+#/var/spool/cron/
+
+
+#crontab (principal programa utilizado para fazer agendamentos de tarefas no linux).
+
+1) Com esse comando, é possível agendar um comando, um script, atividade para rodar a cada uma hora, a cada minuto.
+todo dia, toda segunda às 15.
+
+2) É importante entender que a cron é um deamon (processo que precisa estar sempre em execução para que o agendamento funcione).
+
+#at
+
+#atq
+
+#atrm
+
+#anacron
+
+#/etc/anacrontab
+
