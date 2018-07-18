@@ -3,19 +3,18 @@ Terms and Utilities:
 
 #/etc/cron.{d,daily,hourly,monthly,weekly}/ (outros diretórios relevantes, por mês, por dia, por hora, por semana).
 
-/etc/cron.hourly# (nesse diretório tem scripts, tudo será executado).
+/etc/cron.hourly# (nesse diretório tem scripts, tudo será executado toda hora).
 
-/etc/cron.weekly# (vai rodar uma vez por semanam tem programas e scripts).
+/etc/cron.weekly# (vai rodar uma vez por semana tem programas e scripts).
 
 /etc/cron.monthly# (scripts que serão executados uma vez por mês).
 
-/etc/cron.d# (esse diretório é diferente, nele tem os agendamentos, semelhante ao /etc/crontab).
+/etc/cron.d# (esse diretório é diferente, nele tem os agendamentos, semelhante ao /etc/crontab). Veja abaixo o modelo:
 
-
-
-
-
-
+$cat popularity-contest 
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+31 14 * * *   root    test -x /etc/cron.daily/popularity-contest && /etc/cron.daily/popularity-contest --crond
 
 
 
@@ -23,6 +22,8 @@ Terms and Utilities:
 #/etc/at.deny
 
 #/etc/at.allow
+
+
 
 
 #/etc/crontab (é o agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
@@ -44,15 +45,15 @@ Terms and Utilities:
 m h dom mon dow user  command
 17 *    * * *   root   cd / && run-parts --report /etc/cron.hourly
 
-1º campo (em que minuto o comando será executado).
+1º campo (em que minuto o comando será executado) * (todo minuto).
 2º campo (que hora o comando será executado) * (significa toda hora).
 3º campo (dia do mês que será executado, de 1 a 31 do mês).
 4º campo (mês do ano, de 1 a 12, de janeiro a julho, só em janeiro).
-5º campo (dia da semana, domingo, segunda, de segunda a sexta). 0 e 7 são domingos, temos a sequência, 1 segunda, 2 terça... até 6.
+5º campo (dia da semana, domingo, segunda, de segunda a sexta). 0 e 7 são domingos, temos a sequência, 1 segunda, 2 terça... até 6 que é sabado.
 
-3) Temos também a determinação de qual usuário vai executar esse agendamento, script.
+3) Temos também a determinação de qual usuário vai executar esse agendamento, comando, script.
 
-4) Temos também os comandos, scripts, de backup, de envio de e-mail, de limpeza, gerar relatório.
+4) Temos também os comandos, sequência de comandos, scripts, de backup, de envio de e-mail, de limpeza, gerar relatório.
 
 - o comando run-parts executa tudo que está dentro do diretório.
 
@@ -66,10 +67,46 @@ m h dom mon dow user  command
 
 #crontab (principal programa utilizado para fazer agendamentos de tarefas no linux).
 
+- pode ser chamado de cron ou crontab, o processo de chama cron, alguns arquivos se chamam crontab.
+
 1) Com esse comando, é possível agendar um comando, um script, atividade para rodar a cada uma hora, a cada minuto.
 todo dia, toda segunda às 15.
 
 2) É importante entender que a cron é um deamon (processo que precisa estar sempre em execução para que o agendamento funcione).
+
+### COMO CADA USUÁRIO PODE FAZER SEU AGENDAMENTO:
+
+- para isso cada usuário vai utilizar o comando crontab.
+- cada usuário  incluindo o root, tem os agendamentos individuais.
+- para ver esses agendamentos no sistema, temos que usar o comando $crontab -l 
+
+$crontab -l (lista os agendamentos que eu tenho)
+no crontab for root
+
+$crontab -l -u absouza (lista os agendamentos do usuário absouza)
+
+$crontab -e (edita os agendamentos, entra em modo de edição).
+
+- Formato do agendamento (é a mesma coisa do arquivo /etc/crontab). Veja:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #at
 
