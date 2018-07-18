@@ -16,14 +16,9 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 31 14 * * *   root    test -x /etc/cron.daily/popularity-contest && /etc/cron.daily/popularity-contest --crond
 
-
-
-
 #/etc/at.deny
 
 #/etc/at.allow
-
-
 
 
 #/etc/crontab (é o agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
@@ -58,12 +53,6 @@ m h dom mon dow user  command
 - o comando run-parts executa tudo que está dentro do diretório.
 
 
-#/etc/cron.allow
-
-#/etc/cron.deny
-
-
-
 #crontab (principal programa utilizado para fazer agendamentos de tarefas no linux).
 
 - pode ser chamado de cron ou crontab, o processo de chama cron, alguns arquivos se chamam crontab.
@@ -73,8 +62,13 @@ todo dia, toda segunda às 15.
 
 2) É importante entender que a cron é um deamon (processo que precisa estar sempre em execução para que o agendamento funcione).
 
+3) Opções do comando crontab:
+• crontab -l usuário: mostra as tarefas agendadas pelo usuário;
+• crontab -e usuário: edita o crontab do usuário no editor padrão do sistema;
+• crontab -d usuário: apaga o crontab do usuário selecionado.
 
-### COMO CADA USUÁRIO PODE FAZER SEU AGENDAMENTO:
+
+# COMO CADA USUÁRIO PODE FAZER SEU AGENDAMENTO:
 
 - para isso cada usuário vai utilizar o comando crontab.
 - cada usuário  incluindo o root, tem os agendamentos individuais.
@@ -98,7 +92,7 @@ $crontab -e (edita os agendamentos, entra em modo de edição).
 20 9-8 * * 1-5 /home/usuario/relatorio.sh
 
 
-# Entendendo os agendamentos acima:
+--> Entendendo os agendamentos acima:
 1º linha (13:15, nos dias 1,10,20,30, em qualquer mês, nos dias da semana 1-5 (segunda a sexta)).
 2º linha (executa essa sequência de comandos a cada 10 minutos, de qualquer dia, qualquer mês, qualquer dia da semana ele executa. O (/) indica a cada 10 minutos).
 3º linha (executa no dia 1, minuto 0, hora 0).
@@ -115,13 +109,17 @@ no crontab for lpi2
 
 #/var/spool/cron/ (local onde ficam as crontabs, agendamentos de cada usuário do sistema).
 
+# É POSSÍVEL CONTROLAR O USO DA CRONTAB POR MEIO DOS ARQUIVOS: /etc/cron.allow e /etc/cron.deny
 
+#/etc/cron.allow (permite o uso de quem está listado)
+- não tem esse arquivo por padrão no sistema.
+Se /etc/cron.allow existir, apenas os usuários que nele constarem poderão agendar tarefas.
 
+#/etc/cron.deny (proibe o uso de quem está listado)
+- não tem esse arquivo por padrão no sistema.
+Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agendar tarefas.
 
-
-
-
-
+--> Se nenhum dos arquivos existir, todos os usuários poderão agendar tarefas.
 
 
 
