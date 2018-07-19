@@ -112,3 +112,27 @@ do alfabeto;
 • LC_ TIME: define o formato de data e hora;
 
 • LC_PAPER: define tamanho padrão de papel;
+
+
+
+--> Opções de idioma em scri pts
+
+LANG=C (mantem as configurações que estão definidas no script, tem que usar essa variavel).
+
+
+--> Conversão de codificação
+
+- vamos testar como se faz a conversão de um padrão ISO-8859 para UTF-8.
+- vamos usar um arquivo que foi escrito no Windows.
+
+- cão e caça
+
+- usando o comando file é possível ver em que formato, padrão ele está.
+
+- vamos usar o comando $iconv (comando que converte o padrão de caracteres para outro):
+
+$iconv -f ISO-8859 -t UTF-8 arquivo-teste-win.txt  (opção -f de from).
+cão
+caça
+
+- agora é possível ler o arquivo que estava em outro formato.
