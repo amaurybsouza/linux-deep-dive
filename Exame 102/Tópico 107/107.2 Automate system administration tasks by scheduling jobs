@@ -129,20 +129,46 @@ Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agen
 --> Se nenhum dos arquivos existir, todos os usuários poderão agendar tarefas.
 
 
+### AT ###  O comando at programa a execução de um comando num momento futuro.
 
 
-#/etc/at.deny
+#at (outra opção para agendamentos, agenda uma vez apenas, em tal hora, executa o comando num momento futuro).
 
-#/etc/at.allow
 
-#at
+$at now + 2hours
 
-#atq
 
-#atrm
+#atq (mostra os jobs criados pelo at)
+
+- Após terminar de inseri-los, é necessário pressionar Ctrl+d para encerrar o at e criar o agendamento.
+- cada usuario pode definir o agendamento.
+
+$atq ou at -l
+1	Wed Jul 18 23:22:00 2018 a root
+
+$at 13:20
+warning: commands will be executed using /bin/sh
+at> echo "hora do cafe"
+at> <EOT>
+job 2 at Thu Jul 19 13:20:00 2018
+
+$atq
+2	Thu Jul 19 13:20:00 2018 a root
+1	Wed Jul 18 23:22:00 2018 a root
+
+#atrm (remove um job do at)
+
+$atrm 2 (remove o job de número 2)
+
+#/etc/at.deny (já existe, criado como padrão, quem está listado nesse arquivo não pode usar o at).
+
+- se não existir nem o at.deny e nem o at.allow, só o root consegue usar o at.
+
+#/etc/at.allow (apenas os usuários listados vão conseguir usar o at).
 
 
 ### ANACRON ### garante que o agendamento seja executado caso a máquina esteja desligada, trabalha com o conceito de prazo para execução.
+
 
 #anacron (garante que o agendamento seja executado caso a máquina esteja desligada, trabalha com o conceito de prazo para execução)
 
