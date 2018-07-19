@@ -98,23 +98,6 @@ pt_BR.UTF-8
 --> Além da variável LANG, outras variáveis de ambiente influenciam as opções de localização dos programas. Essas outras variáveis são utilizadas para definir alguma configuração específica de localização:
 
 
-• LC_COLLATE: define a ordenação alfabética. Uma de suas finalidades é definir a ordem de exibição de arquivo e diretórios;
-
-• LC_ CTYPE: define como o sistema trata certos caracteres. Dessa forma, é possível discriminar quais caracteres fazem parte e quais não fazem parte
-do alfabeto;
-
-• LC_MESSAGES: definição de idioma dos avisos emitidos pelos programas (predominantemente os programas GNU) ;
-
-• LC_MONETARY: define a unidade monetária e o formato da moeda;
-
-• LC_NUMERIC: define o formato numérico de valores não monetários. A principal finalidade é determinar o separador de milhar e casas decimais;
-
-• LC_ TIME: define o formato de data e hora;
-
-• LC_PAPER: define tamanho padrão de papel;
-
-
-
 --> Opções de idioma em scri pts
 
 LANG=C (mantem as configurações que estão definidas no script, tem que usar essa variavel).
