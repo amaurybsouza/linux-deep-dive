@@ -2,10 +2,13 @@ Terms and Utilities:
 
 ### FUSO HORÁRIO ###
 
+
+
 #/etc/timezone (mostra o timezone utilizado no momento, quando se instala o Linux ele configura o timezone, pais, linguagens). 
 
 $cat /etc/timezone 
 America/Sao_Paulo
+
 
 
 #/etc/localtime (principal arquivo para configuração do timezone, contem informações do horário de verão).
@@ -14,8 +17,10 @@ $ls -l /etc/localtime
 lrwxrwxrwx 1 root root 37 mai 15 21:41 /etc/localtime -> /usr/share/zoneinfo/America/Sao_Paulo
 
 
+
 #/usr/share/zoneinfo/ (diretórios e arquivos do horário de verão disponíveis no sistema)
 - para configurar o timezone do sistema é nesse arquivo que se defini.
+
 
 #tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais).
 
@@ -30,27 +35,13 @@ America/Chicago
 $date
 Seg Mai 15 15:03:29 CDT 2017
 
-1) Para modificar o fuso horário horário apenas da sessão atual, pode ser alterado o conteúdo da variável TZ
-
-
-
-
-
-
+--> Para modificar o fuso horário horário apenas da sessão atual, pode ser alterado o conteúdo da variável TZ
 
 #timedatectl (controla o sistema de data e hora, mostra o Universal Time).
 
 
-
-
-
-
-
-
-
-
-
 ### IDIOMA E CODIFICAÇÃO DE CARACTERES ###
+
 
 --> A configuração básica de localização é feita com a variável de ambiente LANG e é a partir dela que a maioria dos programas definem as preferências de idioma.
 
@@ -80,9 +71,11 @@ LC_ALL=
 3º campo UTF-8 (padrão de codificação, o Linux usa esse padrão).
 
 
+#UTF-8 (O UTF-8 é um padrão unicode para caracteres ocidentais acentuados).
+
 #ASCII (padrão mais antigo que o UTF-8, foi o primeiro).
 
-#ISO-9959 (depois teve esse padrão, melhorado, UTF é o mais usado).
+#ISO-9959 (depois teve esse padrão, melhorado, UTF-8 é o mais usado).
 
 $locale -a (mostra as localizações que estão disponíveis no sistema).
 C
@@ -94,12 +87,16 @@ en_BW.utf8
 en_CA.utf8
 
 
-#LANG (variavel)
+#LANG (variavel de ambiente)
 $echo $LANG
 pt_BR.UTF-8
 
 
+#LC_ALL: sobrepõe todas as demais variáveis.
+
+
 --> Além da variável LANG, outras variáveis de ambiente influenciam as opções de localização dos programas. Essas outras variáveis são utilizadas para definir alguma configuração específica de localização:
+
 
 • LC_COLLATE: define a ordenação alfabética. Uma de suas finalidades é definir a ordem de exibição de arquivo e diretórios;
 
@@ -115,22 +112,3 @@ do alfabeto;
 • LC_ TIME: define o formato de data e hora;
 
 • LC_PAPER: define tamanho padrão de papel;
-
-• LC_ALL: sobrepõe todas as demais variáveis.
-
-
-
-
-
-
-
-#date
-
-#iconv
-
-#UTF-8 (O UTF-8 é um padrão unicode para caracteres ocidentais acentuados).
-
-
-#ISO-8859 (Em alguns sistemas, a codificação padrão é do padrão ISO, como 150-8859- 1).
-
-#Unicode
