@@ -1,6 +1,8 @@
 Terms and Utilities:
 
-### CRON ###
+### CRON ### é a opção mais usada para agendamentos em diversos segmentos do mercado.
+
+- só funciona se o equipamento tiver ligado, se o agendamento rodar a cada hora e o servidor estiver desligado ele não executa o agendamento.
 
 
 #/etc/cron.{d,daily,hourly,monthly,weekly}/ (outros diretórios relevantes, por mês, por dia, por hora, por semana).
@@ -139,7 +141,33 @@ Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agen
 
 #atrm
 
-#anacron
 
-#/etc/anacrontab
+### ANACRON ### garante que o agendamento seja executado caso a máquina esteja desligada, trabalha com o conceito de prazo para execução.
 
+#anacron (garante que o agendamento seja executado caso a máquina esteja desligada, trabalha com o conceito de prazo para execução)
+
+- é comum usar o anacron em máquinas desktop, que não ficam ligadas o tempo todo.
+- no anacron só existe o agendamento por sistema e não por usuário como no cron.
+- Se uma determinada tarefa deve ser realizada a cada sete dias, o anacron a executará assim que detectar o cumprimento do prazo, mesmo que tenha
+sido após os exatos sete dias em questão.
+
+#/etc/anacrontab (os agendamentos do anacron são armazenados nesse arquivo).
+
+--> Modelo do arquivo:
+
+# These replace cron's entries
+1       5       cron.daily      run-parts --report /etc/cron.daily
+7       10      cron.weekly     run-parts --report /etc/cron.weekly
+@monthly        15      cron.monthly    run-parts --report /etc/cron.monthly
+
+
+--> Os agendamentos são inseridos um por linha, cada um com os seguintes campos separados por espaço:
+
+• Período em dias: Número inteiro determinando com qual frequência a tarefa deve ser executada, em dias. Podem ser utilizados os termos @daily, @weekly e @monthly para diariamente (equivalente a usar o número 1), semanalmente (equivalente a 7) e mensalmente (uma vez por mês, independente do número de dias do mês).
+
+• Minutos de espera: Quantos minutos aguardar antes de executar uma tarefa. Se usado o número O, a tarefa será executada imediatamente, assim que o
+término do prazo for detectado.
+
+• Identificação: Uma descrição, sem espaços, usada para identificar a tarefa nos arquivos de log.
+
+• Comando: O comando a ser executado pelo agendamento.
