@@ -1,5 +1,6 @@
 Terms and Utilities:
 
+### FUSO HORÁRIO ###
 
 #/etc/timezone (mostra o timezone utilizado no momento, quando se instala o Linux ele configura o timezone, pais, linguagens). 
 
@@ -29,31 +30,107 @@ America/Chicago
 $date
 Seg Mai 15 15:03:29 CDT 2017
 
+1) Para modificar o fuso horário horário apenas da sessão atual, pode ser alterado o conteúdo da variável TZ
 
 
 
-#LC_*
-
-#LC_ALL
-
-#LANG
 
 
-#/usr/bin/locale
 
 
 #timedatectl (controla o sistema de data e hora, mostra o Universal Time).
+
+
+
+
+
+
+
+
+
+
+
+### IDIOMA E CODIFICAÇÃO DE CARACTERES ###
+
+--> A configuração básica de localização é feita com a variável de ambiente LANG e é a partir dela que a maioria dos programas definem as preferências de idioma.
+
+#/usr/bin/locale (comando locale mostra as localizações, linguagens do sistema)
+
+$locale
+LANG=pt_BR.UTF-8
+LANGUAGE=pt_BR:pt:en
+LC_CTYPE="pt_BR.UTF-8"
+LC_NUMERIC="pt_BR.UTF-8"
+LC_TIME="pt_BR.UTF-8"
+LC_COLLATE="pt_BR.UTF-8"
+LC_MONETARY="pt_BR.UTF-8"
+LC_MESSAGES="pt_BR.UTF-8"
+LC_PAPER="pt_BR.UTF-8"
+LC_NAME="pt_BR.UTF-8"
+LC_ADDRESS="pt_BR.UTF-8"
+LC_TELEPHONE="pt_BR.UTF-8"
+LC_MEASUREMENT="pt_BR.UTF-8"
+LC_IDENTIFICATION="pt_BR.UTF-8"
+LC_ALL=
+
+--> Entendendo o padrão: LC_CTYPE="pt_BR.UTF-8"
+
+1º campo pt (identificação do idioma). 
+2º campo BR (país de localização)
+3º campo UTF-8 (padrão de codificação, o Linux usa esse padrão).
+
+
+#ASCII (padrão mais antigo que o UTF-8, foi o primeiro).
+
+#ISO-9959 (depois teve esse padrão, melhorado, UTF é o mais usado).
+
+$locale -a (mostra as localizações que estão disponíveis no sistema).
+C
+C.UTF-8
+en_AG
+en_AG.utf8
+en_AU.utf8
+en_BW.utf8
+en_CA.utf8
+
+
+#LANG (variavel)
+$echo $LANG
+pt_BR.UTF-8
+
+
+--> Além da variável LANG, outras variáveis de ambiente influenciam as opções de localização dos programas. Essas outras variáveis são utilizadas para definir alguma configuração específica de localização:
+
+• LC_COLLATE: define a ordenação alfabética. Uma de suas finalidades é definir a ordem de exibição de arquivo e diretórios;
+
+• LC_ CTYPE: define como o sistema trata certos caracteres. Dessa forma, é possível discriminar quais caracteres fazem parte e quais não fazem parte
+do alfabeto;
+
+• LC_MESSAGES: definição de idioma dos avisos emitidos pelos programas (predominantemente os programas GNU) ;
+
+• LC_MONETARY: define a unidade monetária e o formato da moeda;
+
+• LC_NUMERIC: define o formato numérico de valores não monetários. A principal finalidade é determinar o separador de milhar e casas decimais;
+
+• LC_ TIME: define o formato de data e hora;
+
+• LC_PAPER: define tamanho padrão de papel;
+
+• LC_ALL: sobrepõe todas as demais variáveis.
+
+
+
+
+
 
 
 #date
 
 #iconv
 
-#UTF-8
+#UTF-8 (O UTF-8 é um padrão unicode para caracteres ocidentais acentuados).
 
-#ISO-8859
 
-#ASCII
-
+#ISO-8859 (Em alguns sistemas, a codificação padrão é do padrão ISO, como 150-8859- 1).
 
 #Unicode
