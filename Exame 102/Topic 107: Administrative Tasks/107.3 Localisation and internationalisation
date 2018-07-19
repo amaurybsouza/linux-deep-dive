@@ -1,18 +1,23 @@
 Terms and Utilities:
 
 
-#/etc/timezone (mostra o timezone utilizado no momento, quando se instala o Linux ele configura o timezone, linguagens). 
+#/etc/timezone (mostra o timezone utilizado no momento, quando se instala o Linux ele configura o timezone, pais, linguagens). 
+
+$cat /etc/timezone 
+America/Sao_Paulo
+
 
 #/etc/localtime (principal arquivo para configuração do timezone, contem informações do horário de verão).
+
+$ls -l /etc/localtime 
+lrwxrwxrwx 1 root root 37 mai 15 21:41 /etc/localtime -> /usr/share/zoneinfo/America/Sao_Paulo
+
 
 #/usr/share/zoneinfo/ (diretórios e arquivos do horário de verão disponíveis no sistema)
 - para configurar o timezone do sistema é nesse arquivo que se defini.
 
-#LC_*
+#tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais).
 
-#LC_ALL
-
-#LANG
 
 #TZ (variavel de ambiente, defini o horário da minha sessão).
 
@@ -27,13 +32,18 @@ Seg Mai 15 15:03:29 CDT 2017
 
 
 
+#LC_*
+
+#LC_ALL
+
+#LANG
 
 
 #/usr/bin/locale
 
-#tzselect (ajuda a encontrar o nome do timezone correto, fuso horário oficiais).
 
-#timedatectl (controla o sistema de data e hora).
+#timedatectl (controla o sistema de data e hora, mostra o Universal Time).
+
 
 #date
 
