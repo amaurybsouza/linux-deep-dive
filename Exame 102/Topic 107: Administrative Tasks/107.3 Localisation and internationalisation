@@ -1,13 +1,6 @@
 Terms and Utilities:
 
 
-- vamos falar sobre timezone
-- 
-
-
-
-
-
 #/etc/timezone (mostra o timezone utilizado no momento, quando se instala o Linux ele configura o timezone, linguagens). 
 
 #/etc/localtime (principal arquivo para configuração do timezone, contem informações do horário de verão).
@@ -40,7 +33,7 @@ Seg Mai 15 15:03:29 CDT 2017
 
 #tzselect (ajuda a encontrar o nome do timezone correto, fuso horário oficiais).
 
-#timedatectl
+#timedatectl (controla o sistema de data e hora).
 
 #date
 
