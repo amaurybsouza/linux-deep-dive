@@ -1,0 +1,180 @@
+Terms and Utilities:
+
+#### CONCEITOS DE SERVIDOR X: (INTERFACE GRÁFICA PARA LINUX)
+
+1) A plataforma gráfica disponível para distros Linux é o "Servidor X" (ou Xorg), ela suporta as aplicações gráficas 
+disponíveis para Linux, como gerenciadores de desktop, gerenciadores de logins, jogos, aplicações de escritório 
+e editores de imagens.
+
+
+2) É importante entender que o servidor X ou o X11, é a interface gráfica mais básica do Linux, é pelo X  que se pode controlar o botão do mouse, clique do botão direito, botão esquerdo, quantos monitores estão configurados, qual a resolução, tamanho, esse tipo de configuração é tudo feito e controlado pelo servidor X.
+
+- Em cima de servidor X, rodam os gerenciadores de janelas, mais conhecidos como, Gnome, XFCE, KDE.
+
+- Além disso tem o display maneger (tela de login assim que vc liga a máquina, bem vindo, usuário e senha).
+
+- É importante saber que o X funciona num modelo de cliente/servidor.
+
+- Servidor X (X é a interface gráfica) e todos os programas que rodam em cima do servidor X, são clientes do servidor X.
+
+- quando eu abro o Mozilla, ele é um cliente do servidor X.
+
+  - servidor X que organiza as funcionalidades gráficas e os clientes X.
+  - se eu abrir o xcalc no terminal, ele é uma aplicação cliente do servidor X.
+
+
+#####/etc/X11/xorg.conf (Arquivo de configuração mais importante do X11)
+
+
+#### COMO GERAR O ARQUIVO DE CONFIGURAÇÃO /etc/X11/xorg.conf:
+
+OBS: "nas distribuições novas esse arquivo nem existe mais, porque tudo é detectado no momento do boot, 
+tem suporte para monitores, teclados, mouses, tudo é automático".
+
+
+1) Para gerar o arquivo de configuração, deve executar o comando: $X -configure ou $Xorg -configure
+
+$Xorg -configure (o arquivo X é gerado no  /root)
+
+2) copiar esse arquivo para /etc/X11/xorg.conf (criado o arquivo).
+
+3) O comando startx (inicia a interface X, o servidor X). Ele sobe somente a interface gráfica do X sem a interface de login do sistema.
+
+
+#### ESSE ARQUIVO É DIVIDIDO EM SESSÕES E SUB-SESSÕES, VEJA ABAIXO:
+
+
+“InputDevice”
+Esta seção é responsável pela configuração de opções de teclado, como layout, idioma e driver e também de configuração de mouse.
+
+“Files”
+Configura o local onde estão armazenadas as fontes do servidor X. O local padrão é /usr/share/fonts
+(onde o X procura as fontes para o usuário).
+
+“Device”
+Configura opções da placa de vídeo, como driver e o nome do fabricante também.
+
+“Monitor”
+Opções de monitor, como frequências horizontal e vertical, modelo e fabricante.
+
+“Screen”
+Esta seção se refere à configuração da visualização da interface gráfica. É, por exemplo, nesta seção 
+que as resoluções de vídeo podem ser configuradas através da SubSection “Display”
+
+#### VEJA ABAIXO O EXEMPLO DA SESSÃO SCREEN:
+
+Section "Screen"
+        Identifier      "RightScreen"
+        Device          "Right nVidia 8600GT"
+        Monitor         "SyncMaster-226BW"
+        # Compositing manager
+        Option         "RenderAccel" "true"
+        Option         "TripleBuffer" "true"
+        Option         "AllowGLXWithComposite"
+        Option         "DPMS" "true"
+        DefaultDepth    24
+        SubSection "Display"
+                Depth           24
+                Modes           "1680x1050"
+        EndSubSection
+         Even though the SyncMaster and the Viewsonic are 1050, the Viewsonic is 10mm taller. Syncmaster has a finer dot pitch, but less physical real estate
+EndSection
+
+
+#### OUTROS COMANDOS IMPORTANTES DO SERVIDOR X:
+
+
+#xdpyinfo (mostra informações da interface/servidor X).
+
+$xdpyinfo | less
+
+#xwininfo (mostra informações sobre uma janela do sistema, dimensão, ajustes, tamanho, comprimento)
+
+- assim que vc aperta "enter" ele vai pedir para selecionar uma janela.
+
+$xwininfo + enter
+
+xwininfo: Please select the window about which you
+          would like information by clicking the
+          mouse in that window.
+
+xwininfo: Window id: 0x2200015 "Configurações"
+
+  Absolute upper-left X:  474
+  Absolute upper-left Y:  96
+  Relative upper-left X:  474
+  Relative upper-left Y:  96
+  Width: 881
+  Height: 566
+  Depth: 32
+  Visual: 0x16c
+  Visual Class: TrueColor
+
+-- Outro comando importante para a prova é o xvinfo.
+
+#xvinfo (exibe as capacidades dos adaptadores de vídeo que estão utilizando o X).
+
+#### Fontes no X
+
+- A interface X ela utiliza e disponibiliza um conjunto de fontes.
+- O usuário pode adicionar as fontes para utilizar dentro da interface X.
+- São os dois principais tipos de fontes:
+
+- bitmap fonts (tipo mais simples)
+
+- outline fonts (mais utilizado e possui mais opções gráficas para as fontes).
+
+- as fontes ficam dentro da Section "Files" no arquivo "/usr/share/fonts/X11"
+
+- dentro do diretório Type1 existem alguns modelos de fontes, fontes de todo o sistema.
+
+-- é importante notar que sempre vai ter dois arquivos de fontes, que são:
+
+/usr/share/fonts/X11/Type1$ls f*
+fonts.dir  fonts.scale
+
+-- esses dois arquivos são tipo um indice das fontes, o X precisa desses arquivos para referenciar e utilizar essas fontes.
+
+-- para gerar esses dois arquivos utilizamos dois comandos, que são:
+
+$mkfontscale (esse comando gera o arquivo fonts.scale, é importante gerar esse arquivo primeiro).
+
+$mkfontdir (gera o arquivo fonts.dir)
+
+-- como dito na aula anterior, temos a opção de ter o servidor de fontes.
+
+
+
+#### Estudar agora o lado do cliente do servidor. (lembrando que o X é o servidor de interface gráfica e nele rodam os clientes X
+#que são aplicações do clientes do servidor X).
+
+- uma observação, esse lado cliente servidor, além de poder ser utilizado localmente, é possível ser usado entre máquinas diferentes,
+eu posso a partir de uma máquina executar um programa só que esse programa ser exibido no servidor X que está em outra máquina.
+
+- nessa aula vamos fazer um teste para ver o programa rodando em uma máquina e o programa ser exibido no servidor X de outra máquina.
+
+- vamos iniciar a configuração da variavel DISPLAY:
+
+-- A variável DISPLAY é dividida em duas partes. 
+
+1) A porção antes do caractere ":" identifica a máquina (nome ou número IP) 
+
+2) A porção após o caractere ":" identifica qual o display nessa máquina.
+
+
+# EXEMPLO DE USO DA VÁRIAVEL DISPLAY:
+
+$export DISPLAY=192.168.1.3:0.0
+
+
+$echo $DISPLAY (essa variavel indica onde as janelas vão ser exibidas, variavel do shell, o shell vai identificar através da variavel DISPLAY quem deve exibir essa informação, o servidor X local ou é o servidor X de outra máquina)
+:0
+
+$echo $DISPLAY 
+:0
+
+# xhost (programa de controle de acesso para o servidor X) 
+
+1) Existe um controle na outra máquina que impede que novas sessões do X possam conectar nessa máquina, temos que usar o comando xhost.
+
+$xhost +192.168.1.1 (Ip adicionado na lista de controle para serem permitidos de abrir).
