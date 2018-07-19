@@ -1,0 +1,162 @@
+The following is a partial list of the used files, terms and utilities:
+
+-> Diferença entre os dois tipos de GRUBS: (Legacy e GRUB 2)
+
+1) GRUB LEGACY
+- O GRUB é o boot loader usado pela maioria das distribuições para desktops e servers justamente pelo fato de ele ser um gerenciador dinâmico (não precisa ser reinstalado após cada mudança em seu arquivo de configuração) e cheio de recursos, como boot por diversos sistemas operacionais e filesystems diferentes, por discos de qualquer tipo (inclusive ISCSI), por múltiplas imagens, por ter um menu que disponibiliza o modo de comando (para emergências) e a possibilidade de criptografação de senha se boot.
+
+#Arquivos de configuração: 
+
+$/boot/grub/menu.lst (principal arquivo de configuração)
+$/boot/grub/grub.conf/cfg (outro arquivo para edição)
+
+#Referência ao disco:
+
+hda1 = hd0,0
+hda5 = hd0,4
+hdb = hd1,2
+
+#Comandos:
+
+$grub-install /dev/sda (instala o GRUB na MBR do disco)
+$grub-install '(hd0)'
+
+#Principais parâmetros:
+
+title "Ubuntu"
+    root (hd0,0)
+    kernel /boot/vmlinuz-4.15.0-20-generic root=UUID=f44e8cc3-eaae-4dd2-823d-8d8004ef93c8 ro  quiet splash $vt_handoff
+        initrd  /boot/initrd.img-4.15.0-20-generic
+
+default=0
+Timeout=15
+
+2) GRUB 2 (mais utilizado no mercado, esse é o mais atual)
+- Afim de adequar o boot manager aos novos padrões de hardware e fimware do mercado, o GRUB2 surgiu modificando praticamente todos os padrões de configuração. O arquivo /boot/grub/menu.lst já não existe mais nesta versão do boot manager. O recomendado é sempre fazer as alterações dentro do arquivo /etc/default/grub e logo depois atualizar o grub. Toda e qualquer alteração na configuração também pode ser feita diretamente em /boot/grub/grub.cfg.
+
+#Arquivos de configuração: 
+
+$/boot/grub/grub.cfg (principal arquivo de configuração)
+$/etc/default/grub (timeout, cmdline, grub-default)
+$/etc/grub.d (defini as opções de boot, onde o administrador trabalha, a configuração é feita nesses dois arquivos, para depois gerar o grub.cfg)
+
+#Referência ao disco:
+
+hda1 = hd0,1 ou hd0,msdos1
+hda5 = hd0,5
+hdb3 = hd1,3
+
+#Comandos:
+
+$grub-install <device>
+$update-grub (gera o grub.cfg)
+$grub-mkconfig -o /boot/grub/grub.cfg (gera o arquivo grub.cfg)
+
+#Principais parâmetros:
+
+menuentry "Ubuntu" {set root=(hd0,1)
+linux   /boot/vmlinuz-4.15.0-20-generic root=UUID=f44e8cc3-eaae-4dd2-823d-8d8004ef93c8 ro  quiet splash $vt_handoff
+ initrd  /boot/initrd.img-4.15.0-20-generic }
+
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=15
+
+#cd /boot
+
+$/boot/grub/grub.cfg (principal arquivo de configuração do GRUB 2)
+
+$update-grub --version (mostra a versão do GRUB que está sendo usada)
+
+$update-grub (instala o GRUB na MBR)
+
+- somente alterar os arquivos /etc/default/grub ou /etc/grub.d
+
+$/etc/default/grub
+- configurações de timeout
+- só aplica as configurações quando executar o comando update-grub ou grub-mkconfig -o /boot/grub/grub.cfg
+
+$grep timeout grub.cfg
+
+#menu.lst, grub.cfg and grub.conf
+
+Para GRUB2:
+- Todas as alterações mais importantes são feitas no arquivo /etc/default/grub 
+É a partir desse arquivo que será gerado o arquivo /boot/grub/grub.cfg
+
+Para GRUB-LEGACY:
+- Todas as alterações importantes são feitas no arquivo /boot/grub/menu.lst
+
+
+#grub-install (instala o GRUB em um dispositivo)
+
+- O grub também pode ser instalado no MBR ou na partição pelo comando grub-install.
+
+Exemplo:
+Instalando o GRUB no disco /dev/sdc:
+$grub-install /dev/sdc
+
+#grub-mkconfig (gera um arquivo de configuração do GRUB)
+
+$grub-mkconfig -o /boot/grub/grub.cfg ou $grub2-mkconfig -o /boot/grub2/grub.cfg
+
+Outro comando que é similar é: $update-grub ou $update-grub2
+
+#MBR
+- O gerenciador de inicialização - ou simplesmente bootloader - é o componente res­
+ponsável por localizar e carregar o kernel Linux. Ele desempenha o estágio interme­
+diário entre o fim dos procedimentos do BIOS e o início do sistema operacional.
+Logo após finalizar os procedimentos básicos de diagnóstico da máquina, o BIOS
+carrega para a memória os dados presentes na MBR do disco definido como dis-
+positivo de boot. Esses dados correspondem a um programa bastante simples - o
+carregador de boot - que deverá tomar conta da máquina a partir daquele momento.
+A MBR (Master Boot Record ou Registro Mestre de Inicialização) ocupa o primei­
+ro setor do disco (5 1 2 bytes) . Esse primeiro setor contém a tabela de partições e o
+carregador de inicialização. Assim que é carregado pelo BIOS, o bootloader lê as con­
+figurações (que podem estar gravadas no pr6prio MBR ou dentro de uma partição)
+e a partir delas localiza e carrega o Kernel.
+
+- Diferenças entre GRUB2 e GRUB Legacy
+
+Para o usuário final, não há diferenças entre o GRUB2 e o GRUB Legacy. O menu
+de boot ainda é muito parecido e as atualizações continuam transparentes.
+Já o administrador do sistema precisa ficar atento a algumas diferenças importantes:
+
+• Ausência do arquivo / boot / g r ub/men u . 1 s t, substituído por / boot/ g r u b / g r u b . cfg
+(em alguns casos, pode estar em / e t c / g r u b 2 / ) . Este, por sua vez, é gerado auto­
+maticamente e não deve ser editado diretamente;
+
+• O comando do Grub f i n d boot / g r u b / s ta g e l não existe mais. O estágio 1 . 5 foi
+eliminado;
+
+• No GRUB2, o principal arquivo de configuração para modificar do menu de
+boot é o /etc/default/grub;
+
+• Configurações avançadas são definidas e m arquivos separados localizados no
+diretório/etc/grub.d
+
+• A numeração das partições inicia a partir do 1 e não mais de O;
+
+• A inclusão de diferentes kernels Linux e outros sistemas operacionais - como
+Windows - é feita automaticamente.
+A atualização do menu de inicialização do grub - a inclusão de novos kernels e altera­
+ções feitas em /etc/defa u l t lgrub - só acontecerá com a execução do comando update - g rub.
+O comando update - g r ub pode se chamar update - g rub2 em algumas distribuições ou
+até pode estar ausente. Nesses casos, utilize g r u b - mkcon fi g - o · / bootlg r u b / g ru b . cfg ou
+g r ub2 - mkconfi g - o / boot / g ru b 2 / g r u b . cfg, conforme for apropriado.
+
+- Uma dica de administração de sistemas:
+
+Boa prática é fazer uma cópia da MBR, para restaurá-la no caso de ser sobrescrita por outro sistema operacional.Para fazer um becape da MBR, basta copiar os primeiros 5 1 2 bytes do disco, o que pode ser feito com o comando d d : dd i f=/dev / h d a of=mb r . b a c k u p b s = l coun t=5 1 2
+
+• Esse becape pode ser guardado e depois restaurado para a MBR:
+dd i f=mbr. b a c k u p of=/ d e v / hd a
+
+
+
+
+
+
+
+
+
+

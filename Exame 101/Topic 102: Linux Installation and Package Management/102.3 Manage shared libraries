@@ -1,0 +1,73 @@
+Terms and Utilities:
+
+#Biblioteca compartilhada (é quando vc desenvolve uma aplicação e dentro dessa aplicação vc faz referência a um pedaço de código que está fora dessa aplicação, que está desenvolvida através de uma biblioteca)
+
+- O Linux usa dois conceitos de bibliotecas, tem a ESTÁTICA e a DINÂMICA:
+
+-> na ESTÁTICA eu vou referenciar a biblioteca externa e essa será incorporada na minha aplicação, o código vai ser incorporado na aplicação.
+
+-> na forma DINÂMICA indico a aplicação qual a biblioteca vai ser utilizada, e isso será carregado separadamente, pode ter várias aplicações usando a mesma biblioteca e  a biblioteca está carregada apenas uma vez.
+
+-> vinculo dinâmico é só um mapeamento externo das bibliotecas com a aplicação.
+
+#ldd (mostra as bibliotecas compartilhadas que são utilizadas pela aplicação, aplicação)
+
+$ldd <programa>
+
+$ldd /usr/bin/vi (mostra todas as bibliotecas compartilhadas que o vi está utilizando)
+
+linux-vdso.so.1 (0x00007ffe5839b000)
+libselinux.so.1 => /lib64/libselinux.so.1 (0x00007f250c8da000)
+libtinfo.so.6 => /lib64/libtinfo.so.6 (0x00007f250c6ae000)
+libacl.so.1 => /lib64/libacl.so.1 (0x00007f250c4a5000)
+libc.so.6 => /lib64/libc.so.6 (0x00007f250c0ef000)
+libpcre2-8.so.0 => /lib64/libpcre2-8.so.0 (0x00007f250be6d000)
+libdl.so.2 => /lib64/libdl.so.2 (0x00007f250bc69000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f250ce20000)
+libattr.so.1 => /lib64/libattr.so.1 (0x00007f250ba64000)
+libpthread.so.0 => /lib64/libpthread.so.0 (0x00007f250b846000)
+
+- tudo que for .so é uma biblioteca
+
+- pode se usar a opção -v no comando ldd, para mostrar mais detalhes, outras versões.
+
+- diretórios onde se encontram as bibliotecas, são dois diretórios:
+
+/lib (tem vários diretórios e dentro tem várias bibliotecas)
+
+/usr/lib (contem por padrão as bibliotecas utilizadas pelas aplicações)
+
+- pode ter bibliotecas em outros diretórios
+
+$ls -ld ld.so* (diretório /etc onde ficam todos os arquivos e diretórios usados pelo ld.so)
+-rw-r--r--. 1 root root 130214 mai  7 06:46 ld.so.cache (onde ficam mapeadas as bibliotecas do Linux)
+-rw-r--r--. 1 root root     28 mar  2 09:01 ld.so.conf  
+drwxr-xr-x. 2 root root   4096 mai  7 06:46 ld.so.conf.d
+
+- um dos principais é o ld.so.cache (é aqui que estão mapeados todas as bibliotecas conhecidas pelo Linux que podem ser utilizadas pelas aplicações)
+
+#ldconfig (é usado para atualizar o /etc/ld.so.cache)
+
+- Este comando aplica as modificações feitas em todos os arquivos de configuração de paths. Ele 
+grava estas mudanças em /etc/ld.so.cache, que é o aquivo que armazena estas informações de busca.
+
+- quando é executado esse comando ele vai reler as configurações que estão em /etc/ld.so.conf e no /etc/ld.so.conf.d e vai gerar um novo arquivo ld.so.cache
+
+- a opção -p vai listar as bibliotecas ativas no momento.
+
+#/etc/ld.so.conf (é o principal arquivo de configuração, é nesse arquivo que eu vou indicar quais os caminhos, novos caminhos onde o Linux vai encontrar as bibliotecas)
+
+$cat /etc/ld.so.conf (mostra o diretório secundário)
+include ld.so.conf.d/*.conf
+
+$ld.so.conf.d (o que tiver aqui dentro desse diretório será incluido dentro na lib, onde vão estar as bibliotecas)
+
+#LD_LIBRARY_PATH  (usuário pode definir essa váriavel, significa quais diretórios que ele quer considerar como fonte de biblioteca, isso é temporário)
+
+- é usado quando o usuário não tem permissão para alterar o ld.so.conf (mas é uma forma que funciona, setar uma variavel de ambiente)
+
+$export LD_LIBRARY_PATH=/tmp/lib/
+
+$env | grep LIBRARY
+
+

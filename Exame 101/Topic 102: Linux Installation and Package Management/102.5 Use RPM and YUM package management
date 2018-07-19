@@ -1,0 +1,169 @@
+Terms and Utilities:
+
+- Distribuições baseadas em Red Hat e o próprio Red Hat aceitam a instalação de
+pacotes .rpm e .tar.gz.
+A questão das dependências é a mesma: um pacote sozinho pode não ter todas as
+dependências necessárias para a sua instalação e, para resolvê-las, é muito importante
+instalar os pacotes por repositórios.
+
+#rpm (é o equivalente ao dpkg do Debian, ele que faz a base de instalação e remoção dos pacotes)
+
+## O rpm trabalha em modos, COM 3 MODOS PRINCIPAIS:
+
+1) MODO DE CONSULTA: 
+
+- Para consultas temos que usar a opção -q que terá que vir com outras subopções, como -qa, -ql, -qc
+
+$rpm -qa (mostra todos os pacotes instalados no sistema)
+
+$rpm -qa bash (mostra informações do que tiver o nome "bash")
+
+ou  $ rpm -qa | grep bash
+
+$rpm -qi bash (a opção i mostra informações, detalhes  do aplicativo mencionado, no caso o "bash")
+
+$rpm -ql bash (lista os arquivos que pertecem a essa instalação)
+
+$rpm -qc bash (mostra apenas os arquivos de configuração do pacote)
+
+$rpm -qc bash
+/etc/skel/.bash_logout
+/etc/skel/.bash_profile
+/etc/skel/.bashrc
+
+$rpm -qd (mostra arquivos de documentação do pacote)
+
+$rpm -qd bash
+/usr/share/doc/bash/FAQ
+/usr/share/doc/bash/INTRO
+/usr/share/doc/bash/RBASH
+/usr/share/doc/bash/README
+/usr/share/doc/bash/bash.html
+
+$rpm -qf /etc/skel/.bashrc (mostra qual aplicação instalou esse pacote, esse arquivo)
+
+$rpm -qf /etc/skel/.bashrc 
+bash-4.4.19-1.fc27.x86_64
+
+$rpm -qlp adobe-release-x86_64-1.0-1.noarch.rpm (lista os arquivos que estão dentro do pacote adobe)
+
+$rpm -qlp adobe-release-x86_64-1.0-1.noarch.rpm 
+/etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+/etc/yum.repos.d/adobe-linux-x86_64.repo
+
+2) MODO DE INSTALAÇÃO:
+
+- modo de instalação possui menos opções e é represenatado pela opção -i
+
+$rpm -i adobe-release-x86_64-1.0-1.noarch.rpm (instala essa aplicação, esse pacote)
+
+$rpm -U adobe-release-x86_64-1.0-1.noarch.rpm (faz o update, atualiza a versão do pacote)
+
+- o rpm não resolve dependências de pacotes.
+- principais opções usadas com o -i (v e h) (verbose e hash - cerquilhas)
+
+$rpm -ivh skypeforlinux-64.rpm (instala o pacote, mostra os detalhes da instalação e mostra os hash (cerquilhas durante a instalação))
+
+$rpm -ivh skypeforlinux-64.rpm 
+aviso: skypeforlinux-64.rpm: Cabeçalho V4 RSA/SHA1 Signature, ID da chave df7587c3: NOKEY
+Preparando...                         ################################# [100%]
+Updating / installing...
+   1:skypeforlinux-8.20.0.9-1         ################################# [100%]
+Redirecting to /bin/systemctl start atd.service
+
+$rpm -qa skypeforlinux (lista o pacote)
+
+$rpm -qa skypeforlinux
+skypeforlinux-8.20.0.9-1.x86_64
+
+$rpm -ivh gcc-8.1.1-1.fc29.aarch64.rpm (esse pacote precisa de dependência para ser instalado)
+
+$rpm -ivh gcc-8.1.1-1.fc29.aarch64.rpm 
+aviso: gcc-8.1.1-1.fc29.aarch64.rpm: Cabeçalho V3 RSA/SHA256 Signature, ID da chave 429476b4: NOKEY
+erro: Dependências não satisfeitas:
+	binutils >= 2.30 é requerido por gcc-8.1.1-1.fc29.aarch64
+	cpp = 8.1.1-1.fc29 é requerido por gcc-8.1.1-1.fc29.aarch64
+	ld-linux-aarch64.so.1()(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	ld-linux-aarch64.so.1(GLIBC_2.17)(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libasan.so.5()(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libdl.so.2(GLIBC_2.17)(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libgcc >= 8.1.1-1.fc29 é requerido por gcc-8.1.1-1.fc29.aarch64
+	libgomp = 8.1.1-1.fc29 é requerido por gcc-8.1.1-1.fc29.aarch64
+	libm.so.6(GLIBC_2.17)(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+	libubsan.so.1()(64bit) é requerido por gcc-8.1.1-1.fc29.aarch64
+
+- existe uma forma de forçar a instalação fazendo com o o rpm não verifique as dependências:
+
+$rpm -ivh --nodeps gcc-8.1.1-1.fc29.aarch64.rpm (força a instalação do pacote sem verificar as dependências)
+
+$rpm -ivh --nodeps gcc-8.1.1-1.fc29.aarch64.rpm
+aviso: gcc-8.1.1-1.fc29.aarch64.rpm: Cabeçalho V3 RSA/SHA256 Signature, ID da chave 429476b4: NOKEY
+Preparando...                         ################################# [100%]
+	o pacote gcc-8.1.1-1.fc29.aarch64 é destinado para a arquitetura different
+
+$rpm -ivh --force gcc-8.1.1-1.fc29.aarch64.rpm (a opção --force ignora e força a instalação de um pacote que já esteja com determinados arquivos no sistema)
+
+$rpm -ivh --test skypeforlinux-64.rpm (essa opção testa e não faz a instalação de fato)
+
+- todas essas opções que foram feitas usando o -i também funciona com a opção -U (pode usar os dois)
+
+3) MODO DE REMOÇÃO:
+
+- modo mais simples de uso do rpm.
+
+- para esse modo usamos a opção -e (de erase)
+
+$rpm -e ksh (remove o pacote ksh)
+
+$rpm -evh ksh (remove o pacote ksh, usando o verbose e o hash, mostrando melhor o resultado da remoção)
+
+$rpm -evh --teste gcc (simula a remoção do pacote gcc, mas não remove de fato)
+
+$rpm -evh --test skypeforlinux
+Preparando...                         ################################# [100%]
+
+- pode ser que ocorra de outro pacote utilizar alguma dependência de outro pacote, e na hora de remover, ele não deixa, dá erro, usando a opção --nodeps, ele ignora isso e força.
+
+$rpm -evh --nodeps skypeforlinux
+
+#rpm2cpio (ele transforma um arquivo rpm em cpio, de agrupamento de arquivos)
+
+$rpm2cpio gcc-8.1.1-1.fc29.aarch64.rpm > gcc.cpio (é uma forma de extrair o que tem dentro do pacote rpm)
+
+#/etc/yum.conf (principal arquivo de configuração do yum)
+
+#/etc/yum.repos.d/ (diretório que contém as fontes de pacotes, repositório, que o yum vai consultar)
+
+- dentro do /etc/yum.repos.d/ ficam os arquivos de repositórios.
+
+#yum (comando equivalente ao apt-get do Debian, ele faz download, instalação, verificação de dependências dos pacotes)
+
+- PRINCIPAIS OPÇÕES DO YUM:
+
+$yum install gcc (instala o pacote gcc e suas dependências).
+
+$yum update (atualiza todos os pacotes do sistema, fontes novas)
+
+$yum upgrade (atualiza os pacotes e ainda, remove pacotes obsoletos do sistema)
+
+$yum check-update (checa todos os pacotes e verifica qual precisa de update, em relação a base de origem)
+
+$yum list (lista todos os pacotes que estão instalados no sistema)
+
+$yum search samba (mostra todos os pacotes que são relacionados ao samba)
+
+$yum remove ksh (remove o pacote ksh)
+
+#yumdownloader (é uma ferramenta do yum, normalmente não vem instalado como padrão no sistema)
+
+$yumdownloader csh (faz o download do pacote csh)
+
+$rpm --checksig gcc-8.1.1-1.fc29.aarch64.rpm ()
+
+
+
+
+
+
+
+
