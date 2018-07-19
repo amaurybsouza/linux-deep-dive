@@ -1,0 +1,167 @@
+Terms and Utilities:
+
+#caminho relativo: é o caminho que é referente ao diretório atual, conforme relatado pelo comando pwd
+
+#caminho absoluto: é todo caminho que começa com /
+
+#bash (interpretador de comandos do Linux, que fornece diversas funcionalidades e facilidades)
+
+-> Bourne Again Shell: é o shell desenvolvido para o projeto GNU usado pelo GNU/Linux,
+é muito usado pois o sistema que o porta evolui e é adotado rapidamente. Possui uma
+boa portabilidade, pois possui características do Korn Shell e C Shell. É representado por
+"bash". O nosso estudo estará focado neste.
+
+$echo Linux  
+Linux
+
+$echo $SHELL (ver o shell que eu estou utilizando)
+/bin/bash
+
+#echo (comando para imprimir informações na tela, tanto em stdin como stder usando os redireionadores)
+
+$echo “Este é o curso de lpi-1” >> /home/lpi1/Documents/teste.txt
+
+Produzindo como saída o valor da variável SHELL:
+$echo $SHELL
+
+Exibir o texto de seguinte forma:
+Linux
+System
+Administrator
+$echo -e “Linux \\nSystem \\nAdministrator”
+
+#env (mostra todas as variaveis de ambiente/globais naquele momento)
+
+$env
+SHELL=/bin/bash
+TERM=xterm-256color
+
+#DECLARANDO UMA VARIAVEL:
+
+<variável>=<valor>
+NOME_VARIAVEL=valor (essa variavel está declarada localmente, só é visivel nessa sessão)
+$echo $NOME_VARIAVEL
+valor
+
+CURSOLINUX=lpi1
+$echo $CURSOLINUX
+lpi1
+
+#ALGUMAS VARIAVEIS DO SISTEMA:
+
+HISTFILE=/root/.bash_history   (caminho que armazena os comandos feitos no terminal)
+HISTFILESIZE=2000  (tamanho maximo que o arquivo terá)
+HISTSIZE=1000   (limite maximo de linhas "comandos" no arquivo)
+HOME=/root (mostra o home do usuário atual)
+HOSTNAME=souza  (hostiname da máquina)
+LOGNAME=root (mostra o nome do usuario que fez login no sistema)
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin (mostra todos os caminhos de programas do sistema)
+PWD=/home/borges/Downloads    (mostra o diretório atual)
+SHELL=/bin/bash (mostra o shell que está sendo usado)
+TERM=xterm-256color (mostra qual terminal estamos usando)
+USER=root (mostra o nome do usuário atual)
+
+#COMANDOS EM SEQUÊNCIA:
+
+-> clear ; date ; ls (executa o comando seguinte independente do resultado do anterior)
+
+-> ls /tmp/teste && date && uptime (só executa o próximo comando se o comando anterior for bem sucedido)
+
+-> ls -abc || date || teste.com  (só executa o proximo comando se o primeiro der erro, não funcionar) 
+
+#DICAS:
+$echo $$ (mostra o PID do shell atual)
+2322
+
+$echo $! (mostra o ultimo processo que foi executado em background)
+2213
+
+$echo $? (mostra o codigo de retorno do ultimo processo executado)
+0 (codigo de sucesso)
+1 e 2 (codigo de erro)
+
+#export (comando para exportar a variavel de ambiente, está global, está exportada, os processos agora enxergam essa variavel)
+
+$export TESTE
+
+$export LINUX=Xubuntu (já cria a variavel exportando-a)
+
+#pwd (mostra o diretório atual que o usuário se encontra)
+
+$pwd
+/home/lpi
+
+#set (mostra todas as variaveis  locais e que são exportadas)
+
+$set | less (página a saida do comando set)
+
+#unset (comando para apagar uma variavel do sistema)
+
+$unset TESTE (removi a variavel TESTE)
+
+#man (manual de referência de um comando, mostra as opções do comando e as funcionalidades)
+
+-> quando um comando é interno ele não tem o man
+
+-> tem que consultar o manual do bash ($man bash)
+
+-> comando info funciona para obter informações mas é mais limitado que o man.
+
+$man ls (man page do comando ls)
+
+#whatis (mostra o que um comando faz ) == "$man -f" 
+$ whatis mkfs
+mkfs (8)             - build a Linux filesystem
+
+$ whatis fsck
+fsck (8)             - check and repair a Linux filesystem
+
+#apropos (esse comando consulta um banco de dados consistindo da descrição do comando == "man -k")
+#é util em situações em que se deseja executar determinada tarefa e não se conhece o  nome do comando
+$apropos compiler
+B (3pm)              - The Perl Compiler Backend
+B::Deparse (3pm)     - Perl compiler backend to produce perl code
+checkmodule (8)      - SELinux policy module compiler
+checkpolicy (8)      - SELinux policy compiler
+
+$apropos running
+run-parts (4)        - configuration and scripts for running periodical jobs
+sched_getcpu (3)     - determine CPU on which the calling thread is running
+setenforce (8)       - modify the mode SELinux is running in
+uptime (1)           - Tell how long the system has been running.
+xlsclients (1)       - list client applications running on a display
+
+#uname (mostra informações do sistema)
+
+$uname --help (informações do comando uname)
+-a, --all                emite todas as informações, na ordem a seguir,
+                             exceto que omite -p e -i se desconhecidos:
+  -s, --kernel-name        emite o nome do Kernel
+  -n, --nodename           emite o nome do nó da máquina na rede
+  -r, --kernel-release     emite a versão de lançamento do Kernel
+  -v, --kernel-version     emite a data em que o Kernel foi criado
+  -m, --machine            emite o nome do hardware da máquina (arquitetura)
+  -p, --processor          emite o tipo do processador (não portável)
+  -i, --hardware-platform  emite a plataforma de hardware (não portável)
+  -o, --operating-system   emite o sistema operacional
+      --help     mostra esta ajuda e sai
+      --version  informa a versão e sai
+
+#alias (cria um atalho, apelido para algum comando)
+
+$alias lt='ls /tmp' (ação temporária, quando fechar a sessão desconfigura).
+
+#history (mostra todos os comandos que foram execuatados no shell)
+
+-> cada usuário possui seu arquivo ".bash_history" de histórico.
+
+-> !! (repete o ultimo comando digitado no shell)
+
+-> !29 (executa o comando de número 29 "de acordo com o history")
+
+-> !uname (executa o ultimo comando que ele encontrou aquela string) 
+$uname --help
+
+-> history -c (limpa o arquivo de histórico)
+
+#.bash_history (arquivo que mantém todos os comandos que foram digitados pelo usuário na última sessão do shell)
