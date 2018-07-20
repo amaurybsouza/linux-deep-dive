@@ -1,11 +1,20 @@
 Terms and Utilities:
 
-/usr/share/zoneinfo/
-/etc/timezone
-/etc/localtime
-/etc/ntp.conf
-date
-hwclock
-ntpd
-ntpdate
-pool.ntp.org
+#/usr/share/zoneinfo/
+
+#/etc/timezone
+
+#/etc/localtime
+
+#/etc/ntp.conf
+
+#date
+
+#hwclock
+
+#ntpd
+
+#ntpdate
+
+
+#pool.ntp.org
