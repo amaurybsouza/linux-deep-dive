@@ -22,7 +22,7 @@ lrwxrwxrwx 1 root root 37 mai 15 21:41 /etc/localtime -> /usr/share/zoneinfo/Ame
 - para configurar o timezone do sistema é nesse arquivo que se defini.
 
 
-#tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais).
+#tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais, após a escolha cria o arquivo /etc/timezone).
 
 
 #TZ (variavel de ambiente, defini o horário da minha sessão).
@@ -87,7 +87,7 @@ en_BW.utf8
 en_CA.utf8
 
 
-#LANG (variavel de ambiente)
+#LANG (variavel de ambiente utilizada  para realizar a configuração básica de localização).
 $echo $LANG
 pt_BR.UTF-8
 
