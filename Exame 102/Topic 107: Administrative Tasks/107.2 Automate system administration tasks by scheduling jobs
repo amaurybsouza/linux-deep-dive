@@ -1,6 +1,7 @@
 Terms and Utilities:
 
-### CRON ### é a opção mais usada para agendamentos em diversos segmentos do mercado.
+### CRON (É a opção mais usada para agendamentos em diversos segmentos do mercado).
+
 
 OBS: Só funciona se o equipamento tiver ligado, se o agendamento rodar a cada hora e o servidor estiver desligado ele não executa o agendamento.
 
@@ -15,7 +16,7 @@ OBS: Só funciona se o equipamento tiver ligado, se o agendamento rodar a cada h
 3) Opções do comando crontab:
 • crontab -l usuário: mostra as tarefas agendadas pelo usuário;
 • crontab -e usuário: edita o crontab do usuário no editor padrão do sistema;
-• crontab -d usuário: apaga o crontab do usuário selecionado.
+• crontab -r usuário: apaga o crontab do usuário selecionado.
 
 
 #/etc/crontab (arquivo crontab geral do sistema, para agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
@@ -80,27 +81,32 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 - para ver esses agendamentos no sistema, temos que usar o comando $crontab -l 
 - o root pode ver os agendamntos dele e de outros usuários.
 
-$crontab -l (lista os agendamentos que eu tenho)
+$crontab -l (lista os agendamentos do meu usuário root)
 no crontab for root
 
 $crontab -l -u absouza (lista os agendamentos do usuário absouza)
+no crontab for amaury
 
 $crontab -e (edita os agendamentos, entra em modo de edição).
 
-- Formato do agendamento (é a mesma coisa do arquivo /etc/crontab). Veja:
-- dar sempre permissão de execução no script (+x).
+a) Formato do agendamento (é a mesma coisa do arquivo /etc/crontab). Veja:
+b) Dar sempre permissão de execução no script (+x).
 
+c) Exemplo com o usuário amaury: (criado alguns exemplos para demonstração)
+
+$crontab -e
 #m h dia mes diasemana comando/script
-15 13 1,10,20,30 * 1-5 /home/lpi1/Scripts/PrimeiroScript.sh
-*/10 * * * * cd /tmp ; rm -f teste
+15 13 1,10,20,30 * 1-5 /home/lpi1/Scripts/PrimeiroScript.sh >> /tmp/teste-cron.txt    (posso separar os campos por virgula, hora, dia, mês).
+*/10 * * * * cd /tmp ; rm -f teste                                                    (o / significa a cada 10 minutos, 5 dias, 2 dias)
 0 0 1 1 * /usr/bin/fogos-de-artificio.sh
-20 9-8 * * 1-5 /home/usuario/relatorio.sh
+20 9-18 * * 1-5 /home/usuario/relatorio.sh                                            (o - significa um range, das 9 às 18)
 
 
 --> Entendendo os agendamentos acima:
 1º linha (13:15, nos dias 1,10,20,30, em qualquer mês, nos dias da semana 1-5 (segunda a sexta)).
 2º linha (executa essa sequência de comandos a cada 10 minutos, de qualquer dia, qualquer mês, qualquer dia da semana ele executa. O (/) indica a cada 10 minutos).
 3º linha (executa no dia 1, minuto 0, hora 0).
+
 
 $crontab -r (remove uma crontab).
 
@@ -110,10 +116,11 @@ no crontab for lpi2
 
 # ONDE QUE FICA ESSAS CONFIGURAÇÕES?
 
-- se eu reniciar o sistema essas configurações da cron ficarão permanentes.
+- se eu reniciar o sistema esses agendamentos da cron ficarão permanentes.
 
 #/var/spool/cron/ (local onde ficam as crontabs, agendamentos de cada usuário do sistema).
 
+#/var/spool/cron/crontabs (mesmo local do diretório acima).
 
 # É POSSÍVEL CONTROLAR O USO DA CRONTAB POR MEIO DOS ARQUIVOS: /etc/cron.allow e /etc/cron.deny
 
@@ -129,7 +136,6 @@ Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agen
 
 
 ### AT ###  O comando at programa a execução de um comando num momento futuro.
-
 
 #at (outra opção para agendamentos, agenda uma vez apenas, em tal hora, executa o comando num momento futuro).
 
