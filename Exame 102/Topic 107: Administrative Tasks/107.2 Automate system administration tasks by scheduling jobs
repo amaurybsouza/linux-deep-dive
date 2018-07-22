@@ -2,25 +2,20 @@ Terms and Utilities:
 
 ### CRON ### é a opção mais usada para agendamentos em diversos segmentos do mercado.
 
-- só funciona se o equipamento tiver ligado, se o agendamento rodar a cada hora e o servidor estiver desligado ele não executa o agendamento.
+OBS: Só funciona se o equipamento tiver ligado, se o agendamento rodar a cada hora e o servidor estiver desligado ele não executa o agendamento.
 
+#crontab (principal programa utilizado para fazer agendamentos de tarefas no linux).
 
-#/etc/cron.{d,daily,hourly,monthly,weekly}/ (outros diretórios relevantes, por mês, por dia, por hora, por semana).
+- pode ser chamado de cron ou crontab, o processo se chama cron, alguns arquivos se chamam crontab como o /etc/crontab.
 
-Esses diretórios representam, respectivamente, a execução de hora em hora, diária, semanal e mensal.
+1) Com esse comando, é possível agendar um comando, um script, atividade para rodar a cada uma hora, a cada minuto, todo dia, toda segunda às 15.
 
-/etc/cron.hourly# (nesse diretório tem scripts, tudo será executado toda hora).
+2) É importante entender que a cron é um deamon (processo que precisa estar sempre em execução para que o agendamento funcione).
 
-/etc/cron.weekly# (vai rodar uma vez por semana tem programas e scripts).
-
-/etc/cron.monthly# (scripts que serão executados uma vez por mês).
-
-/etc/cron.d# (esse diretório é diferente, nele tem os agendamentos, semelhante ao /etc/crontab). Veja abaixo o modelo:
-
-$cat popularity-contest 
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-31 14 * * *   root    test -x /etc/cron.daily/popularity-contest && /etc/cron.daily/popularity-contest --crond
+3) Opções do comando crontab:
+• crontab -l usuário: mostra as tarefas agendadas pelo usuário;
+• crontab -e usuário: edita o crontab do usuário no editor padrão do sistema;
+• crontab -d usuário: apaga o crontab do usuário selecionado.
 
 
 #/etc/crontab (arquivo crontab geral do sistema, para agendamento de tarefas do sistema, só usuário root pode editar esse arquivo).
@@ -60,18 +55,22 @@ b) Exemplo:
 - o comando run-parts executa tudo que está dentro do diretório.
 
 
-#crontab (principal programa utilizado para fazer agendamentos de tarefas no linux).
+#/etc/cron.{d,daily,hourly,monthly,weekly}/ (outros diretórios relevantes, por mês, por dia, por hora, por semana).
 
-- pode ser chamado de cron ou crontab, o processo se chama cron, alguns arquivos se chamam crontab como o /etc/crontab.
+Esses diretórios representam, respectivamente, a execução de hora em hora, diária, semanal e mensal.
 
-1) Com esse comando, é possível agendar um comando, um script, atividade para rodar a cada uma hora, a cada minuto, todo dia, toda segunda às 15.
+/etc/cron.hourly# (nesse diretório tem scripts, tudo será executado toda hora).
 
-2) É importante entender que a cron é um deamon (processo que precisa estar sempre em execução para que o agendamento funcione).
+/etc/cron.weekly# (vai rodar uma vez por semana tem programas e scripts).
 
-3) Opções do comando crontab:
-• crontab -l usuário: mostra as tarefas agendadas pelo usuário;
-• crontab -e usuário: edita o crontab do usuário no editor padrão do sistema;
-• crontab -d usuário: apaga o crontab do usuário selecionado.
+/etc/cron.monthly# (scripts que serão executados uma vez por mês).
+
+/etc/cron.d# (esse diretório é diferente, nele tem os agendamentos, semelhante ao /etc/crontab). Veja abaixo o modelo:
+
+$cat popularity-contest 
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+31 14 * * *   root    test -x /etc/cron.daily/popularity-contest && /etc/cron.daily/popularity-contest --crond
 
 
 # COMO CADA USUÁRIO PODE FAZER SEU AGENDAMENTO:
