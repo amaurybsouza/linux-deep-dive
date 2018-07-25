@@ -125,14 +125,12 @@ no crontab for lpi2
 # É POSSÍVEL CONTROLAR O USO DA CRONTAB POR MEIO DOS ARQUIVOS: /etc/cron.allow e /etc/cron.deny
 
 #/etc/cron.allow (permite o uso de quem está listado)
-- não tem esse arquivo por padrão no sistema.
-Se /etc/cron.allow existir, apenas os usuários que nele constarem poderão agendar tarefas.
+- não tem esse arquivo por padrão no sistema. (Se /etc/cron.allow existir, apenas os usuários que nele constarem poderão agendar tarefas).
 
 #/etc/cron.deny (proibe o uso de quem está listado)
-- não tem esse arquivo por padrão no sistema.
-Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agendar tarefas.
+- não tem esse arquivo por padrão no sistema. (Se /etc/cron.deny existir, os usuários nele existentes serão proibidos de agendar tarefas).
 
---> Se nenhum dos arquivos existir, todos os usuários poderão agendar tarefas.
+OBS: Se nenhum dos arquivos existir, todos os usuários poderão agendar tarefas.
 
 
 ### AT ###  O comando at programa a execução de um comando num momento futuro.

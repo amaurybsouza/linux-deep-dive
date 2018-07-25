@@ -3,12 +3,10 @@ Terms and Utilities:
 ### FUSO HORÁRIO ###
 
 
-
 #/etc/timezone (mostra o timezone utilizado no momento, quando se instala o Linux ele configura o timezone, pais, linguagens). 
 
 $cat /etc/timezone 
 America/Sao_Paulo
-
 
 
 #/etc/localtime (principal arquivo para configuração do timezone, contem informações do horário de verão).
@@ -17,15 +15,15 @@ $ls -l /etc/localtime
 lrwxrwxrwx 1 root root 37 mai 15 21:41 /etc/localtime -> /usr/share/zoneinfo/America/Sao_Paulo
 
 
-
 #/usr/share/zoneinfo/ (diretórios e arquivos do horário de verão disponíveis no sistema)
-- para configurar o timezone do sistema é nesse arquivo que se defini.
+
+- para configurar o timezone do sistema é nesse arquivo que se define.
 
 
 #tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais, após a escolha cria o arquivo /etc/timezone).
 
 
-#TZ (variavel de ambiente, defini o horário da minha sessão).
+#TZ (variavel de ambiente, define o horário da minha sessão, sessão atual).
 
 $export TZ=America/Chicago
 
@@ -37,10 +35,10 @@ Seg Mai 15 15:03:29 CDT 2017
 
 --> Para modificar o fuso horário horário apenas da sessão atual, pode ser alterado o conteúdo da variável TZ
 
-#timedatectl (controla o sistema de data e hora, mostra o Universal Time).
+#timedatectl (date melhorado, traz mais informações, controla o sistema de data e hora, mostra o Universal Time).
 
 
-### IDIOMA E CODIFICAÇÃO DE CARACTERES ###
+### LOCALIZAÇÃO, IDIOMA E CODIFICAÇÃO DE CARACTERES
 
 
 --> A configuração básica de localização é feita com a variável de ambiente LANG e é a partir dela que a maioria dos programas definem as preferências de idioma.
