@@ -84,24 +84,23 @@ en_AU.utf8
 en_BW.utf8
 en_CA.utf8
 
-
 #LANG (variavel de ambiente utilizada  para realizar a configuração básica de localização).
+
 $echo $LANG
 pt_BR.UTF-8
 
 
 #LC_ALL: sobrepõe todas as demais variáveis.
 
-
 --> Além da variável LANG, outras variáveis de ambiente influenciam as opções de localização dos programas. Essas outras variáveis são utilizadas para definir alguma configuração específica de localização:
 
 
---> Opções de idioma em scri pts
+--> OPÇÕES DE IDIOMA PARA SCRIPTS:
 
 LANG=C (mantem as configurações que estão definidas no script, tem que usar essa variavel).
 
 
---> Conversão de codificação
+--> CONVERSÃO DE CODIFICAÇÃO:
 
 - vamos testar como se faz a conversão de um padrão ISO-8859 para UTF-8.
 - vamos usar um arquivo que foi escrito no Windows.
