@@ -9,7 +9,7 @@ Terms and Utilities:
     * relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
 
 
-# COMANDOS QUE GERENCIAM ESSE DOIS TIPOS DE RELÓGIOS:
+# COMANDOS QUE GERENCIAM ESSES DOIS TIPOS DE RELÓGIOS:
 
 
 #date (mostra a data e o horário do sistema)
@@ -52,6 +52,83 @@ hwclock --set --date "12/01/2017 14:00"  (define o horário de hardware da máqu
 
 
 
+# NTP (Network Time Protocol)
+
+1) Conceitos relevantes:
+
+- mantém o horário sincronizado com um servidor externo;
+- numa rede com servidores Linux, é importante que todas as máquinas estejam com os mesmo horário, segundo, minutos, sincronizados.
+- com o NTP você terá um servidor que irá prover o horário para as outras máquinas, essas máquinas vão consultar esse servidor NTP e vão obter a hora a partir desse protocolo.
+- muito utilizado em ambientes corporativos.
+- ajuda na comunicação dos equipamentos, ativos de rede, servidores, monitoração de logs...
+ 
+
+2) Instalação do serviço ntpd (serviço que habilita isso na máquina Linux):
+
+$apt-get install ntp ; apt-get install ntpdate
+
+--> O ntpd utiliza o protocolo UDP através da porta de comunicação 123
+--> uma pequena observação, no Linux temos um arquivo que mostra as portas que cada serviço roda (/etc/services)
+
+#ntpd (NTP daemon program)
+
+3) Duas formas básicas de uso do NTP:
+
+a) uma forma é com o serviço de deamon (processo que fica sempre executando na máquina):
+
+$ps axu | grep ntp
+ntp      21535  0.0  0.0 109504  4480 ?        Ssl  15:00   0:00 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 123:129
+root     22807  0.0  0.0  21536  1056 pts/1    S+   15:13   0:00 grep --color=auto ntp
+
+* Esse deamon do NTP vai estar sempre indo em um servidor NTP externo para atualizar a data do meu sistema.
+* E a minha máquina pode ser um servidor NTP, outras máquinas podem conectar na minha para utilizar a minha como servidor NTP.
+* Esse deamon do NTP pode ser cliente e pode ser servidor, posso ajustar isso no arquivo de configuração e bloquear caso eu não queria que ninguem conecete na minha máquina.
+
+#/etc/ntp.conf (principal arquivo de configuração do NTP)
+
+a) Entendendo o /etc/ntp.conf
+  
+- abaixo estão os servidores que minha máquina/processo NTP vai consultar o horário.
+- pode aparecer ou pool ou server nos arquivos de configuração.
+
+Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board
+on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for more information.
+pool 0.ubuntu.pool.ntp.org iburst
+pool 1.ubuntu.pool.ntp.org iburst
+pool 2.ubuntu.pool.ntp.org iburst
+pool 3.ubuntu.pool.ntp.org iburst
+
+#pool.ntp.org (conjunto de servidores NTP públicos, podem ser usados por todo o mundo para manter o horário atualizado com essa base)
+
+--> posso usar os servidores de outras regiões do mundo, como South America — south-america.pool.ntp.org
+--> e eles já estão ajustados para serem usados/trocados no arquivo de configuração (/etc/ntp.conf) 
+
+server 0.south-america.pool.ntp.org
+server 1.south-america.pool.ntp.org
+server 2.south-america.pool.ntp.org
+server 3.south-america.pool.ntp.org
+
+# Comandos para testar as configurações do NTP:
+
+$ntpq -p  (retorna os servidores que eu estou utilizando e algumas estatisticas sobre esses servidores)
+ remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ 0.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 1.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 2.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ 3.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
+ ntp.ubuntu.com  .POOL.          16 p    -   64    0    0.000    0.000   0.000
+
+
+
+
+
+
+
+
+
+
+
 
 
 #/usr/share/zoneinfo/
@@ -60,13 +137,5 @@ hwclock --set --date "12/01/2017 14:00"  (define o horário de hardware da máqu
 
 #/etc/localtime
 
-#/etc/ntp.conf
-
-
-
-#ntpd
-
 #ntpdate
 
-
-#pool.ntp.org
