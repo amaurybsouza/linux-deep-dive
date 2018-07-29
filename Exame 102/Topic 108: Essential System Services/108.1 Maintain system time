@@ -1,5 +1,32 @@
 Terms and Utilities:
 
+# Esse tópico trata da manutenção da data e hora do sistema Linux.
+
+--> É importante entender um conceito, numa máquina com Linux, existem dois tipos de relógios: 
+
+    - relógio do hardware (BIOS), mantido pela placa-mãe (usado apenas no processo de boot do sistema).  
+
+    - relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
+
+# COMANDOS QUE GERENCIAM ESSE DOIS TIPOS DE RELÓGIOS:
+
+#date
+
+
+#hwclock
+
+
+
+
+
+
+
+
+
+
+
+
+
 #/usr/share/zoneinfo/
 
 #/etc/timezone
@@ -8,9 +35,7 @@ Terms and Utilities:
 
 #/etc/ntp.conf
 
-#date
 
-#hwclock
 
 #ntpd
 
