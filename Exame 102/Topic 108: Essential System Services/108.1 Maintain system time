@@ -4,24 +4,51 @@ Terms and Utilities:
 
 --> É importante entender um conceito, numa máquina com Linux, existem dois tipos de relógios: 
 
-    - relógio do hardware (BIOS), mantido pela placa-mãe (usado apenas no processo de boot do sistema).  
+    * relógio do hardware (BIOS), mantido pela placa-mãe (usado apenas no processo de boot do sistema).  
 
-    - relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
+    * relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
+
 
 # COMANDOS QUE GERENCIAM ESSE DOIS TIPOS DE RELÓGIOS:
 
-#date
+
+#date (mostra a data e o horário do sistema)
+
+$date  (mostra a data, hora, timezone e o ano)
+dom jul 29 11:27:08 -03 2018
+
+$date -u  (horário UTC, horário universal, que eu posso converter para o meu timezone BRT).
+dom jul 29 14:29:32 UTC 2018
+
+$date +%H:%M (eu posso alterar o formato que é exibido na tela) - usado em scripts.
+11:31
+
+$date 1211200 (podemos mudar o horário do sistema usando o date)
+
+- o mês vai na frente do dia, depois o dia do mês e depois 1200 (horário) -> 01/12 às 12:00 
+
+#hwclock (comando que mostra o horário do hardware do Linux, o horário da BIOS)
+
+1) Importante ressaltar que nem sempre a hora do comando date será igual a hora do hwclock, a máquina pode estar ligada a bastante tempo e isso acaba afetando, e eu posso usar o hwclock para sincronizar esses horários.
+
+$hwclock
+2018-07-29 11:37:31.216738-0300
+
+a) $hwclock -w ou hwclock --systohc (pega a hora do sistema (Linux) e envia para a hora do hardware)
 
 
-#hwclock
+b) Podemos fazer ao contrário, pegar a hora da BIOS (hardware clock) e enviar para a hora do sistema:
+
+hwclock -s ou  hwclock --hctosys (deixa os horários iguais, sincronizados).
+
+c) Posso usar o comando hwclock para setar a hora do hardware também, veja abaixo:
+
+hwclock --set --date "12/01/2017 14:00"  (define o horário de hardware da máquina)
 
 
+--> O sistema usa a hora do Linux (hora do sistema) para gravar os logs, o sistema não usa a hora do hardware para gravar os logs.
 
-
-
-
-
-
+--> Esses são os dois comandos manuais de setar a hora do Linux.
 
 
 
