@@ -51,8 +51,8 @@ hwclock --set --date "12/01/2017 14:00"  (define o horário de hardware da máqu
 --> Esses são os dois comandos manuais de setar a hora do Linux.
 
 
-
 # NTP (Network Time Protocol)
+
 
 1) Conceitos relevantes:
 
@@ -108,7 +108,9 @@ server 1.south-america.pool.ntp.org
 server 2.south-america.pool.ntp.org
 server 3.south-america.pool.ntp.org
 
-# Comandos para testar as configurações do NTP:
+# COMANDOS PARA GERENCIAR O NTP:
+
+#ntpq (standard NTP query program)
 
 $ntpq -p  (retorna os servidores que eu estou utilizando e algumas estatisticas sobre esses servidores)
  remote           refid      st t when poll reach   delay   offset  jitter
@@ -119,23 +121,6 @@ $ntpq -p  (retorna os servidores que eu estou utilizando e algumas estatisticas 
  3.ubuntu.pool.n .POOL.          16 p    -   64    0    0.000    0.000   0.000
  ntp.ubuntu.com  .POOL.          16 p    -   64    0    0.000    0.000   0.000
 
+#ntpdate (seta a hora e data via NTP, atualiza nesse momento o horário do sistema)
 
-
-
-
-
-
-
-
-
-
-
-
-#/usr/share/zoneinfo/
-
-#/etc/timezone
-
-#/etc/localtime
-
-#ntpdate
-
+$ntpdate 3.pt.pool.ntp.org  (pega o horário desse servidor e atualiza o horário do meu sistema, não é horário de Portugual)
