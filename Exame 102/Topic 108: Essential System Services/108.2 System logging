@@ -1,8 +1,26 @@
 Terms and Utilities:
 
+# SISTEMA DE GERENCIAMENTO DE LOGS DO LINUX.
+
+1) Introdução:
+
+- Sabemos que no sistema existem diversas aplicações que rodam simultaneamente, serviços e ambos vão gerando logs, registros.
+- Para que o administrador possa gerenciar esses registros, existe o sistema de gerenciamento de logs.
+
+#syslogd (principal sistema de gerenciamento de logs) * "sislog" (deamon do syslogd)
+
+- hoje em dia temos também o "rsyslog" (melhoria do syslog, performance, sistema de logs mais encontrado em desktops, Debian, Fedora).
+
+- "syslogd" é o principal para nosso estudo para a certificação.
+- Existe também um 3º sistema de logs que é o "syslog-ng" (não é semelhante ao syslog, muda os arquivos, forma de funcionamento).
+
+
+
+
+
+
 #syslog.conf
 
-#syslogd
 
 #klogd
 
@@ -19,6 +37,5 @@ Terms and Utilities:
 #journalctl
 
 #/etc/systemd/journald.conf
-
 
 #/var/log/journal/
