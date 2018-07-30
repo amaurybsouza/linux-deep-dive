@@ -4,9 +4,9 @@ Terms and Utilities:
 
 --> É importante entender um conceito, numa máquina com Linux, existem dois tipos de relógios: 
 
-    * relógio do hardware (BIOS), mantido pela placa-mãe (usado apenas no processo de boot do sistema).  
+    A) relógio do hardware (BIOS), mantido pela placa-mãe (usado apenas no processo de boot do sistema).  
 
-    * relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
+    B) relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
 
 
 # COMANDOS QUE GERENCIAM ESSES DOIS TIPOS DE RELÓGIOS:
@@ -26,6 +26,7 @@ $date +%H:%M (eu posso alterar o formato que é exibido na tela) - usado em scri
 $date 1211200 (podemos mudar o horário do sistema usando o date)
 
 - o mês vai na frente do dia, depois o dia do mês e depois 1200 (horário) -> 01/12 às 12:00 
+
 
 #hwclock (comando que mostra o horário do hardware do Linux, o horário da BIOS)
 
@@ -84,6 +85,7 @@ root     22807  0.0  0.0  21536  1056 pts/1    S+   15:13   0:00 grep --color=au
 * E a minha máquina pode ser um servidor NTP, outras máquinas podem conectar na minha para utilizar a minha como servidor NTP.
 * Esse deamon do NTP pode ser cliente e pode ser servidor, posso ajustar isso no arquivo de configuração e bloquear caso eu não queria que ninguem conecete na minha máquina.
 
+
 #/etc/ntp.conf (principal arquivo de configuração do NTP)
 
 a) Entendendo o /etc/ntp.conf
@@ -107,6 +109,7 @@ server 0.south-america.pool.ntp.org
 server 1.south-america.pool.ntp.org
 server 2.south-america.pool.ntp.org
 server 3.south-america.pool.ntp.org
+
 
 # COMANDOS PARA GERENCIAR O NTP:
 
