@@ -1,30 +1,75 @@
 Terms and Utilities:
 
-# SISTEMA DE GERENCIAMENTO DE LOGS DO LINUX.
+# SISTEMA DE GERENCIAMENTO DE LOGS DO LINUX (SYSLOG).
+
 
 1) Introdução:
 
 - Sabemos que no sistema existem diversas aplicações que rodam simultaneamente, serviços e ambos vão gerando logs, registros.
 - Para que o administrador possa gerenciar esses registros, existe o sistema de gerenciamento de logs.
 
-#syslogd (principal sistema de gerenciamento de logs) * "sislog" (deamon do syslogd)
+#syslogd (principal sistema de gerenciamento de logs) * "sislogd" (deamon do syslog, fica sempre em execução)
 
 - hoje em dia temos também o "rsyslog" (melhoria do syslog, performance, sistema de logs mais encontrado em desktops, Debian, Fedora).
 
-- "syslogd" é o principal para nosso estudo para a certificação.
+- "syslog" é o principal para nosso estudo para a certificação.
 - Existe também um 3º sistema de logs que é o "syslog-ng" (não é semelhante ao syslog, muda os arquivos, forma de funcionamento).
 
+#/var/log/ (principal diretório de logs do Linux) 
+
+- principais arquivos de logs são armazenados aqui nesse diretório.
+
+
+#/etc/syslog.conf (arquivo de configuração do syslog) * cai na prova.
+
+  > CONFIGURAÇÃO DO SYSLOG: /etc/syslog.conf
+
+# First some standard logfiles.  Log by facility.
+#
+##Facility.Priority                    Action
+#
+#Facility                 = o criador da mensagem
+#                         = auth, authpriv, cron, daemon, kern, lpr, mail, mark news, syslog, user, uucp, local0-local7
+#priority/nivel           = urgência/importância da mensagem
+#                         = debug, info, notice, warning (warn), err (error), crit, alert, emerg (panic)
+#action                   = destino das mensagens 
+
+auth,authpriv.*                 /var/log/auth.log
+*.*;auth,authpriv.none          -/var/log/syslog
+#cron.*                         /var/log/cron.log
+daemon.*                        -/var/log/daemon.log
+kern.*                          -/var/log/kern.log
+lpr.*                           -/var/log/lpr.log
+mail.*                          -/var/log/mail.log
+user.*                          -/var/log/user.log
+uucp.*                          /var/log/uucp.log
 
 
 
 
 
-#syslog.conf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #klogd
 
-#/var/log/
 
 #logger
 
