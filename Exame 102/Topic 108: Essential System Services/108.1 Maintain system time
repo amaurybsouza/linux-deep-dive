@@ -14,7 +14,9 @@ Terms and Utilities:
 
 #date (mostra a data e o horário do sistema)
 
-$date  (mostra a data, hora, timezone e o ano)
+- Mostra a data, hora, timezone e o ano
+
+$date 
 dom jul 29 11:27:08 -03 2018
 
 $date -u  (horário UTC, horário universal, que eu posso converter para o meu timezone BRT).
