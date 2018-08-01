@@ -24,34 +24,6 @@ Terms and Utilities:
 
   > CONFIGURAÇÃO DO SYSLOG: /etc/syslog.conf
 
-------------------------------------------------------------------------------------------------------------
-# First some standard logfiles.  Log by facility.
-#
-##Facility.Priority                    Action
-#
-#Facility                 = o criador da mensagem
-#                         = auth, authpriv, cron, daemon, kern, lpr, mail, mark news, syslog, user, uucp, local0-local7
-#priority/nivel           = urgência/importância da mensagem
-#                         = debug, info, notice, warning (warn), err (error), crit, alert, emerg (panic)
-#action                   = destino das mensagens 
-
-auth,authpriv.*                 /var/log/auth.log
-*.*;auth,authpriv.none          -/var/log/syslog
-#cron.*                         /var/log/cron.log
-daemon.*                        -/var/log/daemon.log
-kern.*                          -/var/log/kern.log
-lpr.*                           -/var/log/lpr.log
-mail.*                          -/var/log/mail.log
-user.*                          -/var/log/user.log
-uucp.*                          /var/log/uucp.log
-
-# Logging for the mail system.  Split it up so that
-# it is easy to write scripts to parse these files.
-#
-mail.info                       -/var/log/mail.info
-mail.warn                       -/var/log/mail.warn
-mail.err                        /var/log/mail.err
---------------------------------------------------------------------------------------------------------------
 
 1) Exemplo da linha: mail.info                       -/var/log/mail.info 
 
@@ -63,6 +35,7 @@ mail.err                        /var/log/mail.err
 2) A prioridade é: "da menos urgente para mais urgente"    debug, info, notice, warning, err, crit, alert, emerg
 
 - O termo "none" ignora a urgência para a facility em questão.  
+
 
 3) Exemplos de caracteres modificadores de facility e priority "(* , = !)"
 
@@ -80,22 +53,18 @@ daemon.*                        -/var/log/daemon.log
 
 *.*;auth,authpriv.none          -/var/log/syslog
 
-- criando um log somente para "alert":  mail.=alert                      /var/log/mail.alert (o sinal de = pega apenas o alert)
+- criando um log "somente" para "alert":  mail.=alert                      /var/log/mail.alert (o sinal de = pega apenas o alert)
 
 
 
+4) action (destino da mensagem) -> -/var/log/mail.info  (posso enviar para um arquivo de log)
+                                -> lpi1, lpi2           (posso enviar para um usuário) *tela do usuário
+                                -> @10.0.0.1            (posso enviar para um servidor remoto) *segurança, sempre ter os log, vai que dá pau...
 
-
-
-
-
-- action (destino da mensagem) -> -/var/log/mail.info  (posso enviar para um arquivo de log)
-                               -> lpi1, lpi2           (posso enviar para um usuário) *tela do usuário
-                               -> @10.0.0.1            (posso enviar para um servidor remoto) *segurança, sempre ter os log, vai que dá pau...
 - exemplo com o log "info":
-mail.info                       -/var/log/mail.info  (pega tudo que vai depois de info) *info,notice,warning(warn),err(error),crit,alert,emerg(panic)
+mail.info                       -/var/log/mail.info  (pega tudo que vai depois de info) *info,notice,warning,err,crit,alert,emerg
 
-- criando um log para um servidor de log remoto externo:  *servidor de log remoto roda na porta 514 no protocolo UDP.
+- criando um log para um servidor de log remoto externo:  "*servidor de log remoto roda na porta 514 no protocolo UDP"
 mail.debug                       @10.0.0.100 
 
 mail.emerg                       *                    (joga na tela de todos os usuários a mensagem, terminal)
