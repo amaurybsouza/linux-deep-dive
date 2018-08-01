@@ -52,39 +52,46 @@ mail.info                       -/var/log/mail.info
 mail.warn                       -/var/log/mail.warn
 mail.err                        /var/log/mail.err
 --------------------------------------------------------------------------------------------------------------
-auth,authpriv.*                 /var/log/auth.log (linha com o registro de cada tipo de log)
-= auth, authpriv, cron, daemon, kern, lpr, mail  (lista com os tipos de mensagem) * auth, authpriv (autenticação)
-                                                  local0-local7 (tipo que eu posso usar para scripts, aplicações)
 
-"--> Exemplo do arquivo /etc/syslog.conf com a linha abaixo:"
-mail.info                       -/var/log/mail.info 
--mail é o facility (criador da mensagem) .info (priority/ (info) é o nivel da mensagem) *notice,warning,error,crit,alert
+1) Exemplo da linha: mail.info                       -/var/log/mail.info 
+
+"-mail é o facility" (origem da mensagem) *auth, authpriv, cron, daemon, kern, lpr, mail, mark news, syslog, user, uucp,
+
+"-info é a priority" (é o urgência da mensagem) *notice,warning,error,crit,alert, emerg
 
 
-"- Importante lembrar o significado da linha abaixo:"
-#                         = debug, info, notice, warning (warn), err (error), crit, alert, emerg (panic)
-- quanto mais para a esquerda "menos urgência" (mais log gerado) | mais a direita "mais critíco" (menos log gerado)
+2) A prioridade é: "da menos urgente para mais urgente"    debug, info, notice, warning, err, crit, alert, emerg
+
+- O termo "none" ignora a urgência para a facility em questão.  
+
+3) Exemplos de caracteres modificadores de facility e priority "(* , = !)"
+
+mail.*                          -/var/log/mail.log 
+
+- todo registro que vem do facility "mail", (qualquer que seja a priority), vai enviar para "/var/log/mail.log"
+
+daemon.*                        -/var/log/daemon.log
+
+- todo registro que vem do facility "daemon", seja qual for a priority "*", ele vai enviar para o "/var/log/daemon.log"
+
+- posso separar os facilities por virgula (auth,authpriv.*), tudo isso será enviado para o /var/log/auth.log
+
+- na linha abaixo, qualquer que seja o facility, ou o priority, *com excessão do auth e authpriv
+
+*.*;auth,authpriv.none          -/var/log/syslog
+
+- criando um log somente para "alert":  mail.=alert                      /var/log/mail.alert (o sinal de = pega apenas o alert)
+
+
+
+
+
+
 
 
 - action (destino da mensagem) -> -/var/log/mail.info  (posso enviar para um arquivo de log)
                                -> lpi1, lpi2           (posso enviar para um usuário) *tela do usuário
                                -> @10.0.0.1            (posso enviar para um servidor remoto) *segurança, sempre ter os log, vai que dá pau...
-
-"--> Mais um exemplo com a linha abaixo:"
-mail.*                          -/var/log/mail.log 
-- todo registro que vem do facility "mail", "asterisco" significa (qualquer que seja a priority), vai enviar para "/var/log/mail.log"
-
-daemon.*                        -/var/log/daemon.log
-- todo registro que vem com o facility "daemon", seja qual for o log "*", ele vai enviar para o "/var/log/daemon.log"
-
-- posso separar os facilities por virgula (auth,authpriv.*), tudo isso será enviado para o /var/log/auth.log
-
-- na linha abaixo, qualquer que seja o facility, ou o priority, o ; separa uma outra regra (;auth,authpriv.none) *com excessão do auth e authpriv
-*.*;auth,authpriv.none          -/var/log/syslog
-
-- criando um log somente para "alert":
-mail.=alert                      /var/log/mail.alert (pega apenas o alert)
-
 - exemplo com o log "info":
 mail.info                       -/var/log/mail.info  (pega tudo que vai depois de info) *info,notice,warning(warn),err(error),crit,alert,emerg(panic)
 
@@ -93,6 +100,12 @@ mail.debug                       @10.0.0.100
 
 mail.emerg                       *                    (joga na tela de todos os usuários a mensagem, terminal)
 mail.emerg                       lpi1, lpi2
+
+
+
+
+
+
 
 
 
