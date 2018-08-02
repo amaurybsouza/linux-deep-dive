@@ -83,6 +83,15 @@ $logger -p local0.crit -t [testes-lpi] "teste de mensagem critica" (opção -t i
 #klogd (kernel log, processo que pega os logs do kernel, e gera um registro no syslog)
 
 
+  > ROTACIONAMENTO DE LOGS:
+
+- Porque isso é importante?
+Imagine que você está gerando logs, registros nos sistemas, de toda a rede, e vai chegar um dia que isso vai ficar sem espaço em disco, tem que ficar removendo logs, tem que ficar criando scripts para gerenciar esses logs.
+
+#logrotate (serve para rotacionar os logs que estão sendo gerados pelo syslogd, rsyslog, syslog-ng)
+
+
+#/etc/logrotate.conf (arquivo de configuração do logrotate)
 
 
 
@@ -97,8 +106,11 @@ $logger -p local0.crit -t [testes-lpi] "teste de mensagem critica" (opção -t i
 
 
 
-#logrotate
-#/etc/logrotate.conf
+
+
+
+
+
 #/etc/logrotate.d/
 #journalctl
 #/etc/systemd/journald.conf
