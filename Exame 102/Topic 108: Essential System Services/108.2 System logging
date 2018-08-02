@@ -90,8 +90,21 @@ Imagine que você está gerando logs, registros nos sistemas, de toda a rede, e 
 
 #logrotate (serve para rotacionar os logs que estão sendo gerados pelo syslogd, rsyslog, syslog-ng)
 
+- encontrado em qualquer distribuição do Linux, Unix
 
 #/etc/logrotate.conf (arquivo de configuração do logrotate)
+
+1) Exemplo de logs rotacionados:
+
+/var/log# ls -l syslog*
+-rw-r----- 1 syslog adm 101031 ago  2 17:41 syslog
+-rw-r----- 1 syslog adm 106199 ago  1 19:08 syslog.1
+-rw-r----- 1 syslog adm 341218 jul 31 19:56 syslog.2.gz
+-rw-r----- 1 syslog adm 367315 jul 30 18:08 syslog.3.gz
+-rw-r----- 1 syslog adm  97045 jul 29 12:07 syslog.4.gz
+-rw-r----- 1 syslog adm  61465 jul 28 13:07 syslog.5.gz
+-rw-r----- 1 syslog adm  56230 jul 27 18:10 syslog.6.gz
+-rw-r----- 1 syslog adm 389880 jul 26 18:05 syslog.7.gz
 
 
 
