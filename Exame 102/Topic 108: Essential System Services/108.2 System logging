@@ -15,10 +15,7 @@ Terms and Utilities:
 - "syslog" é o principal para nosso estudo para a certificação.
 - Existe também um 3º sistema de logs que é o "syslog-ng" (não é semelhante ao syslog, muda os arquivos, forma de funcionamento).
 
-#/var/log/ (principal diretório de logs do Linux) 
-
-- principais arquivos de logs são armazenados aqui nesse diretório.
-
+#/var/log/ (principal diretório de logs do Linux) * principais arquivos de logs são armazenados aqui nesse diretório.
 
 #/etc/syslog.conf (arquivo de configuração do syslog) * cai na prova.
 
@@ -27,8 +24,8 @@ Terms and Utilities:
 
 1) Exemplo da linha: mail.info                       -/var/log/mail.info 
 
-"-mail é o facility" (origem da mensagem) *auth, authpriv, cron, daemon, kern, lpr, mail, mark news, syslog, user, uucp,
-
+"-mail é o facility" (origem da mensagem) *auth, authpriv, cron, daemon, kern, lpr, mail, mark news, syslog, user, uucp,local0-local7
+local0 (utilizado em script, aplicações...)
 "-info é a priority" (é o urgência da mensagem) *notice,warning,error,crit,alert, emerg
 
 
@@ -49,12 +46,11 @@ daemon.*                        -/var/log/daemon.log
 
 - posso separar os facilities por virgula (auth,authpriv.*), tudo isso será enviado para o /var/log/auth.log
 
-- na linha abaixo, qualquer que seja o facility, ou o priority, *com excessão do auth e authpriv
+- na linha abaixo, qualquer que seja o facility, ou o priority, *com excessão do auth e authpriv (none)
 
 *.*;auth,authpriv.none          -/var/log/syslog
 
 - criando um log "somente" para "alert":  mail.=alert                      /var/log/mail.alert (o sinal de = pega apenas o alert)
-
 
 
 4) action (destino da mensagem) -> -/var/log/mail.info  (posso enviar para um arquivo de log)
@@ -70,6 +66,28 @@ mail.debug                       @10.0.0.100
 mail.emerg                       *                    (joga na tela de todos os usuários a mensagem, terminal)
 mail.emerg                       lpi1, lpi2
 
+5) "Toda vez que eu realizar uma alteração no /etc/syslog.conf é preciso reiniciar o syslogd:"
+
+/etc/init.d/inetutils-syslogd  restart (forma de reiniciar o serviço syslogd).
+
+
+  > INSERINDO LOGS DE TESTES NOS ARQUIVOS:
+
+#logger (gera os arquivos/registros de log, especificando a facility e a priority). *posso usar dentro de um script, de uma aplicação.
+
+$logger -p local0.debug "log de debug de teste"        (opção -p indica a priority que eu quero)
+
+$logger -p local0.crit -t [testes-lpi] "teste de mensagem critica" (opção -t indica a tag que identifica de onde veio o log)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,18 +98,9 @@ mail.emerg                       lpi1, lpi2
 
 
 #klogd
-
-
-#logger
-
 #logrotate
-
 #/etc/logrotate.conf
-
 #/etc/logrotate.d/
-
 #journalctl
-
 #/etc/systemd/journald.conf
-
 #/var/log/journal/
