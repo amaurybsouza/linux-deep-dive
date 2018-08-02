@@ -80,6 +80,7 @@ $logger -p local0.debug "log de debug de teste"        (opção -p indica a prio
 $logger -p local0.crit -t [testes-lpi] "teste de mensagem critica" (opção -t indica a tag que identifica de onde veio o log)
 
 
+#klogd (kernel log, processo que pega os logs do kernel, e gera um registro no syslog)
 
 
 
@@ -96,8 +97,6 @@ $logger -p local0.crit -t [testes-lpi] "teste de mensagem critica" (opção -t i
 
 
 
-
-#klogd
 #logrotate
 #/etc/logrotate.conf
 #/etc/logrotate.d/
