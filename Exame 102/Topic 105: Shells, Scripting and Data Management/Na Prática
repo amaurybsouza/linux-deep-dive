@@ -1,3 +1,79 @@
+# QUESTÕES DO TÓPICO 105
+
+1. O principal arquivo de definição de variáveis globais do Bash é:
+a. /etc/fstab
+b. I etc/bash
+c. /etc/global
+d. /etc/profile
+
+2. O arquivo de definições do Bash para cada usuário é o:
+a. ~/.init
+b. ~/.bash
+c. ~/.shell
+d. ~/.bash_profile
+
+3. O comando alias delete="rm -i" tem a finalidade de
+a. substituir o comando rm -i pelo comando delete.
+b. criar o comando delete que invoca o comando rm -i.
+c. evitar que arquivos essenciais sejam apagados.
+d. o comando rm sempre exigirá confirmação de exclusão.
+
+4. Qual entrada no início de um script identifica o programa /bin/bash como interpretador padrão?
+a. exporr shell=/bin/bash
+b. env shell=/bin/bash
+c. #shell=lbin/bash
+d. #!/bin/bash
+
+5. A variável $! representa
+a. o interpretador padrão do script.
+b. o primeiro argumento do script.
+c. o número PIO do script.
+d. o número PIO do último programa executado.
+
+6. A instrução que fecha uma estrutura de teste if é
+a. fi
+b. then
+c. end
+d. done
+
+7. A instrução if [ -n " $NOME"]; then... será verdadeira se
+a. A variável $NOME contiver um número.
+b. A variável $NOME possuir um ou mais caracteres.
+C. A variável $NOME for nula.
+d. Essa instrução nunca será verdadeira.
+
+
+8. A instrução que fecha uma estrutura case é:
+a. end
+b. done
+c. then
+d. esac
+
+9. O comando seq tem a finalidade de
+a. segmentar um arquivo.
+b. unir vários arquivo em um só.
+c. exibir uma sequência ordenada de números.
+d. ordenar a entrada padrão numericamente.
+
+
+10. A instrução SQL responsável por atualizar uma linha numa tabela de banco de dados é:
+a. INSERT
+b. ADD
+c. UPDATE
+d. WHERE
+
+
+
+
+
+
+
+
+
+
+
+
+
 # O QUE ESTUDAR?
 
 
