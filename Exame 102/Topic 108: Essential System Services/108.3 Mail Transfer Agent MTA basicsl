@@ -1,11 +1,25 @@
 Terms and Utilities:
 
-~/.forward
-sendmail emulation layer commands
-newaliases
-mail
-mailq
-postfix
-sendmail
-exim
-qmail
+
+
+
+
+
+
+#~/.forward
+
+#sendmail emulation layer commands
+
+#newaliases
+
+#mail
+
+#mailq
+
+#postfix
+
+#sendmail
+
+#exim
+
+#qmail
