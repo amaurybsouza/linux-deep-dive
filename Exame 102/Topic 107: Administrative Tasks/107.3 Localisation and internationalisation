@@ -20,7 +20,8 @@ lrwxrwxrwx 1 root root 37 mai 15 21:41 /etc/localtime -> /usr/share/zoneinfo/Ame
 - para configurar o timezone do sistema é nesse arquivo que se define.
 
 
-#tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais, após a escolha cria o arquivo /etc/timezone).
+#tzselect (mostra o timezone, ajuda a encontrar o nome do timezone correto, fuso horário oficiais, após a escolha cria o 
+#arquivo /etc/timezone).
 
 
 #TZ (variavel de ambiente, define o horário da minha sessão, sessão atual).
@@ -41,7 +42,8 @@ Seg Mai 15 15:03:29 CDT 2017
 ### LOCALIZAÇÃO, IDIOMA E CODIFICAÇÃO DE CARACTERES
 
 
---> A configuração básica de localização é feita com a variável de ambiente LANG e é a partir dela que a maioria dos programas definem as preferências de idioma.
+--> A configuração básica de localização é feita com a variável de ambiente LANG e é a partir dela que a maioria dos programas 
+definem as preferências de idioma.
 
 #/usr/bin/locale (comando locale mostra as localizações, linguagens do sistema)
 
@@ -92,7 +94,8 @@ pt_BR.UTF-8
 
 #LC_ALL: sobrepõe todas as demais variáveis.
 
---> Além da variável LANG, outras variáveis de ambiente influenciam as opções de localização dos programas. Essas outras variáveis são utilizadas para definir alguma configuração específica de localização:
+--> Além da variável LANG, outras variáveis de ambiente influenciam as opções de localização dos programas. 
+Essas outras variáveis são utilizadas para definir alguma configuração específica de localização:
 
 
 --> OPÇÕES DE IDIOMA PARA SCRIPTS:
