@@ -2,7 +2,7 @@
 
 1. O principal arquivo de definição de variáveis globais do Bash é:
 a. /etc/fstab
-b. I etc/bash
+b. /etc/bash
 c. /etc/global
 d. /etc/profile
 
