@@ -7,9 +7,36 @@ a) MTA = Mail Transfer Agent
 
 
 b) SMTP = Simples Mail Transfer Protocol
-   
-   - protocolo utilizado para envio de mensgens entre servidores.
+   - protocolo utilizado para envio de mensagens entre servidores.
    - por padrão, usa a porta 25.
+
+c) MTA = Servidor SMTP = Servidor de E-mails.
+
+
+  > PRINCIPAIS MTA'S NO LINUX: *modelos de servidores de e-mail.
+
+
+#qmail (utilizado no Unix, um dos mais antigos, bastante tempo que ele não é mantido por uma equipe, tem caído em desuso).
+
+#sendmail (foi por muito tempo o padrão do Linux, distros vinham com esse client, hoje em dia não é mais o padrão).
+
+#postfix (padrão nas distribuições Linux, vem sempre instalado esse modelo).
+
+#exim (4º opção de servidor de e-mail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #~/.forward
 
@@ -21,10 +48,6 @@ b) SMTP = Simples Mail Transfer Protocol
 
 #mailq
 
-#postfix
 
-#sendmail
 
-#exim
 
-#qmail
