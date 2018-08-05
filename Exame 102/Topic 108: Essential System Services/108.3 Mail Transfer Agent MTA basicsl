@@ -1,10 +1,15 @@
 Terms and Utilities:
 
+  > CONCEITOS BÁSICOS DE MTA
+
+a) MTA = Mail Transfer Agent 
+    - programa responsável pelo envio e recebimento de mensagens eletrônicas "e-mail".
 
 
-
-
-
+b) SMTP = Simples Mail Transfer Protocol
+   
+   - protocolo utilizado para envio de mensgens entre servidores.
+   - por padrão, usa a porta 25.
 
 #~/.forward
 

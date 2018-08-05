@@ -116,7 +116,7 @@ server 3.south-america.pool.ntp.org
 
 # COMANDOS PARA GERENCIAR O NTP:
 
-#ntpq (standard NTP query program)
+#ntpq (comando para verificar se o serviço ntpd está ativo).
 
 $ntpq -p  (retorna os servidores que eu estou utilizando e algumas estatisticas sobre esses servidores)
  remote           refid      st t when poll reach   delay   offset  jitter
