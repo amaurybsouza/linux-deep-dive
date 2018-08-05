@@ -12,7 +12,6 @@ b) SMTP = Simples Mail Transfer Protocol
 
 c) MTA = Servidor SMTP = Servidor de E-mails.
 
-
   > PRINCIPAIS MTA'S NO LINUX: *modelos de servidores de e-mail.
 
 
@@ -23,6 +22,33 @@ c) MTA = Servidor SMTP = Servidor de E-mails.
 #postfix (padrão nas distribuições Linux, vem sempre instalado esse modelo).
 
 #exim (4º opção de servidor de e-mail).
+
+
+  > INSTALAÇÃO DO PACOTE MAILUTILS (comandos e o servidor Postfix)
+
+$apt-get install mailutils
+
+$ps axu | grep postfix
+root      1599  0.0  0.0  67392  4212 ?        Ss   08:46   0:00 /usr/lib/postfix/sbin/master -w
+postfix  16499  0.0  0.0  73876  5276 ?        S    21:13   0:00 qmgr -l -t unix -u
+postfix  16500  0.0  0.0  73828  5232 ?        S    21:13   0:00 pickup -l -t unix -u -c
+root     18842  0.0  0.0  21536  1152 pts/1    S+   22:25   0:00 grep --color=auto postfix
+
+$systemctl status postfix
+● postfix.service - Postfix Mail Transport Agent
+   Loaded: loaded (/lib/systemd/system/postfix.service; enabled; vendor preset: enabled)
+   Active: active (exited) since Sat 2018-08-04 08:46:25 -03; 13h ago
+
+  > INICIANDO A AULA COM OS COMANDOS DO MTA:
+
+#mail (cliente de e-mail em forma de texto do Linux, bem reduzido)
+
+a) É possível ler as menagens do usuário.
+b) É possível mandar mensagens também usando esse comando.
+
+$mail -s "mensagem de teste 1"  
+
+
 
 
 
@@ -44,7 +70,6 @@ c) MTA = Servidor SMTP = Servidor de E-mails.
 
 #newaliases
 
-#mail
 
 #mailq
 
