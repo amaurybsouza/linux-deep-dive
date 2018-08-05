@@ -43,36 +43,91 @@ $systemctl status postfix
 
 #mail (cliente de e-mail em forma de texto do Linux, bem reduzido)
 
-a) É possível ler as menagens do usuário.
+a) É possível ler as mensagens do usuário.
 b) É possível mandar mensagens também usando esse comando.
 
-$mail -s "mensagem de teste 1"  
+
+  > EXEMPLO DE USO DO COMANDO MAIL:
+
+a) Enviando mensagem para o usuário amaury, com assunto (-s)
+- (Ctrl + d) -> termina e envia a mensagem.
+
+$mail -s "mensagem de teste 1" amaury 
+Cc: 
+mensagem de teste, aula de MTA  (Ctrl + d)
+
+b) Podemos conferir a mensagem enviada direto no shell do usuário, digitando o comando mail:
+
+$mail
+"/var/mail/amaury": 1 message 1 new
+>N   1 root               dom ago  5 10:13  13/417   mensagem de teste 1
+? 
+
+--> apertando "enter" é possível ler o restante da mensagem:
+
+Return-Path: <root@maumau>
+X-Original-To: amaury@maumau
+Delivered-To: amaury@maumau
+Received: by maumau (Postfix, from userid 0)
+	id 9EE2C521072; Sun,  5 Aug 2018 10:13:09 -0300 (-03)
+Subject: mensagem de teste 1
+To: <amaury@maumau>
+X-Mailer: mail (GNU Mailutils 3.4)
+Message-Id: <20180805131309.9EE2C521072@maumau>
+Date: Sun,  5 Aug 2018 10:13:09 -0300 (-03)
+From: root <root@maumau>
+
+mensagem de teste, aula de MTA
+
+   > OUTRAS FORMAS DE USO DO MAIL:
+
+c) Outra forma de se usar o comando mail com o echo (passando o conteúdo):
+
+$echo "mensagem de teste 2" | mail -s "mensagem de teste 2 usando o echo" amaury
+
+d) Outra forma de se usar o comando mail com o comando cat:
+
+$cat diretorios-config.out | mail -s "mensagem de teste 2 com o cat" amaury 
+
+e) Outra forma de se usar o comando mail com redirecionamento de entrada:
+
+$mail -s "mensagem de teste redirec de entrada" amaury < diretorios-config.out 
 
 
+#/var/spool/mail  (diretório onde ficam os arquivos de texto de cada usuário)
 
 
+f) Opção para redirecionamentos de mensagens entre os usuários do Linux: /etc/aliases e .forward
+
+#/etc/aliases (nesse arquivo tem alias, apelidos dos nomes)
+# See man 5 aliases for format
+postmaster:    root
+webmaster:     amaury,root
+admin:         amaury
+contato:       amaury   (contato@dominio) *envia para esse usuário amaury.
+
+#newaliases (comando serve para atualizar o /etc/aliases) *sempre que eu editar esse arquivo rodar o "newaliases"
 
 
+#~/.forward (esse arquivo também serve para redirecionamentos de mensagens, não precisa rodar o newaliases)
+lpi1
+aluno1
+amaury
+lpi2
+
+- cada usuário pode criar no /home/usuario esse arquivo de nome .forward
+- esse arquivo indica quem que vai receber as mensagens.
 
 
+#mailq (mostra a fila de mensagens do servidor de e-mail)
+
+- o servidor de e-mails possui uma fila.
+
+$mailq 
+Mail queue is empty
 
 
+#sendmail -bp (comando similar ao mailq)  *comando usando em modo de compatibilidade ao servidor postfix.
 
 
-
-
-
-
-
-#~/.forward
-
-#sendmail emulation layer commands
-
-#newaliases
-
-
-#mailq
-
-
-
-
+#postqueue (comando que tenta reenviar a mensagem que estava parada na fila).
