@@ -1,9 +1,155 @@
 Terms and Utilities:
 
+
+   > CUPS (Sistema de Gerenciamento de Impressão do Linux)
+
+a) CUPS ->  sistema que gere as impressoras, filas de impressão. 
+
+b) Verificando se o CUPS está rodando no sistema:
+
+$ps axu | grep cups
+root      3924  0.0  0.1 216592 12076 ?        Ss   07:09   0:00 /usr/sbin/cupsd -l
+root      3925  0.0  0.1 306020 11740 ?        Ssl  07:09   0:00 /usr/sbin/cups-browsed
+lp        4072  0.0  0.0  86412  6200 ?        S    07:11   0:00 /usr/lib/cups/notifier/dbus dbus://
+root     13082  0.0  0.0  21536  1040 pts/1    S+   10:44   0:00 grep --color=auto cups
+
+$systemctl status cups
+● cups.service - CUPS Scheduler
+   Loaded: loaded (/lib/systemd/system/cups.service; enabled; vendor preset: enabled)
+   Active: active (running) since Mon 2018-08-06 07:09:08 -03; 3h 36min ago
+     Docs: man:cupsd(8)
+ Main PID: 3924 (cupsd)
+    Tasks: 2 (limit: 4915)
+   CGroup: /system.slice/cups.service
+           ├─3924 /usr/sbin/cupsd -l
+           └─4072 /usr/lib/cups/notifier/dbus dbus://
+
+
+--> Caso não esteja instalado no sistema, executar o comando $apt-get install cups
+
+
+c) O CUPS pode ser configurado por uma interface web ou por comandos de textos, arquivos de configuração.
+
+
+   > Configurando o CUPS por interface web (Firefox)
+
+- Abrir o Firefox e digitar localhost:631 (CUPS roda na porta 631).
+
+- Abre o sistema de gerenciamento de impressão via web.
+
+- Esse passo é feito todo no navegador (Firefox).
+
+- Adicionar uma impressora - (Locais, via rede e outras impressoras).
+
+  - Escolher o driver da impressora (esses drivers já vem instalados no sistema Linux)
+  - Escolher outras configurações de impressão (papel, colorida, monocromática).
+
+- Pela interface gráfica eu posso gerenciar as impressoras, remover, instalar (tudo que eu ajustar aqui via web será traduzido nos arquivos de configuração do CUPS).
+
+
+d) As configurações do CUPS estão no diretório abaixo: 
+
+#/etc/cups/ 
+
+--> "/etc/cups"   (configurações do CUPS).
+-rw------- 1 root lp     108 jun  6 08:57 classes.conf
+-rw-r--r-- 1 root root 26954 abr  6 11:55 cups-browsed.conf
+-rw-r--r-- 1 root root  6403 abr 26 15:24 cupsd.conf
+-rw-r--r-- 1 root root  2923 abr  9 16:44 cups-files.conf
+drwxr-xr-x 2 root root  4096 abr  9 16:44 interfaces
+drwxr-xr-x 2 root lp    4096 ago  6 07:11 ppd
+-rw------- 1 root lp     916 ago  6 07:11 printers.conf
+-rw------- 1 root lp     526 ago  6 07:05 printers.conf.O
+-rw-r--r-- 1 root root   240 abr 26 15:25 raw.convs
+-rw-r--r-- 1 root root   211 abr 26 15:25 raw.types
+-rw-r--r-- 1 root root   142 abr  9 16:44 snmp.conf
+drwx------ 2 root lp    4096 abr  9 16:44 ssl
+-rw-r----- 1 root lp     687 ago  6 10:59 subscriptions.conf
+-rw-r----- 1 root lp     687 ago  6 10:01 subscriptions.conf.O
+
+
+--> "/etc/cups/cupsd.conf"  (principal arquivo de configuração do CUPS).
+
+- posso definir se as impressoras estarão disponíveis na rede.
+- quem pode enxergar essas impressoras na rede.
+- permissões, se habilita ou não a interface gráfica.
+
+
+--> "/etc/cups/printers.conf"  (aqui está a impressora que eu configurei na interface web).
+
+- Dados da impressora que foi instalada via web.
+- todas as impressoras que eu instalar serão listadas nesse arquivo.
+
+
+--> "/etc/cups/ppd" (diretório dos drivers das impressoras que eu ajustar).
+
+- diretório dos drivers do CUPS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #CUPS configuration files, tools and utilities
 
 
-#/etc/cups/
 
 
 #lpd legacy interface (lpr, lprm, lpq)
