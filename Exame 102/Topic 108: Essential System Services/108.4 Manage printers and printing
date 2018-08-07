@@ -86,11 +86,10 @@ drwx------ 2 root lp    4096 abr  9 16:44 ssl
 - diretório dos drivers do CUPS.
 
 
-   > COMANDOS PARA GERENCIAMENTO DE IMPRESSORAS (CUPS)
+   > COMANDOS PARA GERENCIAMENTO DE IMPRESSORAS (CUPS)    *todos os comandos começam com lp... alguma coisa.
 
-- todos os comandos começam com lp... alguma coisa.
 
-#lpinfo  (lista os dispositivos de impressão e os drivers de impressão)
+#lpinfo --> Lista os dispositivos de impressão e os drivers de impressão:
 
 $lpinfo -v   (mostra os dispositivos que o CUPS está identificando)
 network socket
@@ -104,7 +103,8 @@ network ipp
 direct hp
 direct hpfax
 
-$lpinfo -m  (mostra os drivers disponíveis aqui do Linux, que já estão instalados no sistema)
+
+$lpinfo -m  (Mostra os drivers disponíveis aqui do Linux, que já estão instalados no sistema)
 
 - Abaixo está uma base de dados (foomatic) que tem diversos drivers no Linux:
 
@@ -114,14 +114,14 @@ foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Xerox-Phaser_8560DN-ljet4d.ppd Xe
 foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Xerox-Phaser_8560DN-Postscript.ppd Xerox Phaser 8560DN Foomatic/Postscript
 
 
-$lpstat  (comando que mostra o status das impressoras)
+#lpstat --> comando que mostra o status das impressoras.
 
 
 $lpstat -a  (mostra o status de todas as impressoras do sistema)
 Deskjet_2540_series_FCCAC5_ está aceitando requisições desde seg 06 ago 2018 20:46:52 -03
 
 
-$lpstat -t  (mostra um status geral do sistema)
+$lpstat -t  (mostra mais detalhes ainda da impressora do sistema)
 Agendador está em execução
 nenhum destino padrão de sistema
 dispositivo de Deskjet_2540_series_FCCAC5_: ipp://HPECB1D7FCCAC5.local:631/ipp/print
@@ -134,24 +134,49 @@ Deskjet_2540_series_FCCAC5_-22 unknown          12288   seg 06 ago 2018 20:46:52
 $lpstat -d  (mostra qual a impressora padrão do meu sistema Linux)   *no caso nenhuma.
 nenhum destino padrão de sistema
 
-$lpq (msotra as filas de impressão)
+
+#lpq  --> mostra as filas de impressão.
+
+$lpq -P Deskjet_2540_series_FCCAC5_     (mostra a fila de impressão da minha impressora instalada)
+Deskjet_2540_series_FCCAC5_ está pronta e imprimindo
+Ordem   Dono    Trab    Arquivo(s)                      Tamanho total
+active  unknown 22      unknown                         12288 bytes
 
 
+   > ADICIONANDO UMA IMPRESSORA MANUALMENTE:
 
 
+#lpadmin --> Instala uma impressora no sistema, e serve também para configurar.
 
 
+- Primeiramente, temos que procurar o driver da impressora:
+
+$lpinfo -m | grep "HP Deskjet 2540"    (buscando o driver da minha impressora no sistema)
+hplip:0/ppd/hplip/HP/hp-deskjet_2540_series-hpijs.ppd HP Deskjet 2540 Series hpijs, 3.17.10
+hplip:1/ppd/hplip/HP/hp-deskjet_2540_series-hpijs.ppd HP Deskjet 2540 Series hpijs, 3.17.10
+hplip:10/ppd/hplip/HP/hp-deskjet_2540_series-hpijs.ppd HP Deskjet 2540 Series hpijs, 3.17.10
+hplip:11/ppd/hplip/HP/hp-deskjet_2540_series-hpijs.ppd HP Deskjet 2540 Series hpijs, 3.17.10
+
+- Na hora de adicionar a minha impressora eu preciso desse driver:
+
+hplip:0/ppd/hplip/HP/hp-deskjet_2540_series-hpijs.ppd
 
 
+- Adicionando a impressora com o comando abaixo:
+
+$lpadmin -p Impressora2 -E -v "network dnssd://Deskjet%202540%20series%20%5BFCCAC5%5D._ipp._tcp.local/?uuid=1c852a4d-b800-1f08-abcd-ecb1d7fccac5
+" -m "hplip:9/ppd/hplip/HP/hp-deskjet_2540_series-hpijs.ppd"
+
+-p (nome da impressora).
+-E (opção obrigatória).
+-v (dispositivo que eu estou adicionando).
+-m (driver da impressora *ppd).
+
+- Eu poderia incluir outras opções nesse comando, tamanho da folha, preto/branco, localização da impressora... mas esse é o básico.
+- Se eu olhar na interface web vai aparecer a impressora que eu adicionei com esse comando.
 
 
-
-
-
-
-
-
-
+$lpadmin -x  Impressora2  (remove a impressora do sistema)
 
 
 
