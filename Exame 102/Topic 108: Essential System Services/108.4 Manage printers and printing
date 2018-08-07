@@ -247,7 +247,7 @@ $lpq -l (mostra mais detalhes do que está parado na fila de impressão)
    > REMOVENDO OS TRABALHOS NA FILA DE IMPRESSÃO:
 
 
-$ lprm (remove os jobs de impressão da fila)
+$lprm (remove os jobs de impressão da fila)
 
 $lprm -P Impressora2   (limpa os jobs da impressora2, se tiver outras impressoras tem que passar no comando)
 
@@ -259,3 +259,6 @@ $lprm -   (limpa todas as filas de impressão do usuário root)
 #/var/log/cups   (diretório de logs do CUPS)
 -rw-r----- 1 root adm  333 ago  7 06:52 access_log
 -rw-r----- 1 root adm    0 ago  7 06:51 error_log
+
+
+OBS: Vale lembrar que podemos compartilhar as impressoras do Linux com o Windows, basta usar o SAMBA (servidor de serviços).
