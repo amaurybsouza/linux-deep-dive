@@ -31,7 +31,7 @@ $systemctl status cups
 c) O CUPS pode ser configurado por uma interface web ou por comandos de textos, arquivos de configuração.
 
 
-   > Configurando o CUPS por interface web (Firefox)
+   > CONFIGURANDO O CUPS POR INTERFACE WEB (FIREFOX)
 
 
 - Abrir o Firefox e digitar localhost:631 (CUPS roda na porta 631).
