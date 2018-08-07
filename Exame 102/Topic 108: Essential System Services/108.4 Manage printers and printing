@@ -33,6 +33,7 @@ c) O CUPS pode ser configurado por uma interface web ou por comandos de textos, 
 
    > Configurando o CUPS por interface web (Firefox)
 
+
 - Abrir o Firefox e digitar localhost:631 (CUPS roda na porta 631).
 
 - Abre o sistema de gerenciamento de impressão via web.
@@ -86,7 +87,7 @@ drwx------ 2 root lp    4096 abr  9 16:44 ssl
 - diretório dos drivers do CUPS.
 
 
-   > COMANDOS PARA GERENCIAMENTO DE IMPRESSORAS (CUPS)    *todos os comandos começam com lp... alguma coisa.
+   > COMANDOS PARA GERENCIAMENTO DE IMPRESSORAS (CUPS)    *todos os comandos começam com lp... alguma coisa / vieram do LPD.
 
 
 #lpinfo --> Lista os dispositivos de impressão e os drivers de impressão:
@@ -104,7 +105,9 @@ direct hp
 direct hpfax
 
 
-$lpinfo -m  (Mostra os drivers disponíveis aqui do Linux, que já estão instalados no sistema)
+OBS: dnssd (impressora via rede).
+
+$lpinfo -m  (Mostra os modelos/drivers disponíveis aqui do Linux, que já estão instalados no sistema)
 
 - Abaixo está uma base de dados (foomatic) que tem diversos drivers no Linux:
 
@@ -192,6 +195,41 @@ $lpoptions -d Impressora1  (alterando a impressora padrão do sistema).
 
 
    > COMO QUE EU MANDO ARQUIVOS PARA AS IMPRESSORAS DO LINUX:
+
+$lpr (imprime, envia documentos para a impressora)   
+
+OBS: Formas de uso do comando lpr:
+
+
+A) Imprime o /etc/passwd, sem argumentos ele manda para a impressora default, com argumento envia para a impressora2:
+
+$lpr /etc/passwd -P Impressora2
+
+
+B) Imprime somente essa linha e envia para a impressora padrão:
+
+$grep amaury /etc/passwd | lpr
+amaury:x:1000:1000:Amaury B. Souza,,,:/home/amaury:/bin/bash
+
+$lpq (msotra a fila de impressão)
+Impressora2 is ready and printing
+Rank       Owner     Job    File(s)
+active     root      22     (stdin)
+
+
+C) Imprimindo com o comando echo:
+
+$echo "Certificação Comptia+LPI" | lpr -P Impressora2
+
+ 
+
+
+
+
+
+
+
+
 
 
 
