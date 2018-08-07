@@ -9,7 +9,7 @@ Terms and Utilities:
     B) relógio do Linux (software clock) (depois de iniciado o sistema ele assume o software clock, relógio do Linux).
 
 
-# COMANDOS QUE GERENCIAM ESSES DOIS TIPOS DE RELÓGIOS:
+   > COMANDOS QUE GERENCIAM ESSES DOIS TIPOS DE RELÓGIOS:
 
 
 #date (mostra a data e o horário do sistema)
@@ -54,7 +54,7 @@ hwclock --set --date "12/01/2017 14:00"  (define o horário de hardware da máqu
 --> Esses são os dois comandos manuais de setar a hora do Linux.
 
 
-# NTP (Network Time Protocol)
+   > NTP (Network Time Protocol)
 
 
 1) Conceitos relevantes:
@@ -113,8 +113,8 @@ server 1.south-america.pool.ntp.org
 server 2.south-america.pool.ntp.org
 server 3.south-america.pool.ntp.org
 
-
-# COMANDOS PARA GERENCIAR O NTP:
+ 
+   > COMANDOS PARA GERENCIAR O NTP:
 
 #ntpq (comando para verificar se o serviço ntpd está ativo).
 
