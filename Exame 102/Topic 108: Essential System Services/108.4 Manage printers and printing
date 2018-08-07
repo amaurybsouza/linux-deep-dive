@@ -179,6 +179,19 @@ $lpadmin -p Impressora2 -E -v "network dnssd://Deskjet%202540%20series%20%5BFCCA
 $lpadmin -x  Impressora2  (remove a impressora do sistema)
 
 
+$lpoptions (mostra informações e altera as informações de impressoras)
+
+
+$lpoptions -p impressora2 (mostra as propriedades da impressora 2)
+
+
+$lpoptions (alterando a impressora padrão do sistema)   *como no Windows 10.
+
+
+$lpoptions -d Impressora1  (alterando a impressora padrão do sistema).
+
+
+   > COMO QUE EU MANDO ARQUIVOS PARA AS IMPRESSORAS DO LINUX:
 
 
 
@@ -186,67 +199,8 @@ $lpadmin -x  Impressora2  (remove a impressora do sistema)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#CUPS configuration files, tools and utilities
 
 
 
 
 #lpd legacy interface (lpr, lprm, lpq)
-
-
-
