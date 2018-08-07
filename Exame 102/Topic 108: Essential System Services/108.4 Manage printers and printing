@@ -88,6 +88,72 @@ drwx------ 2 root lp    4096 abr  9 16:44 ssl
 
    > COMANDOS PARA GERENCIAMENTO DE IMPRESSORAS (CUPS)
 
+- todos os comandos começam com lp... alguma coisa.
+
+#lpinfo  (lista os dispositivos de impressão e os drivers de impressão)
+
+$lpinfo -v   (mostra os dispositivos que o CUPS está identificando)
+network socket
+network beh
+network https
+file cups-brf:/
+network http
+network lpd
+network ipps
+network ipp
+direct hp
+direct hpfax
+
+$lpinfo -m  (mostra os drivers disponíveis aqui do Linux, que já estão instalados no sistema)
+
+- Abaixo está uma base de dados (foomatic) que tem diversos drivers no Linux:
+
+foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Xerox-Phaser_8550DX-ljet4d.ppd Xerox Phaser 8550DX Foomatic/ljet4
+foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Xerox-Phaser_8560DN-ljet4.ppd Xerox Phaser 8560DN Foomatic/ljet4
+foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Xerox-Phaser_8560DN-ljet4d.ppd Xerox Phaser 8560DN Foomatic/ljet4d
+foomatic-db-compressed-ppds:0/ppd/foomatic-ppd/Xerox-Phaser_8560DN-Postscript.ppd Xerox Phaser 8560DN Foomatic/Postscript
+
+
+$lpstat  (comando que mostra o status das impressoras)
+
+
+$lpstat -a  (mostra o status de todas as impressoras do sistema)
+Deskjet_2540_series_FCCAC5_ está aceitando requisições desde seg 06 ago 2018 20:46:52 -03
+
+
+$lpstat -t  (mostra um status geral do sistema)
+Agendador está em execução
+nenhum destino padrão de sistema
+dispositivo de Deskjet_2540_series_FCCAC5_: ipp://HPECB1D7FCCAC5.local:631/ipp/print
+Deskjet_2540_series_FCCAC5_ está aceitando requisições desde seg 06 ago 2018 20:46:52 -03
+impressora Deskjet_2540_series_FCCAC5_ está imprimindo Deskjet_2540_series_FCCAC5_-22; habilitada desde seg 06 ago 2018 20:46:52 -03
+	Esperando o trabalho completar.
+Deskjet_2540_series_FCCAC5_-22 unknown          12288   seg 06 ago 2018 20:46:52 -03
+
+
+$lpstat -d  (mostra qual a impressora padrão do meu sistema Linux)   *no caso nenhuma.
+nenhum destino padrão de sistema
+
+$lpq (msotra as filas de impressão)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
