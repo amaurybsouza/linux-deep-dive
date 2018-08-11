@@ -1,6 +1,49 @@
 Terms and Utilities:
 
 
+   > FUNDAMENTOS DE TCP/IP
+
+
+- TCP é uma pilha de protocolos, conjunto de protocolos utilizados para comunicação entre computadores.
+
+   > ENDEREÇAMENTO IP
+
+- O IP é responsável pelo endereçamento lógico.
+- Cada dispostivo em uma rede deve possuir um endereço IP único.
+
+- O endereço IP (IPv4) é formado por 32 bits, separados em 4 grupos de 8 bits, representados de maneira decimal.
+  - 192.168.10.20 = 11000000.10101000.00001010.00010100 
+  - 0.0.0.0 = 00000000.00000000.0000000.00000000
+  - 255.255.255.255 = 11111111.11111111.11111111.11111111
+
+
+- Os endereços IP são separados por classes, sendo 3 principais:
+
+CLASSE    PRIMEIRO OCTETO     RANGE
+A              1-126          1.0.0.0 - 126.255.255.255
+B              128-191        128.0.0.0 - 191.255.255.255  
+C              192-223        192.0.0.0 - 223.255.255.255
+
+-> Exemplos: 
+
+Classe A: 10.25.13.10 / 110.14.20.12
+Classe B: 141.150.200.1 / 172.168.1.1
+Classe C: 192.168.20.30 / 200.178.12.242
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #/etc/services
 
