@@ -12,6 +12,7 @@ Terms and Utilities:
 - Cada dispostivo em uma rede deve possuir um endereço IP único.
 
 - O endereço IP (IPv4) é formado por 32 bits, separados em 4 grupos de 8 bits, representados de maneira decimal.
+  
   - 192.168.10.20 = 11000000.10101000.00001010.00010100 
   - 0.0.0.0 = 00000000.00000000.0000000.00000000
   - 255.255.255.255 = 11111111.11111111.11111111.11111111
@@ -31,6 +32,23 @@ Classe B: 141.150.200.1 / 172.168.1.1
 Classe C: 192.168.20.30 / 200.178.12.242
 
 
+   > FALANDO UM POUCO SOBRE IP's PÚBLICOS E IP's PRIVADOS:
+
+- Cada dispositivo na rede deve ter um IP único;
+
+- Faixa de IP's públicos:
+  1- Quando você conecta com o provedor de internet, ele me dá um IP público, IP de internet, reconhecido por toda a internet mundial.
+  2- Para ver meu IP público, IP de internet basta acessar o site meuip.com.br
+
+- Faixa de IP's privados:
+  1- na minha casa tem meu notebook, minha impressora, meu playstation, meu desktop, tudo vai ter um IP, 
+não é IP de internet, meu provedor meu deu apenas um IP, nesse dispositivos internos eu vou ter IP privados, e esses IP privados vão
+estar na faixa abaixo, representado:
+
+CLASSE    PRIMEIRO OCTETO               RANGE                         IP'S PRIVADOS
+A              1-126          1.0.0.0 - 126.255.255.255         10.0.0.0 - 10.255.255.255
+B              128-191        128.0.0.0 - 191.255.255.255       172.16.0.0 - 172.31.255.255
+C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 192.168.255.255
 
 
 
