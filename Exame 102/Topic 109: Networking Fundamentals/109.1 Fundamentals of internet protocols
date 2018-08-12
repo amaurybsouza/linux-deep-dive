@@ -78,7 +78,7 @@ B              128-191        128.0.0.0 - 191.255.255.255       255.255.0.0/16
 C              192-223        192.0.0.0 - 223.255.255.255       255.255.255.0/24
 
 
-- Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão "255.255.0.0" e classe C "255.255.255.255".
+- Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão "255.255.0.0" e classe C "255.255.255.0".
 
 - Exemplos:
 
@@ -86,7 +86,14 @@ Classe A - "110".14.20.12  (nesse IP, o 1° octeto representa a rede (110) e os 
 Classe B - "172.168".1.1   (nesse IP, os 2° octetos representam a rede (172.168) e os demais octetos representam os hosts dessa rede).
 Classe C - "200.178.12".242 
 
+   > MASCARA SUB REDE 
 
+192.168.8.12 / 255.255.255.0 / 24         
+
+Range: 192.168.8.0 - 192.168.8.255
+Endereço da rede: 192.168.8.0
+Endereço de Broadcast: 192.168.8.255
+Hosts: 192.168.8.1 - 192.168.8.254
 
 
 
