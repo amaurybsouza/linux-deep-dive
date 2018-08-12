@@ -51,6 +51,47 @@ B              128-191        128.0.0.0 - 191.255.255.255       172.16.0.0 - 172
 C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 192.168.255.255
 
 
+   > FALANDO SOBRE MÁSCARA DE REDES:
+
+- Utilizada em conjunto com o endereço IP para determinar a segmentação de rede.
+
+- Também composta de 32 bits em 4 grupos de 8:
+  
+  a) 255.0.0.0 = 11111111.00000000.00000000.00000000 = 8
+  b) 255.255.0.0 = 11111111.11111111.00000000.00000000 = 16
+  c) 255.255.255.0 = 11111111.11111111.11111111.00000000 = 24
+  d) 255.255.255.255 = 11111111.11111111.11111111.11111111 = 32
+
+- No exemplo a) indica que o 1º número do IP (11111111) representa a rede e os demais números (00000000.00000000.00000000) representam o host.
+- No exemplo b) indica que os 2º digitos do IP vão representar a rede e os outros 2 vão definir o host dentro desta rede.
+
+
+#CIDR (é a quantidade de bits 1 que eu tenho na mascara, veja abaixo o exemplo:)
+
+c) 255.255.255.0 = 11111111.11111111.11111111.00000000 = 24   (24 é o CIDR, 8+8+8=24)
+
+- Cada classe tem uma mascara padrão:
+
+CLASSE    PRIMEIRO OCTETO               RANGE                         MASCARA PADRÃO
+A              1-126          1.0.0.0 - 126.255.255.255         255.0.0.0/8
+B              128-191        128.0.0.0 - 191.255.255.255       255.255.0.0/16
+C              192-223        192.0.0.0 - 223.255.255.255       255.255.255.0/24
+
+
+- Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão "255.255.0.0" e classe C "255.255.255.255".
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
