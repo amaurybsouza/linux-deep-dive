@@ -80,7 +80,11 @@ C              192-223        192.0.0.0 - 223.255.255.255       255.255.255.0/24
 
 - Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão "255.255.0.0" e classe C "255.255.255.255".
 
- 
+- Exemplos:
+
+Classe A - "110".14.20.12  (nesse IP, o 1° octeto representa a rede (110) e os demais octetos representam os hosts dentro dessa rede).
+Classe B - "172.168".1.1   (nesse IP, os 2° octetos representam a rede (172.168) e os demais octetos representam os hosts dessa rede).
+Classe C - "200.178.12".242 
 
 
 
