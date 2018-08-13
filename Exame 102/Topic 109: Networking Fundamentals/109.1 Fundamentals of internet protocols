@@ -95,6 +95,12 @@ Endereço da rede: 192.168.8.0
 Endereço de Broadcast: 192.168.8.255
 Hosts: 192.168.8.1 - 192.168.8.254
 
+*** preciso continuar essa aula depois.
+
+
+
+
+
 
 
    > ROTA PADRÃO:
@@ -107,12 +113,27 @@ Hosts: 192.168.8.1 - 192.168.8.254
 192.168.10.20-192.168.10.40                                         192.168.200.4-192.168.200.5
 
 
+1) Entendendo a arquitetura da rede acima: é uma rede que não está conectada.
+
+a- Os IP's da rede 192.168.10.0 estão na mesma subrede (192.168.10.10-192.168.10.30-192.168.10.20-192.168.10.40)
+
+c) As duas redes são diferentes, uma não acessa a outra.
+
+b) Os IP's da rede 192.168.200.0 estão na mesma subrede (192.168.200.2-192.168.200.3-192.168.200.4-192.168.200.5)
+
+d) - Caso elas precisam acessar uma com a outra e precisam trocar pacotes, elas precisam de um intermediário que é o gateway.
+   - Esse gateway conhece e tem acesso as duas redes e pode enviar um pacote de uma rede para outra.
+   - ROTA PADRÃO: Quando você precisa enviar um pacote para uma máquina que não está na minha rede, 
+eu vou ter que mandar esse pacote para o gateway padrão (rota padrão).
+   - Por exemplo, se eu preciso acessar a internet, eu não tenho acesso direto para a internet, eu preciso ir para o gateway e esse gateway vai acessar a internet.
+   - Tudo que eu não conhecer eu mando para a minha rota padrão.
 
 
+   > IPV6
 
+1) IPv6 é um novo padrão de endereçamento IP.
 
-
-
+2) Cada endereço possui 128 bits, divididos em 8 grupos de 16 bits, representados por
 
 
 
