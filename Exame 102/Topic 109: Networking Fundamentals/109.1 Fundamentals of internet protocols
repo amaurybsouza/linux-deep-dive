@@ -133,9 +133,12 @@ eu vou ter que mandar esse pacote para o gateway padrão (rota padrão).
 
 1) IPv6 é um novo padrão de endereçamento IP.
 
-2) Cada endereço possui 128 bits, divididos em 8 grupos de 16 bits, representados por
+2) Cada endereço possui 128 bits, divididos em 8 grupos de 16 bits, representados por um par de quartro números hexadecimais.
 
+   Exemplo: 2001:0db8:85a3:08d3:1319:8a2e:0370:7344
 
+   - Muitos dispositivos hoje em dia conseguem trabalhar com IPv4 e IPv6 mesmo a maioria ainda trabalhar com IPv4.
+   -  
 
 
 
