@@ -1,6 +1,60 @@
 Terms and Utilities:
 
 
+   > SERVIÇO NetworkManager
+
+#NetworkManager: Existe um serviço no sistema Linux (Ubuntu, Lubuntu, Debian) que se chama NetworkManager, 
+esse serviço faz com que todas as configurações de rede sejam realizadas automaticamente pelo sistema, 
+ele identifica se está usando rede com fio, sem fio, qual a melhor rede para se usar no momento.
+
+- Para o usuário final isso é muito bom, torna essas configs transparentes.
+- Para a gente que está estudando isso, é melhor que seja feito tudo na mãe, usando os arquivos de configuração, em servidores são assim.
+- Para isso vamos desabilitar esse serviço no sistema usando o comando abaixo:
+
+$systemctl stop NetworkManager        (parando o serviço NetworkManager)
+$systemctl disable NetworkManager     (desativando o serviço de rede)
+
+   
+   > ARQUIVOS BÁSICOS DE CONFIGURAÇÃO DE REDE DO LINUX
+
+- Esses arquivos de rede são comuns a qualquer distribuição Linux, e ficam sempre em /etc
+
+1) #/etc/services (mostra todas as listagens de portas públicas do Linux e os serviços que rodam essas portas)
+
+ntp             123/udp                         # Network Time Protocol
+pwdgen          129/tcp                         # PWDGEN service
+pwdgen          129/udp
+loc-srv         135/tcp         epmap           # Location Service
+loc-srv         135/udp         epmap
+netbios-ns      137/tcp                         # NETBIOS Name Service
+netbios-ns      137/udp
+netbios-dgm     138/tcp                         # NETBIOS Datagram Service
+netbios-dgm     138/udp
+netbios-ssn     139/tcp                         # NETBIOS session service
+netbios-ssn     139/udp
+
+2) #/etc/hostname (arquivo que mostra o nome da máquina)
+
+$hostname
+maumau
+
+3) #/etc/hosts (arquivo que mapeia um IP para um nome, posso usar um domínio também caso seja necessário)
+
+127.0.0.1       localhost
+127.0.1.1       maumau
+
+
+
+
+
+
+
+
+
+
+
+
+4)
 
 
 
@@ -18,12 +72,36 @@ Terms and Utilities:
 
 
 
-/etc/hostname
-/etc/hosts
-/etc/nsswitch.conf
-ifconfig
-ifup
-ifdown
-ip
-route
-ping
+
+
+
+
+
+
+
+
+
+
+
+#/etc/hostname
+
+ 
+ 
+
+#/etc/hosts
+
+#/etc/nsswitch.conf
+
+#ifconfig
+
+#ifup
+
+#ifdown
+
+#ip
+
+#route
+
+
+
+#ping
