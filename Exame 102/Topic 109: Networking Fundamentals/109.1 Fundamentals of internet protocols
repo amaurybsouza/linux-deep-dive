@@ -3,13 +3,16 @@ Terms and Utilities:
 
    > FUNDAMENTOS DE TCP/IP
 
-
 - TCP é uma pilha de protocolos, conjunto de protocolos utilizados para comunicação entre computadores.
+- Engloba os protocolos IP, TCP, UDP,ICMP entre outros.
+
 
    > ENDEREÇAMENTO IP
 
 - O IP é responsável pelo endereçamento lógico.
 - Cada dispostivo em uma rede deve possuir um endereço IP único.
+
+   > IPv4
 
 - O endereço IP (IPv4) é formado por 32 bits, separados em 4 grupos de 8 bits, representados de maneira decimal.
   
@@ -19,21 +22,21 @@ Terms and Utilities:
 
 - Os endereços IP são separados por classes, sendo 3 principais:
 
+-----------------------------------------------------------
+CLASSE    PRIMEIRO OCTETO               RANGE             -
+A              1-126          1.0.0.0 - 126.255.255.255   -
+B              128-191        128.0.0.0 - 191.255.255.255 -  
+C              192-223        192.0.0.0 - 223.255.255.255 -
+-----------------------------------------------------------
 
-CLASSE    PRIMEIRO OCTETO               RANGE
-A              1-126          1.0.0.0 - 126.255.255.255
-B              128-191        128.0.0.0 - 191.255.255.255  
-C              192-223        192.0.0.0 - 223.255.255.255
-
--> Exemplos: 
+Exemplos: 
 
 Classe A: 10.25.13.10 / 110.14.20.12
 Classe B: 141.150.200.1 / 172.168.1.1
 Classe C: 192.168.20.30 / 200.178.12.242
 
 
-   > FALANDO UM POUCO SOBRE IP's PÚBLICOS E IP's PRIVADOS:
-
+   > IP's PÚBLICOS E IP's PRIVADOS:
 
 - Cada dispositivo na rede deve ter um IP único;
 
@@ -46,13 +49,14 @@ Classe C: 192.168.20.30 / 200.178.12.242
 não é IP de internet, meu provedor meu deu apenas um IP, nesse dispositivos internos eu vou ter IP privados, e esses IP privados vão
 estar na faixa abaixo, representado:
 
-CLASSE    PRIMEIRO OCTETO               RANGE                         IP'S PRIVADOS
-A              1-126          1.0.0.0 - 126.255.255.255         10.0.0.0 - 10.255.255.255
-B              128-191        128.0.0.0 - 191.255.255.255       172.16.0.0 - 172.31.255.255
-C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 192.168.255.255
+-----------------------------------------------------------------------------------------------
+CLASSE    PRIMEIRO OCTETO               RANGE                         IP'S PRIVADOS           -
+A              1-126          1.0.0.0 - 126.255.255.255         10.0.0.0 - 10.255.255.255     - 
+B              128-191        128.0.0.0 - 191.255.255.255       172.16.0.0 - 172.31.255.255   -
+C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 192.168.255.255 -
+-----------------------------------------------------------------------------------------------
 
-
-   > FALANDO SOBRE MÁSCARA DE REDES:
+   > MÁSCARA DE REDES:
 
 
 - Utilizada em conjunto com o endereço IP para determinar a segmentação de rede.
@@ -70,15 +74,17 @@ C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 19
 
 #CIDR (é a quantidade de bits 1 que eu tenho na mascara, veja abaixo o exemplo:)
 
-c) 255.255.255.0 = 11111111.11111111.11111111.00000000 = 24   (24 é o CIDR, 8+8+8=24)
+255.255.255.0 = 11111111.11111111.11111111.00000000 = 24   (24 é o CIDR, 8+8+8=24)
+
 
 - Cada classe tem uma mascara padrão:
 
-CLASSE    PRIMEIRO OCTETO               RANGE                         MASCARA PADRÃO
-A              1-126          1.0.0.0 - 126.255.255.255         255.0.0.0/8-
-B              128-191        128.0.0.0 - 191.255.255.255       255.255.0.0/16
-C              192-223        192.0.0.0 - 223.255.255.255       255.255.255.0/24
-
+--------------------------------------------------------------------------------------
+CLASSE    PRIMEIRO OCTETO               RANGE                         MASCARA PADRÃO -
+A              1-126          1.0.0.0 - 126.255.255.255         255.0.0.0/8          -
+B              128-191        128.0.0.0 - 191.255.255.255       255.255.0.0/16       -
+C              192-223        192.0.0.0 - 223.255.255.255       255.255.255.0/24     -
+--------------------------------------------------------------------------------------
 
 - Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão "255.255.0.0" e classe C "255.255.255.0".
 
@@ -88,18 +94,21 @@ Classe A - "110".14.20.12  (nesse IP, o 1° octeto representa a rede (110) e os 
 Classe B - "172.168".1.1   (nesse IP, os 2° octetos representam a rede (172.168) e os demais octetos representam os hosts dessa rede).
 Classe C - "200.178.12".242 
 
-   > MASCARA SUB REDE 
+   
+    > MASCARA SUB REDE - EXEMPLOS:
 
 192.168.8.12 / 255.255.255.0 / 24         
 
 Range: 192.168.8.0 - 192.168.8.255
-Endereço da rede: 192.168.8.0
-Endereço de Broadcast: 192.168.8.255
+Endereço da rede: 192.168.8.0          (reservado)
+Endereço de Broadcast: 192.168.8.255   (reservado)
 Hosts: 192.168.8.1 - 192.168.8.254
 
 
 
-*** preciso continuar essa aula depois.
+
+
+
 
 
 
