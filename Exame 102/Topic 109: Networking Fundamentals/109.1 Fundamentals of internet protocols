@@ -34,6 +34,7 @@ Classe C: 192.168.20.30 / 200.178.12.242
 
    > FALANDO UM POUCO SOBRE IP's PÚBLICOS E IP's PRIVADOS:
 
+
 - Cada dispositivo na rede deve ter um IP único;
 
 - Faixa de IP's públicos:
@@ -52,6 +53,7 @@ C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 19
 
 
    > FALANDO SOBRE MÁSCARA DE REDES:
+
 
 - Utilizada em conjunto com o endereço IP para determinar a segmentação de rede.
 
@@ -95,11 +97,9 @@ Endereço da rede: 192.168.8.0
 Endereço de Broadcast: 192.168.8.255
 Hosts: 192.168.8.1 - 192.168.8.254
 
+
+
 *** preciso continuar essa aula depois.
-
-
-
-
 
 
 
@@ -115,11 +115,11 @@ Hosts: 192.168.8.1 - 192.168.8.254
 
 1) Entendendo a arquitetura da rede acima: é uma rede que não está conectada.
 
-a- Os IP's da rede 192.168.10.0 estão na mesma subrede (192.168.10.10-192.168.10.30-192.168.10.20-192.168.10.40)
+a) Os IP's da rede 192.168.10.0 estão na mesma subrede (192.168.10.10-192.168.10.30-192.168.10.20-192.168.10.40)
 
-c) As duas redes são diferentes, uma não acessa a outra.
+b) As duas redes são diferentes, uma não acessa a outra.
 
-b) Os IP's da rede 192.168.200.0 estão na mesma subrede (192.168.200.2-192.168.200.3-192.168.200.4-192.168.200.5)
+c) Os IP's da rede 192.168.200.0 estão na mesma subrede (192.168.200.2-192.168.200.3-192.168.200.4-192.168.200.5)
 
 d) - Caso elas precisam acessar uma com a outra e precisam trocar pacotes, elas precisam de um intermediário que é o gateway.
    - Esse gateway conhece e tem acesso as duas redes e pode enviar um pacote de uma rede para outra.
@@ -138,21 +138,44 @@ eu vou ter que mandar esse pacote para o gateway padrão (rota padrão).
    Exemplo: 2001:0db8:85a3:08d3:1319:8a2e:0370:7344
 
    - Muitos dispositivos hoje em dia conseguem trabalhar com IPv4 e IPv6 mesmo a maioria ainda trabalhar com IPv4.
-   -  
+
+3) Abreviações do IPv6:
+
+2001:0db8:85a3:0000:0000:0000:0000:7344 
+2001:0db8:85a3:0:0:0:0:7344
+2001:0db8:85a3::7344
+
+2001:0db8:85a3:0000:0000:1319:0000:7344
+2001:0db8:85a3:0:0:1319:0:7344
+2001:0db8:85a3::1319:0:7344
+
+4) Tipos de endereços no IPv6:
+
+--> Unicast: identifica uma unica interface.
+--> Multicast: identifica um conjunto de interfaces. Um pacote é enviado para cada interface.
+--> Anycast: identifica um  conjunto de interfaces. Um pacote é enviado para uma única interface, normalmente a mais próxima.
+
+
+    > PROTOCOLO TCP = Transmission Control Protocol.
+
+- Protocolo de transporte orientado a conexões.
+- O TCP garante a entrega dos pacotes na ordem correta.
+- O pacote é retransmitido em casos de erros na rede.
+- Utilizado por serviços como FTP, SMTP, HTTP.
+
+
+    > PROTOCOLO UDP = User Datagram Protocol.
+
+- Protocolo de transporte não orientado a conexões.
+- Não oferece garantia de entrega dos pacotes.
+- Melhor performance na transmissão de dados.
+- Utilizado por serviços como DNS, NFS, NTP.
 
 
 
+   > PROTOCOLO ICMP = Internet Control Message Protocol
 
-
-
-
-
-
-
-
-
-
-
+-
 
 
 
