@@ -175,27 +175,41 @@ eu vou ter que mandar esse pacote para o gateway padrão (rota padrão).
 
    > PROTOCOLO ICMP = Internet Control Message Protocol
 
--
+- Utilizado para transmitir informações de controle entre os elementos de rede, veja abaixo:
+  - Controle de volume de tráfego.
+  - Detecção de destinos não atingiveis.
+  - Redirecionamentos de rota.
+  - Verificação de status de hosts remotos.
+- Utilizado em comandos como o ping e traceroute.
 
 
+   > TCP/IP - PORTAS E SERVIÇOS
+
+- Cada serviço é provido através de uma porta
+- Portas possuem 16 bits, ou seja,  um máximo de 65535
+- As primeiras  1024 portas são reservadas a serviços conhecidos.
+- As demais são utilizadas para serviços especificos ou para a porta socket de uma conexão.
+
+Exemplos:
+
+200.20.125.60:25 (serviço SMTP)
+
+172.168.8.10:80 (serviço HTTP)
+
+[2001:0db8:85a3:0000:0000:1319:0000:7344]:80
 
 
-
-
-
-
-
-
-
-
-
-
-
-#/etc/services
-
-#IPv4, IPv6
-
-#Subnetting
-
-
-#TCP, UDP, ICMP
+PORTAS       SERVIÇO
+20 e 21      FTP
+22           SSH
+23           TELNET
+25 465       SMTP e SMTPS
+53           DNS
+67 e 68      DHCP
+80 e 443     HTTP e HTTPS
+110 e 995    POP3 e POP3S
+123          NTP
+139          Netbios
+143 e 993    IMAP e IMAPS
+161 e 162    SNMP
+389 e 636    LDAP e LDAPS
