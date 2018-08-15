@@ -93,6 +93,8 @@ nameserver 208.67.220.220
 
    > COMANDOS DE CONFIGURAÇÃO DE REDES NO LINUX
 
+- O comando ifconfig possui muitas finalidades, mas a principal é definir um endereço IP para a interface de rede.
+
 
 1) #ifconfig (esse comando mostra as interfaces de rede da máquina e os IP's que ela está usando).
 
@@ -140,7 +142,7 @@ eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         device interrupt 20  memory 0xf7d00000-f7d20000  
 
 
-$ifconfig eno1 down  (Derrubando uma interface de rede) *fica em estado down e sem running.
+$ifconfig eno1 down  (desativando a interface de rede) *fica em estado down e sem running.
 
 $ifconfig eno1
         inet 222.123.145.222  netmask 255.255.255.0  broadcast 200.144.112.156
@@ -153,19 +155,81 @@ $ifconfig eno1
         device interrupt 20  memory 0xf7d00000-f7d20000
 
 
-$ifconfig eno1 10.0.0.222 
+$ifconfig eno1 10.0.0.222 up (setando o IP 10.0.0.2 na minha interface de rede eno1) 
+
+- Se eu eu não seto a mascara de rede, o sistema verifica o meu IP e adiciona a mascara automaticamente, no caso, usando a mascara da classe C.
+
+
+$ifconfig eno1 10.0.0.222 netmask 255.255.255.0 up  (setando o IP e a mascara na interface de rede eno1)
+
+
+2) #route (mostra e cria rotas de rede, e mostra as rotas padrão)
+
+
+$route -n (mostra informações mais claras sobre as rotas).
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções Métrica Ref   Uso Iface
+0.0.0.0         200.144.112.43  0.0.0.0         UG    100    0        0 eno1
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 eno1
+192.168.56.0    0.0.0.0         255.255.255.0   U     0      0        0 vboxnet0
+200.144.112.0   0.0.0.0         255.255.255.0   U     100    0        0 eno1
+
+
+$route add default gw 10.0.0.1  (adicionando uma rota default na minha rede)
+
+$route add -net 172.168.10.0/24 gw 192.168.10.50  ()
 
 
 
 
+3) #ip (é uma combinação do ifconfig e do comando route, faz as duas funções).
+
+$ip link show (mostra apenas as interfaces de rede) *semelhante ao ifconfig
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 64:51:06:62:79:74 brd ff:ff:ff:ff:ff:ff
+3: vboxnet0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 0a:00:27:00:00:00 brd ff:ff:ff:ff:ff:ff
 
 
+$ip address show (mostra as interfaces de rede e os IP's que estão configurados nessas interfaces)
+ 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 64:51:06:62:79:74 brd ff:ff:ff:ff:ff:ff
+    inet 200.144.112.165/24 brd 200.144.112.255 scope global noprefixroute eno1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::30bd:8f74:2561:370e/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: vboxnet0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 0a:00:27:00:00:00 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.1/24 brd 192.168.56.255 scope global vboxnet0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::800:27ff:fe00:0/64 scope link 
+       valid_lft forever preferred_lft forever
 
 
+$ip route show  (mostra as rotas) *semelhante ao comando route -n
+
+default via 200.144.112.43 dev eno1 proto static metric 100 
+169.254.0.0/16 dev eno1 scope link metric 1000 
+192.168.56.0/24 dev vboxnet0 proto kernel scope link src 192.168.56.1 
+200.144.112.0/24 dev eno1 proto kernel scope link src 200.144.112.165 metric 100 
 
 
+$ip addr ad 192.168.10.223/24 dev eno1  (adicionando um IP na interface de rede eno1)
 
+$ip neigh show  (mostra os IP's que estão próximos da minha rede)
 
+200.144.112.144 dev eno1 lladdr b8:88:e3:ea:02:58 STALE
+200.144.112.43 dev eno1 lladdr 00:04:96:52:8f:5d REACHABLE
 
 
 
@@ -192,6 +256,4 @@ $ifconfig eno1 10.0.0.222
 
 #ifdown
 
-#ip
 
-#route
