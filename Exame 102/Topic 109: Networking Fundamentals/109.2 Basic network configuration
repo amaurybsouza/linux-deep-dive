@@ -17,6 +17,7 @@ $systemctl disable NetworkManager     (desativando o serviço de rede)
    
    > ARQUIVOS BÁSICOS DE CONFIGURAÇÃO DE REDE DO LINUX
 
+
 - Esses arquivos de rede são comuns a qualquer distribuição Linux, e ficam sempre em /etc
 
 1) #/etc/services (mostra todas as listagens de portas públicas do Linux e os serviços que rodam essas portas)
@@ -35,13 +36,59 @@ netbios-ssn     139/udp
 
 2) #/etc/hostname (arquivo que mostra o nome da máquina)
 
-$hostname
-maumau
+$cat /etc/hostname
+amaury-desktop
 
-3) #/etc/hosts (arquivo que mapeia um IP para um nome, posso usar um domínio também caso seja necessário)
+3) #/etc/hosts (associa os números IP da rede a nomes, posso usar um domínio também caso seja necessário)
 
+cat /etc/hosts
 127.0.0.1       localhost
 127.0.1.1       maumau
+189.14.98.138   themisto
+201.6.144.122   office
+192.168.64.199  note
+
+- Se eu digitar o comando $ping note, ele vai entender que o IP 192.168.64.199 está relacionado com o host note.
+
+$ping note
+PING note (192.168.64.199) 56(84) bytes of data.
+64 bytes from note (192.168.64.199): icmp_seq=1 ttl=64 time=0.055 ms
+64 bytes from note (192.168.64.199): icmp_seq=2 ttl=64 time=0.063 ms
+64 bytes from note (192.168.64.199): icmp_seq=3 ttl=64 time=0.075 ms
+64 bytes from note (192.168.64.199): icmp_seq=4 ttl=64 time=0.076 ms
+
+4) #ping (comando utilizado para identificar o funcionamento da rede, usa o protocolo ICMP enviando pacotes 
+para uma máquina e aguarda uma resposta)
+
+$ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=122 time=20.8 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=122 time=26.8 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=122 time=17.3 ms
+
+
+5) #/etc/networks (arquivo utilizado para determinar uma equivalência entre nomes e endereços de rede, 
+onde é possível utilizar um nome para nos referirmos a uma rede)
+
+cat /etc/networks 
+# symbolic names for networks, see networks(5) for more information
+link-local 169.254.0.0
+
+6) #/etc/nsswitch.conf (esse arquivo determina por onde o sistema deve começar a procurar recursos como 
+endereços de rede, serviço de autenticação etc)
+
+- Nesse arquivo temos a linha abaixo, que deve ter uma atenção com ela:
+- É nessa linha que eu vou saber se ele consulta primeiro os arquivos locais (/etc/hostname, /etc/hosts, /etc/networks e depois o DNS).
+
+hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname   
+
+
+7) #/etc/resolv.conf (é aonde eu coloco o servidor DNS que eu vou usar na minha máquina)
+
+$cat /etc/resolv.conf
+search linuxnewmedia.com.br
+nameserver 208.67.222.222
+nameserver 208.67.220.220
 
 
 
@@ -54,43 +101,14 @@ maumau
 
 
 
-4)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#/etc/hostname
 
  
- 
 
-#/etc/hosts
 
-#/etc/nsswitch.conf
 
 #ifconfig
 
@@ -101,7 +119,3 @@ maumau
 #ip
 
 #route
-
-
-
-#ping
