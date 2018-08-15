@@ -240,31 +240,10 @@ OBSERVAÇÕES:
 - Na próxima aula vamos ver os arquivos que podemosa usar para setar essas configs permanentes no sistema.
 
 
+   > CONFIGURANDO UMA INTERFACE DE REDE PARA PEGAR DHCP
 
+#dhclient (Comando utilizado para solicitar informações de rede a um servidor dhcp.)
 
+$dhclient eno1 (esse comando vai definir um DHCP, um IP automático para essa minha interface de rede)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-#ifup
-
-#ifdown
-
-
+- se eu rodar um ifconfig ele mostra um novo IP, um IP que foi dado pelo servidor DHCP. (no caso o meu roteador que está configurado para isso).
