@@ -233,6 +233,17 @@ $ip neigh show  (mostra os IP's que estão próximos da minha rede)
 
 
 
+OBSERVAÇÕES: 
+
+- Lembrando que todos esses ajustes serão perdidos assim que eu reiniciar o sistema, não está fixo numa configuração do Linux.
+- Está tudo em memória, é temporário.
+- Na próxima aula vamos ver os arquivos que podemosa usar para setar essas configs permanentes no sistema.
+
+
+
+
+
+
 
 
 
