@@ -91,6 +91,63 @@ nameserver 208.67.222.222
 nameserver 208.67.220.220
 
 
+   > COMANDOS DE CONFIGURAÇÃO DE REDES NO LINUX
+
+
+1) #ifconfig (esse comando mostra as interfaces de rede da máquina e os IP's que ela está usando).
+
+
+$ifconfig
+eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 202.122.156.85  netmask 255.255.255.0  broadcast 200.144.112.122
+        inet6 fe80::30bd:8f74:2561:370e  prefixlen 64  scopeid 0x20<link>
+        ether 64:51:06:62:79:74  txqueuelen 1000  (Ethernet)
+        RX packets 396005  bytes 379660576 (379.6 MB)
+        RX errors 0  dropped 2563  overruns 0  frame 0
+        TX packets 175171  bytes 24450889 (24.4 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 20  memory 0xf7d00000-f7d20000  
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Loopback Local)
+        RX packets 8157  bytes 751232 (751.2 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 8157  bytes 751232 (751.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+OBS:
+- Sem argumentos esse comando mostra as interfaces de rede (eno1,lo)
+- A interface (lo) Loopback é uma interface de teste local, sempre vai ter essa interface (127.0.0.1)
+- Podemos ver as propriedades e informações de cada interface
+- Temos o macadress, mascara da rede, IP, IPv6
+
+$ifconfig -a (mostra todas as interfaces de rede, mesmo que não esteja ativa no sistema)
+
+$ifconfig eno1  (mostra apenas a interface eno1)
+eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 222.123.145.222  netmask 255.255.255.0  broadcast 200.144.112.156
+        inet6 fe80::30bd:8f74:2561:370e  prefixlen 64  scopeid 0x20<link>
+        ether 64:51:06:62:79:74  txqueuelen 1000  (Ethernet)
+        RX packets 403746  bytes 386200899 (386.2 MB)
+        RX errors 0  dropped 2641  overruns 0  frame 0
+        TX packets 177851  bytes 24854710 (24.8 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 20  memory 0xf7d00000-f7d20000  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -110,7 +167,6 @@ nameserver 208.67.220.220
 
 
 
-#ifconfig
 
 #ifup
 
