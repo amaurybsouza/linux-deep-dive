@@ -246,7 +246,7 @@ A) Como o serviço NetworkManager está desativado, eu preciso ajustar as interf
 
 $vim /etc/network/interfaces
 # interfaces(5) file used by ifup(8) and ifdown(8)
-auto lo
+auto lo enp0s3 enp0s8    (auto define quais as intefaces que vão subir quando eu iniciar a rede)
 iface lo inet loopback
 
 iface enp0s3 inet static
@@ -257,16 +257,20 @@ iface enp0s3 inet static
   broadcast 10.0.0.255   (endereço de broadcast opcional)
 
 
+iface enp0s8 inet dhcp   (outra interface de rede para pegar DHCP)
+
+
+OBS: Para aplicar essas configs eu posso reinciar a minha rede:
+
+$systemctl restart networking  (quando eu der ifconfig ele mostra o IP da minha interface)
+
+- Importante saber que no comando $route -n para eu ver a rota padrão, gateway, tem que olhar em destination 0.0.0.0
 
 
 
+2) #ifdown enp0s8 (esse comando desativa a minha interface de rede)
 
-
-
-
-
-
-2)
+   $ifup enp0s8 (para subir a minha interface de rede)
 
 
 
