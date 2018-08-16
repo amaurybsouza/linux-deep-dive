@@ -228,3 +228,72 @@ $dhclient eno1 (esse comando vai definir um DHCP, um IP automático para essa mi
 - se eu rodar um ifconfig ele mostra um novo IP, um IP que foi dado pelo servidor DHCP. (no caso o meu roteador que está configurado para isso).
 
 
+   > ARQUIVOS DE CONFIGURAÇÃO DO UBUNTU.
+
+
+- Esse arquivos vão estar no /etc
+
+1) #/etc/network/interfaces (onde eu configuro minhas interfaces de rede no Ubuntu, Debian)
+
+$cat /etc/network/interfaces
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+
+
+A) Como o serviço NetworkManager está desativado, eu preciso ajustar as interfaces de rede nesse arquivo, seguindo o modelo abaixo:
+
+
+$vim /etc/network/interfaces
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+
+iface enp0s3 inet static
+  address 10.0.0.222
+  netmask 255.255.255.0
+  gateway 10.0.0.1
+  network 10.0.0.0       (endereço de rede opcional)
+  broadcast 10.0.0.255   (endereço de broadcast opcional)
+
+
+
+
+
+
+
+
+
+
+
+2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
