@@ -228,7 +228,7 @@ $dhclient eno1 (esse comando vai definir um DHCP, um IP automático para essa mi
 - se eu rodar um ifconfig ele mostra um novo IP, um IP que foi dado pelo servidor DHCP. (no caso o meu roteador que está configurado para isso).
 
 
-   > ARQUIVOS DE CONFIGURAÇÃO DO UBUNTU.
+   > ARQUIVOS DE CONFIGURAÇÃO DO UBUNTU/DEBIAN
 
 
 - Esse arquivos vão estar no /etc
@@ -268,36 +268,45 @@ $systemctl restart networking  (quando eu der ifconfig ele mostra o IP da minha 
 
 
 
-2) #ifdown enp0s8 (esse comando desativa a minha interface de rede)
+2) #ifdown enp0s8 (comando utilizado para desabilitar uma interface definida em /etc/network/interfaces)
 
-   $ifup enp0s8 (para subir a minha interface de rede)
-
-
+   $ifup enp0s8 (comando utilizado para carregar uma interface definida em /etc/network/interfaces)
 
 
 
+    > ARQUIVOS DE CONFIGURAÇÃO DO FEDORA/CENTOS
+
+- Todos os arquivos de rede do Fedora vão estar em /etc/sysconfig
+
+1) #/etc/sysconfig/network-scripts (diretório utilizado para armazenas arquivos de configuração referentes a interfaces).
+
+- Nesse diretório eu vou ter sempre o arquivo ifcfg-lo (no caso sempre ifcfg e o nome da interface) *ifcfg-lo, ifcfg-enp0s3
+
+$vim /etc/sysconfig/network-scripts/ifcfg-enp0s3 
+DEVICE=enp0s3
+HWADDR=08:00:27:8C:3E:39
+BOOTPROTO=static
+IPADDR=192.168.1.66
+NETMASK=255.255.255.0
+ONBOOT=yes
+
+--> Configurando outra interface de rede mas agora usando o DHCP:
 
 
+$vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+DEVICE=enp0s3
+BOOTPROTO=dhcp
+ONBOOT=yes
 
+- Depois que eu tiver definido as configurações de rede, basta eu sair e executar o comando abaixo:
 
+$ifup enp0s3 (esse comando vai verificar o arquivo /etc/sysconfig/network-scripts/ifcfg-enp0s3 e executar)
 
+- Para configurar o gateway, existe um arquivo chamado network em /etc/sysconfig
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$vim /etc/sysconfig/network
+NETWORKING=yes
+GATEWAY=10.0.0.1
 
 
 
