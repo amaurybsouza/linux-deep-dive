@@ -1,13 +1,65 @@
 Terms and Utilities:
 
 
+   > COMANDOS DE TESTE DE CONECTIVIDADE DO LINUX
+
+- Identificação de problemas simples de rede no Linux.
+
+- O Linux possui uma série de ferramentas que permite a gente realizar a gente analisar e verificar o funcionamento
+das conexões, interfaces, DNS.
+ 
+
+1) #ifconfig (além de mostrar os IP's e o nome da interface, você precisa se atentar nas informações abaixo)
+
+- usando apenas uma interface do sistema para exemplificação. *wlp1s0
+
+$ifconfig 
+wlp1s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.105  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fe80::2d4c:8a9f:209c:1aa3  prefixlen 64  scopeid 0x20<link>
+        ether f8:da:0c:94:91:cf  txqueuelen 1000  (Ethernet)
+        RX packets 135857  bytes 169308045 (169.3 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 87230  bytes 12781284 (12.7 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+a) Primeiramente verificar se a interface está rodando e ativa olhando a linha:
+
+flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+
+b) Depois verificar se existem erros, pacotes dropados, colisões de pacotes: *RX pacotes recebidos, TX pacotes enviados.
+
+RX packets 135857  bytes 169308045 (169.3 MB)
+RX errors 0  dropped 0  overruns 0  frame 0
+TX packets 87230  bytes 12781284 (12.7 MB)
+TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0  
+
+
+2) #ping (Esse comando envia pacotes ICMP para um host)
+
+- o ping vai mandar pacotes ICMP para um host e ficar testando quanto tempo demorou entre o envio e o recebimento.
+- esse comando é bom para ver a latência de rede.
+
+$ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=122 time=10.0 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=122 time=5.96 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=122 time=5.87 ms
+
+--> Outro exemplo:
+
+- o destino tem que aceitar os pacotes ICMP, receber e responder esse tipo de pacote, muitos destinos não aceitam, 
+por questões de segurança, o próprio LPI não aceita pacotes ICMP.
+
+$ping www.lpi.org
+PING www.lpi.org (65.39.134.165) 56(84) bytes of data.
 
 
 
 
 
 
-#ifconfig
 
 
 
@@ -16,7 +68,12 @@ Terms and Utilities:
 
 
 
-#ip
+
+
+
+
+
+ip
 
 #ifup
 
@@ -32,7 +89,6 @@ Terms and Utilities:
 
 #netstat
 
-#ping
 
 #ping6
 
