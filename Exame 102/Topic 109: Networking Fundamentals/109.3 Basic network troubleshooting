@@ -282,27 +282,136 @@ Address: 65.39.134.165
    > CONANDOS PARA CONFIGURAÇÃO DE ROTA DO LINUX
 
 
+1) #route (mostra a tabela de rotas, cria rotas e deleta rotas).
+
+$route -n (mostra a tabela de rotas do meu sistema)
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções Métrica Ref   Uso Iface
+0.0.0.0         192.168.1.1     0.0.0.0         UG    600    0        0 wlp1s0
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 wlp1s0
+192.168.1.0     0.0.0.0         255.255.255.0   U     600    0        0 wlp1s0
+
+$route -n (mostra a rota default do sistema)
+
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções Métrica Ref   Uso Iface
+0.0.0.0         192.168.1.1     0.0.0.0         UG    600    0        0 wlp1s0
+
+
+A) Deletando a minha rota padrão para simulação de teste:
+
+$route del default
+
+$route -n
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções Métrica Ref   Uso Iface
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 wlp1s0
+192.168.1.0     0.0.0.0         255.255.255.0   U     600    0        0 wlp1s0
+
+$ping www.uol.com.br (testando a conexão depois de remover a rota default)
+ping: unkown host www.uol.com.br
+
+$ping 8.8.8.8. (esse comando também não funciona, porque eu não tanho rota padrão)
+connect: Network is unreachable
+
+- Se eu pingar o IP do meu roteador, eu tenho acesso porque está na mesma rede, só não funciona para internet.
+
+$ping 192.168.1.1
+PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=2.76 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=2.79 ms
+64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=5.64 ms
+64 bytes from 192.168.1.1: icmp_seq=4 ttl=64 time=2.80 ms
+
+- Adicionando a minha rota padrão novamente:
+
+$route add default gw 10.0.0.1 dev wlp1s0
+
+$ping 8.8.4.4
+PING 8.8.4.4 (8.8.4.4) 56(84) bytes of data.
+64 bytes from 8.8.4.4: icmp_seq=1 ttl=122 time=8.49 ms
+64 bytes from 8.8.4.4: icmp_seq=2 ttl=122 time=7.05 ms
+64 bytes from 8.8.4.4: icmp_seq=3 ttl=122 time=6.65 ms
 
 
 
+   > COMANDOS PARA TESTE DE CONECTIVIDADE DE PORTAS DO LINUX:
 
 
+- Para testar essas portas, usamos alguns comandos, veja abaixo os testes.
 
 
+1) #netstat (lista as portas que estão abertas na minha máquina, serviços que estão abrindo porta na minha máquina)
+- Comando importante para analisar o tráfego e a resposta das máquinas remotas.
+
+$netstat -nalpt (lista todas as conexões ativas, com TCP, processos que estão em cada porta)
+Conexões Internet Ativas (servidores e estabelecidas)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado       PID/Program name    
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               OUÇA       1066/mysqld         
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               OUÇA       493/systemd-resolve 
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               OUÇA       17833/cupsd         
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               OUÇA       1637/master         
+tcp        0      0 192.168.1.105:48032     151.101.192.175:443     ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:53490     54.230.58.77:443        ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:56712     34.201.97.22:443        ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:52372     151.101.193.168:443     ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:52882     108.174.12.129:443      ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:38510     52.5.45.40:443          ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:59668     34.193.64.30:443        ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:49220     52.207.119.209:443      ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:47448     64.233.190.188:443      ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:47932     35.173.3.167:443        ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:57506     52.86.212.224:443       ESTABELECIDA 2170/chrome         
+tcp        0      0 192.168.1.105:35952     54.230.59.148:443       ESTABELECIDA 2170/chrome         
+tcp6       0      0 ::1:631                 :::*                    OUÇA       17833/cupsd         
+tcp6       0      0 :::25                   :::*                    OUÇA       1637/master   
 
 
+A) Esse comando agrega funções de outros comandos, com a opção -i, mostra todas as interfaces de rede ativas:
+
+$netstat -i
+Tabela de Interfaces do Kernel
+Iface      MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+enp2s0    1500        0      0      0 0             0      0      0      0 BMU
+lo       65536     8351      0      0 0          8351      0      0      0 LRU
+wlp1s0    1500   385096      0      0 0        265922      0      0      0 BMRU
+
+B) Com a opção -r, exibe a tabela de rotas do sistema:
+
+$netstat -rn
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções   MSS Janela  irtt Iface
+0.0.0.0         192.168.1.1     0.0.0.0         UG        0 0          0 wlp1s0
+169.254.0.0     0.0.0.0         255.255.0.0     U         0 0          0 wlp1s0
+192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 wlp1s0
 
 
+C) Como eu posso ver se a porta 25 está respodendo:
+
+$netstat -nalpt | grep 1637
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               OUÇA       1637/master         
+tcp6       0      0 :::25                   :::*                    OUÇA       1637/master 
+
+- Podemos usar o comando telnet:
+
+$telnet 127.0.0.1 25
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+220 maumau ESMTP Postfix (Ubuntu)
 
 
+2) #netcat (faz a mesma coisa que o comando telnet, mas ele dá mais opções).
+
+$netcat 127.0.0.1 25 (faz um teste de conexão na porta 25)
+220 maumau ESMTP Postfix (Ubuntu)
+
+$netcat -l -p 1234  (agora com esse comando, ele vai ouvindo nessa porta para alguém poder conectar, 
+posso testar firewall)
 
 
+3) #tcpdump (outra ferramenta muito util para analisar problemas de rede)
+
+- monitora os pacotes que estão circulando nas interfaces de rede da minha máquina.
 
 
-
-
-
-
-#netstat
-
-#netcat
