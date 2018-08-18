@@ -279,7 +279,7 @@ Name:	lpi.org
 Address: 65.39.134.165
 
 
-   > CONANDOS PARA CONFIGURAÇÃO DE ROTA DO LINUX
+   > CONANDOS PARA CONFIGURAÇÃO DE ROTA DO LINUX (route -n)
 
 
 1) #route (mostra a tabela de rotas, cria rotas e deleta rotas).
@@ -335,7 +335,7 @@ PING 8.8.4.4 (8.8.4.4) 56(84) bytes of data.
 
 
 
-   > COMANDOS PARA TESTE DE CONECTIVIDADE DE PORTAS DO LINUX:
+   > COMANDOS PARA TESTE DE CONECTIVIDADE DE PORTAS DO LINUX: (netstat, netcat, telnet, tcpdump)
 
 
 - Para testar essas portas, usamos alguns comandos, veja abaixo os testes.
