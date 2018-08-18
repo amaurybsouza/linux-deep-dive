@@ -1,7 +1,7 @@
 Terms and Utilities:
 
 
-   > COMANDOS DE TESTE DE CONECTIVIDADE DO LINUX
+   > COMANDOS DE TESTE DE CONECTIVIDADE DO LINUX (ping, traceroute, tracepath)
 
 
 - Identificação de problemas simples de rede no Linux.
@@ -91,41 +91,196 @@ traceroute to www.google.com.br (172.217.29.227), 30 hops max, 60 byte packets
 - desde que minha rede aceite o protocolo IPv6.
 
 
-5) #tracepath
+5) #tracepath (comando semelhante ao traceroute, ele faz o caminho do tracer)
+
+$tracepath www.linuxandubuntu.com
+ 1?: [LOCALHOST]                      pmtu 1500
+ 1:  _gateway                                              3.166ms 
+ 1:  _gateway                                              2.994ms 
+ 2:  _gateway                                              3.549ms pmtu 1480
+ 2:  172.28.14.1                                           5.970ms 
+ 3:  10.100.221.57                                         5.798ms 
+ 4:  200.106.148.13                                        6.235ms 
+ 5:  xe-1-0-0-2557.edge-b.cas512.algartelecom.com.br       7.605ms asymm 13 
+
+#tracepath6 (traça um caminho para o host de rede descobrindo o MTU ao longo desse caminho).
 
 
 
+   > COMANDOS DE TROUBLESHOOTING DE DNS NO LINUX  (host, nslookup, dig)
+
+
+- Lembrando, DNS é responsável por traduzir nomes de sites, como por exemplo rafaelit.wordpress.com para um número de IP, 
+tornando possível a comunicação pela rede.
+
+
+#cat /etc/resolv.conf (arquivo onde fica os servidores de DNS, primário e secundário).
+
+- esse endereço é recebido através do meu provedor de internet (conexão doméstica | DHCP).
+- se estamos na rede de uma empresa, normalmente a empresa tem o próprio servidor de DNS.
+- podemos usar um servidor de DNS público que está na internet, mas o recomendado é usar um DNS interno.
+
+
+1) #host (Comando utilizado para testes simples de resolução de nomes. Também é possível passar 
+um servidor de DNS específico logo após o nome a ser testado.)
+
+$host www.debian.org
+www.debian.org has address 200.17.202.197
+www.debian.org has IPv6 address 2801:82:80ff:8009:e61f:13ff:fe63:8e88
+
+- basicamente ele informa que o host "www.debian.org" tem o endereço de IP: "200.17.202.197"
+
+$host webmail.cti.gov.br
+webmail.cti.gov.br has address 200.144.113.118
+
+- basicamente ele informa que o host "webmail.cti.gov.br" tem o endereço de IP: "200.144.113.118"
+
+- Podemos fazer um DNS reverso, fazendo o contrário, passando o IP para ele me falar o DNS reverso.
+
+$host 200.17.202.197
+197.202.17.200.in-addr.arpa domain name pointer debiansec.c3sl.ufpr.br.
+
+
+2) #nslookup (faz a mesma coisa que o comando host, mas ele trás mais detalhes).
+
+$nslookup debian.org
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	debian.org
+Address: 5.153.231.4
+Name:	debian.org
+Address: 128.31.0.62
+Name:	debian.org
+Address: 130.89.148.14
+Name:	debian.org
+Address: 149.20.4.15
+Name:	debian.org
+Address: 2001:4f8:1:c::15
+Name:	debian.org
+Address: 2001:67c:2564:a119::148:14
+Name:	debian.org
+Address: 2001:41c8:1000:21::21:4
+ 
+$nslookup www.debian.org
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	www.debian.org
+Address: 200.17.202.197
+Name:	www.debian.org
+Address: 2801:82:80ff:8009:e61f:13ff:fe63:8e88
+
+
+3) #dig (comando semelhante ao nslookup, utilizado para retornar informações mais avançadas para o 
+diagnostico de problemas em servidores DNS)
+
+- Esse comando tem sido até mais usado que o nslookup.
+- No comando abaixo, ele mostra o tempo, quando foi realizada a consulta, e todas as informações do host ubuntu.com
+
+
+$dig ubuntu.com
+
+; <<>> DiG 9.11.3-1ubuntu1.1-Ubuntu <<>> ubuntu.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20592
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;ubuntu.com.			IN	A
+
+;; ANSWER SECTION:
+ubuntu.com.		177	IN	A	91.189.94.40
+
+;; Query time: 50 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Sat Aug 18 11:57:44 -03 2018
+;; MSG SIZE  rcvd: 55
+
+
+- Linhas principais (informação do domínio)
+;; ANSWER SECTION:
+ubuntu.com.             177     IN      A       91.189.94.40
+
+- Trazendo apenas o IP desse host:
+
+dig www.ubuntu.com +short
+91.189.90.58
+
+-  Trazendo apenas a resposta, informação mais direta:
+
+dig www.ubuntu.com +noall +answer
+
+; <<>> DiG 9.11.3-1ubuntu1.1-Ubuntu <<>> www.ubuntu.com +noall +answer
+;; global options: +cmd
+www.ubuntu.com.		82	IN	A	91.189.90.58
+
+- Trazendo o DNS reverso do endereço abaixo:
+
+$dig -x 8.8.8.8
+
+; <<>> DiG 9.11.3-1ubuntu1.1-Ubuntu <<>> -x 8.8.8.8
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 63467
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;8.8.8.8.in-addr.arpa.		IN	PTR
+
+;; ANSWER SECTION:
+8.8.8.8.in-addr.arpa.	7192	IN	PTR	google-public-dns-a.google.com.
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Sat Aug 18 12:04:52 -03 2018
+;; MSG SIZE  rcvd: 93
+
+
+   > TROUBLESHOOTING DE DNS (teste simples de falha na resolução de nome de host)
+
+
+$vim /etc/resolv.conf  (comentando os servidores de DNS do meu sistema).
+
+- Tentando resolver um nome depois que eu desconfigurei meu server de DNS:
+
+$ping www.uol.com.br
+ping: www.uol.com.br: Nome ou serviço desconhecido
+
+- Quando dou um ping no DNS do Google, ele responde, porque ele não tá consultando DNS:
+
+$ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=7 ttl=122 time=6.59 ms
+64 bytes from 8.8.8.8: icmp_seq=13 ttl=122 time=6.50 ms
+
+- Ele também não consegue resolver usando o comando host:
+
+$host www.google.com
+
+$nslookup lpi.org (também nçao resolve essa consulta).
+
+- Agora se eu executar um nslookup e passar um servidor de DNS (DNS do Google), ele vai consultar, e assim pode ver que tenho
+um problema local de DNS em meu sistema.
+
+$nslookup lpi.org 8.8.8.8
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+Name:	lpi.org
+Address: 65.39.134.165
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-#ip
-
-#ifup
-
-#ifdown
-
-#route
-
-#host
-
-#hostname
-
-#dig
 
 #netstat
-
-
-#tracepath6
 
 #netcat
