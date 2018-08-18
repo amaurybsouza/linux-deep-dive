@@ -5,7 +5,8 @@ Terms and Utilities:
 
 
 - Identificação de problemas simples de rede no Linux.
-- O Linux possui uma série de ferramentas que permite a gente analisar e verificar o funcionamento das conexões, interfaces, DNS.
+- O Linux possui uma série de ferramentas que permite a gente analisar e verificar o funcionamento das conexões, 
+interfaces, DNS.
  
 
 1) #ifconfig (além de mostrar os IP's e o nome da interface, você precisa se atentar nas informações abaixo)
