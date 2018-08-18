@@ -3,10 +3,9 @@ Terms and Utilities:
 
    > COMANDOS DE TESTE DE CONECTIVIDADE DO LINUX
 
-- Identificação de problemas simples de rede no Linux.
 
-- O Linux possui uma série de ferramentas que permite a gente realizar a gente analisar e verificar o funcionamento
-das conexões, interfaces, DNS.
+- Identificação de problemas simples de rede no Linux.
+- O Linux possui uma série de ferramentas que permite a gente analisar e verificar o funcionamento das conexões, interfaces, DNS.
  
 
 1) #ifconfig (além de mostrar os IP's e o nome da interface, você precisa se atentar nas informações abaixo)
@@ -36,7 +35,7 @@ TX packets 87230  bytes 12781284 (12.7 MB)
 TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0  
 
 
-2) #ping (Esse comando envia pacotes ICMP para um host)
+2) #ping (esse comando envia pacotes ICMP para um host da rede) *IPv4
 
 - o ping vai mandar pacotes ICMP para um host e ficar testando quanto tempo demorou entre o envio e o recebimento.
 - esse comando é bom para ver a latência de rede.
@@ -47,7 +46,7 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=2 ttl=122 time=5.96 ms
 64 bytes from 8.8.8.8: icmp_seq=3 ttl=122 time=5.87 ms
 
---> Outro exemplo:
+*** Outro exemplo:
 
 - o destino tem que aceitar os pacotes ICMP, receber e responder esse tipo de pacote, muitos destinos não aceitam, 
 por questões de segurança, o próprio LPI não aceita pacotes ICMP.
@@ -55,6 +54,44 @@ por questões de segurança, o próprio LPI não aceita pacotes ICMP.
 $ping www.lpi.org
 PING www.lpi.org (65.39.134.165) 56(84) bytes of data.
 
+3) #ping6 (esse comando envia pacotes ICMP para um host da rede para o formato IPv6)
+
+- ele envia esses pacotes, mas desde que a minha interface aceite IPv6, meu roteador aceite IPv6, todos os pontos.
+
+4) #host (esse comando resolve um nome de um IP da rede)
+
+$host ipv6.google.com
+ipv6.google.com is an alias for ipv6.l.google.com.
+ipv6.l.google.com has IPv6 address 2800:3f0:4001:802::200e   *retorna o IPv6 do Google
+
+5) #traceroute (esse comando mostra as rotas percorridas por um pacote até chegar ao seu destino)
+- Primeiramente devemos instalar esse comando, ele nem sempre é padrão nas distribuições.
+
+$apt install traceroute
+
+- o traceroute envia um pacote por UDP (padrão)
+- se eu quiser que ele use o pacote ICMP, devemos usar a opção -I
+- muitos roteadores hoje em dia não aceitam requisições de ICMP, vale lembrar.
+
+$traceroute -I www.google.com.br  (vai tentar pingar cada um dos hosts que fazem parte do caminho).
+
+$traceroute -I www.google.com.br
+traceroute to www.google.com.br (172.217.29.227), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.1.1)  2.023 ms  2.006 ms  1.999 ms
+ 2  172.28.14.1 (172.28.14.1)  2.700 ms  2.864 ms  2.874 ms
+ 3  10.100.221.57 (10.100.221.57)  2.876 ms  3.513 ms  3.535 ms
+ 4  200.106.148.13 (200.106.148.13)  3.851 ms  3.870 ms  3.872 ms
+ 5  as15169.saopaulo.sp.ix.br (187.16.218.58)  6.888 ms  6.926 ms  6.928 ms
+ 6  108.170.245.129 (108.170.245.129)  6.876 ms  12.479 ms  12.469 ms
+ 7  72.14.236.201 (72.14.236.201)  12.458 ms  5.567 ms  6.152 ms
+ 8  gru06s28-in-f227.1e100.net (172.217.29.227)  6.129 ms  6.132 ms  6.130 ms
+
+
+#traceroute6 (manda as requisições para um endereço IPv6).
+- desde que minha rede aceite o protocolo IPv6.
+
+
+6) #tracepath
 
 
 
@@ -72,8 +109,7 @@ PING www.lpi.org (65.39.134.165) 56(84) bytes of data.
 
 
 
-
-ip
+#ip
 
 #ifup
 
@@ -90,15 +126,6 @@ ip
 #netstat
 
 
-#ping6
-
-#traceroute
-
-#traceroute6
-
-#tracepath
-
 #tracepath6
-
 
 #netcat
