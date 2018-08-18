@@ -8,7 +8,8 @@ esse serviço faz com que todas as configurações de rede sejam realizadas auto
 ele identifica se está usando rede com fio, sem fio, qual a melhor rede para se usar no momento.
 
 - Para o usuário final isso é muito bom, torna essas configs transparentes.
-- Para a gente que está estudando isso, é melhor que seja feito tudo na mãe, usando os arquivos de configuração, em servidores são assim.
+- Para a gente que está estudando isso, é melhor que seja feito tudo na mão, usando os arquivos de configuração, 
+em servidores são assim.
 - Para isso vamos desabilitar esse serviço no sistema usando o comando abaixo:
 
 $systemctl stop NetworkManager        (parando o serviço NetworkManager)
@@ -138,7 +139,8 @@ flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 $ifconfig eno1 10.0.0.222 up (setando o IP 10.0.0.2 na minha interface de rede eno1) 
 
-- Se eu eu não seto a mascara de rede, o sistema verifica o meu IP e adiciona a mascara automaticamente, no caso, usando a mascara da classe A.
+- Se eu eu não seto a mascara de rede, o sistema verifica o meu IP e adiciona a mascara automaticamente, 
+no caso, usando a mascara da classe A.
 
 
 $ifconfig eno1 10.0.0.222 netmask 255.255.255.0 up  (setando o IP e a mascara na interface de rede eno1)
@@ -214,7 +216,8 @@ $ip neigh show  (mostra os IP's que estão próximos da minha rede)
 
 
 OBSERVAÇÕES: 
-- Lembrando que todos esses ajustes serão perdidos assim que eu reiniciar o sistema, não está fixo numa configuração do Linux.
+- Lembrando que todos esses ajustes serão perdidos assim que eu reiniciar o sistema, não está fixo 
+numa configuração do Linux.
 - Está tudo em memória, é temporário, assim que eu reiniciar o sistema esses ajustes deixam de funcionar.
 - Na próxima aula vamos ver os arquivos que podemos usar para setar essas configs permanentes no sistema.
 
@@ -225,7 +228,8 @@ OBSERVAÇÕES:
 
 $dhclient eno1 (esse comando vai definir um DHCP, um IP automático para essa minha interface de rede)
 
-- se eu rodar um ifconfig ele mostra um novo IP, um IP que foi dado pelo servidor DHCP. (no caso o meu roteador que está configurado para isso).
+- se eu rodar um ifconfig ele mostra um novo IP, um IP que foi dado pelo servidor DHCP. 
+(no caso o meu roteador que está configurado para isso).
 
 
    > ARQUIVOS DE CONFIGURAÇÃO DO UBUNTU/DEBIAN
@@ -241,7 +245,8 @@ auto lo
 iface lo inet loopback
 
 
-A) Como o serviço NetworkManager está desativado, eu preciso ajustar as interfaces de rede nesse arquivo, seguindo o modelo abaixo:
+A) Como o serviço NetworkManager está desativado, eu preciso ajustar as interfaces de rede nesse arquivo, 
+seguindo o modelo abaixo:
 
 
 $vim /etc/network/interfaces

@@ -10,7 +10,6 @@ interfaces, DNS.
  
 
 1) #ifconfig (além de mostrar os IP's e o nome da interface, você precisa se atentar nas informações abaixo)
-
 - usando apenas uma interface do sistema para exemplificação. *wlp1s0
 
 $ifconfig 
@@ -37,7 +36,6 @@ TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 
 2) #ping (esse comando envia pacotes ICMP para um host da rede) *IPv4
-
 - o ping vai mandar pacotes ICMP para um host e ficar testando quanto tempo demorou entre o envio e o recebimento.
 - esse comando é bom para ver a latência de rede.
 
@@ -55,17 +53,18 @@ por questões de segurança, o próprio LPI não aceita pacotes ICMP.
 $ping www.lpi.org
 PING www.lpi.org (65.39.134.165) 56(84) bytes of data.
 
-3) #ping6 (esse comando envia pacotes ICMP para um host da rede para o formato IPv6)
-
+#ping6 (esse comando envia pacotes ICMP para um host da rede para o formato IPv6)
 - ele envia esses pacotes, mas desde que a minha interface aceite IPv6, meu roteador aceite IPv6, todos os pontos.
 
-4) #host (esse comando resolve um nome de um IP da rede)
+
+3) #host (esse comando resolve um nome de um IP da rede)
 
 $host ipv6.google.com
 ipv6.google.com is an alias for ipv6.l.google.com.
 ipv6.l.google.com has IPv6 address 2800:3f0:4001:802::200e   *retorna o IPv6 do Google
 
-5) #traceroute (esse comando mostra as rotas percorridas por um pacote até chegar ao seu destino)
+
+4) #traceroute (esse comando mostra as rotas percorridas por um pacote até chegar ao seu destino)
 - Primeiramente devemos instalar esse comando, ele nem sempre é padrão nas distribuições.
 
 $apt install traceroute
@@ -92,7 +91,7 @@ traceroute to www.google.com.br (172.217.29.227), 30 hops max, 60 byte packets
 - desde que minha rede aceite o protocolo IPv6.
 
 
-6) #tracepath
+5) #tracepath
 
 
 
