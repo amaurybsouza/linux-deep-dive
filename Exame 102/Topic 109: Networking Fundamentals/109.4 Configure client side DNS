@@ -1,8 +1,97 @@
 Terms and Utilities:
 
-/etc/hosts
-/etc/resolv.conf
-/etc/nsswitch.conf
-host
-dig
-getent
+
+   > CONFIGURAÇÃO DO CLIENTE DNS
+
+*** Arquivos de configuração:
+i
+
+1) #/etc/resolv.conf (arquivo onde posso configurar meu servidor de DNS).
+nameserver 8.8.8.8 
+nameserver 8.8.4.4
+
+
+2) #/etc/hosts (arquivo onde eu posso associar um IP a um nome, ou a um domínio).
+cat /etc/hosts
+127.0.0.2	localhost
+127.0.2.3	rafael
+10.0.0.2        roteador
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+
+3) #/etc/nsswitch.conf (determina a ordem de busca quando determinadas informações são requisitadas,
+tais como, resolução de nomes, arquivos de senhas e grupos).
+# /etc/nsswitch.conf
+#
+# Example configuration of GNU Name Service Switch functionality.
+# If you have the `glibc-doc-reference' and `info' packages installed, try:
+# `info libc "Name Service Switch"' for information about this file.
+
+passwd:         compat systemd
+group:          compat systemd
+shadow:         compat
+gshadow:        files
+
+hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+networks:       files
+
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+
+netgroup:       nis
+
+- Atenção para essa linha desse arquivo: se ele consuta primeiro em files ou se em dns
+
+hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+
+
+*** Comandos de configuração do cliente DNS:
+
+
+1) #host (comando usado para retornar o IP de um host da rede)
+
+$host www.google.com
+www.google.com has address 216.58.202.132
+www.google.com has IPv6 address 2800:3f0:4001:805::2004
+
+
+2) #dig (comando usado para ver os detalhes do domínio, mais detalhado que o comando host)
+
+
+$dig google.com
+
+; <<>> DiG 9.11.3-1ubuntu1.1-Ubuntu <<>> google.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 26195
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;google.com.			IN	A
+
+;; ANSWER SECTION:
+google.com.		238	IN	A	216.58.202.206
+
+;; Query time: 64 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Sat Aug 18 18:11:55 -03 2018
+;; MSG SIZE  rcvd: 55
+
+
+
+
+
+
+
+
+#getent
