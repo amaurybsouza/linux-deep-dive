@@ -41,13 +41,14 @@ Classe C: 192.168.20.30 / 200.178.12.242
 - Cada dispositivo na rede deve ter um IP único;
 
 - Faixa de IP's públicos:
-  1- Quando você conecta com o provedor de internet, ele me dá um IP público, IP de internet, reconhecido por toda a internet mundial.
+  1- Quando você conecta com o provedor de internet, ele me dá um IP público, IP de internet, 
+reconhecido por toda a internet mundial.
   2- Para ver meu IP público, IP de internet basta acessar o site meuip.com.br
 
 - Faixa de IP's privados:
   1- na minha casa tem meu notebook, minha impressora, meu playstation, meu desktop, tudo vai ter um IP, 
-não é IP de internet, meu provedor meu deu apenas um IP, nesse dispositivos internos eu vou ter IP privados, e esses IP privados vão
-estar na faixa abaixo, representado:
+não é IP de internet, meu provedor meu deu apenas um IP, nesse dispositivos internos eu vou ter IP privados, 
+e esses IP privados vão estar na faixa abaixo, representado:
 
 -----------------------------------------------------------------------------------------------
 CLASSE    PRIMEIRO OCTETO               RANGE                         IP'S PRIVADOS           -
@@ -68,7 +69,8 @@ C              192-223        192.0.0.0 - 223.255.255.255       192.168.0.0 - 19
   c) 255.255.255.0 = 11111111.11111111.11111111.00000000 = 24
   d) 255.255.255.255 = 11111111.11111111.11111111.11111111 = 32
 
-- No exemplo a) indica que o 1º número do IP (11111111) representa a rede e os demais números (00000000.00000000.00000000) representam o host.
+- No exemplo a) indica que o 1º número do IP (11111111) representa a rede e os demais números 
+(00000000.00000000.00000000) representam o host.
 - No exemplo b) indica que os 2º digitos do IP vão representar a rede e os outros 2 vão definir o host dentro desta rede.
 
 
@@ -86,12 +88,15 @@ B              128-191        128.0.0.0 - 191.255.255.255       255.255.0.0/16  
 C              192-223        192.0.0.0 - 223.255.255.255       255.255.255.0/24     -
 --------------------------------------------------------------------------------------
 
-- Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão "255.255.0.0" e classe C "255.255.255.0".
+- Os IP's de classe A por padrão utilizam a mascara "255.0.0.0", classe B utilizam por padrão 
+"255.255.0.0" e classe C "255.255.255.0".
 
 - Exemplos:
 
-Classe A - "110".14.20.12  (nesse IP, o 1° octeto representa a rede (110) e os demais octetos representam os hosts dentro dessa rede).
-Classe B - "172.168".1.1   (nesse IP, os 2° octetos representam a rede (172.168) e os demais octetos representam os hosts dessa rede).
+Classe A - "110".14.20.12  (nesse IP, o 1° octeto representa a rede (110) e os demais octetos representam 
+os hosts dentro dessa rede).
+Classe B - "172.168".1.1   (nesse IP, os 2° octetos representam a rede (172.168) e os demais octetos 
+representam os hosts dessa rede).
 Classe C - "200.178.12".242 
 
    
@@ -141,7 +146,8 @@ d) - Caso elas precisam acessar uma com a outra e precisam trocar pacotes, elas 
    - Esse gateway conhece e tem acesso as duas redes e pode enviar um pacote de uma rede para outra.
    - ROTA PADRÃO: Quando você precisa enviar um pacote para uma máquina que não está na minha rede, 
 eu vou ter que mandar esse pacote para o gateway padrão (rota padrão).
-   - Por exemplo, se eu preciso acessar a internet, eu não tenho acesso direto para a internet, eu preciso ir para o gateway e esse gateway vai acessar a internet.
+   - Por exemplo, se eu preciso acessar a internet, eu não tenho acesso direto para a internet, eu preciso ir 
+para o gateway e esse gateway vai acessar a internet.
    - Tudo que eu não conhecer eu mando para a minha rota padrão.
 
 
