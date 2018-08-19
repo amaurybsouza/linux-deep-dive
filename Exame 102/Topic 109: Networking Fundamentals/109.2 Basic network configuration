@@ -235,7 +235,7 @@ $dhclient eno1 (esse comando vai definir um DHCP, um IP automático para essa mi
    > ARQUIVOS DE CONFIGURAÇÃO DO UBUNTU/DEBIAN
 
 
-- Esse arquivos vão estar no /etc
+- Esses arquivos vão estar no /etc
 
 1) #/etc/network/interfaces (onde eu configuro minhas interfaces de rede no Ubuntu, Debian)
 
