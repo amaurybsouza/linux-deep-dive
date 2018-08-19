@@ -4,7 +4,7 @@ Terms and Utilities:
    > CONFIGURAÇÃO DO CLIENTE DNS
 
 *** Arquivos de configuração:
-i
+
 
 1) #/etc/resolv.conf (arquivo onde posso configurar meu servidor de DNS).
 nameserver 8.8.8.8 
@@ -48,7 +48,7 @@ rpc:            db files
 
 netgroup:       nis
 
-- Atenção para essa linha desse arquivo: se ele consuta primeiro em files ou se em dns
+- Atenção para essa linha desse arquivo: se ele consulta primeiro em files ou em dns
 
 hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
 
