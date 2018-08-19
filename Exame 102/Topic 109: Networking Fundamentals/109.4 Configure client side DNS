@@ -89,9 +89,41 @@ google.com.		238	IN	A	216.58.202.206
 
 
 
+3) #getent (serve para consultar vários recursos do sistema)
+
+$getent  passwd lpi1 (mostra informações do usuário lpi1 do arquivo /etc/passwd)
+
+$getent hosts www.uol.com.br
+2600:9000:200f:2200:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:1000:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:c600:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:f000:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:e400:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:d000:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:5e00:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+2600:9000:200f:9e00:1:5a19:8b40:93a1 dftex7xfha8fh.cloudfront.net www.uol.com.br
+
+- Trazendo informações do host em formato Ipv4:
+
+getent ahostsv4 www.uol.com.br
+54.230.59.231   STREAM dftex7xfha8fh.cloudfront.net
+54.230.59.231   DGRAM  
+54.230.59.231   RAW    
+54.230.59.115   STREAM 
+54.230.59.115   DGRAM  
+54.230.59.115   RAW    
+54.230.59.130   STREAM 
+54.230.59.130   DGRAM  
+54.230.59.130   RAW    
+54.230.59.105   STREAM 
+54.230.59.105   DGRAM  
+54.230.59.105   RAW    
 
 
 
 
 
-#getent
+
+
+
+
