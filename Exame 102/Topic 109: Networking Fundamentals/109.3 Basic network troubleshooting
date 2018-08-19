@@ -243,6 +243,13 @@ $dig -x 8.8.8.8
 ;; WHEN: Sat Aug 18 12:04:52 -03 2018
 ;; MSG SIZE  rcvd: 93
 
+- Mostrando  o servidor de e-mail (mail exchange), registro de MX:
+
+$dig ubuntu.com mx
+;; ANSWER SECTION:
+ubuntu.com.		3568	IN	MX	10 mx.canonical.com.
+
+
 
    > TROUBLESHOOTING DE DNS (teste simples de falha na resolução de nome de host)
 
