@@ -1,6 +1,44 @@
 Terms and Utilities:
 
 
+   > TAREFAS ADMINISTRATIVAS DE SEGURANÇA NO LINUX
+
+
+#su (esse comando serve para mudar de um usuário para outro)
+
+- Para um usuário comum entrar na conta de root, é usado o comando su. Será necessário informar a senha do usuário root para efetuar o login.
+
+- Caso o usuário digite sudo su - basta acessar com a senha do próprio usuário.
+
+
+*** Diferença de se usar o comando "su" e o "su -" 
+
+$su lpi2 (vou assumir o usuário lpi2)
+
+- assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login pra o novo usuário, ele caiu na pasta que eu estava.
+  - ele não executa o ~/.profile, ~/.bash_profile, não inicia as variaveis que estão definidas para esse usuário lpi2.
+
+- Agora digitando $ su - (ele vai funcionar como se fosse um login com o usuário lpi2)
+
+$su - lpi2 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -22,7 +60,6 @@ Terms and Utilities:
 
 #/etc/sudoers
 
-#su
 
 #usermod
 
