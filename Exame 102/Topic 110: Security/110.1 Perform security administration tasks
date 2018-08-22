@@ -11,7 +11,7 @@ Terms and Utilities:
 - Caso o usuário digite sudo su - basta acessar com a senha do próprio usuário.
 
 
-*** Diferença de se usar o comando "su" e o "su -" 
+1) Diferença entre "su" e o "su -" 
 
 $su lpi2 (vou assumir o usuário lpi2)
 
