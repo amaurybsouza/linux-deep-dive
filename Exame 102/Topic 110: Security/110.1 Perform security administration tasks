@@ -23,13 +23,17 @@ Password:
 
 1) Diferença entre "su" e o "su -" 
 
+--> "su" (eu vou logar sem fazer o procedimento de login)
+
+--> "su -" (eu vou logar fazendo o procedimento de login) *carrega as variáveis desse usuário, o ambiente desse usuário.
+
 
 $su lpi2 (vou assumir o usuário lpi2)
 Password:
 
 lpi2@linux:/home/lpi1$ (assim que eu logo ele mostra o /home do usuário, cai na pasta que eu estava antes)
 
-- Assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login pra o novo usuário, ele caiu na pasta que eu estava.
+- Assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login para o novo usuário, ele caiu na pasta que eu estava.
 
 - Ele não executa o ~/.profile, ~/.bash_profile, não inicia as variaveis que estão definidas para esse usuário lpi2.
 
@@ -40,6 +44,17 @@ $su - lpi2
 Password:
 
 
+#su -c (esse comando é usado quando eu não tenho autoridade de acesso é usar o su -c)
+
+- É necessário que eu tenha a senha do usuário root.
+
+
+
+#sudo (serve para executar um comando sem ter a senha do usuário root)
+
+- Quando eu executo o seguinte comando abaixo:
+
+$sudo su - (ele pergunta a senha do usuário lpi1, ele loga com a senha do usuário lpi1) *porque eu dei permissões para o usuário lpi1 logar como root.
 
 
 
@@ -84,7 +99,6 @@ Password:
 
 #netstat
 
-#sudo
 
 #/etc/sudoers
 
