@@ -4,7 +4,7 @@ Terms and Utilities:
    > TAREFAS ADMINISTRATIVAS DE SEGURANÇA NO LINUX
 
 
-#su (esse comando serve para mudar de um usuário para outro)
+1) #su (esse comando serve para mudar de um usuário para outro)
 
 - Para um usuário comum entrar na conta de root, é usado o comando su. Será necessário informar a senha do usuário root para efetuar o login.
 
@@ -27,6 +27,7 @@ Password:
 
 --> "su -" (eu vou logar fazendo o procedimento de login) *carrega as variáveis desse usuário, o ambiente desse usuário.
 
+--> Exemplos:
 
 $su lpi2 (vou assumir o usuário lpi2)
 Password:
@@ -50,12 +51,13 @@ Password:
 
 
 
-#sudo (serve para executar um comando sem ter a senha do usuário root)
+2) #sudo (serve para executar um comando sem ter a senha do usuário root)
 
 - Quando eu executo o seguinte comando abaixo:
 
 $sudo su - (ele pergunta a senha do usuário lpi1, ele loga com a senha do usuário lpi1) *porque eu dei permissões para o usuário lpi1 logar como root.
 
+A) Para que um usuário possa realizar tarefas de root, porém sem que tenha conhecimento da senha da conta root, existe o comando sudo.
 
 
 
