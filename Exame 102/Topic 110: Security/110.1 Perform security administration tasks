@@ -22,7 +22,7 @@ Password:
 - Agora se eu utilizar "sudo su -" (significa que eu digito a senha do meu usuário e nem de root)
 
 
-1) Diferença entre "su" e o "su -" 
+***Diferença entre "su" e o "su -" 
 
 --> "su" (eu vou logar sem fazer o procedimento de login)
 
@@ -33,7 +33,7 @@ Password:
 $su lpi2 (vou assumir o usuário lpi2)
 Password:
 
-lpi2@linux:/home/lpi1$ (assim que eu logo ele mostra o /home do usuário, cai na pasta que eu estava antes)
+lpi2@linux:/home/lpi2$ (assim que eu logo ele mostra o /home do usuário, cai na pasta que eu estava antes)
 
 - Assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login para o novo usuário, ele caiu na pasta que eu estava.
 
@@ -46,9 +46,26 @@ $su - lpi2
 Password:
 
 
-#su -c (esse comando é usado quando eu não tenho autoridade de acesso é usar o su -c)
+2) #su -c (esse comando é usado quando eu não tenho autoridade de acesso é, sendo assim podemos usar o su -c)
 
 - É necessário que eu tenha a senha do usuário root.
+
+--> Exemplos:
+
+$fdisk -l (só o usuário root pode executar este comando, por padrão).
+
+- Agora se eu quiser executar esse comando, eu posso usar:
+
+$su -c "fdisk -l"  (eu vou executar esse comando e quando eu der enter ele vai pedir a senha do usuário root)
+
+- vai executar o comando como se fosse o usuário root, depois quer terminar ele volta para o meu login, como lpi1.
+
+
+
+
+
+
+
 
 
 
@@ -59,15 +76,6 @@ Password:
 $sudo su - (ele pergunta a senha do usuário lpi1, ele loga com a senha do usuário lpi1) *porque eu dei permissões para o usuário lpi1 logar como root.
 
 A) Para que um usuário possa realizar tarefas de root, porém sem que tenha conhecimento da senha da conta root, existe o comando sudo.
-
-
-
-
-
-
-
-
-
 
 
 
