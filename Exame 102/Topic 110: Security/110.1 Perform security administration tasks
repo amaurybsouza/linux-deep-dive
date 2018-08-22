@@ -10,17 +10,45 @@ Terms and Utilities:
 
 - Caso o usuário digite sudo su - basta acessar com a senha do próprio usuário.
 
+- Exemplos:
+
+$su lpi2 (eu vou logar com o usuário lpi2)
+Password:
+
+$su (sem usuário eu vou logar como root, tem que digitar a senha do root)
+Password:
+
+- Agora se eu utilizar "sudo su -" (significa que eu digito a senha do meu usuário e nem de root)
+
 
 1) Diferença entre "su" e o "su -" 
 
+
 $su lpi2 (vou assumir o usuário lpi2)
+Password:
 
-- assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login pra o novo usuário, ele caiu na pasta que eu estava.
-  - ele não executa o ~/.profile, ~/.bash_profile, não inicia as variaveis que estão definidas para esse usuário lpi2.
+lpi2@linux:/home/lpi1$ (assim que eu logo ele mostra o /home do usuário, cai na pasta que eu estava antes)
 
-- Agora digitando $ su - (ele vai funcionar como se fosse um login com o usuário lpi2)
+- Assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login pra o novo usuário, ele caiu na pasta que eu estava.
+
+- Ele não executa o ~/.profile, ~/.bash_profile, não inicia as variaveis que estão definidas para esse usuário lpi2.
+
+
+- Agora digitando $su - (ele vai funcionar como se fosse um login com o usuário lpi2)
 
 $su - lpi2 
+Password:
+
+
+
+
+
+
+
+
+
+
+
 
 
 
