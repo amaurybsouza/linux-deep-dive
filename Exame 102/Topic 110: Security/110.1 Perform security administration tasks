@@ -6,7 +6,8 @@ Terms and Utilities:
 
 1) #su (esse comando serve para mudar de um usuário para outro)
 
-- Para um usuário comum entrar na conta de root, é usado o comando su. Será necessário informar a senha do usuário root para efetuar o login.
+- Para um usuário comum entrar na conta de root, é usado o comando su. Será necessário informar a senha do usuário root 
+para efetuar o login.
 
 - Caso o usuário digite sudo su - basta acessar com a senha do próprio usuário.
 
@@ -35,7 +36,8 @@ Password:
 
 lpi2@linux:/home/lpi2$ (assim que eu logo ele mostra o /home do usuário, cai na pasta que eu estava antes)
 
-- Assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login para o novo usuário, ele caiu na pasta que eu estava.
+- Assim que eu loguei ele mostra o home do usuário lpi2, ele não faz o procedimento de login para o novo usuário, ele caiu na 
+pasta que eu estava.
 
 - Ele não executa o ~/.profile, ~/.bash_profile, não inicia as variaveis que estão definidas para esse usuário lpi2.
 
@@ -66,7 +68,8 @@ $su -c "fdisk -l"  (eu vou executar esse comando e quando eu der enter ele vai p
 
 - Quando eu executo o seguinte comando abaixo:
 
-$sudo su - (ele pergunta a senha do usuário lpi1, ele loga com a senha do usuário lpi1) *porque eu dei permissões para o usuário lpi1 logar como root.
+$sudo su - (ele pergunta a senha do usuário lpi1, ele loga com a senha do usuário lpi1) *porque eu dei permissões para o usuário 
+lpi1 logar como root.
 
 A) Para que um usuário possa realizar tarefas de root, porém sem que tenha conhecimento da senha da conta root, existe o comando sudo.
 
@@ -146,7 +149,7 @@ amaury   ? :0           2018-08-22 18:29   ?          1641 (:0)
 $w
  21:31:37 up  3:02,  1 user,  load average: 0,65, 0,95, 1,20
 USUARIO  TTY      DE               LOGIN@   OCIOSO JCPU   PCPU O QUE
-amaury   :0       :0               18:29   ?xdm?   4:34   0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-se
+amaury   :0       :0               18:29   ?xdm?   4:34   0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_
 
 - com esse comando você pode monitorar usuários e sessões que estão consumindo muito da máquina.
 - o w vai atualizando de acordo com os logs feitos no sistema.
@@ -312,7 +315,8 @@ C) $passwd -n (mesma coisa que o $chage -m) *defini o número "minimo" de dias q
 $passwd -n2 usuario5 
 passwd: informação de expiração de senha alterada.
 
-D) $passwd -w (utilizado para definir os dias anteriores ao fim da validade da senha em que será emitido um aviso a respeito). *chage -W
+D) $passwd -w (utilizado para definir os dias anteriores ao fim da validade da senha em que será emitido um aviso a respeito). 
+*chage -W
 
 passwd -w4 usuario5 
 passwd: informação de expiração de senha alterada.
