@@ -48,7 +48,7 @@ $su - lpi2
 Password:
 
 
-2) #su -c (esse comando é usado quando eu não tenho autoridade de acesso é, sendo assim podemos usar o su -c)
+#su -c (esse comando é usado quando eu não tenho autoridade de acesso é, sendo assim podemos usar o su -c)
 
 - É necessário que eu tenha a senha do usuário root.
 
@@ -62,6 +62,7 @@ $fdisk -l (só o usuário root pode executar este comando, por padrão).
 $su -c "fdisk -l"  (eu vou executar esse comando e quando eu der enter ele vai pedir a senha do usuário root)
 
 - vai executar o comando como se fosse o usuário root, depois quer terminar ele volta para o meu login, como lpi1.
+
 
 
 2) #sudo (serve para executar um comando sem ter a senha do usuário de destino)
@@ -83,6 +84,7 @@ A) Para que um usuário possa realizar tarefas de root, porém sem que tenha con
 $sudo fdisk -l
 [sudo] senha para usuario5: 
 usuario5 não está no arquivo sudoers. Este incidente será relatado.
+
 
 
 3) #/etc/sudoers (esse arquivo é utilizado para determinar as permissões de uso do comando sudo)
@@ -120,6 +122,7 @@ lpi2 ALL=/sbin/poweroff (o usuário lpi2 a partir de qualquer terminal pode exec
 
 
 * Outra forma de editar o arquivo /etc/sudoers é usar o comando "visudo"
+
 
 
     > FERRAMENTAS PARA VER OS LOGINS DOS USUÁRIOS: *who, w, last e lastlog
