@@ -119,7 +119,7 @@ lpi2 ALL=/sbin/poweroff (o usuário lpi2 a partir de qualquer terminal pode exec
 * Outra forma de editar o arquivo /etc/sudoers é usar o comando "visudo"
 
 
-    > FERRAMENTAS PARA VER OS LOGINS DOS USUÁRIOS:
+    > FERRAMENTAS PARA VER OS LOGINS DOS USUÁRIOS: *who, w, last e lastlog
 
 
 - que usuário está logado no momento.
@@ -230,7 +230,7 @@ amaury   :0           :0               Sun Aug 19 09:51 - 23:04  (13:12)
 amaury   :0           :0               Sat Aug 18 08:53 - down   (14:45)
 
 
-    > SENHAS (SEGURANÇA NO LINUX)
+    > SENHAS (SEGURANÇA NO LINUX) *passwd, usermod, chage
 
 
 - As senhas são um dos fatores mais importantes de um sistema, seja Windows, Linux.
