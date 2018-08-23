@@ -1,8 +1,7 @@
 Terms and Utilities:
 
 
-   > TAREFAS DE SEGURANÇA: SU E SUDO
-
+   > TAREFAS DE SEGURANÇA: COMANDOS SU E SUDO
 
 
 1) #su (esse comando serve para mudar de um usuário para outro)
@@ -19,10 +18,11 @@ Password:
 $su (sem usuário eu vou logar como root, tem que digitar a senha do root)
 Password:
 
-- Agora se eu utilizar "sudo su -" (significa que eu digito a senha do meu usuário e nem de root)
+- Agora se eu utilizar "sudo su -" (significa que eu digito a senha do meu usuário e não a senha de root)
 
 
 ***Diferença entre "su" e o "su -" 
+
 
 --> "su" (eu vou logar sem fazer o procedimento de login)
 
@@ -50,26 +50,19 @@ Password:
 
 - É necessário que eu tenha a senha do usuário root.
 
+
 --> Exemplos:
 
 $fdisk -l (só o usuário root pode executar este comando, por padrão).
 
-- Agora se eu quiser executar esse comando, eu posso usar:
+- Agora se eu quiser executar esse comando com lpi1, eu posso usar:
 
 $su -c "fdisk -l"  (eu vou executar esse comando e quando eu der enter ele vai pedir a senha do usuário root)
 
 - vai executar o comando como se fosse o usuário root, depois quer terminar ele volta para o meu login, como lpi1.
 
 
-
-
-
-
-
-
-
-
-2) #sudo (serve para executar um comando sem ter a senha do usuário root)
+2) #sudo (serve para executar um comando sem ter a senha do usuário de destino)
 
 - Quando eu executo o seguinte comando abaixo:
 
@@ -78,13 +71,52 @@ $sudo su - (ele pergunta a senha do usuário lpi1, ele loga com a senha do usuá
 A) Para que um usuário possa realizar tarefas de root, porém sem que tenha conhecimento da senha da conta root, existe o comando sudo.
 
 
+--> Exemplos:
+
+- O usuário5 não tem permissão para executar o comando abaixo, isso é tudo configurado no arquivo sudoers /etc/sudoers.
+
+- O comando sudo é uma ferramenta que você vai configurar e informar quem tem permissão para fazer o que.
+
+$sudo fdisk -l
+[sudo] senha para usuario5: 
+usuario5 não está no arquivo sudoers. Este incidente será relatado.
 
 
+3) #/etc/sudoers (esse arquivo é utilizado para determinar as permissões de uso do comando sudo)
+
+- pode dar permissões para usuários ou para grupos.
+- normalmente é dada a permissão para grupos,  e coloca um usuário especifico dentro desse grupo.
+
+- quando eu tenho o simbolo de porcentagem (%) é um grupo, veja: %sudo   ALL=(ALL:ALL) ALL
+
+$cat /etc/sudoers
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL                             * grupo sudo
+
+# Members of the admin group may gain root privileges
+%admin ALL=(ALL) ALL                                  * grupo admin
 
 
+* Significado importante:
+- Os membros do grupo admin podem: %admin ALL=(ALL) ALL
+
+a partir de qualquer terminal, utilizando qualquer usuário, executar todos os comando == %admin ALL=(ALL) ALL
+
+- o usuário amaury faz parte do grupo sudo, por isso que esse usuário pode fazer qualquer coisa no sistema.
+
+$grep amaury /etc/group
+adm:x:4:syslog,amaury
+sudo:x:27:amaury
+
+- se eu quiser adicionar o "usuário5" no grupo de sudo, posso usar o comando usermod, adicionando esse usuário.
+- a regra já está definida em /etc/sudoers.
+
+* Exemplo de regra no /etc/sudoers
+
+lpi2 ALL=/sbin/poweroff (o usuário lpi2 a partir de qualquer terminal pode executar esse comando, um poweroff).
 
 
-
+* Outra forma de editar o arquivo /etc/sudoers é usar o comando "visudo"
 
 
 
@@ -109,10 +141,6 @@ A) Para que um usuário possa realizar tarefas de root, porém sem que tenha con
 #chage
 
 #netstat
-
-
-#/etc/sudoers
-
 
 #usermod
 
