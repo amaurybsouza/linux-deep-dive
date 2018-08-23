@@ -119,6 +119,214 @@ lpi2 ALL=/sbin/poweroff (o usuário lpi2 a partir de qualquer terminal pode exec
 * Outra forma de editar o arquivo /etc/sudoers é usar o comando "visudo"
 
 
+    > FERRAMENTAS PARA VER OS LOGINS DOS USUÁRIOS:
+
+
+- que usuário está logado no momento.
+- o que esse usuário está fazendo.
+- quais foram as ultimas tentivas de login de cada usuário.
+- para que o administrador tenha como investigar situações que tenham ocorrido no sistema, inclusive de segurança.
+
+
+1) #who (mostra quem está logado nesse momento)
+
+$who
+amaury   :0           2018-08-22 18:29 (:0)
+
+#who -a (com a opção -a mostra mais detalhes)
+
+$who -a 
+           inicialização do sistema 2018-08-22 18:28
+           nível de execução 5 2018-08-22 18:29
+amaury   ? :0           2018-08-22 18:29   ?          1641 (:0)
+
+
+2) #w (mostra quem está logado e o que esse usuário está fazendo) *comando mais detalhado que o $who
+
+$w
+ 21:31:37 up  3:02,  1 user,  load average: 0,65, 0,95, 1,20
+USUARIO  TTY      DE               LOGIN@   OCIOSO JCPU   PCPU O QUE
+amaury   :0       :0               18:29   ?xdm?   4:34   0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-se
+
+- com esse comando você pode monitorar usuários e sessões que estão consumindo muito da máquina.
+- o w vai atualizando de acordo com os logs feitos no sistema.
+
+LOGIN@   OCIOSO JCPU   PCPU O QUE
+18:29   ?xdm?   4:34   0.00s
+
+
+3) #last (mostra o histórico de logins na máquina)
+
+$last
+amaury   :0           :0               Wed Aug 22 18:29   still logged in
+reboot   system boot  4.15.0-32-generi Wed Aug 22 18:28   still running
+amaury   tty4                          Wed Aug 22 18:28 - down   (00:00)
+amaury   :0           :0               Wed Aug 22 16:51 - down   (01:36)
+reboot   system boot  4.15.0-32-generi Wed Aug 22 16:51 - 18:28  (01:37)
+amaury   :0           :0               Tue Aug 21 16:48 - down   (06:13)
+reboot   system boot  4.15.0-32-generi Tue Aug 21 16:48 - 23:01  (06:13)
+amaury   :0           :0               Mon Aug 20 17:08 - down   (05:54)
+reboot   system boot  4.15.0-32-generi Mon Aug 20 17:08 - 23:02  (05:54)
+amaury   :0           :0               Sun Aug 19 09:51 - 23:04  (13:12)
+reboot   system boot  4.15.0-32-generi Sun Aug 19 09:51 - 23:04  (13:12)
+amaury   :0           :0               Sat Aug 18 08:53 - down   (14:45)
+
+
+#lastb (verificar se houve tentativas mal sucedidas de logis no sistema)
+
+$lastb
+UNKNOWN  tty4                          Wed Aug 22 18:27 - 18:27  (00:00)
+
+btmp inicia Wed Aug 22 18:27:59 2018
+
+OBS: o comando $last tira essas informações dos arquivos: /var/log/wtmp e do /var/log/btmp.
+
+$ls -l w*  (mostra todos os logins realizados no sistema)
+-rw-rw-r-- 1 root utmp 51072 ago 22 18:29 wtmp
+-rw-rw-r-- 1 root utmp 70272 ago  1 16:50 wtmp.1
+
+- Para eu ler o conteúdo do arquivo wtmp.1, basta digitar o comando abaixo:  *arquivo que foi rotacionado, antigo.
+
+$last -f wtmp.1
+
+$ls -l bt*  (mostra os logins bloqueados)
+-rw-rw---- 1 root utmp 384 ago 22 18:27 btmp
+-rw-rw---- 1 root utmp   0 jul  1 16:07 btmp.1
+
+
+#lastlog (pega todos os usuários do sistema e vai mostrar quando esse usuário fez login pela última vez)
+
+$lastlog 
+Nome de Usuário         Porta     De             Último
+root                                       **Nunca logou**
+daemon                                     **Nunca logou**
+bin                                        **Nunca logou**
+sys                                        **Nunca logou**
+sync                                       **Nunca logou**
+games                                      **Nunca logou**
+man                                        **Nunca logou**
+lp                                         **Nunca logou**
+amaury           tty4                      qua ago 22 18:28:05 -0300 2018
+
+
+- É interessante de se observar isso, porque eu não posso ter logins de usuários do sistema, 
+como ter login com o usuário do CUPS, do servidor web, ou do proxy, não pode ter logins desses usuários.
+
+- Para ver o último login do usuário amaury:
+
+$lastlog -u amaury 
+Nome de Usuário         Porta     De             Último
+amaury           tty4                      qua ago 22 18:28:05 -0300 2018
+
+- Para ver os últimos logins do usuário amaury:
+
+$last amaury 
+amaury   :0           :0               Wed Aug 22 18:29   still logged in
+amaury   tty4                          Wed Aug 22 18:28 - down   (00:00)
+amaury   :0           :0               Wed Aug 22 16:51 - down   (01:36)
+amaury   :0           :0               Tue Aug 21 16:48 - down   (06:13)
+amaury   :0           :0               Mon Aug 20 17:08 - down   (05:54)
+amaury   :0           :0               Sun Aug 19 09:51 - 23:04  (13:12)
+amaury   :0           :0               Sat Aug 18 08:53 - down   (14:45)
+
+
+    > SENHAS (SEGURANÇA NO LINUX)
+
+
+- As senhas são um dos fatores mais importantes de um sistema, seja Windows, Linux.
+- Cabe ao administardor instruir o usuário sobre a forma correta de usar a senha.
+- É o usuário que não pode compartilhar a senha com outros usuários, tem que definir uma senha segura.
+
+
+1) #chage (esse comando já foi estudado, ele defini a data de expiração, data de inatividade, de quanto em quanto
+o usuário tem que trocar a senha dele)   *rever essa aula que foi estudada.
+
+---- Opções do comando chage:
+-l: Lista as definições atuais
+-d DATA: Define forçadamente a data da última mudança de senha. -d0 força a expiração da senha
+-E DATA: Define a data de expiração da conta
+-I dias: Define o número de dias entre a data da expiração da senha e a desativação da conta
+-m dias: Número mínimo de dias entre as trocas de senha
+-M dias: Máximo de dias para a alteração de senha. Ou validade da senha.
+-W dias: Define a partir de quantos dias antes da expiração da senha o usuário receberá avisos
+
+
+A) Alterando para que a senha do usuário expire 10 dias após a troca da senha:
+
+$chage -M 10 usuario6
+
+B) Alterando para que o usuário possa trocar a senha apenas uma vez por dia:
+
+$chage -m1 usuario6
+
+C) Alterando para que a conta do usuário expire na data de hoje:
+
+$chage -E "2017-05-12" usuario6
+
+D) Tirando a data de expiração da conta do usuário:
+
+$chage -E -1 usuario6
+
+E) Forçando para que o usuário troque a senha no próximo login:
+
+$chage -d 0 usuario6
+
+
+2) #passwd (as mesmas coisas que são feita com o $chage, podem ser feitas com o passwd)
+
+- As definições de cada usuário vão fica no arquivo /etc/shadow    *as senhas e configurações de login do usuário.
+- Vamos usar o usuário5 para trablalhar nesse tópico:
+
+$chage -l usuario5 
+Última mudança de senha					: ago 22, 2018
+Senha expira					: nunca
+Senha inativa					: nunca
+Conta expira						: nunca
+Número mínimo de dias entre troca de senhas		: 0
+Número máximo de dias entre troca de senhas		: 99999
+Número de dias de avisos antes da expiração da senha	: 7
+
+A) $passwd -S (mostra o status do usuario5)
+
+$passwd -S usuario5 
+usuario5 P 08/22/2018 0 99999 7 -1
+
+- P (significa que esse usuário possui uma senha, pode ter L, NP)
+- pega essas informações do arquivo /etc/shadow.
+
+$grep usuario5 /etc/shadow
+usuario5:$6$QhbxUPXh$rmqhAwvXTdmShduW0sYlSK0ytmhvWkSqbi0gLt.saN9aIOgUZ0TRkJfkqZoxs3OAU5vyDVoQ7/2ut.U.kbmuZ.:17765:0:99999:7:::
+
+B) $passwd -x (é a mesma coisa que o comando $chage -M) *defini o número "MÁXIMO" de dias que a senha permanecerá válida.
+
+$passwd -x30 usuario5 (defini quando que a senha vai expirar, ou seja, daqui a 30 dias).
+passwd: informação de expiração de senha alterada.
+
+$chage -l usuario5 
+Última mudança de senha					: ago 22, 2018
+Senha expira					: set 21, 2018
+Senha inativa					: nunca
+
+C) $passwd -n (mesma coisa que o $chage -m) *defini o número "minimo" de dias que o usuário pode trocar a senha.
+
+$passwd -n2 usuario5 
+passwd: informação de expiração de senha alterada.
+
+D) $passwd -w (utilizado para definir os dias anteriores ao fim da validade da senha em que será emitido um aviso a respeito). *chage -W
+
+passwd -w4 usuario5 
+passwd: informação de expiração de senha alterada.
+
+E) $passwd -i (utilizado para definir inatividade ou tolerância de dias após a senha ter expirado até que a conta seja bloqueada).
+
+F) $passwd -l (utilizado para bloquear uma conta de usuário especificada) *usermod -L
+
+G) $passwd -u (utilizado para liberar uma conta de usuário bloqueada). *usermod -U
+
+
+
+
+
 
 
 
@@ -130,7 +338,6 @@ lpi2 ALL=/sbin/poweroff (o usuário lpi2 a partir de qualquer terminal pode exec
 
 #find
 
-#passwd
 
 #fuser
 
@@ -138,12 +345,7 @@ lpi2 ALL=/sbin/poweroff (o usuário lpi2 a partir de qualquer terminal pode exec
 
 #nmap
 
-#chage
-
 #netstat
-
-#usermod
 
 #ulimit
 
-#who, w, last
