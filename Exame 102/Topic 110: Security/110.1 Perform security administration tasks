@@ -1,7 +1,7 @@
 Terms and Utilities:
 
 
-   > TAREFAS DE SEGURANÇA: COMANDOS SU E SUDO
+   > TAREFAS DE SEGURANÇA: *sudo, su e su -
 
 
 1) #su (esse comando serve para mudar de um usuário para outro)
@@ -275,9 +275,9 @@ E) Forçando para que o usuário troque a senha no próximo login:
 $chage -d 0 usuario6
 
 
-2) #passwd (as mesmas coisas que são feita com o $chage, podem ser feitas com o passwd)
+2) #passwd (os mesmos recursos feito com o $chage, podem ser feitos com o passwd)
 
-- As definições de cada usuário vão fica no arquivo /etc/shadow    *as senhas e configurações de login do usuário.
+- As definições de cada usuário vão ficar no arquivo /etc/shadow    *as senhas e configurações de login do usuário.
 - Vamos usar o usuário5 para trablalhar nesse tópico:
 
 $chage -l usuario5 
