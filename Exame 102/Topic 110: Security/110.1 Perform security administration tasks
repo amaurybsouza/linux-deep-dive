@@ -332,6 +332,133 @@ G) $passwd -u (utilizado para liberar uma conta de usuário bloqueada). *usermod
 
 
 
+    > MONITORAÇÃO E LIMITAÇÃO DE RECURSOS NO LINUX
+
+
+- Vamos ver algumas inspeções que o administrador pode fazer no sistema.
+- A principal delas é com relação ao SUID/SGID
+
+
+$ls -l /usr/bin/passwd 
+-rwsr-xr-x 1 root root 59640 jan 25  2018 /usr/bin/passwd
+
+- significa que qualquer usuário pode utilizar o comando passwd e funcionar como root. *pode ser um risco de segurança.
+- por isso que o administrador de sistemas deve monitorar quais arquivos que possuem esse parâmetro, esse bit ativo (SUID, SGID) em arquivos.
+- para encontrar arquivos que possuem esse bit no sistema, devemos usar o comando find.
+
+1) #find (esse comando possue alfuns parâmetros que permitem procurar por arquivos com bit SUID e SGID ativos).
+
+
+$find / -perm -4000 (esse procura por SUID) 
+
+      ou 
+
+$find / -perm -2000 (esse procura por SGID)
+
+
+$find / -perm -4000 -ls (procura por todo o sistema e mostrar os arquivos que tem o S "-rwsr") *SUID
+  7078036     44 -rwsr-xr-x   1 root     root        44528 jan 25  2018 /usr/bin/chsh
+  7078380     24 -rwsr-xr-x   1 root     root        22520 jul 13 08:42 /usr/bin/pkexec
+  7078034     76 -rwsr-xr-x   1 root     root        76496 jan 25  2018 /usr/bin/chfn
+  7078660     40 -rwsr-xr-x   1 root     root        40344 jan 25  2018 /usr/bin/newgrp
+  7077959     24 -rwsr-xr-x   1 root     root        22528 mar  9  2017 /usr/bin/arping
+  7079160    148 -rwsr-xr-x   1 root     root       149080 jan 17  2018 /usr/bin/sudo
+  7078718     60 -rwsr-xr-x   1 root     root        59640 jan 25  2018 /usr/bin/passwd
+
+
+
+$find / \( -perm -2000 -o -perm -4000 \) -ls (procura por arquivos onde tem os dois bits ativos)  *SUID, SGID
+
+- É recomendado que o administrador de sistemas crie um log disso, valide e compare isso.
+- Ele pode executar uma vez por dia esse comando "find / -perm -4000 -ls", gera um arquivo de log e todo dia ele
+gera o arquivo de log, podendo fazer um script que compare isso e mande um alerma caso haja uma diferença.
+
+
+$find / -path /proc -prune -o -nouser -ls (procura por arquivos que não tem usuários associado a ele).
+
+$find / -path /proc -prune -o -nouser -ls
+5244852      4 drwxr-xr-x   2 62583    62583        4096 abr 28 14:37 /var/lib/private/systemd/timesync
+  5244858      0 -rw-r--r--   1 62583    62583           0 jul 29 15:00 /var/lib/private/systemd/timesync/clock
+find: ‘/run/user/1000/gvfs’: Permissão negada
+
+"-path /proc -prune" (esse argunto do comando acima faz com que o find não procure por arquivos no /proc)
+
+
+$find / -path /proc -prune -o -nogroup -ls (mostra todos os arquivos que o grupo definido não existe)
+
+- É legal que o administrador de sistema faça esse tipo de monitoração, para que ele corrija caso exista uma inconsistência no sistema.
+
+
+
+    > LIMITAÇÃO DE RECURSOS: ulimit, limite hard (H) limite soft (S).
+
+
+- Usuários comuns podem provocar lentidão e até panes no sistema se utilizarem exageradamente os recursos da máquina.
+- O uso da memória, a criação de arquivos e o número de processos também podem ser limitados. 
+para esse fim é utilizado o comando ulimit.
+
+
+1) #ulimit (utilizado para limitar o uso de memória, criação de arquivos e número de processos) *age na sessão do bash. 
+
+- esse comando não deixa as tarefas fixas, vale somente para está sessão do bash, para ser permanente usa outros arquivos.
+
+$ulimit -a (mostra os limites atuais da minha sessão do shell)
+
+$ulimit -a 
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 30909
+max locked memory       (kbytes, -l) 16384
+max memory size         (kbytes, -m) unlimited
+
+
+- Se eu digitar $ulimit -u (vai mostrar o número máximo de processos).
+30909
+
+  - Como que eu defino esse valor?
+
+### Definição de valor máximo (hard) *representado pelo "H"
+
+### Definição de valor atual (soft)  *representado pelo "S"
+
+
+$ulimit -Hu 10000 (vou definir que o número máximo de processos para 10000)
+
+$ulimit -u (digitando novamente, ele mostra o valor ativo no momento) *esse é o valor soft
+30909
+
+$ulimit -Su 500 (vai definir o valor atual como 500 de processos)
+
+$ulimit -u (vendo a definição do comando acima).
+500
+
+$ulimit -Su 50000 (já executando esse comando, ele não vai permitir eu aumentar o número de processos, 
+porque meu limite que eu tinha setado era "10000").
+-su: ulimit: max user processses: cannot modify limit: Invalid argument
+
+* ver os comandos acima para entender o cenário.
+
+# Opções mais comuns de ulimit são:
+-a: mostra os limites atuais;
+-f: especifica o número máximo de arquivos que poderão ser na sessão do shell;
+-u: o número máximo de processos disponíveis ao usuário;
+-v: o montante máximo de memória virtual disponível ao shell.
+
+- Para estabelecer em 100 o limite máximo de processos:
+
+$ulimit -Su 100
+
+- Para permitir que o usuário acresça esse limite até o máximo de 200:
+
+$ulimit -Hu 200
+
+
+2) #/etc/security/limits.conf (arquivo onde eu posso definir os limites, para usuários, grupos, é um ajuste permanente).
+
+- Normalmente se usa esse arquivo para configurar os limites do sistema, o comando $ulimit é mais usado 
+para verificar como estão os recursos de limitação do sistema.
 
 
 
@@ -343,7 +470,14 @@ G) $passwd -u (utilizado para liberar uma conta de usuário bloqueada). *usermod
 
 
 
-#find
+
+
+
+
+
+
+
+
 
 
 #fuser
@@ -354,5 +488,4 @@ G) $passwd -u (utilizado para liberar uma conta de usuário bloqueada). *usermod
 
 #netstat
 
-#ulimit
 
