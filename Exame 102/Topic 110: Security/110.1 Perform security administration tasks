@@ -465,32 +465,119 @@ para verificar como estão os recursos de limitação do sistema.
 
 
 
+- Vamos saber como monitorar os serviços e portas que estão sendo escutadas, utilizadas na rede.
+- Com alguns comandos é possível ver o que está rodando na máquina (portas que estão abertas em máquinas da rede).
+
+1) #netstat (esse comando possui várias opções, vamos abordas as principais)
+- No exemplo, é possível observar algumas portas importantes que estão abertas, como o serviço DNS(porta 53) e SMTP(porta 25).
+
+$netstat -anpt (mostrar todos os processos de conexões TCP)
+Conexões Internet Ativas (servidores e estabelecidas)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado       PID/Program name    
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               OUÇA       1021/mysqld         
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               OUÇA       569/systemd-resolve 
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               OUÇA       743/cupsd           
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               OUÇA       1644/master         
+tcp        0      0 192.168.0.107:52332     35.186.165.183:443      ESTABELECIDA 2145/chrome         
+tcp        0      0 192.168.0.107:51036     173.194.206.188:5228    ESTABELECIDA 2145/chrome         
+tcp        0      0 192.168.0.107:37798     151.101.20.175:443      ESTABELECIDA 2145/chrome   
 
 
+- Para identificar quais portas estão abertas no sistema local:
+- a opção "-p" mostra o PID, processos *1021/mysqld
+- a opção "-t" mostra protocolos TCP e a opção "-u" mostra protocolos UDP.
+- a principal opção no exemplo foi "-l" que determina a exibição das portas esperando por conexões no sistema local.
 
 
+$netstat -nltp (mostra as conexões que estão em estado "listining")
+Conexões Internet Ativas (somente servidores)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado       PID/Program name    
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               OUÇA       1021/mysqld         
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               OUÇA       569/systemd-resolve 
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               OUÇA       743/cupsd           
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               OUÇA       1644/master         
+tcp6       0      0 ::1:631                 :::*                    OUÇA       743/cupsd           
+tcp6       0      0 :::25                   :::*                    OUÇA       1644/master      
 
 
+netstat -lt (mostrando as conexões usando os nomes dos serviços ao invés da porta).
+Conexões Internet Ativas (somente servidores)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado      
+tcp        0      0 localhost:mysql         0.0.0.0:*               OUÇA      
+tcp        0      0 localhost:domain        0.0.0.0:*               OUÇA      
+tcp        0      0 localhost:ipp           0.0.0.0:*               OUÇA      
+tcp        0      0 0.0.0.0:smtp            0.0.0.0:*               OUÇA      
+tcp6       0      0 ip6-localhost:ipp       [::]:*                  OUÇA      
+tcp6       0      0 [::]:smtp               [::]:*                  OUÇA  
 
 
+2) #lsof (mostra os programas e usuários estão utilizando uma determinada porta de serviço).
+
+- toda conexão no sistema acaba abrindo um arquivo.
+
+$lsof -i (mostra as conexões de rede abertas no sistema)
+COMMAND    PID            USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+systemd-r  569 systemd-resolve   12u  IPv4  21774      0t0  UDP localhost:domain 
+systemd-r  569 systemd-resolve   13u  IPv4  21775      0t0  TCP localhost:domain (LISTEN)
+avahi-dae  723           avahi   12u  IPv4  24623      0t0  UDP *:mdns 
+avahi-dae  723           avahi   13u  IPv6  24624      0t0  UDP *:mdns 
+avahi-dae  723           avahi   14u  IPv4  24625      0t0  UDP *:49092 
+avahi-dae  723           avahi   15u  IPv6  24626      0t0  UDP *:53699 
+cupsd      743            root    6u  IPv6  24783      0t0  TCP ip6-localhost:ipp (LISTEN)
+cupsd      743            root    7u  IPv4  24784      0t0  TCP localhost:ipp (LISTEN)
+cups-brow  785            root    7u  IPv4  22274      0t0  UDP *:ipp 
+ntpd       843             ntp   16u  IPv6  26686      0t0  UDP *:ntp 
+ntpd       843             ntp   17u  IPv4  26689      0t0  UDP *:ntp 
+ntpd       843             ntp   18u  IPv4  26693      0t0  UDP localhost:ntp 
+ntpd       843             ntp   19u  IPv6  26695      0t0  UDP ip6-localhost:ntp 
+ntpd       843             ntp   23u  IPv4  69743      0t0  UDP maumau:ntp 
+ntpd       843             ntp   24u  IPv6  69746      0t0  UDP maumau:ntp 
 
 
+$lsof -i :25 -n (o que está sendo escutado na porta SMTP).
+COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+master  1644 root   13u  IPv4  33396      0t0  TCP *:smtp (LISTEN)
+master  1644 root   14u  IPv6  33397      0t0  TCP *:smtp (LISTEN)
 
 
+3) #nmap (faz o escaneamento dos serviços e portas que estão abertas na máquina).
+- posso informar o host, localhost ou uma máquina da rede.
 
 
+$nmap localhost (faz o escaneamento das portas e dos serviços que estão ativos no sistema).
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-08-24 21:27 -03
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000050s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+25/tcp   open  smtp
+631/tcp  open  ipp
+3306/tcp open  mysql
 
 
+$nmap 10.0.0.1 (faz o escaneamento do meu roteador, máquina que eu uso como gateway).
 
 
+$nmap -sT localhost (posso escanear especificamente TCP). *T TCP
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-08-24 21:31 -03
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000052s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+25/tcp   open  smtp
+631/tcp  open  ipp
+3306/tcp open  mysql
 
 
-#fuser
+4) #fuser (utilizado para identificar qual processo está utilizando determinado arquivo ou conexão de rede).
 
-#lsof
 
-#nmap
+$fuser -u 25/tcp (mostra o dono do processo)
+25/tcp:               1644(root)
 
-#netstat
+$fuser -uv 25/tcp (mostra mais detalhes)
+                     USUÁRIO     PID ACESSO COMANDO
+25/tcp:              root       1644 F.... (root)master
 
 
