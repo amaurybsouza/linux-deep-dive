@@ -305,7 +305,7 @@ usuario5:$6$QhbxUPXh$rmqhAwvXTdmShduW0sYlSK0ytmhvWkSqbi0gLt.saN9aIOgUZ0TRkJfkqZo
 
 B) $passwd -x (é a mesma coisa que o comando $chage -M) *defini o número "MÁXIMO" de dias que a senha permanecerá válida.
 
-$passwd -x30 usuario5 (defini quando que a senha vai expirar, ou seja, daqui a 30 dias).
+$passwd -x30 usuario5 (defini quando que a senha vai expirar, ou seja, daqui a 30 dias vai expirar).
 passwd: informação de expiração de senha alterada.
 
 $chage -l usuario5 
@@ -324,7 +324,7 @@ D) $passwd -w (utilizado para definir os dias anteriores ao fim da validade da s
 passwd -w4 usuario5 
 passwd: informação de expiração de senha alterada.
 
-E) $passwd -i (utilizado para definir inatividade ou tolerância de dias após a senha ter expirado até que a conta seja bloqueada).
+E) $passwd -i (utilizado para definir inatividade ou tolerância de dias após a senha ter expirado até que a conta seja bloqueada). *chage -I
 
 F) $passwd -l (utilizado para bloquear uma conta de usuário especificada) *usermod -L
 
@@ -346,7 +346,7 @@ $ls -l /usr/bin/passwd
 - por isso que o administrador de sistemas deve monitorar quais arquivos que possuem esse parâmetro, esse bit ativo (SUID, SGID) em arquivos.
 - para encontrar arquivos que possuem esse bit no sistema, devemos usar o comando find.
 
-1) #find (esse comando possue alfuns parâmetros que permitem procurar por arquivos com bit SUID e SGID ativos).
+1) #find (esse comando possue alguns parâmetros que permitem procurar por arquivos com bit SUID e SGID ativos).
 
 
 $find / -perm -4000 (esse procura por SUID) 
@@ -468,7 +468,7 @@ para verificar como estão os recursos de limitação do sistema.
 - Vamos saber como monitorar os serviços e portas que estão sendo escutadas, utilizadas na rede.
 - Com alguns comandos é possível ver o que está rodando na máquina (portas que estão abertas em máquinas da rede).
 
-1) #netstat (esse comando possui várias opções, vamos abordas as principais)
+1) #netstat (esse comando possui várias opções, vamos abordar as principais)
 - No exemplo, é possível observar algumas portas importantes que estão abertas, como o serviço DNS(porta 53) e SMTP(porta 25).
 
 $netstat -anpt (mostrar todos os processos de conexões TCP)
