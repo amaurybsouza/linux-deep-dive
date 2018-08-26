@@ -1,23 +1,63 @@
 Terms and Utilities:
 
 
+#/etc/nologin (com esse arquivo criado nenhum usuário do sistema consegue fazer login, apenas root consegue).
 
+- tem que criar ele para que as funcionalidades sejam válidas para os usuários do sistema.
 
-
-
-
-
-
-
-
-
-
-
-
-
-#/etc/nologin
 
 #/etc/passwd
+
+- Se no arquivo /etc/passwd tiver a seguinte linha abaixo, quer dizer que ele não cosegue logar: */bin/false , /sbin/nologin
+- Normalmente são usuários de sistemas que possuem tal configuração.
+
+$cat /etc/passwd
+mysql:x:122:128:MySQL Server,,,:/nonexistent:/bin/false
+telnetd:x:125:132::/nonexistent:/usr/sbin/nologin
+
+
+
+   > DESATIVANDO SERVIÇOS QUE NÃO SÃO NECESSÁRIOS:
+
+
+- Tudo que não é necessário ou que não é conhecido, que não tem uma função útil no sistema, não precisa estar rodando.
+pode causar mais carga no sistema, e pode vir a causar uma falha de segurança.
+
+A) Para sistemas que usam o systemd (só usar os comandos com systemctl).
+
+- Vamos fazer um exemplo de um processo que não é importante tanto para o sistema:
+
+$ps axu | grep cups-brow
+root      3755  0.0  0.1 303648 10864 ?        Ssl  12:19   0:00 /usr/sbin/cups-browsed
+root     11780  0.0  0.0  21536  1092 pts/1    S+   16:39   0:00 grep --color=auto cups-brow
+
+- Se eu quero desabilitar esse serviço, como que eu faço?
+
+$systemctl stop cups-browsed  (isso funciona, mas se eu reiniciar o sistema esse processo será ativado de novo).
+
+$systemctl disable cups-browsed (assim que eu reiniciar a máquina ele não vai estar mais ativo).
+
+
+B) Para sistemas que usam o SysV, (Init), temos outras definições a serem feitas.
+
+- Para visualizar processo indesejados, que não precisam estar rodando temos que olhar primeiro o arquivo abaixo:
+
+$cat /etc/inittab (configurações de level do sistema)
+
+- posso remover o link de cada processo em: /etc/rc5.d (links de processos)
+
+
+C) Outra forma de se desativar um serviço é no arquivo /etc/init.d
+
+- Acessar o arquivo /etc/init.d (onde ficam os scripts) e tirar a permissão de execução de um dos scripts.
+
+$chmod -x nmbd (tira a permissão de execução desse script).
+
+- quando o init tentar subir esse script, ele não vai conseguir porque não terá a permissão de execução.
+
+- podemos renomar também o arquivo, como $mv nmbd  nmbd.disable (tira esse serviço do ar). 
+
+
 
 #/etc/shadow
 
@@ -29,9 +69,15 @@ Terms and Utilities:
 
 #/etc/inetd.conf
 
-#/etc/inittab
 
 #/etc/init.d/
+
+
+
+
+
+
+
 
 #/etc/hosts.allow
 
