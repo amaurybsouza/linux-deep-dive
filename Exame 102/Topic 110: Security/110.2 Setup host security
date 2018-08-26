@@ -47,7 +47,7 @@ $cat /etc/inittab (configurações de level do sistema)
 - posso remover o link de cada processo em: /etc/rc5.d (links de processos)
 
 
-C) Outra forma de se desativar um serviço é no arquivo /etc/init.d
+C) Outra forma de se desativar um serviço é no arquivo "/etc/init.d"
 
 - Acessar o arquivo /etc/init.d (onde ficam os scripts) e tirar a permissão de execução de um dos scripts.
 
@@ -58,8 +58,35 @@ $chmod -x nmbd (tira a permissão de execução desse script).
 - podemos renomar também o arquivo, como $mv nmbd  nmbd.disable (tira esse serviço do ar). 
 
 
+    > VAMOS ESTUDAR INETD E XINETD
 
-#/etc/shadow
+
+- Esses serviços inetd e xinetd não estão mais ativos em distribuições novas, a LPI ainda cobra isso porque
+tem alguns servidores em produção, legados, que ainda usam serviços disponibilizados pelo inetd ou xinetd.
+
+- Primeiro vamos instalar esses pacotes no sistema para nossos estudos:
+
+$apt-get install ftpd telnetd inetutils-inetd
+
+
+#/etc/inetd.conf (principal arquivo de configuração)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #/etc/xinetd.d/
 
@@ -67,12 +94,12 @@ $chmod -x nmbd (tira a permissão de execução desse script).
 
 #/etc/inetd.d/
 
-#/etc/inetd.conf
 
 
 #/etc/init.d/
 
 
+#/etc/shadow
 
 
 
