@@ -69,12 +69,17 @@ tem alguns servidores em produção, legados, que ainda usam serviços disponibi
 $apt-get install ftpd telnetd inetutils-inetd
 
 
-#/etc/inetd.conf (principal arquivo de configuração)
+#/etc/inetd.d/ (utilizado para armazenar arquivos de configuração de serviços gerenciados pelo "inetd").
 
+#/etc/inetd.conf (principal arquivo de configuração do serviço xinetd)
 
+- Contém uma lista de serviços de rede que informam ao "inetd" quais portas serão ouvidas e quais programas 
+de servidor serão executados em resposta a solicitações de serviço.
 
+#TCP wrappers (é uma forma que existe no Linux que você pode colocar um processo dentro do outro, no caso o telnet e o FTP).
 
-
+- É um sistema de rede ACL baseada em host, usado para filtrar o acesso à rede para os servidores de protocolo de 
+Internet em sistemas Unix-like, como Linux ou BSD. Arquivos utilizados "/etc/hosts.allow" e "/etc/hosts.deny".
 
 
 
@@ -92,11 +97,9 @@ $apt-get install ftpd telnetd inetutils-inetd
 
 #/etc/xinetd.conf
 
-#/etc/inetd.d/
 
 
 
-#/etc/init.d/
 
 
 #/etc/shadow
