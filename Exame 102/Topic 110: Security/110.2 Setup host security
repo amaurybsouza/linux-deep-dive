@@ -55,7 +55,7 @@ $chmod -x nmbd (tira a permissão de execução desse script).
 
 - quando o init tentar subir esse script, ele não vai conseguir porque não terá a permissão de execução.
 
-- podemos renomar também o arquivo, como $mv nmbd  nmbd.disable (tira esse serviço do ar). 
+- podemos renomear também o arquivo, como $mv nmbd  nmbd.disable (tira esse serviço do ar). 
 
 
     > VAMOS ESTUDAR INETD E XINETD
@@ -69,12 +69,40 @@ tem alguns servidores em produção, legados, que ainda usam serviços disponibi
 $apt-get install ftpd telnetd inetutils-inetd
 
 
+*** Desativando serviços de rede:
+
+- Para serviços disparados pelo servidor inetd, basta comentar (acrescentar o caracter #) a linha referente ao serviço
+em /etc/inetd.conf
+
+- Por exemplo, para desativar o servidor telnet em "/etc/inetd.conf":
+
+#telnet         stream  tcp     nowait  telnetd /usr/sbin/tcpd  /usr/sbin/in.telnetd
+
+
+- De forma semelhante, os serviços controlados pelo servidor xinetd podem ser desativados no arquivo de 
+configuração /etc/xinetd.conf com a opção disable correspondente ao serviço.
+
+- Para desativar o servidor FTP em "/etc/xinetd.conf", a entrada correspondente no arquivo seria:
+
+ftp {
+disable = yes
+socket type = stream
+protocol = tcp
+wait = no
+user = root
+server = /usr/sbin/vsftpd
+}
+
+
+
 #/etc/inetd.d/ (utilizado para armazenar arquivos de configuração de serviços gerenciados pelo "inetd").
 
 #/etc/inetd.conf (principal arquivo de configuração do serviço xinetd)
 
 - Contém uma lista de serviços de rede que informam ao "inetd" quais portas serão ouvidas e quais programas 
 de servidor serão executados em resposta a solicitações de serviço.
+
+
 
 #TCP wrappers (é uma forma que existe no Linux que você pode colocar um processo dentro do outro, no caso o telnet e o FTP).
 
@@ -96,18 +124,6 @@ Internet em sistemas Unix-like, como Linux ou BSD. Arquivos utilizados "/etc/hos
 #/etc/xinetd.d/
 
 #/etc/xinetd.conf
-
-
-
-
-
-
-#/etc/shadow
-
-
-
-
-
 
 #/etc/hosts.allow
 
