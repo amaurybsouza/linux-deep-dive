@@ -1,5 +1,38 @@
 Terms and Utilities:
 
+
+    > O QUE É CRIPTOGRAFIA?
+
+
+- Uma forma de garantir que dados sejam enviados de um ponto a outro de maneira segura.
+
+- Principais objetivos:
+  * Autenticidade (do remetente)
+  * Confidencialidade (da mensagem)
+  * Integridade (da mensagem)
+  * Irretratabilidade (do rementente)
+
+
+
+    > SSH - SECURE SHELL
+
+
+-> Protocolo de criptografia de rede.
+-> Cria um canal seguro de comunicação entre 2 hosts, um cliente e um servidor.
+-> Utiliza chaves assimétricas, ou seja, um conjunto de chaves públicas e privadas.
+-> OpenSSH é a implementação mais comum.
+
+
+
+
+
+
+
+
+
+
+
+
 #ssh
 
 
