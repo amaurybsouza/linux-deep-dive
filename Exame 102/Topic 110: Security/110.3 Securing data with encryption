@@ -24,7 +24,12 @@ Terms and Utilities:
 
 
 
+    > SSH - CHAVES ASSIMÉTRICAS
 
+-> Cada máquina possui sua chave pública e sua chave privada, que são associadas.
+-> A "chave pública" será compartilhada com seu remetente, que utilizará para criptografar a mensagem antes de envia-l-a.
+
+-> A "chave privada" é usada pelo destinatário para descriptografar os dados recebidos.
 
 
 
