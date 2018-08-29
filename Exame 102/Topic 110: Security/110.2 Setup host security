@@ -111,21 +111,14 @@ Internet em sistemas Unix-like, como Linux ou BSD. Arquivos utilizados "/etc/hos
 
 
 
+#/etc/hosts.allow (Arquivo de configuração que contêm as regras para endereços remotos que poderão acessar a máquina local)
 
 
-
-
-
-
-
-
+#/etc/hosts.deny (Arquivo de configuração que contêm as regras para endereços remotos que não poderão acessar a máquina local)
 
 
 #/etc/xinetd.d/
 
 #/etc/xinetd.conf
 
-#/etc/hosts.allow
 
-
-#/etc/hosts.deny
