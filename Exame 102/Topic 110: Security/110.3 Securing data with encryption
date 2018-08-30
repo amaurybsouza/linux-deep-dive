@@ -27,10 +27,86 @@ Terms and Utilities:
     > SSH - CHAVES ASSIMÉTRICAS
 
 -> Cada máquina possui sua chave pública e sua chave privada, que são associadas.
+
 -> A "chave pública" será compartilhada com seu remetente, que utilizará para criptografar a mensagem antes de envia-l-a.
 
 -> A "chave privada" é usada pelo destinatário para descriptografar os dados recebidos.
 
+---> Exemplificando esse caso: vamos imaginar que eu tenha a Maria e o João, a Maria tem a chave pública e a 
+chave privada dela, e o joão tem a chave pública e a chave privada dele, se a Maria quiser enviar uma mensagem
+para o João, o João vai ter que informar para a Maria qual é a chave pública dele, por exemplo,
+Maria, quando vc quiser enviar uma mensagem para mim, usa a minha chave pública, e usa ela para criptografar
+a mensagem que vc quer me enviar... Esse é o sistema que o SSH usa.
+
+* De maneira bem geral isso que é importante  saber de criptografia e SSH.
+
+
+
+     > VAMOS VER NA PRÁTICA COMO ISSO FUNCIONA:
+
+
+- O SSH funciona em cliente e servidor e todas as instalações quase sempre vem instalado o cliente.
+- Mostrando o cliente openssh-client: *normalmente é o que vem padrão nos sistema. openssh-client
+
+$dpkg -l | grep ssh
+ii  libssh-4:amd64                             0.8.0~20170825.94fa1e38-1build1     amd64        tiny C SSH library (OpenSSL flavor)
+ii  libssh-gcrypt-4:amd64                      0.8.0~20170825.94fa1e38-1build1     amd64        tiny C SSH library (gcrypt flavor)
+ii  openssh-client                             1:7.6p1-4                           amd64        secure shell (SSH) client, for secure access to remote machines
+
+1)  Arquivo de configuração do "client" ssh: #etc/ssh/ssh_config
+
+$cd /etc/ssh# ls -l
+total 580
+-rw-r--r-- 1 root root 553122 fev 10  2018 moduli
+-rw-r--r-- 1 root root   1580 fev 10  2018 ssh_config
+
+
+2) Arquivo de configuração do "servidor" ssh: #etc/ssh/sshd_config
+
+3) Conjunto de chaves públicas e privadas do servidor SSH:
+
+-rw------- 1 root root    227 ago 28 17:41 ssh_host_ecdsa_key
+-rw-r--r-- 1 root root    173 ago 28 17:41 ssh_host_ecdsa_key.pub
+-rw------- 1 root root    399 ago 28 17:41 ssh_host_ed25519_key
+-rw-r--r-- 1 root root     93 ago 28 17:41 ssh_host_ed25519_key.pub
+-rw------- 1 root root   1675 ago 28 17:41 ssh_host_rsa_key
+-rw-r--r-- 1 root root    393 ago 28 17:41 ssh_host_rsa_key.pub
+
+-> Mostrando a minha chave privada:
+
+$cd /etc/ssh# cat ssh_host_rsa_key
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA3BSOH5TIuuoaCAvjwt1O/5myt0/t2YLsgpGs8RScgZpSnhdw
++mZ7o7ufcDBc6R6Q2Of8Hzj9l41OE5HQ0xI2o/w1Elf6jAqeBkaiwppCURYwlfdi
+0pzfrUyVHzDPgEaMRdd5/PL+2j2trJ5TpItDxoFe8+TWT+eamblXYgdXaqTzffSJ
+JpGYMopoBc30Qs9uDQO4Cm1CPgmuvnGfBx92SYOTHIo11n1D6Qy9211bfWs7ebrv
+-----END RSA PRIVATE KEY-----
+
+-> Mostrando a minha chave pública:
+
+$cd /etc/ssh# ssh_host_ecdsa_key.pub
+MIIEowIBAAKCAQEA3BSOH5TIuuoaCAvjwt1O/5myt0/t2YLsgpGs8RScgZpSnhdw
++mZ7o7ufcDBc6R6Q2Of8Hzj9l41OE5HQ0xI2o/w1Elf6jAqeBkaiwppCURYwlfdi
+
+
+A) Fazendo uma conexão ssh simples, o que é mais usado normalmente:
+
+$ssh lpi1@linux-server  (usuário do host remoto, @IP do host remoto ou o nome do host remoto).
+
+B) Outra modelo de sintaxe de conexão de ssh:
+
+$ssh -l lpi1 linux-server (pode se utilizar o nome do host remoto  ou o IP do host remoto).
+
+C) Autenticando via ssh somente com o nome ou IP do host remoto:
+
+$ssh linux-server (esse tipo de conexão serve somente se na máquina de destino tiver o mesmo usuário que na máquina de origem).
+
+
+#know_hosts (arquivo que fica dentro do diretório .ssh no home do usuário).
+
+  - no /home do usuário podemos ver que existe um diretório chamado .ssh
+  - vai ter um arquivo que foi criado, chamado de know_hosts (que é a chave que ele recebeu da conexão destino).
+  - o arquivo "know_hosts" vai guardando todas as chaves públicas que o client fez a conexão.
 
 
 
@@ -38,7 +114,18 @@ Terms and Utilities:
 
 
 
-#ssh
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #ssh-keygen
