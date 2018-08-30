@@ -110,9 +110,30 @@ $ssh linux-server (esse tipo de conexão serve somente se na máquina de destino
 
 
 
+     > VEREMOS AGORA A FORMA DE AUTENTICAR SEM SENHA COM SSH:
 
 
+- Nesse modelo o usuário vai criar as próprias chaves públicas e privadas.
 
+- Como que fazemos isso na prática?
+
+1) Na máquina client, dentro do diretório .ssh
+
+$ls -la
+total 12
+drwx------  2 absouza domain users 4096 ago 30 15:17 .
+drwxr-xr-x 31 absouza domain users 4096 ago 30 15:03 ..
+-rw-r--r--  1 absouza domain users  444 ago 30 15:17 known_hosts
+
+
+2) Agora vamos criar as chaves públicas e privadas para o usuário:
+
+
+$ssh-keygen (comando para criar as chaves com ssh)
+
+- aqui podemos utilizar a opção "-t" que é o tipo, e "-b" que é o tamanho da chave:
+
+$ssh-keygen -t rsa -b 1024
 
 
 
