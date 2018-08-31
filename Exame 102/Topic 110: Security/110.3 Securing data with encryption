@@ -42,7 +42,7 @@ a mensagem que vc quer me enviar... Esse é o sistema que o SSH usa.
 
 
 
-     > VAMOS VER NA PRÁTICA COMO ISSO FUNCIONA:
+     > OPENSSH NA PRÁTICA:
 
 
 - O SSH funciona em cliente e servidor e todas as instalações quase sempre vem instalado o cliente.
@@ -110,7 +110,7 @@ $ssh linux-server (esse tipo de conexão serve somente se na máquina de destino
 
 
 
-     > VEREMOS AGORA A FORMA DE AUTENTICAR SEM SENHA COM SSH:
+     > AUTENTICAÇÃO POR CHAVES COM SSH:
 
 
 - Nesse modelo o usuário vai criar as próprias chaves públicas e privadas.
@@ -165,6 +165,80 @@ drwxr-xr-x 31 absouza domain users 4096 ago 30 15:03 ..
 -rw-r--r--  1 absouza domain users  444 ago 30 15:17 known_hosts
 
 
+- Agora terei que pegar essa chave pública enviar para o servidor:
+
+$cat id_rsa.pub (estou no diretório.ssh do meu home) 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDevj8YYSG/oGYzjdJA+TxEVZrg0lVUpOfSCunZ0Jc4rj5UPwff1RjgUAjseD5l4NHTSuJWcVZzrUPyj4Q80zEGuTCnnuB7qmGzIdP8Ju2arowJ7GsdwRumgdUpORIABNaaR6GJnvtk30nMbd+TemI2YoEjTQvKZyb9rCmL+tqUiw== amaury@maumau
+
+
+- Na máquina do meu servidor, eu terei que ir no /home do meu usuário no servidor, do usuário que eu vou conectar.
+
+- Criar o diretório ".ssh" e depois criar o arquivo "authorized_keys" (arquivo onde eu vou colocar a chave pública do ssh client).
+
+- Apenas copiar a chave dentro desse arquivo, sair e salvar. *esse arquivo precisa ter permissão 600 (-rw------)
+
+- Agora na máquina client eu vou fazer a conexão ssh:
+
+$ssh lpi1@linux-server (apertando "enter" eu faço a conexão sem precisar da senha).
+
+---------------------------------------------------------------------
+CHAVES DO SISTEMA:                                                  -
+                                                                    -
+-rw------- 1 root root    227 ago 28 17:41 ssh_host_ecdsa_key       -
+-rw-r--r-- 1 root root    173 ago 28 17:41 ssh_host_ecdsa_key.pub   -
+-rw------- 1 root root    399 ago 28 17:41 ssh_host_ed25519_key     -
+-rw-r--r-- 1 root root     93 ago 28 17:41 ssh_host_ed25519_key.pub -
+-rw------- 1 root root   1675 ago 28 17:41 ssh_host_rsa_key         -
+-rw-r--r-- 1 root root    393 ago 28 17:41 ssh_host_rsa_key.pub     -
+---------------------------------------------------------------------
+
+--------------------------------------------------------
+CHAVES DO USUÁRIO:                                     -
+                                                       -
+-rw------- 1 amaury amaury 887 ago 30 20:29 id_rsa     -
+-rw-r--r-- 1 amaury amaury 227 ago 30 20:29 id_rsa.pub -                                                                    -
+--------------------------------------------------------
+
+
+    > AUTENTICAÇÃO USANDO O PASSPHRASES:
+
+
+- É uma senha das chaves.
+- Vamos começar gerando novas chaves na máquina client:
+
+$ssh-keygen -t rsa -b 1024 (colocar uma senha em passphrase no andamento do comando).
+
+$ls -l
+-rw------- 1 amaury amaury 966 ago 30 20:50 id_rsa
+-rw-r--r-- 1 amaury amaury 227 ago 30 20:50 id_rsa.pub
+
+- Agora tenho que pegar a chave pública que foi gerada e copiar para o servidor ssh (destino de onde quero conectar).
+
+$cat id_rsa.pub  (peguei essa chave no diretório .ssh do meu usuário *ssh client)
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDIawaCVxHkzPXDXZztg0N4HLl8tMUqIkBkJ7lvCog+qm7HuDrGhY0rw8e6Y/dgk9Rz+MEYerehoPBnclY92h4yEZtNF/brCFdrRsJRDDw6R6093h/aduFHzRIMu3WmSRpAavdl3+usEk9mDcRseEyUO+dkw7F7ZkEk66Ibz7+ygw== amaury@maumau
+
+
+#ssh-agent (esse processo/comando vai monitorar as senhas das minhas chaves).
+
+$ssh-add (comando utilizado para incluir chaves de usuário no "ssh-agent").
+
+$ssh-add 
+Enter passphrase for /home/amaury/.ssh/id_rsa: 
+Identity added: /home/amaury/.ssh/id_rsa (/home/amaury/.ssh/id_rsa)
+
+- Feito isso eu já posso realizar a conexão via ssh:
+
+$ssh lpi1@linux-server (ele vai acessar o destino e não vai pedir mais a senha, pois o processo ssh-agent fica 
+analisando a senha da minha chave).
+
+
+     > TÚNEL SSH
+
+
+- o SSH pode ser utilizado como veículo para outras conexões. Essa técnica é conhecida como túnel de 
+porta ou simplesmente túnel SSH.
+
+- 
 
 
 
@@ -174,19 +248,28 @@ drwxr-xr-x 31 absouza domain users 4096 ago 30 15:03 ..
 
 
 
-#ssh-keygen
 
-#ssh-agent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #ssh-add
-
-#~/.ssh/id_rsa and id_rsa.pub
-
-#~/.ssh/id_dsa and id_dsa.pub
-
-#/etc/ssh/ssh_host_rsa_key and ssh_host_rsa_key.pub
-
-#/etc/ssh/ssh_host_dsa_key and ssh_host_dsa_key.pub
 
 #~/.ssh/authorized_keys
 
