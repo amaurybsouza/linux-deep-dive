@@ -13,7 +13,6 @@ Terms and Utilities:
   * Irretratabilidade (do rementente)
 
 
-
     > SSH - SECURE SHELL
 
 
@@ -23,16 +22,17 @@ Terms and Utilities:
 -> OpenSSH é a implementação mais comum.
 
 
-
     > SSH - CHAVES ASSIMÉTRICAS
 
--> Cada máquina possui sua chave pública e sua chave privada, que são associadas.
+A) Cada máquina possui sua chave pública e sua chave privada, que são associadas.
 
--> A "chave pública" será compartilhada com seu remetente, que utilizará para criptografar a mensagem antes de envia-l-a.
+B) A "chave pública" será compartilhada com seu remetente, que utilizará para criptografar a mensagem antes de envia-l-a.
 
--> A "chave privada" é usada pelo destinatário para descriptografar os dados recebidos.
+C) A "chave privada" é usada pelo destinatário para descriptografar os dados recebidos.
 
----> Exemplificando esse caso: vamos imaginar que eu tenha a Maria e o João, a Maria tem a chave pública e a 
+---> Exemplificando esse caso: 
+
+Vamos imaginar que eu tenha a Maria e o João, a Maria tem a chave pública e a 
 chave privada dela, e o joão tem a chave pública e a chave privada dele, se a Maria quiser enviar uma mensagem
 para o João, o João vai ter que informar para a Maria qual é a chave pública dele, por exemplo,
 Maria, quando vc quiser enviar uma mensagem para mim, usa a minha chave pública, e usa ela para criptografar
@@ -41,11 +41,11 @@ a mensagem que vc quer me enviar... Esse é o sistema que o SSH usa.
 * De maneira bem geral isso que é importante  saber de criptografia e SSH.
 
 
-
      > OPENSSH NA PRÁTICA:
 
 
 - O SSH funciona em cliente e servidor e todas as instalações quase sempre vem instalado o cliente.
+
 - Mostrando o cliente openssh-client: *normalmente é o que vem padrão nos sistema. openssh-client
 
 $dpkg -l | grep ssh
@@ -55,13 +55,9 @@ ii  openssh-client                             1:7.6p1-4                        
 
 1)  Arquivo de configuração do "client" ssh: #etc/ssh/ssh_config
 
-$cd /etc/ssh# ls -l
-total 580
--rw-r--r-- 1 root root 553122 fev 10  2018 moduli
--rw-r--r-- 1 root root   1580 fev 10  2018 ssh_config
-
 
 2) Arquivo de configuração do "servidor" ssh: #etc/ssh/sshd_config
+
 
 3) Conjunto de chaves públicas e privadas do servidor SSH:
 
@@ -90,15 +86,14 @@ MIIEowIBAAKCAQEA3BSOH5TIuuoaCAvjwt1O/5myt0/t2YLsgpGs8RScgZpSnhdw
 
 
 A) Fazendo uma conexão ssh simples, o que é mais usado normalmente:
-
 $ssh lpi1@linux-server  (usuário do host remoto, @IP do host remoto ou o nome do host remoto).
 
-B) Outra modelo de sintaxe de conexão de ssh:
 
+B) Outra modelo de sintaxe de conexão de ssh:
 $ssh -l lpi1 linux-server (pode se utilizar o nome do host remoto  ou o IP do host remoto).
 
-C) Autenticando via ssh somente com o nome ou IP do host remoto:
 
+C) Autenticando via ssh somente com o nome ou IP do host remoto:
 $ssh linux-server (esse tipo de conexão serve somente se na máquina de destino tiver o mesmo usuário que na máquina de origem).
 
 
@@ -107,7 +102,6 @@ $ssh linux-server (esse tipo de conexão serve somente se na máquina de destino
   - no /home do usuário podemos ver que existe um diretório chamado .ssh
   - vai ter um arquivo que foi criado, chamado de know_hosts (que é a chave que ele recebeu da conexão destino).
   - o arquivo "know_hosts" vai guardando todas as chaves públicas que o client fez a conexão.
-
 
 
      > AUTENTICAÇÃO POR CHAVES COM SSH:
@@ -253,6 +247,26 @@ Esse recurso é especialmente útil para programas que não possuem a funcionali
      > X REMOTO VIA SSH
 
 
+A) Técnica semelhante aos túneis SSH é abrir a janela de uma aplicação remota por meio de uma conexão SSH, usando a opção - X . 
+
+B) Por exemplo, para exibir localmente o programa VirtualBox presente na máquina remota:
+
+
+$ssh -X  luciano@192.168.1.1 "VirtualBox"
+
+
+C) Podemos fazer uma conexão no servidor remoto para mostrar esse recurso:
+
+- Eu vou entrar lá outro servidor via ssh, e vou rodar nesse servidor essa aplicação gráfica e ela será exibida aqui na minha tela.
+
+$ssh -X lpi@10.0.0.112 "gnome-calculator"  (o gnome-calculator será mostrado aqui na minha tela, que eu executei em outro servidor).
+
+
+
+    > COMO EXECUTAR UMA SÉRIE DE COMANDOS REMOTAMENTE:
+
+
+-
 
 
 
@@ -267,19 +281,6 @@ Esse recurso é especialmente útil para programas que não possuem a funcionali
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-#ssh-add
 
 #~/.ssh/authorized_keys
 
