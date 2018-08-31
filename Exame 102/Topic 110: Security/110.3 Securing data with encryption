@@ -299,6 +299,7 @@ scripy-jandira                                                         100%  998
 
 
 
+       > PROTEGENDO OS DADOS COM ENCRIPTAÇÃO: GPG
 
 
 
@@ -314,9 +315,9 @@ scripy-jandira                                                         100%  998
 
 
 
-#~/.ssh/authorized_keys
 
-#ssh_known_hosts
+
+
 
 #gpg
 
