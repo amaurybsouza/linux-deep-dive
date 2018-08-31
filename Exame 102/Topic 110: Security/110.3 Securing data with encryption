@@ -266,7 +266,39 @@ $ssh -X lpi@10.0.0.112 "gnome-calculator"  (o gnome-calculator será mostrado aq
     > COMO EXECUTAR UMA SÉRIE DE COMANDOS REMOTAMENTE:
 
 
--
+- O comando abaixo executa os dois comandos, faz a conexão via ssh e retorna para a minha sessão:
+
+$ssh lpi1@linux-server "ls -l /tmp; free" 
+
+
+
+    > COMO ENVIAR E RECEBER ARQUIVOS COM SSH:
+
+
+- Enviando o arquivo "usuariossistema" da minha máquina local para o server, via ssh:
+
+$scp usuariossistema root@192.168.56.101:/tmp
+root@192.168.56.101's password: 
+usuariossistema                                                        100% 2572     2.7MB/s   00:00  
+
+
+- Enviando outros dois arquivos da minha máquina local para o server, via ssh:
+
+$scp Estudo2_LPIC-2.odt script_dominio.sh root@192.168.56.101:/tmp  (joga no /tmp)
+root@192.168.56.101's password: 
+Estudo2_LPIC-2.odt                                                     100%   24KB   1.4MB/s   00:00    
+script_dominio.sh                                                      100% 1804   506.2KB/s   00:00 
+
+
+- Agora, eu vou puxar um arquivo do servidor, buscar:
+
+$scp root@192.168.56.101:/tmp/scripy-jandira /tmp (joga no /tmp da minha máquina local)
+root@192.168.56.101's password: 
+scripy-jandira                                                         100%  998     1.4MB/s   00:00  
+
+
+
+
 
 
 
