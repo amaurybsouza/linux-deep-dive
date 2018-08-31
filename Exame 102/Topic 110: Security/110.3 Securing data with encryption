@@ -238,9 +238,19 @@ analisando a senha da minha chave).
 - o SSH pode ser utilizado como veículo para outras conexões. Essa técnica é conhecida como túnel de 
 porta ou simplesmente túnel SSH.
 
-- 
+- Comando utilizado para simular um túnel ssh:
+
+$ssh -N -f -L 2323:10.0.0.112:23 lpi1@10.0.0.112
+
+- A opção -f indica que o comando deve ser executado em segundo plano. A opção -N determina que não deve ser 
+aberta uma sessão do shell na máquina remota.
+
+- Após criar um túnel criptografado, outro programa poderá comunicar-se com a máquina remota em questão 
+através desse túnel, de maneira que todos os dados estarão protegidos ao longo da conexão. 
+Esse recurso é especialmente útil para programas que não possuem a funcionalidade de criptografia de dados.
 
 
+     > X REMOTO VIA SSH
 
 
 
