@@ -298,27 +298,63 @@ scripy-jandira                                                         100%  998
 
 
 
-
        > PROTEGENDO OS DADOS COM ENCRIPTAÇÃO: GPG
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #gpg
+
+
+- Primeiramente vamos verificar se o programa está instalado:
+
+$dpkg -l | grep gnupg
+ii  gnupg                                      2.2.4-1ubuntu1.1                    amd64        GNU privacy guard - a free PGP replacement
+ii  gnupg-l10n                                 2.2.4-1ubuntu1.1                    all          GNU privacy guard - localization files
+ii  gnupg-utils                                2.2.4-1ubuntu1.1                    amd64        GNU privacy guard - utility programs
+
+
+
+- Agora vamos gerar as nossas chaves, para isso vamos usar o comando:
+
+$gpg --gen-key
+
+- Para visualizar a minha chave, uso este comando:
+
+$gpg --list-keys 
+gpg: checando o trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: profundidade: 0 válidas:   1 assinadas:   0 confiança: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: próxima checagem de banco de dados de confiabilidade em 2020-08-31
+/root/.gnupg/pubring.kbx
+------------------------
+pub   rsa3072 2018-09-01 [SC] [expira: 2020-08-31]
+      FA95D1FE175DE2089AA4D312E02550D571B01E39
+uid           [final] Amaury <amaurybsouza@gmail.com>
+sub   rsa3072 2018-09-01 [E] [expira: 2020-08-31]
+
+- Também semelhante ao que eu tinha no .ssh, terei as chaves no diretório .gnupg
+
+$~/.gnupg$ ls -l
+total 12
+drwx------ 2 amaury amaury 4096 abr 28 17:38 private-keys-v1.d
+-rw------- 1 amaury amaury   32 abr 28 17:56 pubring.kbx
+-rw------- 1 amaury amaury 1200 abr 28 17:56 trustdb.gpg
+ 
+- Agora irei exportar as minhas chaves:
+
+$gpg --export (utilizado para exportar a chave publica de um usuário. Determina qual chave publica será exportada).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #~/.gnupg/
