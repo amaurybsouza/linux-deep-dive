@@ -6,9 +6,9 @@ O exame é composto de 2 exames (101 e 102), passando nas duas provas você obte
 
 Separei os materiais em dois tópicos para as duas provas, os comandos estão detalhados e mostro exemplos também de uso.
 
-
-
 Fiquei a vontade para estudar o conteúdo e caso tenha dúvida, fico à disposição.
+
+Site LPI: https://www.lpi.org/ (tópicos dos exames)
 
 E-mail: amaurybsouza@gmail.com
 
