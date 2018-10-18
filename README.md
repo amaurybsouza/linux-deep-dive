@@ -8,7 +8,7 @@ Separei os materiais em dois tópicos para as duas provas, os comandos estão de
 
 Fiquei a vontade para estudar o conteúdo e caso tenha dúvida, fico à disposição.
 
-Site LPI: https://www.lpi.org/ (tópicos dos exames)
+Site LPI: https://www.lpi.org/ 
 
 E-mail: amaurybsouza@gmail.com
 
