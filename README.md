@@ -12,4 +12,4 @@ Site LPI: https://www.lpi.org/
 
 E-mail: amaurybsouza@gmail.com
 
-Linkedin: amaurybsouza
+Linkedin: [amaurybsouza](https://www.linkedin.com/in/amaurybsouza/)
