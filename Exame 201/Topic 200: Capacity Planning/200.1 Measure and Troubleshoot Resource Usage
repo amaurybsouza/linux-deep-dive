@@ -1,1 +1,149 @@
-dddd
+
+- comando padrão do linux ao invés do ifconfig -> ip address show
+- vamos instalar dois pacotes que são usados nesta aula.
+
+
+$ yum install net-tools syssatat -y
+
+
+# VAMOS COMEÇAR PELOS COMANDOS INICIAIS:
+
+
+#iostat (relatório de uso de CPU e de IO dos dispositivos de armazenamento, de CPU e de armazenamento)
+
+# whatis iostat 
+iostat (1)           - Report Central Processing Unit (CPU) statistics and input/output statistics for devices and partitions.
+
+- sempre ver o man, whatis para ajudar com os comandos do Linux.
+
+
+
+
+-> Principais opções do comando iostat:
+
+#iostat 
+
+Linux 5.4.0-31-generic (dell-inspiron) 	27/05/2020 	_x86_64_	(4 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+          36,26    0,15   11,83    0,04    0,00   51,72
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+loop0             0,00         0,02         0,00         0,00       1090          0          0
+loop1             0,10         0,12         0,00         0,00       6029          0          0
+loop10            0,00         0,02         0,00         0,00       1071          0          0
+loop11            0,00         0,02         0,00         0,00       1079          0          0
+loop12            0,00         0,00         0,00         0,00          1          0          0
+loop2             0,00         0,01         0,00         0,00        344          0          0
+loop3             0,02         0,03         0,00         0,00       1478          0          0
+loop4             0,09         0,10         0,00         0,00       4745          0          0
+loop5             0,00         0,02         0,00         0,00       1083          0          0
+loop6             0,20         0,20         0,00         0,00       9811          0          0
+loop7             0,00         0,01         0,00         0,00        341          0          0
+loop8             0,00         0,01         0,00         0,00        404          0          0
+loop9             1,44         1,46         0,00         0,00      70714          0          0
+sda              12,70        61,87       224,82         0,00    3005109   10919609          0
+
+- entendendo as opções desse comando: (observar esses dados em problemas de performance do sistema)
+
+1) %user (é o tempo de CPU de programas a nivel de usuário, root, meu usuário)
+
+2) %nice (aplicações a nivel de usuário que foi definido alguma prioridade especifica)
+
+3) %system (uso de CPU pelo kernel, praticamente o kernel)
+
+4) %iowait (quanto tempo a CPU ficou esperando algum procedimento de entrada, escrita em disco)
+   - por exemplo, isso é relevante se você ver que o disco está lento, lento para ler ou escrever algum setor do disco
+   - ou alguma aplicaçao tendo dificuldade em escrver algo no disco, isso causa tempo de CPU elevando, %iowait
+
+5) %steal (usado em máquina virtuais, CPU virtual, quanto tempo a CPU da maquina virtual esperou a CPU da maquina
+real disponibilzar recurso para ela).
+
+6) %idle (tempo que a CPPU ficou em estado idle)
+
+- outro dado importante desse comando, são os devices (dispositivos de armazenamento da máquina)
+
+tps (transações em segundos, média)
+
+7) opções do comando iostat:
+
+- $iostat -m (mostra os dados em megas)
+- $iostat -h (mostra os dados mais humanos, mais legivel)
+- iostat -c (mostra só os dados de CPU)
+- iostat -d (mostra só os devices)
+- iostat -p (mostra as partições)
+
+- iostat -c 2 (gera um relatório a cada dois segundos)
+- iostat -d 2 (gera um relatório a cada dois segundos)
+- iostat -c 2 5 (relatório a cada 2 segundos e em 5 vezes)
+ 
+
+
+#vmstat (alternativa ao comando iostat, mostra informações sobre processos, memória, paginação, blocos de IO)
+
+# vmstat 
+procs -----------memória--------- ---swap-- ----e/s---- -sistema- ------cpu-----
+ r  b   swpd  livre   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 5  0      0 1340280 493688 6325104    0    0    35   124  400  133 35 12 53  0  0
+
+- informações importante desse comando:
+
+r (o que está na fila do processamento dos processadores)
+b (estado de bloqueio, blocked, sleep)
+
+- vmstat -d (dispositivos da máquina)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+netstat
+
+
+w
+
+
+top
+
+
+sar
+
+
+processes blocked on I/O
+
+
+blocks out
+
+
+
+
+pstree, ps
+
+Isof
+
+uptime
+
+swap
+
+blocks in
+
+
+
+
+
+
