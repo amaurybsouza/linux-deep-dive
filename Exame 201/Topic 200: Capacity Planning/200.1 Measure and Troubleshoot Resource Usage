@@ -249,6 +249,7 @@ root     pts/0    10.0.0.6         09:38    1.00s  0.16s  0.01s w
 
 $lsof (identifica processo com arquivos, usado em sockets)
 
+
 - vamos fazer um teste com esse comando.
 
 1) vou criar um arquivo do zero:
@@ -281,7 +282,30 @@ ssh     16414 root    3u  IPv4 175203      0t0  TCP 10.0.0.6:40956->10.0.0.8:ssh
 -> link importante: https://stackoverflow.com/questions/7880784/what-is-rss-and-vsz-in-linux-memory-management
 
 
-#top 
+
+#top  (importante lembrar a média de cargo do sistema)
+
+load average: 0,00, 0,01, 0,03 (média dos ultimos 1 minutos, 5 minutos, 15 minutos)
+
+- para ordenar os campos do comando top, usando as teclas (shift + f)
+
+
+#htop (não é instalado por padrão, é um top mais melhorado, ele mostra o consumo por cpu)
+
+$ htop + l (mostra os arquivos abertos)
+
+$ htop -p 29202 (mostra os detalhes desse processo em especifico, telegra, obs)
+
+$ htop -d 100 (equivale a 10 segundos)
+
+$ htop -d 1000 (equivale a 100 segundos)
+
+
+
+
+
+
+  
 
 
 
@@ -311,7 +335,6 @@ ssh     16414 root    3u  IPv4 175203      0t0  TCP 10.0.0.6:40956->10.0.0.8:ssh
 
 
 
-top
 
 
 
