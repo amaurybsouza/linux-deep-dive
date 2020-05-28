@@ -1,0 +1,13 @@
+- delete files older than 7 days
+find /path/to/files* -mtime +7 -exec rm {} ;
+
+- set account expiry date for a user
+chage -E "2012-06-31" raja
+
+- disable password aging for a user account
+chage -m 0 -M 99999 -I -1 -E -1 madhu
+
+- verify crontab entry for a specific user
+crontab -u username -l
+
+
