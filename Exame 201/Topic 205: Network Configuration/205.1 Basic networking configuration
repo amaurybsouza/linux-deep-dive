@@ -1,0 +1,254 @@
+Terms and Utilities:
+
+
+#ifconfig (mostra as interfaces ativas do meu sistema, faz parte do pacote net-tools)
+
+
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.7.101  netmask 255.255.255.0  broadcast 192.168.7.255
+        inet6 fe80::ebae:4105:3823:8777  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:1f:ae:f7  txqueuelen 1000  (Ethernet)
+        RX packets 12153  bytes 10981931 (10.4 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 516  bytes 100215 (97.8 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.7.112  netmask 255.255.255.0  broadcast 192.168.7.255
+        inet6 fe80::9b33:365e:28e9:eb5f  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:03:09:c9  txqueuelen 1000  (Ethernet)
+        RX packets 11679  bytes 10924186 (10.4 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1941  bytes 212426 (207.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 32  bytes 2592 (2.5 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 32  bytes 2592 (2.5 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+- interface de loopback (sempre usada internamente pelo sistema, teste de conexão interna ou para que
+um processo se comunique com outro através dessa interface).
+
+
+## INFORMAÇÕES SOBRE O COMANDO IFCONFIG:
+
+- enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+- ether 08:00:27:1f:ae:f7 (mac address)
+-  RX packets 12153 (estatisticas de pacotes recebidos) e TX packets 516 (transmitidos)
+- inet6 fe80::ebae:4105:3823:8777 (endereço de IPv6)
+- inet 192.168.7.101 (endereço de IPv4)
+
+
+1) para baixar uma interface de rede usamos:
+
+$ ifconfig enp0s3 down (ele derruba essa interface)
+
+$ ifconfig enp0s3 up (ele sobe essa interface)
+
+
+2) Denifindo um IP para a interface:
+
+$ ifconfig enp0s3 10.0.0.5 (defino um IP, neste caso a mascara de rede é a classe do IP que eu defini, classe A)
+
+$ $ ifconfig enp0s3 10.0.0.5 netmask 255.255.255.0 up  (podemos fazer dessa forma também, que ele sobe a interface)
+
+$ ifconfig enp0s3:0 172.20.32.33 (definindo mais de um IP para essa interface)
+
+$ ifconfig enp0s3 add 172.20.32.33 (outra forma de se adicionar IP na interface)
+
+$ ifconfig enp0s3 hw ether 10:10:10:10:10:10 (setando um novo mac address para essa intrface)
+
+
+#route (mostra as rotas que estão ativas no sistema no momento)
+
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         gateway         0.0.0.0         UG    101    0        0 enp0s8
+192.168.0.0     0.0.0.0         255.255.255.0   U     100    0        0 enp0s3
+192.168.0.0     0.0.0.0         255.255.255.0   U     101    0        0 enp0s8
+
+- tudo que for (192.168.0.0) eu mando para a interface (enp0s8)
+
+Rota default
+- default         192.168.5.11     0.0.0.0         UG    600    0        0 wlp1s0
+
+
+A) Adicionando uma rota:
+
+$ route add -net 192.168.10.4/24 gw 192.168.9.22 (a minha rede para a rota e o gateway dessa rota)
+
+$ route add -net 192.168.10.4/24 netmask 255.255.255.0 gw 192.168.9.22
+
+
+B) Removendo uma rota default:
+
+$ route del default 
+
+- se eu tentar pingar alguma coisa não  funciona, a principal função da rota default é sair para a internet.
+- sair da rede interna para a rede exterma
+
+
+C) Adicionando uma rota default:
+
+$ route add default gw 192.168.1.33 
+
+
+D) Se eu quiser remover uma rota:
+
+$ route del -net 192.168.0.0/24 
+
+- lembrando que esses comandos estão entrando em desuso, o comando ip faz toda essa gestão de rede.
+
+
+
+#ip (novo comando padrão das distribuições Linux, substituindo o ifconfig e route)
+
+
+1) $ ip link show (mostra as interfaces de rede do sistema)
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT group default qlen 1000
+    link/ether 08:00:27:1f:ae:f7 brd ff:ff:ff:ff:ff:ff
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT group default qlen 1000
+    link/ether 08:00:27:03:09:c9 brd ff:ff:ff:ff:ff:ff
+
+
+2) ip address show (mostra as interfaces e os IP's associados às interfaces)
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:1f:ae:f7 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.120/24 brd 192.168.0.255 scope global noprefixroute enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::ebae:4105:3823:8777/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:03:09:c9 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.125/24 brd 192.168.0.255 scope global noprefixroute dynamic enp0s8
+       valid_lft 4343sec preferred_lft 4343sec
+    inet6 fe80::9b33:365e:28e9:eb5f/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+
+3) Mostrando apenas o endereço do IPv6:
+
+$ ip -6 addr show
+
+
+4)  Adicionando um IP com o comando ip:
+
+$ ip address add 10.0.0.33/24 dev enp0s3
+
+
+5) Trabalhando com as rotas com o comando ip:
+
+$ ip route show 
+default via 192.168.0.1 dev enp0s3 
+192.168.0.0/24 dev enp0s3 proto kernel scope link src 192.168.0.120 metric 100 
+192.168.0.0/24 dev enp0s8 proto kernel scope link src 192.168.0.125 metric 101
+
+
+6) Adicionando uma rora com o comando ip:
+
+$ ip route add 172.14.33.11/24 via 192.168.1.76
+
+ 
+7) Removendo um rota defaulr com o comando ip:
+
+$ ip route del default
+
+$ ip route add default via 192.168.1.1 (adicionando uma rota default com o comando ip)
+
+
+
+#arp (protocolo que ajuda a encontrar a partir de um IP o endereço de MAC Address)
+
+
+$ arp
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.0.100            ether   90:78:b2:5c:5f:38   C                     enp0s3
+gateway                  ether   ac:84:c6:3e:53:e8   C                     enp0s8
+192.168.0.105            ether   f8:da:0c:94:91:cf   C                     enp0s3
+gateway                  ether   ac:84:c6:3e:53:e8   C                     enp0s3
+  
+1)  Como remover alguma entrada dessa tabela do arp:
+
+$ arp -d 192.168.0.105 
+
+2)  Adicionando uma entrada na tabela do arp:
+
+$ arp -s 192.168.0.110 c5:c5:c5:11:11:11
+
+- quando você adiciona algum endereço manualmente, ele adiciona uma flag na mascara: CM
+
+
+3) Outro comando sobre o arp:
+
+$arpwatch (não vem instalado no sistema, serve para informar quando existe mudanças entre IP e mac address)
+
+- monitora o relacionamento de IP e mac address, ele ajuda nessa parte.
+- pode enviar um e-mail informando sobre isso
+- pelo arquivo de log
+
+
+- esse comando possui um serviço:
+
+$ systemctl status arpwatch
+● arpwatch.service - Arpwatch daemon which keeps track of ethernet/ip address pairings
+   Loaded: loaded (/usr/lib/systemd/system/arpwatch.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)  
+
+
+$ arpwatch -e email -i enp0s3 (me alerme via e-mail e a interface que eu quero monitorar)
+
+## ARQUIVO DE CONFIGURAÇÃO DO ARPWATCH:
+
+/etc/default/arpwatch 
+
+
+A) Modo de debug do arpwatch:
+
+$ arpwatch -d (ele fica esperando as entradas online)
+
+
+
+
+
+iw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+iwconfig
+
+
+
+
+iwlist
