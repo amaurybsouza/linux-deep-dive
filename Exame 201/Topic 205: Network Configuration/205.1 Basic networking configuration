@@ -223,32 +223,3 @@ A) Modo de debug do arpwatch:
 
 $ arpwatch -d (ele fica esperando as entradas online)
 
-
-
-
-
-iw
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-iwconfig
-
-
-
-
-iwlist
