@@ -100,7 +100,6 @@ b (estado de bloqueio, blocked, sleep)
 - mpstat 2 3 (mostra a cada 2 segundos por 3 vezes as informações)
 
 
-
 #sar (mostra o histórico de uso dos recursos de hardware do sistema)
 
 - Em sistemas Debian preciso ativar a flag para que o comando sar seja ativado.
@@ -134,7 +133,7 @@ $ /var/log/sysstat
 $ sar -u (dados de todas as CPU do sistema)
 $ sar -f sa10 (mostra os dados do dia 10/05, histórico desse dia)
 $ sar -r (mostra dados de memória do sistema) ** parecido com o comando free 
-$ sar -s (mostra dados de swap do sistema) 
+$ sar -S (mostra dados de swap do sistema) 
 
 swap free, swap usada
 $ sar -n DEV (mostra dados referentes a interface de redes)
@@ -301,6 +300,28 @@ $ htop -d 100 (equivale a 10 segundos)
 $ htop -d 1000 (equivale a 100 segundos)
 
 
+##############
+
+200.1 – Medir e Resolver Problemas de Uso de Recursos - Swap, uptime e free
+
+
+# uptime (mostra o load average, informação mais importante desse comando, é a linha inicial do top)
+
+- são processos que ficaram aguardando execução, para serem executados.
+
+- se tem 4 cpus o ideal é que fique até 4, se tiver mais, pode ser que esteja criando filas.
+
+
+# free -h (area de swap, é para ser complementar a memória RAM)
+- se a memória foi mais utilizada pode ser que, ele vai acionar a parte de swap.
+- quando se usa a swap, o sistema fica mais lento, é para ser usada em emergência, falta de recursos
+- servidores de produção, é bom que tenha swap.
+- não pode entrar na area de swap em máquinas de produção
+
+# cat /proc/swaps 
+Filename				Type		Size	Used	Priority
+/swapfile                               file		2097148	0	-2
+
 
 
 
@@ -348,9 +369,7 @@ blocks out
 pstree, ps
 
 
-uptime
 
-swap
 
 blocks in
 
