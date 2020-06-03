@@ -1,1 +1,284 @@
-dsdsdsdsd
+Terms and Utilities:
+
+
+#### COMANDOS QUE PODEM AJUDAR NO TROUBLESHOOTING DE CONEXÃO DE REDE:
+
+#### INTERFACES DE REDE.
+
+#ifconfig
+
+a) verificar se as interfaces estão ativas (UP, RUNNING)
+
+b) olhar sempre o netmask (se a interface está configurada na mascara correta)
+
+c) olhar as estatisticas que aparecem embaixo no comando ifconfig
+  RX packets 127724  bytes 20006296 (19.0 MiB)
+  RX errors 0  dropped 0  overruns 0  frame 0
+  TX packets 218711  bytes 67760922 (64.6 MiB)
+  TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+#### ROTAS.
+
+
+#route 
+
+a) sempre olhar as rotas, mas principalmente a rota padrão.
+
+route -n
+Tabela de Roteamento IP do Kernel
+Destino         Roteador        MáscaraGen.    Opções Métrica Ref   Uso Iface
+0.0.0.0         192.168.1.0     0.0.0.0         UG    0      0        0 enp0s3
+172.32.16.0     0.0.0.0         255.255.255.0   U     0      0        0 enp0s8
+192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 enp0s3
+
+- olhar se existe a opção U de up.
+- principal consequência de não ter rota padrão, não consegue sair para a internet.
+
+
+
+#ping, ping6
+
+a) ping trabalha com o protocolo ICMP, envia request e aguarda reply.
+
+
+
+#traceroute, traceroute6
+
+a) traça uma rota, trabalha com o protocolo UDP.
+
+
+#mtr (my traceroute ao vivo), fica exibindo as estatisticas, tempo de ping, melhor ping
+
+
+
+#### STATUS DE CONEXÕES DA MÁQUINA:
+
+
+#netstat e #ss
+
+a) ver conexões ativas que estão na máquina
+
+$ netstat -tun
+Conexões Internet Ativas (sem os servidores)
+Proto Recv-Q Send-Q Endereço Local          Endereço Remoto         Estado     
+tcp        0      0 192.168.0.116:22        192.168.1.120:38080     ESTABELECIDA
+
+ 
+
+#### COMO TORNAR AS DEFINIÇÕES DE REDE FIXAS:
+
+
+- para que seja visivel toda vez que reiniciar o sistema ou a rede de dados.
+- muda de distribuições entre Red Hat e Debian.
+- ultimamente as distribuições tem usado o network manager 
+para gerenciar as conexões de redes (cabeada e wireless)
+- serviço de net work manager
+- vamos parar o serviço do network manager.
+
+### DEBIAN:
+
+1) no padrão Debian, onde que ficam essas configurações de rede:
+
+$ vim /etc/network/interfaces
+
+1.1) vou adicionar um IP estático (fixo, manualmente) no arquivo:
+
+abrindo o arquivo /etc/network/interfaces -> inserindo a linha abaixo:
+
+iface enp0s3 inet dhcp
+
+iface enp0s3 inet static
+        address 172.10.10.10
+        netmask 255.255.255.192
+        gateway 172.10.10.1
+        dns-nameserver 8.8.8.8        
+
+
+1.2) feito isso, preciso reiniciar o serviço de rede no Debian:
+
+$ /etc/init.d/networking restart
+
+
+### CENTOS:
+
+1) no padrão Centos, onde que ficam essas configurações de rede:
+
+$ vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+
+- sempre teráum arquivo com o nome da interface de rede.
+- da loopback também
+
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp0s3
+UUID=6863441f-bc43-4d9c-bc1b-6231bf28601a
+DEVICE=enp0s3
+ONBOOT=yes
+IPADDR=192.168.1.122
+MASK=255.255.255.0
+DNS1=192.168.1.120
+DNS2=8.8.8.8
+
+
+1.2) as configurações do gateway ficam em outro arquivo:
+
+$ /etc/sysconfig/network
+
+- se for alterar o DNS, precisa reiniciar o serviço de rede:
+
+$ systemctl restart network
+
+
+#### RESOLUÇÃO DE PROBLEMAS DE DNS:
+
+
+- um dos fatores mais causadores de problemas de rede e comunicação 
+é devido ao DNS, para acesso a internet
+ e dentro da rede interna.
+
+
+# ARQUIVOS DE CONFIGURAÇÃO NO DEBIAN:
+
+
+#/etc/resolv.conf (arquivo onde indico quem é o servidor DNS do meu sistema)
+
+- pode ser uma máquina ineterna da rede que tenha essa função de DNS
+- como pode ser uma máquina fora da rede
+
+
+#/etc/hosts (lista de nomes ineternos)
+
+
+# /etc/networks (é a mesmac coisa que o arquivo de hosts, mas esse é para redes)
+
+$ cat /etc/networks
+default		0.0.0.0
+loopback	127.0.0.0
+link-local	169.254.0.0
+
+
+# /etc/hostname (onde eu ajusto o nome da minha máquina)
+
+$ cat /etc/hostname 
+debian
+
+
+### COMANDOS PARA FAZER ANÁLISE DE DNS:
+
+
+1) nome do meu sistema:
+$ hostname
+debian
+
+
+2) nome do dominio do meu sistema:
+$ hostname -d
+
+
+3) agora o comando host:
+$ whatis host
+host (5)             - The static table lookup for host names
+host (1)             - DNS lookup utility
+
+$ host www.lpi.org (quem é esse nome?)
+www.lpi.org has address 65.39.134.165
+
+
+4) quem é o servidor de email do domínio lpi.org?
+$ host -t mx lpi.org
+lpi.org mail is handled by 5 alt2.aspmx.l.google.com.
+lpi.org mail is handled by 5 alt1.aspmx.l.google.com.
+lpi.org mail is handled by 10 aspmx5.googlemail.com.
+lpi.org mail is handled by 0 aspmx.l.google.com.
+lpi.org mail is handled by 10 aspmx4.googlemail.com.
+lpi.org mail is handled by 10 aspmx2.googlemail.com.
+lpi.org mail is handled by 10 aspmx3.googlemail.com.
+
+
+5) uso do comando dig, esse é mais usado pois existe mais recursos:
+$ whatis dig
+dig (1)              - DNS lookup utility
+
+
+- tem a mesma função do host.
+
+$ apt install dnsutils -y
+
+
+### ANALISANDO PROBLEMAS DE REDE VENDO OS REGISTROS DE LOGS DO SISTEMA:
+
+
+#dmesg (esse comando olha um buffer interno do sistema, kernel ring buffer)
+- logs desde o boot do sistema.
+- uma interface que pode ter algum problema.
+- falha de comunicação entre as interfaces.
+
+
+### LOGS DO PADRÃO DEBIAN:
+
+$ vim /var/log/syslog
+- todos os processos, serviços, gerenciamento de redes, servidor web, e o que aparece no dmesg.
+
+
+### LOGS DO PADRÃO CENTOS:
+
+$ vim /var/log/messages
+- todos os processos, serviços, gerenciamento de redes, servidor web, e o que aparece no dmesg.
+
+1) analisando logs com o journalctl:
+
+$  journalctl -u NetworkManager --since 13:00    -k (logs do kernel)
+
+
+
+### ACESSOS AOS SERVIÇOS ####
+
+
+
+#/etc/hosts.allow, /etc/hosts.deny
+
+- são arquivos são as configurações do TCP Wrapper.
+- o TCO Wrapper é uma biblioteca
+- aqui nesses arquivos podemos ajustar quais arquivos serão liberados e quais serão bloqueados.
+
+
+##### EXERCICIOS:
+
+
+1. Utilizando os arquivos de configuração do seu sistema, não o NetworkManager, 
+configure de maneira fixa as seguintes propriedades:
+
+IP : 10.0.0.10
+
+Máscara: 255.255.255.0
+
+Gateway: 10.0.0.1
+
+Servidor DNS Primário: 10.0.0.5
+
+Servidor DNS Secundário: 1.1.1.1
+
+
+2. Utilizando o servidor de DNS 1.1.1.1, identifique os servidores de e-mail 
+responsáveis pelo domínio kernel.org
+
+3. Utilize os arquivos de configuração do TCP Wrapper (hosts.allow e hosts.deny) 
+para definir que apenas os endereços da rede 192.168.1.0/24, o IP 10.0.0.50, 
+além do localhost, possam utilizar o servidor SSH local.
+
+
+
+
+
+
+
