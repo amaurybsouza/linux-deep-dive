@@ -223,3 +223,20 @@ A) Modo de debug do arpwatch:
 
 $ arpwatch -d (ele fica esperando as entradas online)
 
+
+--------------------------------------------------------------------------
+
+###### EXERCICIOS:
+
+1. Utilizando o comando ifconfig, configure o IP 10.10.10.20, máscara 255.255.255.0, 
+como um IP/Mask adicional em sua interface de rede.
+
+2. Adicione uma rota para a rede 172.32.16.0/24, utilizando como gateway o IP 10.10.10.200.
+
+3. Adicione manualmente na tabela ARP do sistema a referência do IP 10.10.10.111 
+para o MAC Address 01:01:01:02:02:02.
+
+4. Via linha de comando, verifique todas as redes wireless que podem ser encontradas 
+pela sua interface de redes sem fio.
+
+
