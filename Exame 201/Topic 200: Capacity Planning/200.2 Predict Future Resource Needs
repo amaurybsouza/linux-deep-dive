@@ -1,1 +1,57 @@
-uuuuu
+The following is a partial list of the used files, terms and utilities:
+
+
+- Na verdade esse topico ja usa o que estudamos no topico anterior, tanto comanodos, conceitos, vamos usar a base anterior para avancar.
+- vamos fazer a instalacao da ferramenta chamada collectd
+
+#collectd (e um deamon que fica rodando no nosso sistema, coletando informacoes e gravando essas informacoes)
+- semelhante ao sar, mas ele coleta muita mais coisa e regitra bem mais que o sar.
+- indo ate o diretorio /var/lib/collectd voce vera que ele possue um arquivo chamado rrd.
+
+- rrd (round robin database) arquivos binarios que ele guarda.
+- para ler as informacoes de um arquivo rrd, precisamos usar a tool chamada rrdtool.
+
+
+#### Algumas ferramentas que podem cair no exame que sao importantes.
+
+1) RRDTool (uma solucao que armazena e disponibiliza graficos relacionado aos arquivos do rrd)
+- o collectd pode trabalhar junto com o RRDTool.
+- existe um plugin que podem ser integrados, assim coletar tudo que for preciso.
+
+
+2) Cacti (essa ferramenta usa os dados do RRDTool, baseada no RRDTool, ele usa os dados dele)
+- isso sera disponibilizado ao vivo as informacoes.
+
+
+
+3) 
+
+
+
+
+
+
+
+
+
+
+
+
+#diagnose
+
+
+
+
+
+#predict growth
+
+
+
+
+
+
+
+
+
+
+#resource exhaustion
