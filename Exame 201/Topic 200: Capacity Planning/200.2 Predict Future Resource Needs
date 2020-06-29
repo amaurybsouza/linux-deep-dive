@@ -10,11 +10,15 @@ The following is a partial list of the used files, terms and utilities:
 
 - rrd (round robin database) arquivos binarios que ele guarda.
 - para ler as informacoes de um arquivo rrd, precisamos usar a tool chamada rrdtool.
+- arquivo de configuracao:
+
+$rpm -qc collectd
+/etc/collectd.conf
 
 
 #### Algumas ferramentas que podem cair no exame que sao importantes.
 
-1) RRDTool (uma solucao que armazena e disponibiliza graficos relacionado aos arquivos do rrd)
+1) RRDTool (uma solucao que armazena e disponibiliza graficos relacionados aos arquivos do rrd)
 - o collectd pode trabalhar junto com o RRDTool.
 - existe um plugin que podem ser integrados, assim coletar tudo que for preciso.
 
@@ -24,34 +28,22 @@ The following is a partial list of the used files, terms and utilities:
 
 
 
-3) 
+3) MRTG (ferramenta focada em gerar grafico, informacoes, trafico de rede, interfaces de redes)
+- foco dele e monitoracao de rede,
+- usa o protoloco SNMP
+- ele e muito usado em roteadores, shitches, graficos semelhantes ao MRTG
+- gera graficos.
+- solucao mais simples, mais e usado muito ainda.
+
+
+4) Nagios (ferramenta completa para monitoracao de sistema, aplicacoes, log, banda, envia alarmes)
+- como ele funciona? funciona por agentes, por protocolo SNMP, gera relatorios, historico, envia alertas por email
+mensagem.
+
+
+5) Outra ferramenta semelhante ao Nagios (Icinga2)
+- parecida com o Nagios, tambem trabalha com agentes, protocolos nos servidores.
+- envia alarmes para os administradores.
 
 
 
-
-
-
-
-
-
-
-
-
-#diagnose
-
-
-
-
-
-#predict growth
-
-
-
-
-
-
-
-
-
-
-#resource exhaustion
