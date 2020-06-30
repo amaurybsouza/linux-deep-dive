@@ -1,0 +1,45 @@
+Terms and Utilities:
+
+
+1) COMPONENTES DO KERNEL:
+
+         Applications
+              |
+	    Kernel
+              |
+     CPU Memory Divices
+
+
+- O que e o kernel Linux?
+kernel e o nucleo do sistema Linux
+
+- o kernel fala com o hardware do sistema e as aplicacoes falam com o kernel.
+
+a) Tipos do kernel
+
+- kernel monolitico
+
+
+- Micro kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/usr/src/linux/
+/usr/src/linux/Documentation/
+zImage
+bzImage
+xz compression
