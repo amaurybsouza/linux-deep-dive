@@ -10,20 +10,74 @@ Terms and Utilities:
      CPU Memory Divices
 
 
-- O que e o kernel Linux?
-kernel e o nucleo do sistema Linux
 
-- o kernel fala com o hardware do sistema e as aplicacoes falam com o kernel.
-
-a) Tipos do kernel
-
-- kernel monolitico
+-> O que e o kernel Linux?
+kernel e o nucleo do sistema Linux.
+A distribuicao Linux é composta por aplicações, GNU, entre outras aplicações.
+o kernel fala com o hardware do sistema e as aplicacoes falam com o kernel.
 
 
-- Micro kernel
+a) Tipos do kernel (O kernel do Linux é o kernel monolitico modular)
+- usa modulos no sistema, esses modulos vão carregando conforme a necessidade, não precisa carregar 
+tudo em memória ao mesmo tempo.
+
+
+-> kernel monolitico: tudo implementado em um processo apenas, tudo é feito por esse processo principal.
+
+-> Micro kernel: existe um controlador principal, ele tem um subprocesso, servers, associados a esse kernel.
+- exemplo seria o kernel hurd.
+
+
+b) Aonde são disponibilizadas as versões do kernel Linux?
+
+- existe um site (kernel.org) onde o pessoal de desenvolvimento disponibiliza as versões que eles vão
+lançando.
+- atualmente, está na versão 5.7.6
+- as versões são lançadas regularmente
+
+Alguns termos:
+
+- mainline (que ainda vai se tornar estavel)
+- stables (versão que é estável)
+- logterm (versões que são mantidas)
+
+
+c) Entendendo a versão e o número do kernel:
+
+- 5.7.6 (versão do kernel é 5 | release do kernel é 7 | patches, incrementações da release 6)
+- para ver a versão/release do kernel usar o comando (uname -r)
+
+$uname -r
+5.4.0-39-generic
+
+- o número 39 é a versão do kernel adaptada pela distribuição, eles fazem alterações em cima
+da versão do kernel para disponibilizar aos usuários.
 
 
 
+2) Qual a localização do kernel no sistema?
+
+
+a) arquivos de fonte do kernel ficam no diretório /usr/src
+
+$ls -l
+drwxr-xr-x 24 root root 4096 jun  9 21:09 linux-headers-5.4.0-37
+drwxr-xr-x  7 root root 4096 jun  9 21:09 linux-headers-5.4.0-37-generic
+drwxr-xr-x 24 root root 4096 jun 25 12:07 linux-headers-5.4.0-39
+drwxr-xr-x  7 root root 4096 jun 25 12:07 linux-headers-5.4.0-39-generic
+drwxr-xr-x 11 root root 4096 mai 22 13:21 virtualbox-6.1.6
+
+- nao é necessário que tenham as fontes do kernel no sistema, ocupa espaço.
+- a equipe de desenvolvimento do kernel liberam as fontes para download em arquivos
+compactados, usando o protocolo XZ.
+
+$ls -l 
+linux-5.7.6.tar.xz
+
+- para descompactar:
+$tar xvf linux-5.7.6.tar.xz
+
+- kernel é desenvolvimento em C
 
 
 
