@@ -1,0 +1,38 @@
+Terms and Utilities:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#mkinitrd
+
+#mkinitramfs
+
+#make
+
+#make targets (all, config, xconfig, menuconfig, gconfig, oldconfig, mrproper, zImage, bzImage, modules, modules_install, rpm-pkg, binrpm-pkg, deb-pkg)
+
+#gzip
+
+#bzip2
+
+#module tools
+
+#/usr/src/linux/.config
+
+#/lib/modules/kernel-version/
+
+#depmod
+
+
+
+#dkms
