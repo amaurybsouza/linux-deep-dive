@@ -58,7 +58,7 @@ da versão do kernel para disponibilizar aos usuários.
 2) Qual a localização do kernel no sistema?
 
 
-a) arquivos de fonte do kernel ficam no diretório /usr/src
+a) arquivos de fontes do kernel ficam no diretório /usr/src
 
 $ls -l
 drwxr-xr-x 24 root root 4096 jun  9 21:09 linux-headers-5.4.0-37
@@ -68,32 +68,126 @@ drwxr-xr-x  7 root root 4096 jun 25 12:07 linux-headers-5.4.0-39-generic
 drwxr-xr-x 11 root root 4096 mai 22 13:21 virtualbox-6.1.6
 
 - nao é necessário que tenham as fontes do kernel no sistema, ocupa espaço.
-- a equipe de desenvolvimento do kernel liberam as fontes para download em arquivos
-compactados, usando o protocolo XZ.
+
+- visualizando meu diretorio de fontes: cd /usr/src
+
+$ls -l
+total 110096
+-rw-rw-r--  1 amaury amaury 112711436 jun 29 22:28 linux-5.7.6.tar.xz
+drwxr-xr-x 24 root   root        4096 jun  9 21:09 linux-headers-5.4.0-37
+drwxr-xr-x  7 root   root        4096 jun  9 21:09 linux-headers-5.4.0-37-generic
+lrwxrwxrwx  1 root   root          24 jun 29 22:36 linux-headers-5.4.0-37ls -> linux-headers-5.4.0-37ls
+drwxr-xr-x 24 root   root        4096 jun 25 12:07 linux-headers-5.4.0-39
+drwxr-xr-x  7 root   root        4096 jun 25 12:07 linux-headers-5.4.0-39-generic
+drwxr-xr-x 11 root   root        4096 mai 22 13:21 virtualbox-6.1.6
+
+- esses arquivos, sao os headers do kernel (implementacoes, drivers, variaveis)
+- pode ser importante para compilar outros programas e tal
+- so root pode escrever nesse diretorio /usr/src
+
+
+#### SIMULANDO O DOWNLOAD DA VERSAO DO KERNEL:
+
+- ir ate o site kernel.org e baixar a versao mais recente
+- copiar para o diretorio /usr/src
+
+- a equipe de desenvolvimento do kernel liberam as fontes para download em arquivos compactados, usando o protocolo XZ.
 
 $ls -l 
 linux-5.7.6.tar.xz
 
 - para descompactar:
+
 $tar xvf linux-5.7.6.tar.xz
 
-- kernel é desenvolvimento em C
+- kernel foi desenvolvido em C
 
 
 
+b) Onde fica a imagem compilada do meu kernel atual no sistema?
+
+
+- fica no diretorio /boot
+
+$uname -r
+5.4.0-39-generic
+
+
+- acessando o /boot para ver a imagem do meu kernel atual:
+
+$ls -l
+ total 129808
+ -rw-r--r-- 1 root root   237753 jun  3 11:24 config-5.4.0-37-generic
+ -rw-r--r-- 1 root root   237753 jun 19 06:56 config-5.4.0-39-generic
+ drwx------ 2 root root     4096 dez 31  1969 efi
+ drwxr-xr-x 4 root root     4096 jun 25 12:57 grub
+ lrwxrwxrwx 1 root root       27 jun 25 12:07 initrd.img -> initrd.img-5.4.0-39-generic
+ -rw-r--r-- 1 root root 49528813 jun 17 23:00 initrd.img-5.4.0-37-generic
+ -rw-r--r-- 1 root root 49529283 jun 29 21:56 initrd.img-5.4.0-39-generic
+ lrwxrwxrwx 1 root root       27 jun 25 12:07 initrd.img.old -> initrd.img-5.4.0-37-generic
+ -rw-r--r-- 1 root root   182704 fev 13 20:09 memtest86+.bin
+ -rw-r--r-- 1 root root   184380 fev 13 20:09 memtest86+.elf
+ -rw-r--r-- 1 root root   184884 fev 13 20:09 memtest86+_multiboot.bin
+ -rw------- 1 root root  4738082 jun  3 11:24 System.map-5.4.0-37-generic
+ -rw------- 1 root root  4738082 jun 19 06:56 System.map-5.4.0-39-generic
+ lrwxrwxrwx 1 root root       24 jun 25 12:07 vmlinuz -> vmlinuz-5.4.0-39-generic
+ -rw------- 1 root root 11662080 jun  3 12:32 vmlinuz-5.4.0-37-generic
+ -rw------- 1 root root 11662080 jun 19 07:04 vmlinuz-5.4.0-39-generic
+ lrwxrwxrwx 1 root root       24 jun 25 12:07 vmlinuz.old -> vmlinuz-5.4.0-37-generic
+
+
+$ls -l vmlinuz-5.4.0-39-generic
+ -rw------- 1 root root 11662080 jun 19 07:04 vmlinuz-5.4.0-39-generic
+
+- eu posso fazer o download da versao atual do kernel, compilar e eu mesmo gerar a minha imagem.
+
+- uma informacao importante desse arquivo vmlinuz:
+
+$file vmlinuz-5.4.0-39-generic
+vmlinuz-5.4.0-39-generic: Linux kernel x86 boot executable bzImage, version 5.4.0-39-generic (buildd@lcy01-amd64-016) #43-Ubuntu SMP Fri Jun 19 10:28:31 UTC 2020, RO-rootFS, swap_dev 0xB, Normal VGA
+
+
+-> Zimage (limitacao de 512K, imagem bem pequena, carregada na memoria baixa do sistema
+
+-> bzimage (big Zimage, maior, nao tem limite de tamanho, carregado na memoria alta)
+
+-----------------
+
+OBS) tanto o Zimage como o bzimage sao comprimidos/compactados usando o Gzip
+
+-----------------
 
 
 
+->  no /boot (fica o arquivo da imagem do kernel, que sera carregado pelo GRUB na memoria)
+
+-> cd /lib/modules (os ficam os diretorios para cada versao do kernel, modulos ligados a essa versao do kernel, modulos estao associados ao kernel)
+
+$ls -l
+total 28
+drwxr-xr-x 2 root root 4096 mai  4 20:33 5.4.0-26-generic
+drwxr-xr-x 2 root root 4096 mai 19 08:44 5.4.0-28-generic
+drwxr-xr-x 2 root root 4096 mai 28 09:19 5.4.0-29-generic
+drwxr-xr-x 2 root root 4096 jun  9 21:41 5.4.0-31-generic
+drwxr-xr-x 2 root root 4096 jun 25 12:58 5.4.0-33-generic
+drwxr-xr-x 6 root root 4096 jun  9 21:09 5.4.0-37-generic
+drwxr-xr-x 6 root root 4096 jun 25 12:07 5.4.0-39-generic
 
 
 
+OBS) sempre lembre, a extensao ".ko" e um modulo (que vai subir alguma funcao no kernel)
+
+
+201.1 - Componentes do kernel - Exercícios
+
+1. Identifique a versão e o release do kernel em uso do seu sistema.
 
 
 
+2. Faça o download do release atual do kernel e o descompacte no diretório correto. Crie também o link simbólico referenciando ao diretório do código fonte.
 
 
-/usr/src/linux/
-/usr/src/linux/Documentation/
-zImage
-bzImage
-xz compression
+
+3. Veja o tamanho da imagem do kernel em uso no seu sistema.
+
+
