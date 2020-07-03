@@ -158,7 +158,6 @@ OBS) tanto o Zimage como o bzimage sao comprimidos/compactados usando o Gzip
 -----------------
 
 
-
 ->  no /boot (fica o arquivo da imagem do kernel, que sera carregado pelo GRUB na memoria)
 
 -> cd /lib/modules (os ficam os diretorios para cada versao do kernel, modulos ligados a essa versao do kernel, modulos estao associados ao kernel)
@@ -174,7 +173,6 @@ drwxr-xr-x 6 root root 4096 jun  9 21:09 5.4.0-37-generic
 drwxr-xr-x 6 root root 4096 jun 25 12:07 5.4.0-39-generic
 
 
-
 OBS) sempre lembre, a extensao ".ko" e um modulo (que vai subir alguma funcao no kernel)
 
 
@@ -182,11 +180,7 @@ OBS) sempre lembre, a extensao ".ko" e um modulo (que vai subir alguma funcao no
 
 1. Identifique a versão e o release do kernel em uso do seu sistema.
 
-
-
 2. Faça o download do release atual do kernel e o descompacte no diretório correto. Crie também o link simbólico referenciando ao diretório do código fonte.
-
-
 
 3. Veja o tamanho da imagem do kernel em uso no seu sistema.
 
