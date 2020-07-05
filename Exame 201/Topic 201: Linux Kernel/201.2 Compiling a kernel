@@ -216,9 +216,47 @@ d) agora vamos usar dois comandos que sao usados para limpar
 
 
 
+1) VAMOS INSTALAR OS MODULOS:
+
+
+$ make modules_install (vai colocar os arquivos que foram compilados nos diretorios corretos vai instalar aqui /lib/modules)
 
 
 
+2) INSTALANDO A IMAGEM DO KERNEL:
+
+
+
+a) Usando o comando make install:
+
+- existem duas formas, a primeira seria copiar o arquivo "bzImage" la para o diretorio /boot (renomear para a forma correta)
+- no direotorio /usr/src/linux executar o comando "make install" 
+- ele vai copiar o bzImage no /boot
+- vai gerar o initramfs
+- vai copiar tambem o arquivo ".config" e o "systemmap"
+- e vai atualizar o GRUB
+
+
+b) De forma manual:
+
+
+- mover o arquivo bzImage la para o /boot
+- usar o $mkinitramfs -o /boot/initrd.img-5.7.7-99 5.7.7-99
+- e depois $ update-grub (atualiza o grub.cfg)
+
+
+
+### PACOTES, LIMPEZA, DKMS, DRACUT
+
+
+
+- Supondo que eu tenha muitos equipamentos Linux e queira compilar o kernel para todos, eu teria que
+fazer esse processo maquina por maquina, a resposta e nao. Veja abaixo como podemos prosseguir:
+
+
+
+
+  
 
 
 
@@ -233,22 +271,14 @@ d) agora vamos usar dois comandos que sao usados para limpar
 
 #mkinitramfs
 
-#make
 
 #make targets (all, config, xconfig, menuconfig, gconfig, oldconfig, mrproper, zImage, bzImage, modules, modules_install, rpm-pkg, binrpm-pkg, deb-pkg)
 
-#gzip
-
-#bzip2
-
-#module tools
 
 #/usr/src/linux/.config
 
 #/lib/modules/kernel-version/
 
 #depmod
-
-
 
 #dkms
