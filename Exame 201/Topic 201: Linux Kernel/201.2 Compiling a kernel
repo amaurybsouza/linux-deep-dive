@@ -1,6 +1,222 @@
 Terms and Utilities:
 
 
+###  ETAPA DE CONFIGURACAO DO KERNEL:
+
+
+1) AULA PARA REALIZAR O PROCEDIMENTO DE CONFIGURACAO, COMPILACAO E INSTALACAO DO KERNEL (usando minha VM Debian 9)
+
+src/linux# ls -l
+total 816
+drwxrwxr-x  27 root root   4096 jun 30 17:21 arch
+drwxrwxr-x   3 root root   4096 jun 30 17:21 block
+drwxrwxr-x   2 root root   4096 jun 30 17:21 certs
+-rw-rw-r--   1 root root    496 jun 30 17:21 COPYING
+-rw-rw-r--   1 root root  99724 jun 30 17:21 CREDITS
+drwxrwxr-x   4 root root   4096 jun 30 17:21 crypto
+drwxrwxr-x  80 root root   4096 jun 30 17:21 Documentation
+drwxrwxr-x 140 root root   4096 jun 30 17:21 drivers
+drwxrwxr-x  79 root root   4096 jun 30 17:21 fs
+drwxrwxr-x  28 root root   4096 jun 30 17:21 include
+drwxrwxr-x   2 root root   4096 jun 30 17:21 init
+drwxrwxr-x   2 root root   4096 jun 30 17:21 ipc
+-rw-rw-r--   1 root root   1327 jun 30 17:21 Kbuild
+-rw-rw-r--   1 root root    595 jun 30 17:21 Kconfig
+drwxrwxr-x  18 root root   4096 jun 30 17:21 kernel
+drwxrwxr-x  20 root root  12288 jun 30 17:21 lib
+drwxrwxr-x   6 root root   4096 jun 30 17:21 LICENSES
+-rw-rw-r--   1 root root 552385 jun 30 17:21 MAINTAINERS
+-rw-rw-r--   1 root root  61731 jun 30 17:21 Makefile
+drwxrwxr-x   3 root root   4096 jun 30 17:21 mm
+drwxrwxr-x  72 root root   4096 jun 30 17:21 net
+-rw-rw-r--   1 root root    727 jun 30 17:21 README
+drwxrwxr-x  30 root root   4096 jun 30 17:21 samples
+drwxrwxr-x  16 root root   4096 jun 30 17:21 scripts
+drwxrwxr-x  13 root root   4096 jun 30 17:21 security
+drwxrwxr-x  26 root root   4096 jun 30 17:21 sound
+drwxrwxr-x  37 root root   4096 jun 30 17:21 tools
+drwxrwxr-x   3 root root   4096 jun 30 17:21 usr
+drwxrwxr-x   4 root root   4096 jun 30 17:21 virt
+
+- ja estou no diretorio correto /usr/src
+- ja descompactei as fontes do kernel
+- ja criei um link simbolico apontando para linux
+
+a) O processo de compilacao basicamente consiste em 3 partes (configurar, compilar e instalar)
+
+b) Antes de comecar vamos instalar os pacotes necessarios para a configuracao
+
+c) Vamos usar o comando make, que e o principal comando de compilar kernel.
+
+d) vale lembrar que o comando make nao vem instalado por padrao, temos que instalar
+
+e) vamos usar o pacote **build-essential** para isso
+- ele vai instalar uma serie de pacotes, inclusiveo comando make
+- para sistema Red Hat, usar o pacote yum groupinstall "Development Tools"
+
+
+
+2) ETAPAS E FERRAMENTAS USADAS PARA CONFIGURACAO DO KERNEL (antes de compilar):
+
+
+a) make config (primeira forma de se fazer essa etapa inicial de configuracao)
+- ele vai fazer uma serie de perguntas nesse processo, cerca de 100 perguntas (processo nao muito usado)
+- vc quer que o kernel tenha suporta para 64bits? e assim por diante...
+
+root@debian:/usr/src/linux# make config
+  LEX     scripts/kconfig/lexer.lex.c
+  /bin/sh: 1: flex: not found
+  scripts/Makefile.host:9: recipe for target 'scripts/kconfig/lexer.lex.c' failed
+  make[1]: *** [scripts/kconfig/lexer.lex.c] Error 127
+  Makefile:585: recipe for target 'config' failed
+  make: *** [config] Error 2
+
+
+- agora que instalou algumas dependencias do pacote make config, vamos ver o proximo passo:
+
+*
+* Linux/x86 5.7.7 Kernel Configuration
+*
+*
+* Compiler: gcc (Debian 6.3.0-18+deb9u1) 6.3.0 20170516
+*
+*
+* General setup
+*
+Compile also drivers which will not load (COMPILE_TEST) [N/y/?]
+
+
+b) make menuconfig (esse comando oferece uma opcao com menu, que acaba sendo mais usada e mais facil)
+
+- nessa opcao voce pode definir o que quer configurar para seu kernel.
+- porque compilar um kernel? para habilitar um hardware que nao e reconhecido, recursos de CPU, de memoria, de disco...
+- voce pode customizar o kernel de acordo com sua necessidade, entao voce baixa o kernel e compila ele.
+- quero desabilitar recursos que eu nao preciso, faco isso compilando o kernel do sistema
+
+
+-> opcoes bem importantes:
+
+- (M) quando ver essa opcao no make menuconfig quer dizer que sera compilado como modulo
+- o arquivo que ele salva as configuracoes do kernel e o .config (ele que sera usado no processo de compilacao)
+-rw-r--r--   1 root root 217K jul  5 15:58 .config
+- outra opcao de configuracao e o **make oldconfig** (usado para restaurar uma configuracao anterior, por exemplo,
+ele pega o .config anterior e faz uma restauracao em cima disso)
+- o **make menuconfig** tambem faz isso na parte de menus, na opcao de load.
+
+OBS) tres importantes passos, make menuconfig, make oldconfig, make config
+
+
+
+c) temos tambem a opcao de fazer todo esse processo usando ferramentas graficas
+
+- pode se usar a interface do servidor X (qt) ou do GTK, um deles seria o (make xconfig)
+- precisa do qt, e prcisa de alguns pacotes para que ele possa ser executado
+- vamos instalar alguns pacotes que serao necessarios:
+
+$ apt install pkg-config g++ libqt4-dev bison flex -y
+
+$ make xconfig
+
+- similar ao make menuconfig (so precisa ter o servidor X instalado para usar o xconfig)
+
+d) Outra alternatica de interface grafica seria o **make gconfig** (usa a interface GTK)
+
+
+
+
+3) O QUE E IMPORTANTE SABER SOBRE ESSE PROCESSO DE CONFIGURACAO?
+
+a) as opcoes que voce tem:
+
+- make config (alternativa de configuracao que vai fazer uma serie de perguntas)
+- make oldconfig (alternativa que vai carregar outros .config e vai fazer perguntas)
+- make menuconfig (opcao principal, nao precisa de servidor X, mais facil de se configurar)
+- make gconfig (opcao grafica)
+- make xconfig (opcao grafica)
+
+
+
+4) ARQUIVO IMPORTANTE: Makefile
+
+- ele vem junto com as fontes do kernel descompactado
+- dois fatores importantes nesse arquivo:
+
+EXTRAVERSION=111 (no arquivo Makefile)
+EXTRAVERSION (onde posso colocar uma nova versao nesse kernel), ficaria 5.7.7.111
+
+
+- Outro arquivo importante no arquivo ".config"
+
+LOCALVERSION=cursolpic2
+LOCALVERSION (posso dizer que essa compilacao e minha, d minha autoria)
+
+
+
+### ETAPA DE COMPILACAO DO KERNEL:
+
+
+
+
+- nessa etapa vmos realmente partir para a parte de compilacao do kernel
+- para depois la no fim, gerar a imagem do kernel que iremos utilizar
+- essa imagem jogamos no GRUB para que o sistema possa reconhecer e subir
+
+
+
+5) USANDO O COMANDO MAKE PARA COMPILAR:
+
+
+a) make bzImage (no fim teremos uma imagem bzimage)
+
+- essa etapa demora cerca de 3 horas e consme cerca de 20G de disco, depende da configuracao da maquina
+
+$ make -j 2 bzImage
+
+
+b) vamos fazer os passos e instalando alguns pacotes que serao pedidos no momento da execucao do comando...
+
+cripts/extract-cert.c:21:25: fatal error: openssl/bio.h: Arquivo ou diretório não encontrado
+ #include <openssl/bio.h>
+                          ^
+			    HOSTCC  scripts/genksyms/genksyms.o
+			      YACC    scripts/genksyms/parse.tab.[ch]
+			        LEX     scripts/genksyms/lex.lex.c
+				error: Cannot generate ORC metadata for CONFIG_UNWINDER_ORC=y, please install libelf-dev, libelf-devel or elfutils-libelf-devel
+				  HOSTCC  scripts/selinux/genheaders/genheaders
+				    UPD     include/generated/utsrelease.h
+				      HOSTCC  scripts/selinux/mdp/mdp
+				      compilation terminated.
+
+- pode notar que ele pede alguns pacotes nesse processo... iremos instalar eles e entao partir para a compilacao
+
+
+$ apt install libelf-dev, libelf-devel or elfutils-libelf-devel -y
+
+- existem muitos pacotes que podem ser instalados durante essa etapa de configuracao
+- no fim da compilacao ele vai gerar a imagem, e ele ficara no diretorio /arch/x86/boot/bzImage
+
+
+c) agora vamos para a etapa de compilar os modulos:
+
+$ make -j2 modules (demora mais de 2 horas para compilar os modulos)
+- vai notar varios modulos com a extensao ".ko"
+- 40 minutos para compilar o kernel e 2 horas para compilar os modulos
+
+
+d) agora vamos usar dois comandos que sao usados para limpar 
+
+- make clean (limpa tudo que foi gerado da compilacao do kernel e dos modulos), ele deixa o .config
+
+
+- make mrproper (limpa o .config, alem de tudo do outro comando anterior)
+
+
+
+### ETAPA DE INSTALACAO DO KERNEL E DOS MODULOS NO SISTEMA:
+
+
+
+
 
 
 
