@@ -250,35 +250,64 @@ b) De forma manual:
 
 
 
-- Supondo que eu tenha muitos equipamentos Linux e queira compilar o kernel para todos, eu teria que
+- supondo que eu tenha muitos equipamentos Linux e queira compilar o kernel para todos, eu teria que
 fazer esse processo maquina por maquina, a resposta e nao. Veja abaixo como podemos prosseguir:
 
+- o que poderia ser feito seria, compilar em uma maquina e gerar um pacote para instalar nas outras maquinas
+
+- pacote .debian, tar.gz, .rpm
 
 
 
-  
+1) Vamos ver como gerar esse tipo de pacote:
+
+
+- para isso usamos o comando "make deb-pkg" (faz todo o processo de compilacao e no final ele gera pacotes .deb para voc usar nas instalacoes)
+- executando esse comando, ele gera alguns pacotes ".deb" no /usr/src (pode levar horas e necessita de muito espaco em disco)
+- gera arquivos com mudancas, gera tar.gz, gera os headers, gera a imagem do kernel e as bibliotecas do kernel
+- o mais importante arquivo e o "linux-image-5.7.7-99_5.7.7.99_amd64.deb"
+- tendo esse arquivo, podemos executar o dpkg -i que ele vai instalar a imagem do kernel nas outras maquinas
+
+
+- para sistemas RPM, usamos o comando "make rpm-pkg" ele gera os mesmos arquivos como no exemplo anterior
+- existe tambem o comando "make binrpm-pkg" (gera a imagem compilada, apenas a imagem)
+
+
+a) Mostrando o projeto DKMS:
+
+- framework que foi desenvolvido pela Dell para rsolver um problemas deles com atualizacoes de kernel no sistema 
+- temos que instalar esse pacote, nao tem por padrao nas distribuicoes
+- usado para compilar modulos externos de forma independente (DKMS)
 
 
 
+b) Dracut (low level tool for generating and initramfs image)
+
+
+- basicamente o que o comando "update-initramfs" faz em sistemas Debian o comando "dracut" faz para sistemas Red Hat
 
 
 
+c) Agora vamos ver dois comandos de limpeza da estrutura de codido fonte.
+
+
+- make clean (limpa todos os arquivos compilados)
+
+- make mrproper (limpa o que foi configurado o ".config", alem dos arquivos compilados)
+
+- depois que eu gerei minha imagem do kernel, nao preciso manter, posso limpar com esses comandos acima
+- esses comandos devem ser executados dentro do caminho absoluto /usr/src/linux (estrutura de arquivos e codigo fonte do kernel)
 
 
 
-
-#mkinitrd
-
-#mkinitramfs
+### EXERCICIOS:
 
 
-#make targets (all, config, xconfig, menuconfig, gconfig, oldconfig, mrproper, zImage, bzImage, modules, modules_install, rpm-pkg, binrpm-pkg, deb-pkg)
+1. Usando o código fonte dos exercícios da sub-tópico anterior e tendo como base a configuração do seu kernel atual, 
+faça a compilação e instalação de um novo kernel em seu sistema com as seguintes características:
 
+Desabilite os Recursos de Wimax e Suporte a Rádio Amador
 
-#/usr/src/linux/.config
+Desabilite os sistemas de Arquivo GFS2 e OCFS2
 
-#/lib/modules/kernel-version/
-
-#depmod
-
-#dkms
+Integre o suporte a EXT4 ao kernel, não via módulo
