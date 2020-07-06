@@ -2,58 +2,60 @@ Terms and Utilities:
 
 
 
+1) Vamos comecar vendo o comando uname do Linux:
+
+
+$ uname (ele pode imprimir um serie de informacoes sobre o kernel)
+
+- para mais detalhes podemos usar:
+
+$ uname --help $ whatis uname
+
+
+a) Mostrando a saida padrao do comando "uname --help"
+
+$ uname --help (mostra ajuda com as opcoes do comando uname)
+Usage: uname [OPTION]...
+Print certain system information.  With no OPTION, same as -s.
+
+  -a, --all                print all information, in the following order,
+                             except omit -p and -i if unknown:
+  -s, --kernel-name        print the kernel name
+  -n, --nodename           print the network node hostname
+  -r, --kernel-release     print the kernel release
+  -v, --kernel-version     print the kernel version
+  -m, --machine            print the machine hardware name
+  -p, --processor          print the processor type or "unknown"
+  -i, --hardware-platform  print the hardware platform or "unknown"
+  -o, --operating-system   print the operating system
+      --help     display this help and exit
+      --version  output version information and exit
+
+GNU coreutils online help: <http://www.gnu.org/software/coreutils/>
+For complete documentation, run: info coreutils 'uname invocation'
+
+
+b) Visualizando a opcao do "uname -a"
+
+$ uname -a (mostra todas as informacoes usando essa opcao)
+Linux LAPTOP-1IK77O2H 4.4.0-18362-Microsoft #836-Microsoft Mon May 05 16:04:00 PST 2020 x86_64 x86_64 x86_64 GNU/Linux
+
+
+c) Visualizando a opcao "-r" do uname:
+
+
+$ uname -r (mostra a release do kernel do sistema)
+4.4.0-18362-Microsoft
+
+
+
+2) De onde que ele pega essas informacoes? Do diretorio /proc
+
+
+- pega essas informacoes la do /proc/sys/kernel
+- o diretorio /proc (diretorio virtual do sistema)
+- no /proc temos as informacoes em memoria do kernel em tempo real, tras as propriedades do kernel em execucao)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#/lib/modules/kernel-version/modules.dep
-
-
-#module configuration files in /etc/
-
-#/proc/sys/kernel/
-
-#/sbin/depmod
-
-#/sbin/rmmod
-
-#/sbin/modinfo
-
-#/bin/dmesg
-
-#/sbin/lspci
-
-#/usr/bin/lsdev
-
-#/sbin/lsmod
-
-#/sbin/modprobe
-
-#/sbin/insmod
-
-#/bin/uname
-
-#/usr/bin/lsusb
-
-#/etc/sysctl.conf, /etc/sysctl.d/
-
-#/sbin/sysctl
-
-#udevmonitor
-
-#udevadm monitor
-
-#/etc/udev/
