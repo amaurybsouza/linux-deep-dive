@@ -55,6 +55,105 @@ $ uname -r (mostra a release do kernel do sistema)
 - pega essas informacoes la do /proc/sys/kernel
 - o diretorio /proc (diretorio virtual do sistema)
 - no /proc temos as informacoes em memoria do kernel em tempo real, tras as propriedades do kernel em execucao)
+- no diretorio /proc/sys/kernel (temos as informacoes representadas em tempo real do kernel em forma de arquivos e diretorios)
+
+
+
+3) Como alteramos essas informacoes do kernel em tempo real?
+
+
+a) no diretorio /proc/sys/fs temos um arquivo de teste, para esse exemplo
+
+- vamos usar o arquivo "file-max" que mostra o total de arquivos que meu sistema pode abrir
+- duas formas de se visualizar esse arquivo:
+
+$ cat /proc/sys/file-max
+99306
+
+
+$ /proc/sys/fs$ sysctl fs.file-max
+fs.file-max = 9223372036854775807
+
+
+
+b) Digitando o comando sysctl -a podemos ver todaos os parametros que temos no /proc/sys
+
+
+$ sysctl -a
+
+
+c) Como eu que eu poderia alterar esses valores?
+
+- podemos usar o comando 'echo" 
+
+$ echo 100000 > /proc/sys/fs/file-max (alterei um valor do kernel em tempo real)
+
+
+- outra forma seria usar o comando "sysctl"
+
+$ sysctl -w fs.file-max=100001
+
+
+d) Caso eu reinicie o sistema, essas alteracoes serao perdidas no proximo boot, podemos tratar isso para que fique permanente:
+
+
+- temos aqui um arquivo de configuracao, que e o sysctl.conf, nele podemos definir os valores que queremos alterar.
+- no fim do arquivo de conf, executar um "echo >> fs.file-max=100110"
+- temos outro arquivo de conf que podemos usar para deixar os valores permanentes:
+
+$ cd /etc/sysctl.d/
+
+- nesse diretorio, pode ser que exista alguma aplicacao que instale algum arquivo nesse diretorio para que possam alterar os valores
+diferentes do que foi compilado no kernel da distribuicao.
+
+
+
+4) Agora vamos estudar alguns comandos que vimos anteriormente que podem ler os arquivos do /proc
+
+
+a) primeiro deles seria o lspci:
+
+$ lspci (le as informacoes relacionadas ao barramento PCI do sistema, ao que esta conectado no barramento PCI)
+
+$ lspci -s 
+00:02.0 VGA compatible controller: Intel Corporation HD Graphics 620 (rev 02)
+
+$ lspci -s 00:02 -v (mostra mais detalhes desse barramento VGA)
+
+
+b) outro comando relevante, e o lsusb
+
+$ lsusb (mostra os dispositivos USO conectados no barramento)
+
+$ lsusb -d (mostra mais detalhes de cada dispositivo, basta colocar os numeros que aparecem logo na frente)
+
+
+- outro comando importante que mostra detalhes do hardware do equipamento "lsdev"
+
+
+c) mais um comando que pode ajudar nessa parte seria o comando "dmesg"
+
+$ dmesg (le as informacoes do buffer que esta em memoria do kernel, nao de log, buffer onde o kernel guarda essas informacoes)
+
+- vale lembrar que as informacoes de boot, tbm podem ser vistas nos arquivos de logs dos sistema, /var/log/messages e /var/log/syslog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
