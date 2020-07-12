@@ -1,0 +1,13 @@
+Terms and Utilities:
+
+/usr/lib/systemd/
+/etc/systemd/
+/run/systemd/
+systemctl
+systemd-delta
+/etc/inittab
+/etc/init.d/
+/etc/rc.d/
+chkconfig
+update-rc.d
+init and telinit

@@ -1,0 +1,14 @@
+Terms and Utilities:
+
+mount
+fsck
+inittab, telinit and init with SysV init
+The contents of /boot/, /boot/grub/ and /boot/efi/
+EFI System Partition (ESP)
+GRUB
+grub-install
+efibootmgr
+UEFI shell
+initrd, initramfs
+Master boot record
+systemctl
