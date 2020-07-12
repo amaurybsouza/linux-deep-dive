@@ -139,20 +139,188 @@ $ dmesg (le as informacoes do buffer que esta em memoria do kernel, nao de log, 
 
 
 
+### MODULOS DO SISTEMA:
 
 
 
+1) Onde que ficam os modulos do sistema?
+- ficam dentro do /lib/modules
+
+[root@ip-172-31-12-118 modules]# ls
+4.18.0-193.6.3.el8_2.x86_64  4.18.0-193.el8.x86_64
+
+- para acessar o modulo do kernel atual do sistema basta usar comando:
+
+[root@ip-172-31-12-118 modules]# cd /lib/modules/`uname -r`
+[root@ip-172-31-12-118 4.18.0-193.6.3.el8_2.x86_64]#
+
+
+- comando "depmod"
+
+$ whatis depmod
+depmod (8)           - Generate modules.dep and map files.
+
+- se por acaso voce instalou algum modulo no seu sistema, sera necessario usar comando "depmod" para atualizar os modulos do sistema
+
+$ depmod -a (relaciona os arquivos aos modulos)
+
+$ no final do comando "make modules install", ele roda o "depmod -a" para referenciar os arquivos aos modulos
+
+
+- comando "lsmod"
+
+$ lsmod
+Module                  Size  Used by
+cirrus                 16384  0
+drm_kms_helper        212992  3 cirrus
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            16384  1 drm_kms_helper
+sysimgblt              16384  1 drm_kms_helper
+fb_sys_fops            16384  1 drm_kms_helper
+drm                   536576  3 drm_kms_helper,cirrus
+intel_rapl_msr         16384  0
+intel_rapl_common      24576  1 intel_rapl_msr
+sb_edac                24576  0
+intel_rapl_perf        20480  0
+pcspkr                 16384  0
+i2c_piix4              24576  0
+ip_tables              28672  0
+xfs                  1519616  1
+libcrc32c              16384  1 xfs
+ata_generic            16384  0
+ata_piix               36864  0
+libata                270336  2 ata_piix,ata_generic
+crct10dif_pclmul       16384  1
+crc32_pclmul           16384  0
+crc32c_intel           24576  1
+xen_blkfront           40960  2
+xen_netfront           32768  0
+ghash_clmulni_intel    16384  0
+serio_raw              16384  0
+dm_mirror              28672  0
+dm_region_hash         20480  1 dm_mirror
+dm_log                 20480  2 dm_region_hash,dm_mirror
+dm_mod                151552  2 dm_log,dm_mirror
+
+
+- a saida desse comando, mostra os modulos carregados no sistema, e mostra quantos modulos estao usando tal modulo.
+- se nao mostra nada na frente da coluna, e porque internamente no kernel usa o modulo
+- por exemplo, libata possui dois modulos usando ele, que sao,  ata_piix,ata_generic
 
 
 
+- comando modinfo (mostra informacoes especificas sobre cada modulo do sistema)
+- vamos executar um exemplo:
+
+ $ modinfo xfs (peguei esse modulo xfs para exemplo)
+ filename:       /lib/modules/4.18.0-193.6.3.el8_2.x86_64/kernel/fs/xfs/xfs.ko.xz
+ license:        GPL
+ description:    SGI XFS with ACLs, security attributes, no debug enabled
+ author:         Silicon Graphics, Inc.
+ alias:          fs-xfs
+ rhelversion:    8.2
+ srcversion:     C36B82F4ACAB2B834C39330
+ depends:        libcrc32c
+ intree:         Y
+ name:           xfs
+ vermagic:       4.18.0-193.6.3.el8_2.x86_64 SMP mod_unload modversions
+ sig_id:         PKCS#7
+ signer:         Red Hat Enterprise Linux kernel signing key
+ sig_key:        1B:6F:CF:3B:E9:E8:C0:19:BC:A4:D7:D0:3D:AB:29:B2:7B:C1:47:CC
+ sig_hashalgo:   sha256
+ signature:      8E:3A:5A:56:78:FA:1A:01:EE:58:0B:3A:41:01:47:3B:1C:03:31:20:
+
+- mostra diversas informacoes, modulos dependentes, versao, descricao.
+
+- modinfo -p (mostra opcoes do modulo)
+- insmod (sobre um modulo, precisa passar o nome do arquivo do modulo)
+- rmmod (baixa algum modulo, precisa passar o nome do arquio do modulo)
 
 
 
+- o comando usado seria o "modprobe" (sobre as dependencias, baixa as dependencias)
+
+
+$ modprobe -r psmouse (baixa o modulo do psmouse)
+
+$ modprobe psmouse (ele sobe o modulo, ele ve as dependencias)
+
+- o comando mdprobe tambem fornece recurso de definir opcoes do modulo, modo de debug do modulo...
+
+$ modporbe r8166 debug=15
 
 
 
+### ARQUIVOS DE CONFIGURACAO DOS MODULOS:
 
 
+$ vim /etc/modules.conf (atualmente nao se usa mais esse arquivo)
+
+
+$ cd /etc/modprobe.d (nesse diretorio existe uma serie de arquivos, onde podemos ajustar as config de cada modulo)
+
+root@ip-172-31-8-61:/etc/modprobe.d# ls -l
+total 32
+-rw-r--r-- 1 root root  325 Jan 28  2018 blacklist-ath_pci.conf
+-rw-r--r-- 1 root root  210 Jan 28  2018 blacklist-firewire.conf
+-rw-r--r-- 1 root root  677 Apr  9 04:03 blacklist-framebuffer.conf
+-rw-r--r-- 1 root root  583 Jan 28  2018 blacklist-rare-network.conf
+-rw-r--r-- 1 root root  236 Jun 11 19:38 blacklist-xen-fbfront.conf
+-rw-r--r-- 1 root root 1667 Apr  9 04:03 blacklist.conf
+-rw-r--r-- 1 root root  347 Jan 28  2018 iwlwifi.conf
+-rw-r--r-- 1 root root  379 Jan 14 19:10 mdadm.conf
+
+
+- nesses arquivos existem uma serie de modulos que eu nao quero que carregue, eles ficam marcados como: 
+
+# evbug is a debug tool that should be loaded explicitly
+blacklist evbug
+
+# these drivers are very simple, the HID drivers are usually preferred
+blacklist usbmouse
+blacklist usbkbd
+
+# replaced by e100
+blacklist eepro100
+
+
+- outro arquivo que e bem utilizado, e vale ressaltar e:
+
+$ vim /etc/modules
+
+- aqui voce coloca modulos que precisam ser carregados no boot da maquina
+- ou em algum arquivo dentro do /etc/modules-load.d
+
+
+
+### PROCESSO udev
+
+
+
+ $ ps axu | grep udev
+ root         616  0.0  1.2 109160 10720 ?        Ss   14:26   0:00 /usr/lib/systemd/systemd-udevd
+ root        1530  0.0  0.1  12108  1088 pts/0    R+   16:00   0:00 grep --color=auto udev
+
+
+- ele fica escutando o kernel e assim que o kernel envia mensagens para ele, ele toma acoes.
+- por exemplo, habilitar um mouse, adicionar um drive no /dev (devices que aparecem no /dev /sys)
+
+
+1) Comando "udevadm monitor" (mostra as mensagens que vao vir do udev e do kernel)
+
+- por exemplo, se eu tirar o meu mouse aqui da USB, ele vai registrar todas essas saidas.
+- por exemplo, se eu adicionar um Hd externo, ele vai mostrar queo kernel reconheceu algo e da um add
+- ele cria as referencias no /dev o udev faz esse tipo de gerenciamento, recebe as mensagens do kernel.
+
+
+2) Onde ficam os arquivos de configuracao do udev:
+
+- existem dois que sao principais:
+
+- /etc/udev/udev.conf  (configuracoes do udev, posso incluir as config aqui)
+- /etc/udev/rules.d (arquivos com as regras do udev), pode ter varios arquivos
+
+- /lib/udev/rules.d (aqui e o local padrao das distros que vem essas regras do udev)
 
 
 
