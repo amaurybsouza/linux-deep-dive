@@ -133,36 +133,98 @@ lrwxrwxrwx 1 root root 15 Jun 11 19:36 K01uuidd -> ../init.d/uuidd
 - pode notar que as letras comecam com k (ele usa kill para matar o processo)
 
 
-#update-rc.d (esse comando permite mudar os links do rc.d)
+
+
+
+### MOSTRANDO O COMANDO NO DEBIAN:
+
+#update-rc.d (esse comando permite mudar os links do rc.d) Veja alguns exemplos;
+
+ ls -l /etc/rc*.d/*collectd*
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc0.d/K01collectd -> ../init.d/collectd
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc1.d/K01collectd -> ../init.d/collectd
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc2.d/S01collectd -> ../init.d/collectd
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc3.d/S01collectd -> ../init.d/collectd
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc4.d/S01collectd -> ../init.d/collectd
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc5.d/S01collectd -> ../init.d/collectd
+ lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc6.d/K01collectd -> ../init.d/collectd
+
+- no exemplo acima eu posso visualizar que o collectd e run level 1 ate o 5.
+- atraves do comando "update-rc.d" eu consigo mudar isso, eu posso gerenciar isso.
+
+
+Veja alguns exemplos:
+
+a) Desabilitar o run level 5 do collectd:
+
+etc/rc1.d# update-rc.d collectd disable 5
+root@ip-172-31-8-61:/etc/rc1.d#
+root@ip-172-31-8-61:/etc/rc1.d# ls -l /etc/rc*.d/*collectd*
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc0.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc1.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc2.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc3.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc4.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc5.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc6.d/K01collectd -> ../init.d/collectd
+
+
+b) Ativando o run level novamente usando o comando "update-rc.d":
+
+/etc/rc1.d# update-rc.d collectd enable 5
+root@ip-172-31-8-61:/etc/rc1.d# ls -l /etc/rc*.d/*collectd*
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc0.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc1.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc2.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc3.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc4.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc5.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 15 01:32 /etc/rc6.d/K01collectd -> ../init.d/collectd
+
+
+c) Agora removendo os links do collectd:
+
+/etc/rc1.d# update-rc.d collectd remove
+root@ip-172-31-8-61:/etc/rc1.d# ls -l /etc/rc*.d/*collectd*
+ls: cannot access '/etc/rc*.d/*collectd*': No such file or directory
+
+
+d) Para restaurar usamos outra opcao:
+
+/etc/rc1.d# update-rc.d collectd defaults
+:/etc#  ls -l /etc/rc*.d/*collectd*
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc0.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc1.d/K01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc2.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc3.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc4.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc5.d/S01collectd -> ../init.d/collectd
+lrwxrwxrwx 1 root root 18 Jul 16 01:36 /etc/rc6.d/K01collectd -> ../init.d/collectd
+
+
+### MOSTRANDO O COMANDO NO CENTOS:
+
+#chkconfig (comando similar ao comando update-rc.d)
+
+- faz o gerenciamento dos links dos run levels.
 
 
 
 
+#runlevel (esse comando mostra o run level que eu estou no momento)
+
+$ runlevel
+N 3
 
 
+#init (esse comando muda de run level)
+
+$ init 3
 
 
+#telinit (comando simular ao comando init, ele muda de runlevel)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$ telinit 5
 
 
 
@@ -170,12 +232,8 @@ lrwxrwxrwx 1 root root 15 Jun 11 19:36 K01uuidd -> ../init.d/uuidd
 
 
 /usr/lib/systemd/
-/etc/systemd/
+/otc/systemd/
 /run/systemd/
-systemctl
-systemd-delta
 /etc/inittab
 /etc/init.d/
 /etc/rc.d/
-chkconfig
-init and telinit
