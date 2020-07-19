@@ -396,6 +396,50 @@ c) #systemctl enable cron (ativa para que o servico seja iniciado no boot da maq
 d) #systemctl disable cron (desativa o servico  e nao sobe no boot da maquina)
 
 
+e) # systemctl daemon-reload (reinicia as configuracoes do SystemD, as definicoes e tudo mais)
 
+
+
+   > LSB (Linux Standard Base)
+
+
+- e um padrao para que todas as distribuicoes Linux, tivesse um padrao, com relacao a bibliotecas....
+
+- bibliotecas
+- comandos
+- ambinetes de execucacao
+- sistema de arquivos
+- suporte a modulos
+- processo de inicializacao
+
+
+a) A ideia e que hoje poucas distribuicoes usam esse padrao do LSB.
+
+
+b) Existe um pacote no Debian chamado de "lsb" que tras essas definicoes de padrao LSB, caso precise instalar
+ele segue os itens mencionados acima, pacotes, bibliotecas, comandos, que deixa o sistema dentro do padrao LSB
+
+
+- exemplo para a Red Hat:
+
+$ yum search redhat-lsb
+Last metadata expiration check: 0:01:14 ago on Sun 19 Jul 2020 08:10:02 PM UTC.
+============================================================================= Name Exactly Matched: redhat-lsb =============================================================================
+redhat-lsb.x86_64 : Implementation of Linux Standard Base specification
+================================================================================= Name Matched: redhat-lsb =================================================================================
+redhat-lsb-cxx.x86_64 : LSB CXX module support
+redhat-lsb-cxx.i686 : LSB CXX module support
+redhat-lsb-core.i686 : LSB Core module support
+redhat-lsb-core.x86_64 : LSB Core module support
+redhat-lsb-desktop.x86_64 : LSB Desktop module support
+redhat-lsb-desktop.i686 : LSB Desktop module support
+redhat-lsb-printing.i686 : LSB Printing module support
+redhat-lsb-printing.x86_64 : LSB Printing module support
+redhat-lsb-languages.x86_64 : LSB Languages module support
+redhat-lsb-languages.i686 : LSB Languages module support
+redhat-lsb-submod-security.x86_64 : LSB Security submodule support
+redhat-lsb-submod-security.i686 : LSB Security submodule support
+redhat-lsb-submod-multimedia.i686 : LSB Multimedia submodule support
+redhat-lsb-submod-multimedia.x86_64 : LSB Multimedia submodule support
 
 
