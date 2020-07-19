@@ -230,10 +230,172 @@ $ telinit 5
 
 
 
+     >  FALANDO SOBRE O SYSTEMD
 
-/usr/lib/systemd/
-/otc/systemd/
-/run/systemd/
-/etc/inittab
-/etc/init.d/
-/etc/rc.d/
+
+- comecando agora a falar sobre o Systemd (que e o sistema de gerencia de processos, start/stop de procesos
+atualmente usado em todas as distribuicoes Linux, tornou-se padrao)
+
+- ele e baseado em UNITS, que podem ser de diversos tipos de units
+- ele possui services (como se fossem os daemons)
+- ele possui targets (grupos de UNITS)
+
+
+1) Configuracoes do Systemd:
+
+# /lib/systemd/system (principal arquivo de configuracao do SystemD)
+
+- dentro desse arquivo tem as UNITS, servicos
+- o que define as UNITS sao o ".alguma coisa" veja o exemplo abaixo:
+
+[root@ip-172-31-12-118 system]# ls -l
+total 884
+-rw-r--r--. 1 root root  275 Sep 26  2018 arp-ethers.service
+-rw-r--r--. 1 root root 1512 Jan  8  2020 auditd.service
+lrwxrwxrwx. 1 root root   14 Apr 15 14:51 autovt@.service -> getty@.service
+-rw-r--r--. 1 root root  956 Apr 15 14:50 basic.target
+drwxr-xr-x. 2 root root    6 Apr 15 14:51 basic.target.wants
+-rw-r--r--. 1 root root  419 Jun 22  2018 bluetooth.target
+-rw-r--r--. 1 root root  209 May 22  2019 chrony-dnssrv@.service
+-rw-r--r--. 1 root root  138 May 22  2019 chrony-dnssrv@.timer
+-rw-r--r--. 1 root root  491 May 22  2019 chronyd.service
+-rw-r--r--. 1 root root  472 May 10  2019 chrony-wait.service
+-rw-r--r--. 1 root root  491 May  4 11:31 cloud-config.service
+-rw-r--r--. 1 root root  536 May  4 11:31 cloud-config.target
+
+
+# /etc/systemd/system (outro diretorio do SystemD)
+
+- ele possui os mesmos arquivos do direotorio anterior
+- mas uma coisa importante:
+
+OBS: o que tem dentro do diretorio /etc/systemd/system tem mais preferencia do que o /lib/systemd/system
+
+
+1) Como que eu defino um runlevel default no SustemD:
+
+- e definido por uma UNIT chamada default.target
+
+[root@ip-172-31-12-118 system]# ls -l default.target
+lrwxrwxrwx. 1 root root 16 Apr 15 14:51 default.target -> graphical.target
+
+- pode ver que ela esta chamando a target principal (graphical.target)
+
+
+
+2) Agora mostrando os runlevels (igual do SystemV)
+
+- o SystemD nao trabalha com aqueles runlevels de 0 ate 6
+- o conceito de runlevel para o SystemD sao os targets:
+
+lrwxrwxrwx. 1 root root   15 Apr 15 14:51 runlevel0.target -> poweroff.target
+lrwxrwxrwx. 1 root root   13 Apr 15 14:51 runlevel1.target -> rescue.target
+lrwxrwxrwx. 1 root root   17 Apr 15 14:51 runlevel2.target -> multi-user.target
+lrwxrwxrwx. 1 root root   17 Apr 15 14:51 runlevel3.target -> multi-user.target
+lrwxrwxrwx. 1 root root   17 Apr 15 14:51 runlevel4.target -> multi-user.target
+lrwxrwxrwx. 1 root root   16 Apr 15 14:51 runlevel5.target -> graphical.target
+lrwxrwxrwx. 1 root root   13 Apr 15 14:51 runlevel6.target -> reboot.target
+
+- tem a mesma do que a do Init visto anteriormente
+
+
+
+# /run/systemd/system (outro diretorio do SystemD)
+
+- posso ter alguma configuracao aquim normalmente sao configuracoes temporarias
+
+OBS: Ordem de prioridade dos diretorios do SystemD:
+
+
+
+> /etc/systemd/system >  /run/systemd/system  > /lib/systemd/system
+
+
+
+# systemd-delta (esse comando olha os 3 diretorios e ve qual deles esta sobrescrevendo o outro diretorio...)
+
+
+ $ whatis systemd-delta
+ systemd-delta (1)    - Find overridden configuration files
+
+
+
+
+   > COMO QUE GERENCIA TUDO ISSO VIA COMANDO: "systemctl"
+
+
+1) #systemctl list-units  (lista as unidades existentes e as descricoes de cada)
+
+[root@ip-172-31-12-118 system]# systemctl list-units
+UNIT                                             LOAD   ACTIVE SUB       DESCRIPTION
+proc-sys-fs-binfmt_misc.automount                loaded active waiting   Arbitrary Executable File Formats File System Automount Point
+sys-devices-platform-serial8250-tty-ttyS1.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS1
+sys-devices-platform-serial8250-tty-ttyS2.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS2
+sys-devices-platform-serial8250-tty-ttyS3.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS3
+sys-devices-pnp0-00:06-tty-ttyS0.device          loaded active plugged   /sys/devices/pnp0/00:06/tty/ttyS0
+sys-devices-vbd\x2d768-block-xvda-xvda1.device   loaded active plugged   /sys/devices/vbd-768/block/xvda/xvda1
+sys-devices-vbd\x2d768-block-xvda-xvda2.device   loaded active plugged   /sys/devices/vbd-768/block/xvda/xvda2
+sys-devices-vbd\x2d768-block-xvda.device         loaded active plugged   /sys/devices/vbd-768/block/xvda
+sys-devices-vif\x2d0-net-eth0.device             loaded active plugged   /sys/devices/vif-0/net/eth0
+sys-module-configfs.device                       loaded active plugged   /sys/module/configfs
+sys-subsystem-net-devices-eth0.device            loaded active plugged   /sys/subsystem/net/devices/eth0
+
+
+
+2) #systemctl default (entra no target default)
+
+
+
+3) #systemctl isolate (muda de target)
+
+
+
+4) Agora vamos testar um servico usando o comando systectl:
+
+
+- vamos primeiro listar alguns servicos:
+
+$ ps axu | less
+
+$ cd /lib/systemd/system
+
+- vamos usar o servico da CRON:
+
+ls -l *cron*
+-rw-r--r-- 1 root root 776 jul 16  2019 anacron.service
+-rw-r--r-- 1 root root 154 jul 16  2019 anacron.timer
+-rw-r--r-- 1 root root 316 fev 11 00:43 cron.service
+
+
+a) #systemctl status cron (mostra o status do servico cron)
+
+[root@ip-172-31-12-118 system]# systemctl status crond
+● crond.service - Command Scheduler
+Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+Active: active (running) since Sun 2020-07-19 16:57:43 UTC; 2h 52min ago
+Main PID: 985 (crond)
+Tasks: 1 (limit: 4855)
+Memory: 2.8M
+CGroup: /system.slice/crond.service
+└985 /usr/sbin/crond -n
+
+
+
+b) #systemctl stop cron (para o servico da cron)
+
+● crond.service - Command Scheduler
+   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+      Active: inactive (dead) since Sun 2020-07-19 19:58:16 UTC; 2s ago
+        Process: 985 ExecStart=/usr/sbin/crond -n $CRONDARGS (code=exited, status=0/SUCCESS)
+	 Main PID: 985 (code=exited, status=0/SUCCESS)
+
+
+c) #systemctl enable cron (ativa para que o servico seja iniciado no boot da maquina)
+
+
+d) #systemctl disable cron (desativa o servico  e nao sobe no boot da maquina)
+
+
+
+
+
