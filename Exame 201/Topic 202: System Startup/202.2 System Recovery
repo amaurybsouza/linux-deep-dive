@@ -1,5 +1,76 @@
 Terms and Utilities:
 
+
+   > RELEMBRANDO O PROCESSO DE BOOT DO LINUX
+
+
+1) O que e a MBR? (512 Bytes)
+
+
+- MBR (master boot recorder)
+- localizado no primeiro setor do disco bootavel
+- /dev/hda ou /dev/sda
+- contem informacoes sobre o GRUB
+- MBR armazena o GRUB
+
+
+
+2) O processo de boot / BIOS (sequencia do boot)
+
+
+a) BIOS: - executa o POST (Power On Self Test)
+         - localiza e executa o que esta na MBR
+
+b) MBR: - Master Boot Recordee
+        - contem o bootloader
+
+c) Bootloader (GRUB): -seleciona e executa o kernel e o initrd
+
+d) Kernel: - executa o /sbin/init
+
+e) Init: - inicia os programas do runlevel/target target definido
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 mount
 fsck
 inittab, telinit and init with SysV init
