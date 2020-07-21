@@ -33,18 +33,39 @@ e) Init: - inicia os programas do runlevel/target target definido
 
 
 
-
-teste
-
+   > GRUB
 
 
+- Grand Unified Bootloader (bootloader padrao na maioria das distribuicoes Linux, tanto para server como workstation)
+
+- existem duas versoes do GRUB: GRUB Legacy e GRUB2 
+- GRUB2 e o padrao usado nas distribuicoes Linux
+- GRUB legacy e o mais antigo, que foi atualizado para o GRUB2
 
 
+1) Caracteristicas do GRUB2
+
+- bootloader modular (suporte a sistemas de arquivos)
+- suporta BIOS e UEFI
+- suporte a scripts
+- suporte a multiplas plataformas alem da x86
+- suporte a UUIDs
 
 
+2) Algumas comparacoes entre os dois tipos de GRUB:
 
+a) arquivos de configuracao 
 
+- GRUB LEGACY: /boot/grub/menu.lst()
+- GRUB2: (/boot/grub/grub/cfg, /etc/default/grub/, /etc/grub.d)
 
+b) referencia ao disco
+
+- GRUB LEGACY: hda1 = hd0,0 | hda5 = hd0,4 | hdb3 = hd1,2
+- GRUB2: 
+
+c) comandos
+d) principais parametros
 
 
 
