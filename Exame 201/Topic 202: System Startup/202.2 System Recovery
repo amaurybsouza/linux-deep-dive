@@ -69,13 +69,91 @@ d) principais parametros
 
 
 
+# update-grub (atualiza as informacoes do /boot/grub/grub.cfg)
 
 
 
 
+   > GRUB SHELL (PARTE MAIS PRATICA)
+
+
+- nessa parte vamos usar o GRUB SHELL nos sistemas Centos e Debian.
+- basicamente seria a tela iniial dos sistema, onde aparece a inicializacao do GRUB
+
+
+1) Como acessar o GRUB SHELL?
+
+Conhecido por "command-line == GRUB SHELL"
+- para acessar esse recurso, pressionamos a letra c, que ele cai na tela do GRUB
+
+grub>
 
 
 
+2) O que o GRUB SHELL fornece?
+
+- ele da uma serie de comandos para vc ver as informacoes do sistema, boot corretamente:
+
+a) Exempos de uso:
+
+- quando o GRUB nao encontrar a imagem do kernel
+- quando o GRUB nao encontrar a imagem do Initrd
+- arquivo do kernel corrompido
+- problemas com os arquivos do /boot
+- ele dara um erro que vai cair na tela do grub>
+
+
+
+3) Como usar o GRUB SHELL
+
+-- veja os passos:
+
+
+3.1) usamos o comando "ls" para listar os discos e as particoes
+
+
+$ ls
+(hd0) (hd0,msdos2) (hd0,msdos1)
+
+- que sao os discos e as particoes
+- (hd0): disco, tenho apenas um disco nessa maquina
+- (hd0,msdos1) (hd0,msdos2): particoes do meu disco, sda1, sda2
+
+
+3.2) podemos listar as particoes e visualizar os dados:
+
+
+$ ls (hd0,msdos1)/
+
+
+3.3) como visualizar os arquivos dentro do GRUB SHELL:
+
+
+$ cat (hd0,msdos1)/grub2/grub.cfg (visualizando o arquivo de configuracao do GRUB)
+
+
+
+4) Fazendo o boot manualmente:
+
+
+a) setando meu diretorio /boot
+
+grub> set root =(hd0,msdos1)
+
+
+b) setando o nome do kernel que eu quero bootar:
+
+grub> linux / vmlinuz-4.9.0-6-amd64 root=/dev/sda3
+
+
+c)  setando o initrd:
+
+grub> initrd /initrd.img-4.9.0-6-amd64
+
+
+d) setando o boot:
+
+grub> boot
 
 
 
