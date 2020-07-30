@@ -158,6 +158,8 @@ $ sar -u 2 (mostra dados de cpu a cada 2 segundos, opção bem utilizada)
 
 $ sar -u 2 5 (a cada 2 segundos por 5 vezes)
 
+$ sar -n DEV (mostra dados das interfaces de redem RX, TX trafego de rede nas interfaces)
+
 - vale mencionar que o cron coleta e armazena a cada 10 minutos nos logs (var/log/sysstat)
 - analise de performance do sistema.
 
