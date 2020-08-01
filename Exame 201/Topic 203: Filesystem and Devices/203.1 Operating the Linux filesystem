@@ -1,9 +1,7 @@
 Terms and Utilities:
 
-/etc/fstab
 /etc/mtab
 /proc/mounts
-mount and umount
 blkid
 sync
 swapon
@@ -11,7 +9,79 @@ swapoff
 
 
 
-### OPERARAÇÃO O SISTEMA DE ARQUIVOS LINUX
+### OPERARAÇÃO DO SISTEMA DE ARQUIVOS LINUX
+
+
+- relembrando alguns conceitos do fstab e do comando mount
+- para a prova e legal saber as opções do fstab e as algumas das opções que utilizadas
+
+
+1) #/etc/fstab ()
+
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sda1 during installation
+UUID=4d8a74e7-adfe-440e-8f10-050e48099a93 /               ext4    errors=remount-ro 0       1
+# swap was on /dev/sda5 during installation
+UUID=9261dd6f-5839-4d26-8f56-6fe73575dbb6 none            swap    sw              0       0
+/dev/sr0        /media/cdrom0   udf,iso9660 user,noauto     0       0
+
+
+   > O que precisamos entender nesse arquivo:
+
+- o filesystem (UUID ou o dispositivo /dev/sdb1 ou LABEL)
+- o ponto de montagem (/opt/montagem)
+- o tipo do filesystem (ext4, xfs, auto) *auto identifica automaticamente o tipo do filesystem
+- as opções, aqui podemos usar o defaults (ele agrupa alguns tipos de opções)
+- o dump (usada para backup, ele faz um dump da particão, normalmente se usa 0)
+- o pass (se vai rodar um fsck toda vez que inicia o sistema, o / sempre com 1, as demais usam o 2)
+
+
+
+2) #mount (le as informações do /etc/fstab e faz a montagem das particções)
+
+   > Algumas opções de uso do comando mount:
+
+$ mount -a (monta tudo que esta dentro do /etc/fstab) * com a opção auto setada
+
+$ df -Th (mostra as partições do sistema e se estão montadas)
+Sist. Arq.     Tipo     Blocos de 1K   Usado Disponível Uso% Montado em
+udev           devtmpfs       498448       0     498448   0% /dev
+tmpfs          tmpfs          102036    1784     100252   2% /run
+/dev/sda1      ext4         19862136 3748892   15081260  20% /
+tmpfs          tmpfs          510160       0     510160   0% /dev/shm
+tmpfs          tmpfs            5120       0       5120   0% /run/lock
+tmpfs          tmpfs          510160       0     510160   0% /sys/fs/cgroup
+tmpfs          tmpfs          102032       0     102032   0% /run/user/1000
+/dev/sdb1      ext4          5095040   20472    4796040   1% /opt/montagem
+
+
+- pode ver que o /dev/sdb1 está montado em /opt/montagem
+
+  > Algumas opções usadas no comando mount:
+
+- asysnc (joga em cache, buffer os dados e depois que isso é  gravado no disco, performance do sistema)
+- auto (significa que a partição será montada no boot do sistema e quando usado mount -a)
+- noauto (é o contrário do auto)
+- defaults (contem um grupo de opções, que são: rw, suid, dev, exec, auto, nouser, aysnc)
+- dev (blocos especiais que serão interpretados)
+- nodev (ao contrário)
+- exec (permite executável)
+- noexec (ao contrário)
+- group (permite que um usuário comum faça a montagem da partição se o dono pertencer a esse grupo)
+- user (permite que qualquer usuário possa manter o filesystem mas só quem montou pode desmontar)
+- nouser (qualquer usuário pode montar a partição e qualquer usuário pode desmontar a partição)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
