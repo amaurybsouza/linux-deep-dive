@@ -1,15 +1,8 @@
 Terms and Utilities:
 
-/etc/mtab
-/proc/mounts
-blkid
-sync
-swapon
-swapoff
 
 
-
-### OPERARAÇÃO DO SISTEMA DE ARQUIVOS LINUX
+### OPERARAÇÃO DO SISTEMA DE ARQUIVOS LINUX (fstab)
 
 
 - relembrando alguns conceitos do fstab e do comando mount
@@ -71,17 +64,267 @@ tmpfs          tmpfs          102032       0     102032   0% /run/user/1000
 - user (permite que qualquer usuário possa manter o filesystem mas só quem montou pode desmontar)
 - nouser (qualquer usuário pode montar a partição e qualquer usuário pode desmontar a partição)
 
+   > Aqui foram realizados algumas opções de uso do comando mount na prática (Aula 203.1 - fstab)
+
+
+
+3) Mount mais detalhado (mount)
+
+
+  > Veja abaixo alguns exemplos de uso do comando mount:
+
+
+- comando que monta as partições estando ou não montadas
+
+A) $ mount (rodando apenas esse comndo ele mostra apenas as partições que estão montadas)
+- /proc
+- /sys
+
+$ mount | grep sd
+/dev/sda1 on / type ext4 (rw,relatime,errors=remount-ro,data=ordered)
+/dev/sdb1 on /opt/montagem type ext4 (rw,relatime,data=ordered)
+
+$ cat /proc/mounts (seria outra comando que mostra a mesma coisa)
+
+$ cat /etc/mtab (seria outra forma tbm de visualizar as partições que estão montadas)
+- mostra o que está montado nesse momento
+
+
+C) $ mount -h (algumas opções do comando mount)
+
+Monta um sistema de arquivos.
+Opções:
+ -a, --all               monta todos os sistemas de arquivos mencionados
+                           no fstab
+ -c, --no-canonicalize   não canoniza caminhos
+ -f, --fake              teste; ignora a chamada de sistema do mount(2)
+ -F, --fork              faz fork de cada dispositivo (usa com -a)
+ -T, --fstab <caminho>   arquivo alternativo ao /etc/fstab
+ -i, --internal-only     não chama os ajudantes de mount.<tipo>
+ -l, --show-labels       mostra também os rótulos dos sistemas de arquivos
+ -n, --no-mtab           não escreve para no /etc/mtab
+ -o, --options <lista>   lista separada por vírgula de opções de montagem
+ -O, --test-opts <lista> limita o conjunto de sistemas de arquivos
+                           (usa com -a)
+
+
+D) $ mount -t ext4 (mostra apenas as partições do tipo ext4)
+/dev/sda1 on / type ext4 (rw,relatime,errors=remount-ro,data=ordered)
+/dev/sdb1 on /opt/montagem type ext4 (rw,relatime,data=ordered)
+
+
+- SE A PARTIÇÃO ESTIVER SETADA  no /etc/fstab:
+
+$ mount /dev/sdb1 ou $ mount /opt/montagem
+
+
+- SE A PARTIÇÃO NÃO ESTIVER no /tec/fstab:
+
+- $ mount /dev/sdb1 /opt/teste (primeiro o dispositivo e depois o ponto de montagem)
+
+- $ umount /dev/sdb1 (para desmontar essa partição)
+
+- $ mount -t ext4 /dev/sdb1 /opt/teste (monta usando o tipo ext4)
+
+- $ mount -o ro,user,auto,exec /dev/sdb1 /opt/teste
+
+
+E) #blkid (mostra o UUID de todas as partições)
+
+$ blkid 
+/dev/sda1: UUID="4d8a74e7-adfe-440e-8f10-050e48099a93" TYPE="ext4" PARTUUID="c0b6c47f-01"
+/dev/sda5: UUID="9261dd6f-5839-4d26-8f56-6fe73575dbb6" TYPE="swap" PARTUUID="c0b6c47f-05"
+/dev/sdb1: UUID="0849ccae-5119-4542-994b-f51a81c06af5" TYPE="ext4" PARTUUID="5bf7c908-01"
+
+$ mount -U 0849ccae-5119-4542-994b-f51a81c06af5 /opt/teste (montagem usando o UUID)
+
+ou $ mount UUID=0849ccae-5119-4542-994b-f51a81c06af5 /opt/teste
+
+- e para montar com LABEL: $ mount LABEL=partiçãox /opt/teste
+
+
+$ lsblk (mostra informações sobre os dispositivos/partição)
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 20,4G  0 disk 
+├─sda1   8:1    0 19,4G  0 part /
+├─sda2   8:2    0    1K  0 part 
+└─sda5   8:5    0 1023M  0 part [SWAP]
+sdb      8:16   0 20,5G  0 disk 
+└─sdb1   8:17   0    5G  0 part /opt/montagem
+sr0     11:0    1 1024M  0 rom
+
+$ lsblk -f (mostra o UUID)
+NAME            FSTYPE      LABEL UUID                                   MOUNTPOINT
+sda                                                                      
+├─sda1          xfs               c65b472f-08c5-4ea5-a913-1735eaf817c3   /boot
+└─sda2          LVM2_member       iKi6g2-As53-dcoX-cp1a-RD8q-GWUN-XpMQ65 
+  ├─centos-root xfs               227ab08e-6fe4-43b7-bdc7-ae34cdb2c7b4   /
+  └─centos-swap swap              ca56a6b0-c654-4f0f-b5e3-0c27b3190403   [SWAP]
+sdb                                                                      
+├─sdb1          LVM2_member       rApJfu-38zu-CXro-1FKz-nk22-SF31-HHi4zw 
+└─sdb2          LVM2_member       Q2fDSU-FWcn-gXhI-DudD-M9sG-XsMH-LTP9RY 
+sdc                                                                      
+├─sdc1          LVM2_member       db2i8b-46gF-9whc-HAxB-9n9j-Z1ny-zClZx6 
+└─sdc2                                                                   
+sr0
+
+
+$ e2label /dev/sda2 (mostra o LABELA dessa partição)
+
+$ findfs UUID=4d8a74e7-adfe-440e-8f10-050e48099a93 (mostra o filesystem desse UUID)
+/dev/sda1
+
+$ findfs LABEL=partiçãox (trás o filesystem dessa LABEL)
+
+$ findmnt (mostra as partições e pontos de montagem) 
+TARGET                                SOURCE      FSTYPE      OPTIONS
+/                                     /dev/sda1   ext4        rw,relatime,errors=remount-ro,data=ordered
+├─/sys                                sysfs       sysfs       rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/kernel/security              securityfs  securityfs  rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/cgroup                    tmpfs       tmpfs       ro,nosuid,nodev,noexec,mode=755
+│ │ ├─/sys/fs/cgroup/systemd          cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/lib/systemd/systemd-cgroups
+│ │ ├─/sys/fs/cgroup/memory           cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,memory
+│ │ ├─/sys/fs/cgroup/net_cls,net_prio cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,net_cls,net_prio
+│ │ ├─/sys/fs/cgroup/freezer          cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,freezer
+│ │ ├─/sys/fs/cgroup/cpu,cpuacct      cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,cpu,cpuacct
+│ │ ├─/sys/fs/cgroup/cpuset           cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,cpuset
+│ │ ├─/sys/fs/cgroup/perf_event       cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,perf_event
+│ │ ├─/sys/fs/cgroup/pids             cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,pids
+│ │ ├─/sys/fs/cgroup/devices          cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,devices
+│ │ └─/sys/fs/cgroup/blkio            cgroup      cgroup      rw,nosuid,nodev,noexec,relatime,blkio
+│ ├─/sys/fs/pstore                    pstore      pstore      rw,nosuid,nodev,noexec,relatime
+│ └─/sys/kernel/debug                 debugfs     debugfs     rw,relatime
+
+
+
+$ sync (pega tudo que esta em memória e força a gravação em disco, de forma persistente)
+
+$ whatis sync
+sync (2)             - commit filesystem caches to disk
+sync (1)             - Synchronize cached writes to persistent storage
 
 
 
 
+4) Agora vamos falar sobre (swap)
+
+- vamos aprender a criar, a visualizar a área de swap
+
+$ free -h (mostrando a área de swap)
+              total        used        free      shared  buff/cache   available
+Mem:           996M         76M        740M        3,3M        179M        778M
+Swap:          1,0G          0B        1,0G
 
 
+- Criando uma área de swap (tipo é: 82) *83 é Linux e 8e LVM
+
+$ fdisk /dev/sdb (criando uma partição para uso como sendo swap) *tipo 82
+$ mkswap /dev/sdb2 (formatar como sendo partição de swap)
+$ swapon /dev/sdb2 (incluir essa partição na área de swap)
+$cat /proc/swaps
+Filename				Type		Size	Used	Priority
+/dev/sda5                               partition	1047548	0	-1
 
 
+- Como que eu defino para que isso sempre seja usado no boot?
+
+-> usamos o arquivo /etc/fstab da seguinte forma, adicionando a linha abaixo:
+/dev/sdb2      swap        swap    defaults     0     0
+/dev/sdb2      none         sw    defaults     0     0
+
+- Agora se eu quiser tirar essa partição de swap:
+
+$ swapoff /dev/sdb2
+
+e para montar de novo: swapon -a 
 
 
+- Criando swap usando arquivos ao invés de devices:
 
+$ cat /proc/swaps 
+Filename				Type		Size	Used	Priority
+/swapfile                               file		2097148	11264	-2
+
+- Vamos simular o exemplo acima:
+
+$ dd if=/dev/zero of=/arquivoswap bs=1024k count=1000 (esse comando cria como sendo um arquivo)
+1000+0 registros de entrada
+1000+0 registros de saída
+1048576000 bytes (1,0 GB, 1000 MiB) copiados, 1,16805 s, 898 MB/s
+
+-> basta seguir com os passos anteriores que ele formata e prepara esse arquivo como sendo swap.
+-> incluir esse arquivo no /etc/fstab para que ele sempre faça boot no sistema
+
+
+5) Montando partições com o systemd 
+
+- Vimos até o momento que as partições são montadas com base nas informaões do arquivo /etc/fstab
+- Mas existe uma outra forma de se fazer isso, usando o systemd para gerenciar pontos de montagem
+
+---
+
+- Vamos até o diretório /etc/systemd/system
+
+$ cd /etc/systemd/system
+
+- Lembrando que vamos usar o ponto de montagem (/opt/montagem)
+
+- Criamos um arquivo chamado (vim opt-montagem.mount) *esse nome precisa ser o caminho do diretório de montagem
+
+- Nesse arquivo escrevemos o seguinte:
+
+[Unit]
+Description=Ponto de Montagem Teste
+
+[Mount]
+What=/dev/sdb1
+Where=/opt/montagem
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi.user.target
+
+- Agora vamos usar o comando systemctl para gerenciar isso:
+
+$ systemctl status opt-montagem.mount 
+● opt-montagem.mount - Ponto de Montagem Teste
+   Loaded: loaded (/etc/systemd/system/opt-montagem.mount; disabled; vendor preset: enabled)
+   Active: inactive (dead)
+    Where: /opt/montagem
+     What: /dev/sdb1
+
+$ systemctl status opt-montagem.mount 
+● opt-montagem.mount - Ponto de Montagem Teste
+   Loaded: loaded (/etc/systemd/system/opt-montagem.mount; disabled; vendor preset: enabled)
+   Active: active (mounted) since Sat 2020-08-01 22:09:12 -03; 2s ago
+    Where: /opt/montagem
+     What: /dev/sdb1
+  Process: 22565 ExecMount=/bin/mount /dev/sdb1 /opt/montagem -t ext4 -o defaults (code=exited, status=0/SUCCESS)
+    Tasks: 0 (limit: 4915)
+   CGroup: /system.slice/opt-montagem.mount
+
+
+$ df -Th
+Sist. Arq.     Tipo      Tam. Usado Disp. Uso% Montado em
+udev           devtmpfs  487M     0  487M   0% /dev
+tmpfs          tmpfs     100M  3,1M   97M   4% /run
+/dev/sda1      ext4       19G  4,6G   14G  26% /
+tmpfs          tmpfs     499M     0  499M   0% /dev/shm
+tmpfs          tmpfs     5,0M     0  5,0M   0% /run/lock
+tmpfs          tmpfs     499M     0  499M   0% /sys/fs/cgroup
+tmpfs          tmpfs     100M     0  100M   0% /run/user/1000
+/dev/sdb1      ext4      4,9G   20M  4,6G   1% /opt/montagem
+
+
+- Se eu executar um stop no serviço, ele desmonta a partição:
+
+$ systemctl stop opt-montagem.mount (ele executa o umount da partição)
+
+- Para que essa partiçao sempre seja montada no boot, basta: 
+
+$ systemctl enable opt-montagem.mount
+Created symlink /etc/systemd/system/multi.user.target.wants/opt-montagem.mount → /etc/systemd/system/opt-montagem.mount.
 
 
 
