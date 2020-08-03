@@ -1,0 +1,348 @@
+Terms and Utilities:
+
+btrfs, btrfs-convert
+xfs_info, xfs_check, xfs_repair, xfsdump and xfsrestore
+smartd, smartctl
+
+
+### MANUTENÇÃO DO SISTEMA DE ARQUIVOS LINUX 
+
+
+
+   > Alguns pontos importantes para considerar
+
+- Primeiramente, vou criar uma nova partição para que eu posso usar ela como exemplo:
+
+$ fdisk -l /dev/sdb
+Disco /dev/sdb: 20,5 GiB, 22030106624 bytes, 43027552 setores
+Unidades: setor de 1 * 512 = 512 bytes
+Tamanho de setor (lógico/físico): 512 bytes / 512 bytes
+Tamanho E/S (mínimo/ótimo): 512 bytes / 512 bytes
+Tipo de rótulo do disco: dos
+Identificador do disco: 0x5bf7c908
+
+Dispositivo Inicializar   Início      Fim  Setores Tamanho Id Tipo
+/dev/sdb1                   2048 10487807 10485760      5G 83 Linux
+/dev/sdb2               10487808 20973567 10485760      5G 83 Linux
+
+
+
+   > Formatando uma partição Linux:
+
+
+1) mkfs (mkfs.*) (esse comando faz a formatação da partição Linux) 
+
+- Duas formas de uso do comando mkfs:
+
+$ mkfs.ext3 /dev/sdb2
+mke2fs 1.43.4 (31-Jan-2017)
+Creating filesystem with 1310720 4k blocks and 327680 inodes
+Filesystem UUID: 06d79939-d21e-4740-8bb7-5f6ec0612535
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+
+- mkfs -t ext3 /dev/sdb2
+mke2fs 1.43.4 (31-Jan-2017)
+/dev/sdb2 contains a ext3 file system
+	created on Sun Aug  2 20:31:24 2020
+Proceed anyway? (y,N)
+
+
+- Opções de uso suportadas pela distro com o comando mkfs
+
+$ mkfs
+mkfs         mkfs.bfs     mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix 
+
+
+- Outro comando similar ao mkfs:
+
+$ man mke2fs
+mke2fs - create an ext2/ext3/ext4 filesystem
+
+
+
+- Uma opção legal de se usar do comando mkfs é a opção -c:
+- Essa partição faz a checagem de bad blocks antes de formatar a partição
+
+$ mkfs.ext4 -c /dev/sdb2
+mke2fs 1.43.4 (31-Jan-2017)
+/dev/sdb2 contains a ext3 file system
+	created on Sun Aug  2 20:31:24 2020
+Proceed anyway? (y,N) y
+Creating filesystem with 1310720 4k blocks and 327680 inodes
+Filesystem UUID: 65bddf7e-0284-4aac-b577-2d25556c32ea
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736
+
+Checking for bad blocks (read-only test): done                                                 
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+- Ele vai checar se existe bad blocks, se existir ele vai avisar, e o correto seria não usar.
+
+
+2) mkswap (formata a partição para ser usada como swap)
+
+
+3) dumpe2fs (coletar informações, ele pega e mostra as informações sobre a partição/filesystem)
+
+- Mostrando o uso mais utilizado, usando a opção -h:
+
+$ dumpe2fs -h /dev/sdb2 | head 
+dumpe2fs 1.43.4 (31-Jan-2017)
+Filesystem volume name:   <none>
+Last mounted on:          <not available>
+Filesystem UUID:          65bddf7e-0284-4aac-b577-2d25556c32ea
+Filesystem magic number:  0xEF53
+Filesystem revision #:    1 (dynamic)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum
+Filesystem flags:         signed_directory_hash 
+Default mount options:    user_xattr acl
+Filesystem state:         clean
+Errors behavior:          Continue
+
+-> legal que eu posso usar esse comando para fazer o fsck a cada 1 mês por exemplo.
+
+- Verificando se existe bad blocks nessa partição:
+
+$ dumpe2fs -b /dev/sdb2 
+dumpe2fs 1.43.4 (31-Jan-2017) 
+
+
+4) tune2fs (tunar, customizar o filesystem, listar as propriedades do filesystem)
+
+
+- Criando uma descrição/label para a minha partição:
+
+$ tune2fs -L "Aula de teste" /dev/sdb2
+tune2fs 1.43.4 (31-Jan-2017)
+
+$ tune2fs -l /dev/sdb2 | head 
+tune2fs 1.43.4 (31-Jan-2017)
+Filesystem volume name:   Aula de teste
+Last mounted on:          <not available>
+Filesystem UUID:          65bddf7e-0284-4aac-b577-2d25556c32ea
+Filesystem magic number:  0xEF53
+Filesystem revision #:    1 (dynamic)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum
+Filesystem flags:         signed_directory_hash 
+Default mount options:    user_xattr acl
+Filesystem state:         clean
+
+
+- Definindo a quantidade de mounts para essa partição:
+
+$ tune2fs -c10 /dev/sdb2  
+tune2fs 1.43.4 (31-Jan-2017)
+
+
+$ tune2fs -l /dev/sdb2 | grep -i maxim
+Maximum mount count:      10
+
+
+- Aumentando o espaço reservado da partição, que normalmente é de 5%:
+- Coloquei apenas 1%, esse espaço e visto apenas pelo root, usuário normal não pode escrever nele
+
+
+$ tune2fs -m1 /dev/sdb2
+tune2fs 1.43.4 (31-Jan-2017)
+Setting reserved blocks percentage to 1% (13107 blocks)
+
+
+- tune2fs -j (transforma uma partição ext2 em ext3) * journaling/principal diferença entre ext2 e ext3
+
+
+
+5) badblocks (ele procura por bad blocks na partição, aí você deixa de usar esse espaço)
+$ whatis badblocks
+badblocks (8)        - search a device for bad blocks
+
+
+- Gerando um arquivo com o comando badblocks sobre badblocks na partição:
+
+$ badblocks -o arquivo /dev/sdb2
+
+
+6)  fsck (fsck.*) (comando usado para checar e reparar a estrutura do filesystem)
+
+$ whatis fsck
+fsck (8)             - check and repair a Linux filesystem
+
+$ fsck (posso usar como no comando mkfs)
+fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.ext4    fsck.minix
+
+
+- Posso usar também o comando "e2fsck" para partições ext2/ext3/ext4
+
+- Como que eu uso o comando fsck:
+
+$ fsck /dev/sdb2
+fsck de util-linux 2.29.2
+e2fsck 1.43.4 (31-Jan-2017)
+Aula_de_teste: clean, 11/327680 files, 42078/1310720 blocks
+
+$ fsck -t ext3 /dev/sdb2
+fsck de util-linux 2.29.2
+e2fsck 1.43.4 (31-Jan-2017)
+Aula_de_teste: clean, 11/327680 files, 42078/1310720 blocks
+
+
+- Forçando a chacagem do comando fsck com a opção -f:
+
+$ fsck -f /dev/sdb2 -y (ele vai corrigir tudo que estiver de errado e vai passar direto sem perguntar com a opção -y)
+fsck de util-linux 2.29.2
+e2fsck 1.43.4 (31-Jan-2017)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+Aula_de_teste: 11/327680 files (0.0% non-contiguous), 42078/1310720 blocks
+
+
+- Checando agora com a opção -c por badblocks:
+
+$ fsck -f -c /dev/sdb2
+fsck de util-linux 2.29.2
+e2fsck 1.43.4 (31-Jan-2017)
+Checking for bad blocks (read-only test): done                                                 
+Aula_de_teste: Updating bad block inode.
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+
+Aula_de_teste: ***** FILE SYSTEM WAS MODIFIED *****
+Aula_de_teste: 11/327680 files (0.0% non-contiguous), 42078/1310720 blocks
+
+
+OBS: só é possível executar o comando fsck em partição desmontada.
+
+
+
+   > Btrfs (B-tree file system)
+
+- Filesystem moderno
+- Foco em tolerância a falhas e facilidade de administração
+- Desenvolvido por um grupo de empresas, como: Oracle, Red Hat, Facebook...
+- Usado pelo Facebook, TripAdvisor
+- Será empregado no lugar dos ext3, ext4
+
+
+- Vamos checar se no sistema tem suporte para esse filesystem:
+
+$ cat /proc/filesystems | tail -n 4
+	ext4
+nodev	autofs
+nodev	binfmt_misc
+	btrfs
+
+$ modprobe btrfs (tive que usar esse comando porque na compilação do kernel, ele estava disponível como módulo)
+
+- Instalando as ferramentas do btrfs para que eu possa gerenciar o sistema:
+
+$ apt install btrfs-tools -y
+
+$ btrfs
+btrfs               btrfsck             btrfs-debug-tree    btrfs-image         btrfs-select-super  btrfstune           
+btrfs-calc-size     btrfs-convert       btrfs-find-root     btrfs-map-logical   btrfs-show-super    btrfs-zero-log
+
+
+- Formatando uma partição como sendo btrfs:
+
+$ mkfs.btrfs /dev/sdb3
+btrfs-progs v4.7.3
+See http://btrfs.wiki.kernel.org for more information.
+
+Label:              (null)
+UUID:               
+Node size:          16384
+Sector size:        4096
+Filesystem size:    2.00GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP             102.38MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Incompat features:  extref, skinny-metadata
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     2.00GiB  /dev/sdb3
+
+
+$ sblk -f
+NAME   FSTYPE LABEL         UUID                                 MOUNTPOINT
+sda                                                              
+├─sda1 ext4                 4d8a74e7-adfe-440e-8f10-050e48099a93 /
+├─sda2                                                           
+└─sda5 swap                 9261dd6f-5839-4d26-8f56-6fe73575dbb6 [SWAP]
+sdb                                                              
+├─sdb1 ext4                 0849ccae-5119-4542-994b-f51a81c06af5 /opt/montagem
+├─sdb2 ext4   Aula de teste 65bddf7e-0284-4aac-b577-2d25556c32ea 
+├─sdb3 btrfs                5d8c2073-3c9d-46d1-a380-8cf54c4233b6 
+└─sdb4 btrfs                6ae5e4f8-31e8-4d73-a62e-c2c18af62d96 
+sr0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
