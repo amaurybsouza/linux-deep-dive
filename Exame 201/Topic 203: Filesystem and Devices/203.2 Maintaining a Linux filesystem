@@ -1,6 +1,5 @@
 Terms and Utilities:
 
-btrfs, btrfs-convert
 xfs_info, xfs_check, xfs_repair, xfsdump and xfsrestore
 smartd, smartctl
 
@@ -280,7 +279,7 @@ Devices:
     1     2.00GiB  /dev/sdb3
 
 
-$ sblk -f
+$ lsblk -f
 NAME   FSTYPE LABEL         UUID                                 MOUNTPOINT
 sda                                                              
 ├─sda1 ext4                 4d8a74e7-adfe-440e-8f10-050e48099a93 /
@@ -295,47 +294,146 @@ sr0
 
 
 
+- Mostrando todas as partições que eu tenho marcadas como btrfs:
+
+$ btrfs filesystem show
+Label: none  uuid: 5d8c2073-3c9d-46d1-a380-8cf54c4233b6
+	Total devices 1 FS bytes used 112.00KiB
+	devid    1 size 2.00GiB used 228.75MiB path /dev/sdb3
+
+Label: none  uuid: 6ae5e4f8-31e8-4d73-a62e-c2c18af62d96
+	Total devices 1 FS bytes used 112.00KiB
+	devid    1 size 2.00GiB used 228.75MiB path /dev/sdb4
+
+
+- Agora montando uma partição para testar sub-volumes com btrfs:
+
+$ mkdir /mnt/btrfs1
+
+$ mount /dev/sdb2 /mnt/btrfs1
+/dev/sdb3      btrfs         2097152   16704    1870016   1% /mnt/btrfs1
+
+
+- Criando um sub-volume com btrfs:
+
+$ btrfs subvolume create /mnt/btrfs1/sub1
+Create subvolume '/mnt/btrfs1/sub1'
+
+
+- Vendo os subvolumes criados:
+
+$ btrfs subvolume list /mnt/btrfs1/
+ID 257 gen 7 top level 5 path sub1
+ID 258 gen 8 top level 5 path sub2
+ID 259 gen 9 top level 5 path sub3
+
+
+$ btrfs subvolume show /mnt/btrfs1/sub1/
+/mnt/btrfs1/sub1
+	Name: 			sub1
+	UUID: 			2195669c-14a3-4e4d-ae3a-7971efaff663
+	Parent UUID: 		-
+	Received UUID: 		-
+	Creation time: 		2020-08-03 21:27:27 -0300
+	Subvolume ID: 		257
+	Generation: 		7
+	Gen at creation: 	7
+	Parent ID: 		5
+	Top level ID: 		5
+	Flags: 			-
+	Snapshot(s):
+
+
+- Para montar um subvolume com btrfs:
+
+$ mount -o subvolume=sub1 /dev/sdb3 /mnt/subvolume1/
 
 
 
+   > Spnashot com btrfs:
+
+
+$ btrfs subvolume snapshot /mnt/subvolume1/ /mnt/subvolume1/snap1
+
+
+   > Criando um RAID1 com o fileystem btrfs:
+
+
+$ mkfs.btrfs -d raid1 /dev/sdb3 /dev/sdb4
+btrfs-progs v4.7.3
+See http://btrfs.wiki.kernel.org for more information.
+
+Label:              (null)
+UUID:               
+Node size:          16384
+Sector size:        4096
+Filesystem size:    4.00GiB
+Block group profiles:
+  Data:             RAID1           204.75MiB
+  Metadata:         RAID1           204.75MiB
+  System:           RAID1             8.00MiB
+SSD detected:       no
+Incompat features:  extref, skinny-metadata
+Number of devices:  2
+Devices:
+   ID        SIZE  PATH
+    1     2.00GiB  /dev/sdb3
+    2     2.00GiB  /dev/sdb4
+
+
+- O RAID1 significa que uma partição espelha a outra
+- Criado o RAID1, contem dois devices, apenas um dispositivo.
+- Montando tanto pelo /dev/sdb3 ou /dev/sdb4 ele monta apenas um, e reflete nos dois.
+
+
+   > Converntendo uma partição de ext4 para btrfs:
+
+- Primeiro devo verificar se a partição está desmontada:
+
+$ lsblk -f
+NAME   FSTYPE LABEL         UUID                                 MOUNTPOINT
+sda                                                              
+├─sda1 ext4                 4d8a74e7-adfe-440e-8f10-050e48099a93 /
+├─sda2                                                           
+└─sda5 swap                 9261dd6f-5839-4d26-8f56-6fe73575dbb6 [SWAP]
+sdb                                                              
+├─sdb1 ext4                 0849ccae-5119-4542-994b-f51a81c06af5 /opt/montagem
+├─sdb2 ext4   Aula de teste 65bddf7e-0284-4aac-b577-2d25556c32ea 
+├─sdb3 btrfs                066c2fee-3ff4-403c-9e44-c26382d60121 
+└─sdb4 btrfs                066c2fee-3ff4-403c-9e44-c26382d60121 
+sr0
+
+- Vou usar a partição /dev/sdb2 que está marcada como ext4.
+
+- Convertendo a partição:
+
+$ btrfs-convert /dev/sdb2
+create btrfs filesystem:
+	blocksize: 4096
+	nodesize:  16384
+	features:  extref, skinny-metadata (default)
+creating ext2 image file
+creating btrfs metadatacopy inodes [o] [         2/        11]
+
+
+- Verificando se deu certo:
+
+$ lsblk -f
+NAME   FSTYPE LABEL         UUID                                 MOUNTPOINT
+sda                                                              
+├─sda1 ext4                 4d8a74e7-adfe-440e-8f10-050e48099a93 /
+├─sda2                                                           
+└─sda5 swap                 9261dd6f-5839-4d26-8f56-6fe73575dbb6 [SWAP]
+sdb                                                              
+├─sdb1 ext4                 0849ccae-5119-4542-994b-f51a81c06af5 /opt/montagem
+├─sdb2 btrfs  Aula de teste 5a41e529-14a3-4e74-8878-fa4b667364d3 
+├─sdb3 btrfs                066c2fee-3ff4-403c-9e44-c26382d60121 
+└─sdb4 btrfs                066c2fee-3ff4-403c-9e44-c26382d60121 
+sr0
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   > XFS (Noção)
 
 
 
