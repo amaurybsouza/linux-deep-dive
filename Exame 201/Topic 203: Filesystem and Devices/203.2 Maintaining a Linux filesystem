@@ -433,11 +433,174 @@ sr0
 
 
 
-   > XFS (Noção)
+   > ZFS (Noção)
+
+- Mantido pela Oracle
+- OpenZFS: Alternativa de código aberto
+- Foco na integridade dos dados
+- Facilidade de gerenciamento
+- Sistema de arquivos em Pools/Escalabilidade
+- RAID
+
+---
+  
+   > XFS
+
+- Robusto e escalavel
+- Trabalha bem com arquivos grandes
+- Redimensionamento/Desfragmentação online
+- Tamanho de blocos variáveis 
+
+---
+
+- Efetuando a instalação do filesystem XFS:
+
+$ apt install xfsprogs xfsdump -y
 
 
+- Vou usar a partição /dev/sdb4
+
+$ fdisk -l /dev/sdb
+Disco /dev/sdb: 20,5 GiB, 22030106624 bytes, 43027552 setores
+Unidades: setor de 1 * 512 = 512 bytes
+Tamanho de setor (lógico/físico): 512 bytes / 512 bytes
+Tamanho E/S (mínimo/ótimo): 512 bytes / 512 bytes
+Tipo de rótulo do disco: dos
+Identificador do disco: 0x5bf7c908
+
+Dispositivo Inicializar   Início      Fim  Setores Tamanho Id Tipo
+/dev/sdb1                   2048 10487807 10485760      5G 83 Linux
+/dev/sdb2               10487808 20973567 10485760      5G 83 Linux
+/dev/sdb3               20973568 25167871  4194304      2G 83 Linux
+/dev/sdb4               25167872 29362175  4194304      2G 83 Linux
 
 
+- Formatando a partição /dev/sdb4 como sendo xfs:
+
+$ mkfs.xfs /dev/sdb4 -f
+meta-data=/dev/sdb4              isize=512    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=0, rmapbt=0, reflink=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+
+
+- Analisando agora a nova marcação do XFS:
+
+lsblk -f
+NAME   FSTYPE LABEL         UUID                                 MOUNTPOINT
+sda                                                              
+├─sda1 ext4                 4d8a74e7-adfe-440e-8f10-050e48099a93 /
+├─sda2                                                           
+└─sda5 swap                 9261dd6f-5839-4d26-8f56-6fe73575dbb6 [SWAP]
+sdb                                                              
+├─sdb1 ext4                 0849ccae-5119-4542-994b-f51a81c06af5 /opt/montagem
+├─sdb2 btrfs  Aula de teste 5a41e529-14a3-4e74-8878-fa4b667364d3 
+├─sdb3 btrfs                066c2fee-3ff4-403c-9e44-c26382d60121 
+└─sdb4 xfs                  2711869f-4a95-4149-b413-835f7a361e4a 
+sr0 
+
+
+- Montando a partição:
+
+$ df -T | grep -i sdb4
+/dev/sdb4      xfs           2086912   35104    2051808   2% /mnt/xfs
+
+
+- Mostrando informações sobre a partição:
+
+xfs_info /mnt/xfs/
+meta-data=/dev/sdb4              isize=512    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1 spinodes=0 rmapbt=0
+         =                       reflink=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal               bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+
+
+-  Similar ao FSCK temos o xfs_repair que faz o reparo:
+
+
+$ whatis xfs_repair
+xfs_repair (8)       - repair an XFS filesystem
+
+
+$ whatis xfsdump
+xfsdump (8)          - XFS filesystem incremental dump utility
+
+
+$ whatis xfsrestore
+xfsrestore (8)       - XFS filesystem incremental restore utility
+
+
+   > Falando sobre o smart
+
+
+- smart é um deamon que roda no sistema para ajudar a monitorar o HD, o dispositivo de armazenamento.
+- ele procura erros no disco, ele faz a monitoração do disco, não é como o FSCK
+- terá um deamon que vai ficar rodando no sistema e o client que o smartctl que fornece alguns comandos
+
+- Fazendo a instalação desse recurso:
+
+$ apt install smartmontools
+
+- Trazendo informações do disco:
+
+$ smartctl -i /dev/sdb
+smartctl 6.6 2016-05-31 r4324 [x86_64-linux-4.9.0-13-amd64] (local build)
+Copyright (C) 2002-16, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Device Model:     VBOX HARDDISK
+Serial Number:    VB70bfcd76-80e06682
+Firmware Version: 1.0
+User Capacity:    22.030.106.624 bytes [22,0 GB]
+Sector Size:      512 bytes logical/physical
+Device is:        Not in smartctl database [for details use: -P showall]
+ATA Version is:   ATA/ATAPI-6 published, ANSI INCITS 361-2002
+Local Time is:    Wed Aug  5 21:34:14 2020 -03
+SMART support is: Unavailable - device lacks SMART capability
+
+
+- Processo em execução no sistema:
+
+$ ps axu | grep smartd
+root        8769  0.0  0.0  10780  5884 ?        Ss   21:31   0:00 /usr/sbin/smartd -n
+
+- Possível acompanhar e gerenciar com o systemctl:
+
+$ systemctl status smartd
+● smartmontools.service - Self Monitoring and Reporting Technology (SMART) Daemon
+     Loaded: loaded (/lib/systemd/system/smartmontools.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2020-08-05 21:31:01 -03; 6min ago
+       Docs: man:smartd(8)
+             man:smartd.conf(5)
+   Main PID: 8769 (smartd)
+     Status: "Next check of 1 device will start at 22:01:01"
+      Tasks: 1 (limit: 14083)
+     Memory: 1.6M
+     CGroup: /system.slice/smartmontools.service
+             └─8769 /usr/sbin/smartd -n
+
+
+- Arquivo de configuração:
+
+$ vim /etc/smartd.conf
+
+
+- Para usar ver mais opções desse recurso, usamos o comando smartctl:
+
+$ smartctl -a /dev/sdb (mostra uma lista de testes que foi feita no disco)
+
+$ smartctl -H /dev/sdb (faz um teste de verificação da saude do disco)
 
 
 
