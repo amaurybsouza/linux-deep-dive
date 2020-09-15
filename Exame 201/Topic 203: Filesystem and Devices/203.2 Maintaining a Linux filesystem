@@ -29,6 +29,11 @@ Dispositivo Inicializar   Início      Fim  Setores Tamanho Id Tipo
    > Formatando uma partição Linux:
 
 
+
+- apos criar uma nova particao precisamos formatar com um file system.
+
+
+
 1) mkfs (mkfs.*) (esse comando faz a formatação da partição Linux) 
 
 - Duas formas de uso do comando mkfs:
