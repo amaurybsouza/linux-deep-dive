@@ -9,7 +9,7 @@ $ yum install net-tools syssatat -y
 # VAMOS COMEÇAR PELOS COMANDOS INICIAIS:
 
 
-#iostat (relatório de uso de CPU e de IO dos dispositivos de armazenamento, de CPU e de armazenamento)
+#iostat (mostra um relatório de uso de CPU e de IO dos dispositivos de armazenamento, de CPU)
 
 # whatis iostat 
 iostat (1)           - Report Central Processing Unit (CPU) statistics and input/output statistics for devices and partitions.
@@ -167,6 +167,8 @@ $ sar -n DEV (mostra dados das interfaces de redem RX, TX trafego de rede nas in
 #netstat (mostra por padrão as conexões de redes, tabelas de roteamento, muita informação)
 
 - algumas opções do comando netstat:
+
+
 
 $ netstat -i (interfaces de rede da maquina e as estatisticas de redes) ** mesmo que o comando ifconfig
 
